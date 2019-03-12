@@ -1,0 +1,37 @@
+%nav.navbar{"aria-label" => "main navigation", :role => "navigation"}
+  .navbar-brand
+    %a.navbar-item{:href => "https://"}
+      %img{:height => "28", :src => "https://", :width => "112"}/
+    %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "navbarBasicExample", :role => "button"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+      %span{"aria-hidden" => "true"}
+  #navbarBasicExample.navbar-menu
+    .navbar-start
+      %a.navbar-item
+        Home
+      %a.navbar-item
+        Documentation
+      .navbar-item.has-dropdown.is-hoverable
+        %a.navbar-link
+          More
+        .navbar-dropdown
+          %a.navbar-item
+            About
+          %a.navbar-item
+            Jobs
+          %a.navbar-item
+            Contact
+          %hr.navbar-divider/
+          %a.navbar-item
+            Report an issue
+    .navbar-end
+      .navbar-item
+        .buttons
+          - if user_signed_in?
+            = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-light"
+          - else
+            %a.button.is-primary(href=new_user_registration_path)
+              %strong= t('devise.registrations.new.sign_up')
+            %a.button.is-light
+              = t('devise.sessions.new.sign_in')
