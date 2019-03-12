@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_191850) do
+ActiveRecord::Schema.define(version: 2019_03_12_192416) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "firstname"
@@ -27,6 +27,31 @@ ActiveRecord::Schema.define(version: 2019_03_12_191850) do
 
   create_table "rooms", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "seminars", force: :cascade do |t|
+    t.string "title"
+    t.string "subtitle"
+    t.text "description"
+    t.integer "attendees_minimum"
+    t.integer "attendees_maximum"
+    t.string "attendees_preconditions"
+    t.string "please_bring"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.integer "cancellation_time", default: 7
+    t.string "cancellation_reason"
+    t.string "room_material"
+    t.string "room_extras"
+    t.decimal "royalty_participant"
+    t.decimal "royalty_participant_reduced"
+    t.decimal "material_cost"
+    t.decimal "honorar"
+    t.string "kind", default: "user"
+    t.string "uuid"
+    t.boolean "locked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
