@@ -1,0 +1,9 @@
+de:
+  activerecord:
+    models:
+      seminar:
+        one: Seminar
+        other: Seminare
+    attributes:
+      seminar:
+        title: Title
