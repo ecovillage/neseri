@@ -2,7 +2,11 @@ class SeminarsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @seminars = Seminar.all
+    if current_user.admin?
+      @seminars = Seminar.all
+    else
+      @seminars = current_user.seminars
+    end
     authorize!
   end
 
@@ -10,6 +14,24 @@ class SeminarsController < ApplicationController
     @seminar = Seminar.find(params[:id])
     authorize! @seminar
   end
+
+  def edit
+    @seminar = Seminar.find(params[:id])
+    authorize! @seminar
+  end
+
+  def update
+    @seminar = Seminar.find(params[:id])
+
+    authorize! @seminar
+
+    if @seminar.update(seminar_params)
+      redirect_to @seminar, notice: :seminar_saved
+    else
+      render :edit
+    end
+  end
+
 
   def new
     @seminar = Seminar.new

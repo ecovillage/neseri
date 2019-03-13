@@ -12,6 +12,20 @@ class SeminarPolicy < ApplicationPolicy
   end
 
   def show?
-    true
+    user.admin? || seminar.creator == user
+  end
+
+  def update?
+    user.admin? || seminar.creator == user
+  end
+
+  def edit?
+    user.admin? || seminar.creator == user
+  end
+
+  private
+
+  def seminar
+    record
   end
 end
