@@ -28,7 +28,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
-gem 'rails-i18n'
+gem 'rails-i18n', '~> 5.1'
 
 gem 'devise'
 gem 'devise-i18n'
