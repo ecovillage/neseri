@@ -2,3 +2,4 @@ de:
   sessions:
     destroy:
       sign_out: Abmelden
+  edit: bearbeiten
