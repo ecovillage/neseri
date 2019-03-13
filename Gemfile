@@ -38,6 +38,8 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bulma'
 end
 
+gem 'font-awesome-rails'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
