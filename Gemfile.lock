@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/fwolfst/bulma_form_builder.git
+  revision: 0be83e400d2bbed291f037702a6a191d762364c6
+  specs:
+    bulma_form_builder (0.1.0)
+      rails (~> 5.2.2)
+
 GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
@@ -233,6 +240,7 @@ PLATFORMS
 
 DEPENDENCIES
   bootsnap (>= 1.1.0)
+  bulma_form_builder!
   byebug
   capybara (>= 2.15)
   chromedriver-helper
