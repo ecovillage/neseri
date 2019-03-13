@@ -3,20 +3,28 @@ class SeminarsController < ApplicationController
 
   def index
     @seminars = Seminar.all
+    authorize!
   end
 
   def show
     @seminar = Seminar.find(params[:id])
+    authorize! @seminar
   end
 
   def new
     @seminar = Seminar.new
+    authorize!
   end
 
   def create
     @seminar = Seminar.new(seminar_params)
+    @seminar.creator = current_user
+    authorize!
+
     if @seminar.save
       redirect_to @seminar, notice: :seminar_creation_success
+    else
+      render :new
     end
   end
 
