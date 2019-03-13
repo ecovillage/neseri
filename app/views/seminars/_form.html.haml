@@ -1,1 +1,65 @@
-= :form
+= form_for @seminar, builder: BulmaFormBuilder::HorizontalBulmaFormBuilder do |f|
+  = f.errors
+
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-star
+      = t('seminar.form.section.publication')
+      %span.icon
+        %i.fa.fa-star
+    = f.labeled_text_field :title, placeholder: t('seminar.placeholder.title')
+    = f.labeled_text_field :subtitle, placeholder: t('seminar.placeholder.subtitle')
+    = f.labeled_text_area "description", help_text: t('seminar.helptext.description')
+
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-calendar
+      = t('seminar.form.section.dates')
+      %span.icon
+        %i.fa.fa-calendar
+    = f.labeled_datetime_select "start_date"
+    = f.labeled_datetime_select "end_date"
+    = f.labeled_number_field "cancellation_time", icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
+    = f.labeled_text_field "cancellation_reason"
+  
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-users
+      = t('seminar.form.section.participants')
+      %span.icon
+        %i.fa.fa-users
+    = f.labeled_number_field "attendees_minimum"
+    = f.labeled_number_field "attendees_maximum"
+    = f.labeled_text_field "attendees_preconditions"
+    = f.labeled_text_field "please_bring"
+  
+  
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-sitemap
+      = t('seminar.form.section.infrastructure')
+      %span.icon
+        %i.fa.fa-sitemap
+    = f.labeled_text_field "room_material", help_text: t('seminar.helptext.room_material')
+    = f.labeled_text_field "room_extras", help_text: t('seminar.helptext.room_extras'), icon: 'fa-wrench'
+  
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-money
+      = t('seminar.form.section.costs')
+      %span.icon
+        %i.fa.fa-money
+    = f.labeled_text_field "royalty_participant"
+    = f.labeled_text_field "royalty_participant_reduced"
+    = f.labeled_text_field "material_cost"
+    = f.labeled_text_field "honorar"
+    -#= f.labeled_string "kind", default: "user"
+    -#= f.labeled_string "uuid"
+    -#= f.labeled_boolean "locked", default: false
+
+  = f.submit t('seminar.new')

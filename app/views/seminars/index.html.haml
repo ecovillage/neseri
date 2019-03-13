@@ -1,3 +1,16 @@
 %h1.title= Seminar.model_name.human(count: 2)
 
-= link_to :create_seminar, new_seminar_path, class: 'button'
+%table.table
+  %thead
+    %tr
+      %th= t('seminars.index.created_at')
+      %th seminar.model.attribute
+      %th
+  %tbody
+    - @seminars.each do |seminar|
+      %tr
+        %td= seminar.created_at
+        %td= seminar.title
+
+= link_to t('seminar.new'), new_seminar_path, class: 'button'
+

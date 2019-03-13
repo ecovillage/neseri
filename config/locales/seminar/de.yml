@@ -1,0 +1,25 @@
+de:
+  seminar:
+    new: Neuen Seminarvorschlag anlegen
+    my: Meine Seminare
+    placeholder:
+      title: Name des Seminars
+      subtitle: Untertitel des Seminars
+    helptext:
+      description: "Max. 1200 Zeichen. Gliederung: Einführung in Thema - Inhalte und Ablauf - Welche Kompetenzen/Fähigkeiten/Wissen wird erworben - Methoden. Die ersten 300 Zeichen erscheinen im Seminarüberblick."
+      start_date: (Seminararbeitszeit, nicht Anreisezeit). Leider werden wir nicht alle Wünsche berücksichtigen können.
+      end_date: (Seminararbeitszeit, nicht Abreisezeit).
+      cancellation_time: bei geringem Anmeldestand (Standard 7 Tage vor Seminarbeginn), in Tagen (nur wenn abweichend von 7 Tagen vor Seminarbeginn)
+      attendees_minimum: Inklusive Regionalplatz
+      room_material: Der Raum wird spätestens eine Stunde vor Seminarbeginn zur Verfügung stehen und ist ausgestattet mit Moderationskoffer, Flipchart, Stiften und Papier. Besondere Wünsche (Beamer, DVD-Spieler, Materialien, Internetzugang). Bitte sprich das Gäste-Team rechtzeitig an, wenn du Unterstützung benötigst.
+      room_extras: z.B. Internetzugang für TeilnehmerInnen, Kaffee-Trinken
+    form:
+      section:
+        publication: Veröffentlichung im Seminarprogramm
+        dates: Gewünschter Termin
+        participants: Teilnehmer/Innen
+        infrastructure: Infrastrukturelles
+        costs: Kosten
+  seminars:
+    index:
+      created_at: Erstellt am

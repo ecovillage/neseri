@@ -1,3 +1,6 @@
-%h1.title= :create_new_seminar
+%h1.title= t('seminar.new')
 
 = render 'form'
+
+- if true
+  %h2.subtitle= t('seminar.my')
