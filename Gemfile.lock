@@ -9,6 +9,7 @@ GEM
   remote: https://rubygems.org/
   remote: https://rails-assets.org/
   specs:
+    action_policy (0.2.4)
     actioncable (5.2.2)
       actionpack (= 5.2.2)
       nio4r (~> 2.0)
@@ -239,6 +240,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action_policy
   bootsnap (>= 1.1.0)
   bulma_form_builder!
   byebug

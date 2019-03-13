@@ -42,6 +42,8 @@ gem 'bulma_form_builder', git: 'https://github.com/fwolfst/bulma_form_builder.gi
 
 gem 'font-awesome-rails'
 
+gem 'action_policy'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
