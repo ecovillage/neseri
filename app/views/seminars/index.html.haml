@@ -4,12 +4,16 @@
   %thead
     %tr
       %th= t('seminars.index.created_at')
+      %th= :from_by
       %th seminar.model.attribute
       %th
   %tbody
     - @seminars.each do |seminar|
       %tr
-        %td= seminar.created_at
+        %td
+          = seminar.created_at
+        %td
+          = seminar.creator&.email
         %td= seminar.title
 
 = link_to t('seminar.new'), new_seminar_path, class: 'button'

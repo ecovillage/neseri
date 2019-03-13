@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_12_193313) do
+ActiveRecord::Schema.define(version: 2019_03_13_154549) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "firstname"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 2019_03_12_193313) do
     t.boolean "locked", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "creator_id"
+    t.index ["creator_id"], name: "index_seminars_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
