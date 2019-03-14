@@ -3,3 +3,7 @@ de:
     destroy:
       sign_out: Abmelden
   edit: bearbeiten
+  pages:
+    contact: Kontakt
+    impressum: Impressum
+    privacy: Datenschutz

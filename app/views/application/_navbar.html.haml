@@ -12,19 +12,9 @@
         Home
       %a.navbar-item
         Documentation
-      .navbar-item.has-dropdown.is-hoverable
-        %a.navbar-link
-          More
-        .navbar-dropdown
-          %a.navbar-item
-            About
-          %a.navbar-item
-            Jobs
-          %a.navbar-item
-            Contact
-          %hr.navbar-divider/
-          %a.navbar-item
-            Report an issue
+      = link_to t('pages.contact'), contact_path, class: 'navbar-item'
+      = link_to t('pages.impressum'), impressum_path, class: 'navbar-item'
+      = link_to t('pages.privacy'), privacy_path, class: 'navbar-item'
     .navbar-end
       .navbar-item
         .buttons
