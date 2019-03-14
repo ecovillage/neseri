@@ -26,6 +26,6 @@ class User < ApplicationRecord
          :confirmable
 
   has_many :seminars, foreign_key: 'creator_id'
-  belongs_to :instructor
+  belongs_to :instructor, required: false
 
 end

@@ -26,10 +26,12 @@
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
 #  creator_id                  :integer
+#  seminar_kind_id             :integer
 #
 
 class Seminar < ApplicationRecord
   belongs_to :creator, class_name: "User"
+  belongs_to :seminar_kind
 
   validates :title, presence: true
 

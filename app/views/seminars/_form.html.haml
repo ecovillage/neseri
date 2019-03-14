@@ -21,6 +21,7 @@
         %i.fa.fa-calendar
     = f.labeled_datetime_select "start_date"
     = f.labeled_datetime_select "end_date"
+    = f.labeled_collection_select "seminar_kind_id", SeminarKind.where(active: true), :id, :name
     = f.labeled_number_field "cancellation_time", icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
     = f.labeled_text_field "cancellation_reason"
   

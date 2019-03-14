@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_160450) do
+ActiveRecord::Schema.define(version: 2019_03_14_161133) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "firstname"
@@ -63,7 +63,9 @@ ActiveRecord::Schema.define(version: 2019_03_14_160450) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "creator_id"
+    t.integer "seminar_kind_id"
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
+    t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"
   end
 
   create_table "users", force: :cascade do |t|

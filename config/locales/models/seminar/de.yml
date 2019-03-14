@@ -26,6 +26,7 @@ de:
         royalty_participant_reduced: Ermäßigtes Honorar pro Teilnehmer/In
         material_cost: Materialkosten
         creator: erstellt von
+        seminar_kind: Art
     errors:
       models:
         seminar:
