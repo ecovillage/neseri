@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'impressum', to: 'pages#impressum'
   get 'privacy',   to: 'pages#privacy'
   get 'contact',   to: 'pages#contact'
+  get 'about',     to: 'pages#about'
 
   resources :seminars
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
