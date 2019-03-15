@@ -1,4 +1,4 @@
-class NeserituController < ApplicationController::Base
+class NeserituController < ApplicationController
   verify_authorized if !Rails.env.production?
 
   rescue_from ActionPolicy::Unauthorized do |exception|
