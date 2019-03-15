@@ -1,0 +1,10 @@
+%h1.title :instructor
+
+%table.table
+  %tbody
+    - [:firstname, :lastname, :address, :email, :fax, :phone, :mobile, :homepage].each do |attr|
+      %tr
+        %td= Instructor.human_attribute_name(attr)
+        %td= @instructor.send(attr)
+
+= link_to :edit, edit_instructor_path, class: 'button'

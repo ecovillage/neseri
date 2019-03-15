@@ -8,5 +8,8 @@ Rails.application.routes.draw do
   get 'about',     to: 'pages#about'
 
   resources :seminars
+  resource :instructor, only: [:show, :create, :edit, :update]
+  resolve('Instructor') { :instructor }
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

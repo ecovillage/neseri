@@ -20,6 +20,7 @@
       .navbar-item
         .buttons
           - if user_signed_in?
+            = link_to current_user.email, instructor_path, class: 'button'
             = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-light"
           - else
             %a.button.is-primary(href=new_user_registration_path)
