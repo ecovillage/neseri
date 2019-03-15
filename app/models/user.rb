@@ -28,4 +28,9 @@ class User < ApplicationRecord
   has_many :seminars, foreign_key: 'creator_id'
   belongs_to :instructor, required: false
 
+  before_validation :downcase_strip_email
+
+  def downcase_strip_email
+    self.email = email.downcase.strip
+  end
 end
