@@ -6,6 +6,7 @@ class PagesController < ApplicationController
   end
 
   def contact
+    authenticate_user!
   end
 
   def about
