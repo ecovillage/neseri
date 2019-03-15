@@ -7,3 +7,7 @@ de:
     contact: Kontakt
     impressum: Impressum
     privacy: Datenschutz
+    about: Über
+  resend_confirmation_instructions: Anleitung erneut schicken
+  send_me_reset_password_instructions: Anleitung schicken
+

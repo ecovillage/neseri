@@ -1,6 +1,5 @@
 = render 'devise/shared/auth_hero' do
   %h2.title= t('devise.sessions.new.sign_in')
-  %p.subtitle= t('.please_login_to_proceed')
   .box
     = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
       .field
