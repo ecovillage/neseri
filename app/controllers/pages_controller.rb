@@ -1,6 +1,4 @@
 class PagesController < ApplicationController
-  # skip_authorization_verification
-
   def impressum
   end
 
