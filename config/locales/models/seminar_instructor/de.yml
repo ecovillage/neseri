@@ -1,0 +1,16 @@
+de:
+  activerecord:
+    models:
+      seminar_instructor:
+        one: Referent/In
+        other: Referent/Innen
+    attributes:
+      seminar_instructor:
+        email: E-Mail-Adresse
+        qualification: Qualifikation
+        comment: Erläuterung/Kommentar
+        accommodation: Unterbringung
+    errors:
+      models:
+        seminar_instructors:
+
