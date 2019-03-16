@@ -10,13 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_14_161133) do
+ActiveRecord::Schema.define(version: 2019_03_16_081923) do
 
   create_table "instructors", force: :cascade do |t|
     t.string "firstname"
     t.string "lastname"
     t.string "address"
-    t.string "email"
     t.string "fax"
     t.string "phone"
     t.string "mobile"
@@ -29,6 +28,21 @@ ActiveRecord::Schema.define(version: 2019_03_14_161133) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "seminar_instructors", force: :cascade do |t|
+    t.integer "seminar_id"
+    t.integer "instructor_id"
+    t.text "qualification"
+    t.boolean "main_contact"
+    t.string "accommodation"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email"
+    t.string "comment"
+    t.index ["email"], name: "index_seminar_instructors_on_email"
+    t.index ["instructor_id"], name: "index_seminar_instructors_on_instructor_id"
+    t.index ["seminar_id"], name: "index_seminar_instructors_on_seminar_id"
   end
 
   create_table "seminar_kinds", force: :cascade do |t|
@@ -64,6 +78,7 @@ ActiveRecord::Schema.define(version: 2019_03_14_161133) do
     t.datetime "updated_at", null: false
     t.integer "creator_id"
     t.integer "seminar_kind_id"
+    t.string "accommodation"
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
     t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"
   end
