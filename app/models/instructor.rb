@@ -6,7 +6,6 @@
 #  firstname  :string
 #  lastname   :string
 #  address    :string
-#  email      :string
 #  fax        :string
 #  phone      :string
 #  mobile     :string
@@ -18,12 +17,10 @@
 class Instructor < ApplicationRecord
   has_one :user
 
-  before_validation :downcase_strip_email
-  before_validation :prepend_https_to_homepage
+  has_many :seminar_instructors, inverse_of: :instructor
+  has_many :seminars, through: :seminar_instructors
 
-  def downcase_strip_email
-    self.email = email.downcase.strip
-  end
+  before_validation :prepend_https_to_homepage
 
   def prepend_https_to_homepage
     if self.homepage

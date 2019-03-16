@@ -27,11 +27,15 @@
 #  updated_at                  :datetime         not null
 #  creator_id                  :integer
 #  seminar_kind_id             :integer
+#  accommodation               :string
 #
 
 class Seminar < ApplicationRecord
   belongs_to :creator, class_name: "User"
   belongs_to :seminar_kind
+
+  has_many :seminar_instructors, inverse_of: :seminar
+  has_many :instructors, through: :seminar_instructors
 
   validates :title, presence: true
 
