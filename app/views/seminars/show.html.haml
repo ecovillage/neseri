@@ -1,3 +1,103 @@
-%h1.title :show
+%h1.title
+  = Seminar.model_name.human
+  = ":"
+  = @seminar.title
 
-= @seminar.id
+%br
+.subtitle
+  = Seminar.human_attribute_name(:creator).capitalize
+  = @seminar.creator.email
+  = l(@seminar.created_at, format: :long)
+.subtitle
+  = Seminar.human_attribute_name(:updated_at)
+  = l(@seminar.updated_at, format: :long)
+
+%br
+
+.columns
+  .column.is-6
+    %table.table.box
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-star
+              = t('seminar.form.section.publication')
+        - [:title, :subtitle, :description].each do |attr|
+          %tr
+            %td= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+
+    %table.table.box
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-calendar
+              = t('seminar.form.section.dates')
+        - [:start_date, :end_date, :seminar_kind, :cancellation_time, :cancellation_reason].each do |attr|
+          %tr
+            %th= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+    %table.table.box
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-money
+              = t('seminar.form.section.costs')
+        - [:royalty_participant, :royalty_participant_reduced, :material_cost].each do |attr|
+          %tr
+            %th= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+  .column.is-6
+    %table.table.box
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-users
+              = t('seminar.form.section.participants')
+        - [:attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring].each do |attr|
+          %tr
+            %td= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+    
+    %table.table.box
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-sitemap
+              = t('seminar.form.section.infrastructure')
+        - [:room_material, :room_extras].each do |attr|
+          %tr
+            %th= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+    
+    
+%table.table.box
+  %tbody
+    %tr
+      %th(colspan=4)
+        %h2.subtitle 
+          %span.icon
+            %i.fa.fa-user-circle
+          = t('seminar.form.section.referees')
+    %tr
+      %th= SeminarInstructor.human_attribute_name(:email)
+      %th= SeminarInstructor.human_attribute_name(:qualification)
+      %th= SeminarInstructor.human_attribute_name(:comment)
+      %th= SeminarInstructor.human_attribute_name(:accommodation)
+    - @seminar.seminar_instructors.each do |instructor|
+      %tr
+        - [:email, :qualification, :comment, :accommodation].each do |attr|
+          %td= instructor.send(attr)
+
+
+= link_to t('edit'), edit_seminar_path(@seminar), class: 'button'

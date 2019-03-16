@@ -1,23 +1,26 @@
-%h1.title= Seminar.model_name.human(count: 2)
+- if @seminars.present?
+  %h1.title= Seminar.model_name.human(count: 2)
 
-%table.table
-  %thead
-    %tr
-      %th= t('seminars.index.created_at')
-      %th= Seminar.human_attribute_name(:creator)
-      %th= Seminar.human_attribute_name(:title)
-      %th
-  %tbody
-    - @seminars.each do |seminar|
+  %table.table
+    %thead
       %tr
-        %td
-          = seminar.created_at
-        %td
-          = seminar.creator&.email
-        %td
-          = link_to seminar.title, seminar
-        %td
-          = link_to t(:edit), edit_seminar_path(seminar), class: 'button'
+        %th= t('seminars.index.created_at')
+        %th= Seminar.human_attribute_name(:creator)
+        %th= Seminar.human_attribute_name(:title)
+        %th
+    %tbody
+      - @seminars.each do |seminar|
+        %tr
+          %td
+            = l(seminar.created_at, format: :long)
+          %td
+            = seminar.creator&.email
+          %td
+            = link_to seminar.title, seminar
+          %td
+            = link_to t(:edit), edit_seminar_path(seminar), class: 'button'
+- else
+  %h1.subtitle :no_own_seminars_yet
 
-= link_to t('seminar.new'), new_seminar_path, class: 'button'
+= link_to t('seminar.new'), new_seminar_path, class: 'button is-primary'
 
