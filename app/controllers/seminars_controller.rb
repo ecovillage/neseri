@@ -26,12 +26,11 @@ class SeminarsController < NeserituController
     authorize! @seminar
 
     if @seminar.update(seminar_params)
-      redirect_to @seminar, notice: :seminar_saved
+      redirect_to @seminar, notice: I18n.t('seminar.saved')
     else
       render :edit
     end
   end
-
 
   def new
     @seminar = Seminar.new
@@ -44,7 +43,7 @@ class SeminarsController < NeserituController
     authorize!
 
     if @seminar.save
-      redirect_to @seminar, notice: :seminar_creation_success
+      redirect_to @seminar, notice: I18n.t('seminar.saved')
     else
       render :new
     end

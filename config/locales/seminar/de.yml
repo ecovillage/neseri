@@ -1,6 +1,7 @@
 de:
   seminar:
     new: Neuen Seminarvorschlag anlegen
+    saved: Seminarvorschlag gespeichert
     my: Meine Seminare
     placeholder:
       title: Name des Seminars

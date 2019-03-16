@@ -19,6 +19,7 @@ de:
         attendees_minimum: Mindestanzahl Teilnehmer/Innen
         attendees_maximum: Höchstanzahl Teilnehmer/Innen
         attendees_preconditions: Voraussetzungen für Teilnahme
+        accommodation: Unterkunft Teilnehmer/Innen
         please_bring: Was sollen die Teilnehmer/Innen mitbringen?
         room_material: Zusätzliche Ausstattung
         room_extras: Sonstige Extras
@@ -27,6 +28,7 @@ de:
         material_cost: Materialkosten
         creator: erstellt von
         seminar_kind: Art
+        updated_at: Zuletzt geändert am
     errors:
       models:
         seminar:
