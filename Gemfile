@@ -45,6 +45,8 @@ gem 'font-awesome-rails'
 
 gem 'action_policy'
 
+gem 'ahoy_email'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

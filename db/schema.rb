@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_16_081923) do
+ActiveRecord::Schema.define(version: 2019_04_13_154022) do
+
+  create_table "ahoy_messages", force: :cascade do |t|
+    t.string "user_type"
+    t.integer "user_id"
+    t.text "to"
+    t.string "mailer"
+    t.text "subject"
+    t.datetime "sent_at"
+    t.index ["user_type", "user_id"], name: "index_ahoy_messages_on_user_type_and_user_id"
+  end
 
   create_table "instructors", force: :cascade do |t|
     t.string "firstname"
