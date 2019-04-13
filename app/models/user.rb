@@ -16,6 +16,13 @@
 #  updated_at             :datetime         not null
 #  admin                  :boolean          default(FALSE)
 #  instructor_id          :integer
+#  firstname              :string
+#  lastname               :string
+#  address                :string
+#  fax                    :string
+#  phone                  :string
+#  mobile                 :string
+#  homepage               :string
 #
 
 class User < ApplicationRecord
@@ -29,8 +36,18 @@ class User < ApplicationRecord
   belongs_to :instructor, required: false
 
   before_validation :downcase_strip_email
+  before_validation :prepend_https_to_homepage
 
   def downcase_strip_email
     self.email = email.downcase.strip
+  end
+
+  def prepend_https_to_homepage
+    if self.homepage
+      self.homepage = homepage.strip
+      if !self.homepage.start_with? "http"
+        self.homepage = "https://#{self.homepage}"
+      end
+    end
   end
 end

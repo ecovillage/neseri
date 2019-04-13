@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_154022) do
+ActiveRecord::Schema.define(version: 2019_04_13_181552) do
 
   create_table "ahoy_messages", force: :cascade do |t|
     t.string "user_type"
@@ -107,6 +107,13 @@ ActiveRecord::Schema.define(version: 2019_04_13_154022) do
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
     t.integer "instructor_id"
+    t.string "firstname"
+    t.string "lastname"
+    t.string "address"
+    t.string "fax"
+    t.string "phone"
+    t.string "mobile"
+    t.string "homepage"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["instructor_id"], name: "index_users_on_instructor_id"
