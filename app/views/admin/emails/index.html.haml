@@ -1,0 +1,19 @@
+%table.table
+  %thead
+    %tr
+      %th
+        = t(:to)
+      %th
+        = t(:subject)
+      %th
+        = t(:sent_at)
+      %th
+        = t(:mailer)
+  %tbody
+    - @mails.each do |mail|
+      %tr
+        %td= mail.to
+        %td= mail.subject
+        %td= mail.sent_at
+        %td= mail.mailer
+
