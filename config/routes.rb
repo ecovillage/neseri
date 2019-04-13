@@ -8,6 +8,10 @@ Rails.application.routes.draw do
   get 'about',     to: 'pages#about'
 
   resources :seminars
+  namespace :admin do
+    resources :emails, only: [:index]
+  end
+
   resource :instructor, only: [:show, :create, :edit, :update]
   resolve('Instructor') { :instructor }
 
