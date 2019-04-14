@@ -32,11 +32,12 @@
 
 class Seminar < ApplicationRecord
   belongs_to :creator, class_name: "User"
-  belongs_to :seminar_kind
+  belongs_to :seminar_kind, optional: true
 
   has_many :seminar_instructors, inverse_of: :seminar
   has_many :instructors, through: :seminar_instructors, class_name: "User"
 
+  accepts_nested_attributes_for :seminar_instructors, reject_if: :all_blank, allow_destroy: true
 
   validates :title, presence: true
 

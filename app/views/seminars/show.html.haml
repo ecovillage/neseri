@@ -16,20 +16,21 @@
 
 .columns
   .column.is-6
-    %table.table.box
-      %tbody
-        %tr
-          %th(colspan=2)
-            %h2.subtitle 
-              %span.icon
-                %i.fa.fa-star
-              = t('seminar.form.section.publication')
-        - [:title, :subtitle, :description].each do |attr|
+    .box
+      %table.table.is-fullwidth
+        %tbody
           %tr
-            %td= Seminar.human_attribute_name(attr)
-            %td= @seminar.send(attr)
+            %th(colspan=2)
+              %h2.subtitle 
+                %span.icon
+                  %i.fa.fa-star
+                = t('seminar.form.section.publication')
+          - [:title, :subtitle, :description].each do |attr|
+            %tr
+              %th= Seminar.human_attribute_name(attr)
+              %td= @seminar.send(attr)
 
-    %table.table.box
+    %table.table.is-fullwidth.box
       %tbody
         %tr
           %th(colspan=2)
@@ -41,7 +42,7 @@
           %tr
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
-    %table.table.box
+    %table.table.box.is-fullwidth
       %tbody
         %tr
           %th(colspan=2)
@@ -54,7 +55,7 @@
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
   .column.is-6
-    %table.table.box
+    %table.table.box.is-fullwidth
       %tbody
         %tr
           %th(colspan=2)
@@ -67,7 +68,7 @@
             %td= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
     
-    %table.table.box
+    %table.table.box.is-fullwidth
       %tbody
         %tr
           %th(colspan=2)
@@ -81,7 +82,7 @@
             %td= @seminar.send(attr)
     
     
-%table.table.box
+%table.table.box.is-fullwidth
   %tbody
     %tr
       %th(colspan=4)
