@@ -1,10 +1,13 @@
-%h1.title :instructor
+%h1.title.has-text-centered= t(:instructor)
+%h2.sub-title.has-text-centered="(#{current_user.email})"
 
-%table.table
-  %tbody
-    - [:firstname, :lastname, :address, :email, :fax, :phone, :mobile, :homepage].each do |attr|
-      %tr
-        %td= Instructor.human_attribute_name(attr)
-        %td= @instructor.send(attr)
-
-= link_to :edit, edit_instructor_path, class: 'button'
+.columns.section
+  .column.is-offset-3.is-6
+    %table.table.is-fullwidth
+      %tbody
+        - [:firstname, :lastname, :address, :fax, :phone, :mobile, :homepage].each do |attr|
+          %tr
+            %th= User.human_attribute_name(attr)
+            %td= @instructor.send(attr)
+    
+    = link_to :edit, edit_instructor_path, class: 'button'

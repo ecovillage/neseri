@@ -10,13 +10,16 @@
 #  accommodation :string
 #  created_at    :datetime         not null
 #  updated_at    :datetime         not null
+#  email         :string
+#  comment       :string
 #
 
 class SeminarInstructor < ApplicationRecord
-  belongs_to :seminar
-  belongs_to :instructor
+  belongs_to :seminar, inverse_of: :seminar_instructors, optional: true
+  belongs_to :user, inverse_of: :seminar_instructors, optional: true
 
-  validates :email, uniqueness: true
+  validates :seminar, presence: true
+
 
   before_validation :downcase_strip_email
 

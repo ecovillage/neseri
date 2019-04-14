@@ -1,17 +1,16 @@
 %h1.title :edit_instructor
 %h2.subtitle :editing_you?
 
-= form_for @instructor, builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, local: true, remote: false do |f|
+= form_for @instructor, url: instructor_path, builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, local: true, remote: false do |f|
   = f.errors
 
   .box
     = f.labeled_text_field :firstname, placeholder: t('instructor.placeholder.lastname')
     = f.labeled_text_field :lastname, placeholder: t('instructor.placeholder.lastname')
     = f.labeled_text_area "address", help_text: t('instructor.helptext.address')
-    = f.labeled_text_field "email"
-    = f.labeled_text_field "fax"
-    = f.labeled_text_field "phone"
-    = f.labeled_text_field "mobile"
+    = f.labeled_text_field "fax", icon: 'fa-fax'
+    = f.labeled_text_field "phone", icon: 'fa-phone'
+    = f.labeled_text_field "mobile", icon: 'fa-mobile'
     = f.labeled_text_field "homepage"
 
   = f.submit t('instructor.new')

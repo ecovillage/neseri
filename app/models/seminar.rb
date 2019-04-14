@@ -35,7 +35,8 @@ class Seminar < ApplicationRecord
   belongs_to :seminar_kind
 
   has_many :seminar_instructors, inverse_of: :seminar
-  has_many :instructors, through: :seminar_instructors
+  has_many :instructors, through: :seminar_instructors, class_name: "User"
+
 
   validates :title, presence: true
 

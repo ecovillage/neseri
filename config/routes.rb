@@ -12,7 +12,7 @@ Rails.application.routes.draw do
     resources :emails, only: [:index]
   end
 
-  resource :instructor, only: [:show, :create, :edit, :update]
+  resource :instructor, only: [:show, :edit, :update]
   resolve('Instructor') { :instructor }
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

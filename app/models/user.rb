@@ -32,7 +32,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  has_many :seminars, foreign_key: 'creator_id'
+  has_many :created_seminars, foreign_key: 'creator_id'
+  has_many :seminar_instructors, inverse_of: 'user'
+  has_many :teaching_seminars, through: :seminar_instructors
+
   belongs_to :instructor, required: false
 
   before_validation :downcase_strip_email
