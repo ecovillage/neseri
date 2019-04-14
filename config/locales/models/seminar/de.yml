@@ -4,9 +4,6 @@ de:
       seminar:
         one: Seminar
         other: Seminare
-      user:
-        one: Benutzer/In
-        other: Benutzer/Innen
     attributes:
       seminar:
         title: Titel

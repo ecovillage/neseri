@@ -1,13 +1,18 @@
+---
 de:
-  sessions:
-    destroy:
-      sign_out: Abmelden
+  contact:
+    contact: Eine E-Mail schicken
   edit: bearbeiten
   pages:
+    about: Über
     contact: Kontakt
     impressum: Impressum
     privacy: Datenschutz
-    about: Über
   resend_confirmation_instructions: Anleitung erneut schicken
+  seminar_instructors:
+    add: Referent/In hinzufügen
+    remove: Referent/In entfernen
   send_me_reset_password_instructions: Anleitung schicken
-
+  sessions:
+    destroy:
+      sign_out: Abmelden

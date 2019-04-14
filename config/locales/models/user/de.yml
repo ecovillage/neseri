@@ -1,0 +1,15 @@
+de:
+  activerecord:
+    models:
+      user:
+        one: Benutzer/In
+        other: Benutzer/Innen
+    attributes:
+      user:
+        firstname: Vorname
+        lastname: Nachname
+        address: Adresse
+        fax: Fax
+        phone: Telefonnummer
+        mobile: Mobilfunknummer
+        homepage: Homepage
