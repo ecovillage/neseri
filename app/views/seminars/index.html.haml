@@ -4,20 +4,20 @@
   %table.table
     %thead
       %tr
+        %th= Seminar.human_attribute_name(:title)
         %th= t('seminars.index.created_at')
         %th= Seminar.human_attribute_name(:creator)
-        %th= Seminar.human_attribute_name(:title)
         %th= Seminar.human_attribute_name(:seminar_instructors)
         %th
     %tbody
       - @seminars.each do |seminar|
         %tr
           %td
+            = link_to seminar.title, seminar
+          %td
             = l(seminar.created_at, format: :long)
           %td
             = seminar.creator&.email
-          %td
-            = link_to seminar.title, seminar
           %td
             - seminar.seminar_instructors.each do |instructor|
               = instructor.email
