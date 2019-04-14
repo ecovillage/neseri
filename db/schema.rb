@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_181552) do
+ActiveRecord::Schema.define(version: 2019_04_13_215625) do
 
   create_table "ahoy_messages", force: :cascade do |t|
     t.string "user_type"
@@ -22,18 +22,6 @@ ActiveRecord::Schema.define(version: 2019_04_13_181552) do
     t.index ["user_type", "user_id"], name: "index_ahoy_messages_on_user_type_and_user_id"
   end
 
-  create_table "instructors", force: :cascade do |t|
-    t.string "firstname"
-    t.string "lastname"
-    t.string "address"
-    t.string "fax"
-    t.string "phone"
-    t.string "mobile"
-    t.string "homepage"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "rooms", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
@@ -42,7 +30,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_181552) do
 
   create_table "seminar_instructors", force: :cascade do |t|
     t.integer "seminar_id"
-    t.integer "instructor_id"
+    t.integer "user_id"
     t.text "qualification"
     t.boolean "main_contact"
     t.string "accommodation"
@@ -51,8 +39,8 @@ ActiveRecord::Schema.define(version: 2019_04_13_181552) do
     t.string "email"
     t.string "comment"
     t.index ["email"], name: "index_seminar_instructors_on_email"
-    t.index ["instructor_id"], name: "index_seminar_instructors_on_instructor_id"
     t.index ["seminar_id"], name: "index_seminar_instructors_on_seminar_id"
+    t.index ["user_id"], name: "index_seminar_instructors_on_user_id"
   end
 
   create_table "seminar_kinds", force: :cascade do |t|
@@ -106,7 +94,6 @@ ActiveRecord::Schema.define(version: 2019_04_13_181552) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "admin", default: false
-    t.integer "instructor_id"
     t.string "firstname"
     t.string "lastname"
     t.string "address"
@@ -116,7 +103,6 @@ ActiveRecord::Schema.define(version: 2019_04_13_181552) do
     t.string "homepage"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["instructor_id"], name: "index_users_on_instructor_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
