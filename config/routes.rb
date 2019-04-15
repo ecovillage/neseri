@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     resources :emails, only: [:index, :show]
   end
 
+  resource :tos, only: :show
+  resource :tos_acceptance, only: :create
+
   resource :instructor, only: [:show, :edit, :update]
   resolve('Instructor') { :instructor }
 

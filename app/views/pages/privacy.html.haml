@@ -1,4 +1,95 @@
-%h1.title.has-text-centered
-  Datenschutz
+.has-text-centered
+  Zuletzt geändert am 1.4.2019 .
+.columns
+  .column.is-6
+    %h1.title.has-text-centered
+      Datenschutz
+    
+    .section
+      %h2.subtitle.has-text-centered
+        Wer wir sind
+    
+      Die Adresse unserer Website ist: http://neseri.siebenlinden.de.
+    
+      Verantwortlich ist der Freundeskreis Ökdorf e.V.,
+      %pre
+        Sieben Linden 1
+        38489 Beetzendorf OT Poppau
+        Deutschland
+        Tel.: +49-39000-51235
+        E-Mail: info@siebenlinden.org
+        Website: http://neseri.siebenlinden.de
+        Umsatzsteueridentifikationsnummer: DE 249278851
+        Vereinsregister Stendal, VR 53348
+        Vorstand: Simone Britsch, Hanne Kaiser-Gottwald, Giselher Dahmen, Claudia Marx.
+    
+    .sectionb
+      %h2.subtitle.has-text-centered
+        Welche personenbezogenen (und andere) Daten wir "sammeln"" und warum wir sie sammeln
+    
+      %p
+        Dieses Seite wird benutzt um Veranstaltungen im Ökodorf Sieben Linden zu organisieren. Dazu geben Referent/Innen und andere Veranstalter/innen ihre E-Mail-Adresse, sowie andere Kontaktdaten und Informationen zu Veranstaltungsvorschlägen und -abläufen an. Die angegebenen Informationen sind notwendig um die Veranstaltung ggfs. später auch zu veröffentlichen und (auch im Eigeninteresse der Nutzer/Innen) zu bewerben, weswegen wir keinen erhöhten Schutzbedarf dieser Daten sehen. Trotzdem sind die meisten Angaben freiwillig.
+    
+    
+    .section
+      %h2.subtitle.has-text-centered
+        Cookies
+      Anmeldedaten und Benachrichtigungen werden in Cookies gespeichert.
+    
+    .section
+      %h2.subtitle
+        Analysedienste
+      Die Kommunikationsdaten werden nicht weiter analysiert, aber in normalen Maße in Protokolldateien gespeichert (um den Server- und Applikationsbetrieb sicherzustellen).  Insbesondere werden die versandten E-Mails gespeichert, um nachvollziehen zu können ob das System korrekt funktioniert.
+    
+    .section
+      %h2.subtitle
+        Mit wem wir deine Daten teilen
+      %p
+        Die persönlichen und Kommunikationsdaten werden nicht weiter mit anderen Instanzen geteilt.
+    
+    .section
+      %h2.subtitle
+        Wie lange wir deine Daten speichern
+    
+      Die Daten werden im Sinne der Nutzer/innen 10 Jahre gespeichert, um eine Veranstaltungsvorschlag aus einem vorherigen Jahr problemlos und einfach erneut einreichen zu können. Solltest du eine frühere Löschung wünschen, reicht eine einfache mail an bildungsreferat@siebenlinden.org (oder ein Anruf bei o.g. Telefonnummer).
+    
+    .section
+      %h2.subtitle
+        Welche Rechte du an deinen Daten hast
+    
+      Du kannst jederzeit eine Löschung oder Herausgabe der Daten verlangen. Dazu reicht eine einfache mail an bildungsreferat@siebenlinden.org (oder ein Anruf bei o.g. Telefonnummer).
+    
+    .section
+      %h2.subtitle
+        Wie wir deine Daten schützen
+    
+      Wir sehen aufgrund des Zweckes der Applikation (Veranstaltungsplanung und -bewerbung) keine erhöhte Schutzwürdigkeit der Daten. Im Zweifelsfall können die Daten auch via E-Mail oder telefonisch eingereicht werden.
+      Die persönlichen Daten wie z.B. Telefonnummer sind nur für Administrator*n (Mitarbeiter der Betreiberin) einsichtlich.
+      Passwörter werden verschlüsselt gespeichert.
+    
+    .section
+      %h2.subtitle
+        Welche automatisierte Entscheidungsfindung und/oder Profilerstellung wir mit Benutzerdaten durchführen
+      Keine 
 
+  .column.is-6
+    %h1.title.has-text-centered
+      AGB
+    
+    .section
+      %h2.subtitle
+        Was du beachten solltest
 
+    .sectionc
+      %h2.subtitle.has-text-centered
+        Medien
+    
+      %p
+        Wenn du ein registrierter Benutzer bist und Fotos auf diese Website lädst, solltest du vermeiden, Fotos mit einem EXIF-GPS-Standort hochzuladen. Besucher dieser Website könnten Fotos, die auf dieser Website gespeichert sind, herunterladen und deren Standort-Informationen extrahieren. Außerdem musst Du Nutzungsrechte an den hochgeladenen oder versandten Daten benutzen und zustimmen, dass der Freundeskreis Ökordof e.V. diese zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit nutzt sowie gegebenenfalls weitergibt. Bitte stelle auch sicher, dass du Nutzungsrechte an eingegebenen Texten besitzt (also z.B. keine Textpassagen aus Büchern nutzen ohne sich eine Einverständniserklärung einzuholen).
+
+- if current_user&.tos_accepted_at
+  .notification.has-text-centered
+    Du hast die AGB und die Datenschutzbestimmungen am 
+    %strong
+      #{l(current_user.tos_accepted_at, format: :long)}
+    als gelesen und zugestimmt markiert.

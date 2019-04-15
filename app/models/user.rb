@@ -23,6 +23,7 @@
 #  phone                  :string
 #  mobile                 :string
 #  homepage               :string
+#  tos_accepted_at        :date
 #
 
 class User < ApplicationRecord
