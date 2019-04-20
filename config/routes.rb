@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   resources :seminars
   namespace :admin do
+    resources :users, only: [:index]
     resources :emails, only: [:index, :show]
   end
 

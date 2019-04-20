@@ -1,0 +1,29 @@
+%h1.title :users_index
+
+- if @pagy.pages > 1
+  != pagy_bulma_nav(@pagy)
+%table.table.is-fullwidth
+  %thead
+    %tr
+      %th= :name
+      %th= :email
+      %th= :seminars
+      %th= :actions
+  %tbody
+    - @users.find_each do |user|
+      %tr
+        %td= user_name user
+        %td= user.email
+        %td
+          - user.created_seminars.each do |seminar|
+            = link_to seminar.title, seminar_path(seminar)
+
+          - user.teaching_seminars.each do |seminar|
+            = link_to seminar.title, seminar_path(seminar)
+        %td
+          %a(href="mailto:#{user.email}")
+            =t(:send_mail)
+          -#= link_to t(:show), admin_user_path(user), class: 'button'
+- if @pagy.pages > 1
+  != pagy_bulma_nav(@pagy)
+
