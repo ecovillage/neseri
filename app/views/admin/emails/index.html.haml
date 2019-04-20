@@ -1,5 +1,7 @@
 %h1.title= t(:mails)
 
+- if @pagy.pages > 1
+  != pagy_bulma_nav(@pagy)
 %table.table
   %thead
     %tr
@@ -18,4 +20,6 @@
         %td= mail.subject
         %td= mail.sent_at
         %td= mail.mailer
-
+        
+- if @pagy.pages > 1
+  != pagy_bulma_nav(@pagy)
