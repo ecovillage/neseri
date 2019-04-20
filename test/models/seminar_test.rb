@@ -31,40 +31,21 @@
 #  user_seminar_id             :integer
 #
 
-class Seminar < ApplicationRecord
-  belongs_to :creator, class_name: "User"
-  belongs_to :seminar_kind, optional: true
+require 'test_helper'
 
-  belongs_to :user_seminar, class_name: 'Seminar', optional: true, inverse_of: :admin_seminar, foreign_key: 'user_seminar_id'
-  has_one :admin_seminar, class_name: 'Seminar', inverse_of: :user_seminar, foreign_key: 'user_seminar_id'
+class SeminarTest < ActiveSupport::TestCase
+  test "can be an admin_seminar (which is related to a user_seminar)" do
+    user_seminar = Seminar.new(title: 'Users Version', creator: users(:jane), start_date: DateTime.now, end_date: DateTime.now + 1)
+    assert user_seminar.is_user_seminar?
 
-  has_many :seminar_instructors, inverse_of: :seminar
-  has_many :instructors, through: :seminar_instructors, class_name: "User"
+    user_seminar.save!
 
-  accepts_nested_attributes_for :seminar_instructors, reject_if: :all_blank, allow_destroy: true
+    admin_seminar = user_seminar.create_admin_seminar
+    assert user_seminar.is_user_seminar?
+    assert !admin_seminar.is_user_seminar?
+    assert admin_seminar.is_admin_seminar?
 
-  validates :title, presence: true
-
-  validate :end_after_start
-  validates :start_date, :end_date, presence: true
-
-  def is_user_seminar?
-    !user_seminar_id?
-  end
-
-  def is_admin_seminar?
-    user_seminar_id?
-  end
-
-  protected
-
-  private
-
-  def end_after_start
-    return if end_date.blank? || start_date.blank?
-    
-    if end_date < start_date
-      errors.add(:end_date, :must_be_before_start_date)
-    end
+    assert user_seminar.admin_seminar == admin_seminar
+    assert admin_seminar.user_seminar == user_seminar
   end
 end
