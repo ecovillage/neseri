@@ -46,6 +46,8 @@ gem 'font-awesome-rails'
 gem 'jquery-rails' # unfortunately needed for cocoon
 gem 'cocoon'
 
+gem 'pagy'
+
 gem 'action_policy'
 
 gem 'ahoy_email'
