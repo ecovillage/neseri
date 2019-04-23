@@ -18,3 +18,6 @@ de:
   sessions:
     destroy:
       sign_out: Abmelden
+  read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a> gelesen und akzeptiert
+  accept_tos: AGB und Datenschutzerklärung gelesen und akzeptiert
+  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige deine Zurkenntnisnahme ganz unten auf der Seite.

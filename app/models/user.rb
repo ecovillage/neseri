@@ -42,6 +42,8 @@ class User < ApplicationRecord
   before_validation :downcase_strip_email
   before_validation :prepend_https_to_homepage
 
+  validates_acceptance_of :tos_agreement, :allow_nil => false, on: :create
+
   def downcase_strip_email
     self.email = email.downcase.strip
   end
@@ -53,5 +55,11 @@ class User < ApplicationRecord
         self.homepage = "https://#{self.homepage}"
       end
     end
+  end
+
+  after_create :set_tos_accepted_at
+
+  def set_tos_accepted_at
+    update(tos_accepted_at: DateTime.now)
   end
 end

@@ -34,3 +34,6 @@ de:
   seminars:
     index:
       created_at: Erstellt am
+  no_own_seminars_yet: Noch keine eigenen Seminare anzuzeigen
+  please_read_and_accept_below: Bitte lies den folgenden Text sorgfältig und akzeptiere ihn ganz unten auf dieser Seite.
+  accept: Als gelesen und akzeptiert markieren

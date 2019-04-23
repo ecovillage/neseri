@@ -1,5 +1,6 @@
-%h1.title.has-centered-text= t('please read and accept below')
+.notification.is-warning
+  %h1.title.has-centered-text= t(:please_read_and_accept_below)
 
 = render template: 'pages/privacy'
 
-= button_to t(:accept), tos_acceptance_path, class: 'button', method: :post
+= button_to t(:accept), tos_acceptance_path, class: 'button is-primary', method: :post

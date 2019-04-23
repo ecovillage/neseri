@@ -50,7 +50,7 @@
       -#      - else
       -#        = link_to t(:view), seminar_path(seminar), class: 'button'
 - else
-  %h1.subtitle :no_own_seminars_yet
+  %h1.subtitle= t(:no_own_seminars_yet)
 
 = link_to t('seminar.new'), new_seminar_path, class: 'button is-primary'
 
