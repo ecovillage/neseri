@@ -25,6 +25,7 @@ de:
         material_cost: Materialkosten
         creator: erstellt von
         seminar_kind: Art
+        seminar_instructors: Referent*n
         updated_at: Zuletzt geändert am
     errors:
       models:

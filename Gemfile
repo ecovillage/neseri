@@ -50,6 +50,9 @@ gem 'pagy'
 
 gem 'action_policy'
 
+
+gem 'clowne'
+
 gem 'ahoy_email'
 
 # Use ActiveStorage variant

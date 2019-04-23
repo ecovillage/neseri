@@ -7,6 +7,8 @@ class SeminarsController < NeserituController
     else
       @seminars = current_user.seminars
     end
+    @created_seminars  = current_user.created_seminars.order(created_at: :desc)
+    @teaching_seminars = current_user.teaching_seminars.order(created_at: :desc)
     authorize!
   end
 
