@@ -1,0 +1,7 @@
+= form_for [:admin, @seminar_kind], builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, local: true, remote: false do |f|
+  = f.errors
+
+  = f.labeled_text_field :name, placeholder: t('seminar_kind.placeholder.name')
+  = f.labeled_text_area :description, help_text: t('seminar_kind.placeholder.name')
+
+  = f.submit

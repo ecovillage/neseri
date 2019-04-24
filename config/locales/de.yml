@@ -1,23 +1,30 @@
 ---
 de:
-  created_seminars: Erstellte Seminare
-  teaching_seminars: Seminare in (Mit-)Leitung
+  accept_tos: AGB und Datenschutzerklärung gelesen und akzeptiert
   contact:
     contact: Eine E-Mail schicken
+  created_seminars: Erstellte Seminare
   edit: bearbeiten
   pages:
     about: Über
     contact: Kontakt
     impressum: Impressum
     privacy: Datenschutz
+  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige
+    deine Zurkenntnisnahme ganz unten auf der Seite.
+  read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a>
+    gelesen und akzeptiert
   resend_confirmation_instructions: Anleitung erneut schicken
+  seminar: 
   seminar_instructors:
     add: Referent/In hinzufügen
     remove: Referent/In entfernen
+  seminar_kind:
+    create: Neue Veranstaltungs-Art anlegen
+    deactivate: Verstecken
+    reactivate: Reaktivieren
   send_me_reset_password_instructions: Anleitung schicken
   sessions:
     destroy:
       sign_out: Abmelden
-  read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a> gelesen und akzeptiert
-  accept_tos: AGB und Datenschutzerklärung gelesen und akzeptiert
-  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige deine Zurkenntnisnahme ganz unten auf der Seite.
+  teaching_seminars: Seminare in (Mit-)Leitung

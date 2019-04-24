@@ -1,0 +1,20 @@
+%h1.title= SeminarKind.model_name.human(count: 2)
+
+%table.table.is-fullwidth
+  %thead
+    %tr
+      %th
+      %th
+  %tbody
+    - @seminar_kinds.each do |seminar_kind|
+      - if seminar_kind.active?
+        %tr
+          %td= seminar_kind.name
+          %td= link_to t("seminar_kind.deactivate"), admin_seminar_kind_path(seminar_kind), method: :delete
+      - else
+        %tr.is-selected
+          %td= seminar_kind.name
+          %td= link_to t("seminar_kind.reactivate"), admin_seminar_kind_path(seminar_kind), method: :patch
+    %tr
+      %td.has-text-centered(colspan=2)= link_to t('seminar_kind.create'), new_admin_seminar_kind_path, class: 'button is-primary'
+

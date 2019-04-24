@@ -13,6 +13,8 @@
 class SeminarKind < ApplicationRecord
   has_many :seminars
 
+  validates :name, uniqueness: true
+
   def to_s
     name
   end
