@@ -1,4 +1,4 @@
-%h1.title.has-text-centered= t(:instructor)
+%h1.title.has-text-centered= t(:your_instructor_data)
 %h2.sub-title.has-text-centered="(#{current_user.email})"
 
 .columns.section
@@ -10,4 +10,4 @@
             %th= User.human_attribute_name(attr)
             %td= @instructor.send(attr)
     
-    = link_to :edit, edit_instructor_path, class: 'button'
+    = link_to t(:edit), edit_instructor_path, class: 'button is-primary'

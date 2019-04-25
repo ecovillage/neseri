@@ -3,7 +3,7 @@
   = f.labeled_email_field :email, icon: 'fa-envelope', help_text: :email_adress_of_instructor
   = f.labeled_text_field :accommodation, icon: 'fa-home'
   = f.labeled_text_field :comment, icon: 'fa-comment-o'
-  = f.labeled_text_area  :qualification, help_text: t('seminar_instructor.helptext.qualification')
+  = f.labeled_text_area  :qualification, icon: 'fa-adress-card', help_text: t('seminar_instructor.helptext.qualification')
   .field.is-grouped.is-grouped-right
     .control
       -# This needs an arrow up or clearer wording (to make clear which referee is meant)

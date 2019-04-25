@@ -1,5 +1,4 @@
-%h1.title :edit_instructor
-%h2.subtitle :editing_you?
+%h1.title #{t(:your_instructor_data)} #{t(:edit)}
 
 = form_for @instructor, url: instructor_path, builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, local: true, remote: false do |f|
   = f.errors
@@ -13,5 +12,5 @@
     = f.labeled_text_field "mobile", icon: 'fa-mobile'
     = f.labeled_text_field "homepage"
 
-  = f.submit t('instructor.new')
+  = f.submit t(:save)
 
