@@ -6,7 +6,12 @@
 #  name       :string
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
+#  kind       :text
+#  active     :boolean
 #
 
 class Room < ApplicationRecord
+  has_many :seminars
+
+  validates :name, uniqueness: true
 end

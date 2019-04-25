@@ -29,6 +29,9 @@
 #  seminar_kind_id             :integer
 #  accommodation               :string
 #  user_seminar_id             :integer
+#  alternative_dates           :text
+#  other_extras                :text
+#  room_wish_id_id             :integer
 #
 
 class Seminar < ApplicationRecord
@@ -38,8 +41,10 @@ class Seminar < ApplicationRecord
   belongs_to :user_seminar, class_name: 'Seminar', optional: true, inverse_of: :admin_seminar, foreign_key: 'user_seminar_id'
   has_one :admin_seminar, class_name: 'Seminar', inverse_of: :user_seminar, foreign_key: 'user_seminar_id'
 
+  belongs_to :wished_room, class_name: 'Room', optional: true, inverse_of: :seminars, foreign_key: 'wished_room_id'
+
   has_many :seminar_instructors, inverse_of: :seminar
-  has_many :instructors, through: :seminar_instructors, class_name: "User"
+  has_many :instructors, through: :seminar_instructors, class_name: "User", source: 'user'
 
   accepts_nested_attributes_for :seminar_instructors, reject_if: :all_blank, allow_destroy: true
 

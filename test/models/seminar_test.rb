@@ -29,6 +29,9 @@
 #  seminar_kind_id             :integer
 #  accommodation               :string
 #  user_seminar_id             :integer
+#  alternative_dates           :text
+#  other_extras                :text
+#  room_wish_id_id             :integer
 #
 
 require 'test_helper'

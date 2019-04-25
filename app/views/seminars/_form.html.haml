@@ -22,6 +22,7 @@
     = f.labeled_datetime_select "start_date", help_text: t('seminar.helptext.start_date')
     = f.labeled_datetime_select "end_date", help_text: t('seminar.helptext.end_date')
     = f.labeled_collection_select "seminar_kind_id", SeminarKind.where(active: true), :id, :name
+    = f.labeled_text_area "alternative_dates", icon: 'fa-calendar', help_text: t('seminar.helptext.alternative_dates')
     = f.labeled_number_field "cancellation_time", icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
     = f.labeled_text_field "cancellation_reason"
   
@@ -32,10 +33,11 @@
       = t('seminar.form.section.participants')
       %span.icon
         %i.fa.fa-users
-    = f.labeled_number_field "attendees_minimum", help_text: t('seminar.helptext.attendees_minimum')
-    = f.labeled_number_field "attendees_maximum"
+    = f.labeled_number_field "attendees_minimum", help_text: t('seminar.helptext.attendees_minimum'), icon: 'fa-window-minimize'
+    = f.labeled_number_field "attendees_maximum", icon: 'fa-window-maximize'
+    = f.labeled_text_field "accommodation", icon: 'fa-home', help_text: t('seminar.helptext.accommodation')
     = f.labeled_text_field "attendees_preconditions"
-    = f.labeled_text_field "please_bring"
+    = f.labeled_text_field "please_bring", icon: 'fa-suitcase'
   
   
   .box
@@ -45,6 +47,7 @@
       = t('seminar.form.section.infrastructure')
       %span.icon
         %i.fa.fa-sitemap
+    = f.labeled_collection_select "wished_room", Room.where(active: true), :id, :name
     = f.labeled_text_field "room_material", help_text: t('seminar.helptext.room_material'), icon: 'fa-clipboard'
     = f.labeled_text_field "room_extras", help_text: t('seminar.helptext.room_extras'), icon: 'fa-wrench'
   

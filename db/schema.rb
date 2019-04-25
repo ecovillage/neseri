@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_14_180103) do
+ActiveRecord::Schema.define(version: 2019_04_24_174420) do
 
   create_table "ahoy_messages", force: :cascade do |t|
     t.string "user_type"
@@ -27,6 +27,9 @@ ActiveRecord::Schema.define(version: 2019_04_14_180103) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "kind"
+    t.boolean "active"
+    t.index ["kind"], name: "index_rooms_on_kind"
   end
 
   create_table "seminar_instructors", force: :cascade do |t|
@@ -78,8 +81,14 @@ ActiveRecord::Schema.define(version: 2019_04_14_180103) do
     t.integer "creator_id"
     t.integer "seminar_kind_id"
     t.string "accommodation"
+    t.integer "user_seminar_id"
+    t.text "alternative_dates"
+    t.text "other_extras"
+    t.integer "room_wish_id_id"
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
+    t.index ["room_wish_id_id"], name: "index_seminars_on_room_wish_id_id"
     t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"
+    t.index ["user_seminar_id"], name: "index_seminars_on_user_seminar_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -102,6 +111,7 @@ ActiveRecord::Schema.define(version: 2019_04_14_180103) do
     t.string "phone"
     t.string "mobile"
     t.string "homepage"
+    t.date "tos_accepted_at"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

@@ -4,7 +4,7 @@
 #
 #  id            :integer          not null, primary key
 #  seminar_id    :integer
-#  instructor_id :integer
+#  user_id       :integer
 #  qualification :text
 #  main_contact  :boolean
 #  accommodation :string

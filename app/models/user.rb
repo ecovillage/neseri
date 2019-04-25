@@ -15,7 +15,6 @@
 #  created_at             :datetime         not null
 #  updated_at             :datetime         not null
 #  admin                  :boolean          default(FALSE)
-#  instructor_id          :integer
 #  firstname              :string
 #  lastname               :string
 #  address                :string
@@ -35,7 +34,7 @@ class User < ApplicationRecord
 
   has_many :created_seminars, class_name: 'Seminar', foreign_key: 'creator_id'
   has_many :seminar_instructors, inverse_of: 'user'
-  has_many :teaching_seminars, class_name: 'Seminar', foreign_key: 'seminar_id', through: :seminar_instructors, inverse_of: 'instructors', source: 'seminar'
+  has_many :teaching_seminars, class_name: 'Seminar', foreign_key: 'seminar_id', inverse_of: 'instructors', source: 'seminar', through: :seminar_instructors
 
   belongs_to :instructor, required: false
 

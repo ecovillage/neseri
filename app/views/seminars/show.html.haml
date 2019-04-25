@@ -76,6 +76,9 @@
               %span.icon
                 %i.fa.fa-sitemap
               = t('seminar.form.section.infrastructure')
+          %tr
+            %th= Seminar.human_attribute_name(:wished_room)
+            %td= @seminar.wished_room&.name
         - [:room_material, :room_extras].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
