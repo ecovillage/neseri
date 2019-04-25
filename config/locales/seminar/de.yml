@@ -24,6 +24,11 @@ de:
       attendees_minimum: Inklusive Regionalplatz
       room_material: Der Raum wird spätestens eine Stunde vor Seminarbeginn zur Verfügung stehen und ist ausgestattet mit Moderationskoffer, Flipchart, Stiften und Papier. Besondere Wünsche (Beamer, DVD-Spieler, Materialien, Internetzugang). Bitte sprich das Gäste-Team rechtzeitig an, wenn du Unterstützung benötigst.
       room_extras: z.B. Internetzugang für TeilnehmerInnen, Kaffee-Trinken
+      attendees_minimum: 'Inklusive Regionalplatz'
+      royalty_participant: in Euro
+      royalty_participant_reduced: für Teilnehmer/In, die auch vom FK Sozialermäßigung erhalten. Höchstens 2/3 des normalen Honorars.
+      accommodation: "In der Regel: Gästezimmer"
+      alternative_dates: So weit gefasst wie möglich, z.B. Quartal, Monat
     form:
       section:
         publication: Veröffentlichung im Seminarprogramm
@@ -31,6 +36,7 @@ de:
         participants: Teilnehmer/Innen
         infrastructure: Infrastrukturelles
         costs: Kosten
+        main_referee: Referent*n
   seminars:
     index:
       created_at: Erstellt am

@@ -11,6 +11,7 @@ de:
         description: Text für das Seminarprogramm
         start_date: Anfangsdatum und Zeit
         end_date: Enddatum und Zeit
+        alternative_dates: Alternative Termine
         cancellation_time: Besondere Absagefrist
         cancellation_reason: Begründung
         attendees_minimum: Mindestanzahl Teilnehmer/Innen
@@ -25,7 +26,9 @@ de:
         material_cost: Materialkosten
         creator: erstellt von
         seminar_kind: Art
+        seminar_kind_id: Art
         seminar_instructors: Referent*n
+        room_wish: Seminar-Raumwunsch
         updated_at: Zuletzt geändert am
     errors:
       models:

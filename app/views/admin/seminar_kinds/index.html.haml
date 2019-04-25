@@ -13,7 +13,9 @@
           %td= link_to t("seminar_kind.deactivate"), admin_seminar_kind_path(seminar_kind), method: :delete
       - else
         %tr.is-selected
-          %td= seminar_kind.name
+          %td
+            = seminar_kind.name
+            #{t('seminar_kind.deactivated')}
           %td= link_to t("seminar_kind.reactivate"), admin_seminar_kind_path(seminar_kind), method: :patch
     %tr
       %td.has-text-centered(colspan=2)= link_to t('seminar_kind.create'), new_admin_seminar_kind_path, class: 'button is-primary'

@@ -19,8 +19,8 @@
       = t('seminar.form.section.dates')
       %span.icon
         %i.fa.fa-calendar
-    = f.labeled_datetime_select "start_date"
-    = f.labeled_datetime_select "end_date"
+    = f.labeled_datetime_select "start_date", help_text: t('seminar.helptext.start_date')
+    = f.labeled_datetime_select "end_date", help_text: t('seminar.helptext.end_date')
     = f.labeled_collection_select "seminar_kind_id", SeminarKind.where(active: true), :id, :name
     = f.labeled_number_field "cancellation_time", icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
     = f.labeled_text_field "cancellation_reason"
@@ -32,7 +32,7 @@
       = t('seminar.form.section.participants')
       %span.icon
         %i.fa.fa-users
-    = f.labeled_number_field "attendees_minimum"
+    = f.labeled_number_field "attendees_minimum", help_text: t('seminar.helptext.attendees_minimum')
     = f.labeled_number_field "attendees_maximum"
     = f.labeled_text_field "attendees_preconditions"
     = f.labeled_text_field "please_bring"
@@ -55,8 +55,8 @@
       = t('seminar.form.section.costs')
       %span.icon
         %i.fa.fa-money
-    = f.labeled_text_field "royalty_participant"
-    = f.labeled_text_field "royalty_participant_reduced"
+    = f.labeled_text_field "royalty_participant", help_text: t('seminar.helptext.royalty_participant')
+    = f.labeled_text_field "royalty_participant_reduced", help_text: t('seminar.helptext.royalty_participant_reduced')
     = f.labeled_text_field "material_cost"
     = f.labeled_text_field "honorar"
     -#= f.labeled_string "kind", default: "user"

@@ -15,6 +15,11 @@ de:
   read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a>
     gelesen und akzeptiert
   resend_confirmation_instructions: Anleitung erneut schicken
+  room:
+    create: Neuen Raum anlegen
+    deactivate: Verstecken
+    deactivated: "(versteckt)"
+    reactivate: Reaktivieren
   seminar: 
   seminar_instructors:
     add: Referent/In hinzufügen
@@ -22,6 +27,7 @@ de:
   seminar_kind:
     create: Neue Veranstaltungs-Art anlegen
     deactivate: Verstecken
+    deactivated: "(versteckt)"
     reactivate: Reaktivieren
   send_me_reset_password_instructions: Anleitung schicken
   sessions:
