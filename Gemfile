@@ -32,6 +32,8 @@ gem 'rails-i18n', '~> 5.1'
 gem 'devise'
 gem 'devise-i18n'
 
+gem 'devise_invitable', '~> 2.0.0'
+
 gem 'haml'
 gem 'haml-rails'
 
