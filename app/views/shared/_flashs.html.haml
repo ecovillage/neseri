@@ -1,0 +1,18 @@
+- flash.each do |type, message|
+  - Array(message).each do |message|
+    - if type == "notice"
+      .notification
+        %span.icon.is-large.has-text-warning
+          %i.fa.fw.fa-warning
+        !=message
+    - elsif type == "alert"
+      .notification
+        %span.icon.is-large.has-text-danger
+          %i.fa.fw.fa-warning
+        !=message
+    - else
+      .notification
+        %span.icon.is-large.has-text-warning
+          %i.fa.fw.fa-star
+        !=message
+        (#{type})
