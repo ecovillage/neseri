@@ -11,7 +11,21 @@
     = render 'navbar'
     %section.section
       .container
-        %p.notice= notice
-        %p.alert= alert
+        %noscript
+          .notification{ :class => 'is-primary' }
+            %span.icon.has-text-warning
+              %i.fa.fa-warning
+            = t('notification.nojs')
+
+        - if notice
+          .notification
+            %span.icon.is-large.has-text-warning
+              %i.fa.fw.fa-warning
+            !=notice
+        - if alert
+          .notification
+            %span.icon.is-large.has-text-danger
+              %i.fa.fw.fa-warning
+            !=alert
         = yield
 

@@ -38,6 +38,7 @@ de:
         infrastructure: Infrastrukturelles
         costs: Kosten
         main_referee: Referent*n
+        referees: Referent*n
   seminars:
     index:
       created_at: Erstellt am

@@ -5,11 +5,14 @@ de:
     contact: Eine E-Mail schicken
   created_seminars: Erstellte Seminare
   edit: bearbeiten
+  instructor_updated: Profil aktualisiert.
   pages:
     about: Über
     contact: Kontakt
     impressum: Impressum
     privacy: Datenschutz
+  please_fill_out_profile_html: Du bist als Referent* angegeben, aber uns fehlen Kontakt-Daten.
+    Bitte <a href="%{profile_path}">fülle Dein Profil aus</a>.
   please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige
     deine Zurkenntnisnahme ganz unten auf der Seite.
   read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a>

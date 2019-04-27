@@ -5,8 +5,9 @@
 
 %br
 .subtitle
-  = Seminar.human_attribute_name(:creator).capitalize
-  = @seminar.creator.email
+  - if @seminar.creator
+    = Seminar.human_attribute_name(:creator).capitalize
+    = @seminar.creator.email
   = l(@seminar.created_at, format: :long)
 .subtitle
   = Seminar.human_attribute_name(:updated_at)
@@ -99,9 +100,16 @@
       %th= SeminarInstructor.human_attribute_name(:comment)
       %th= SeminarInstructor.human_attribute_name(:accommodation)
     - @seminar.seminar_instructors.each do |instructor|
-      %tr
-        - [:email, :qualification, :comment, :accommodation].each do |attr|
-          %td= instructor.send(attr)
+      - if instructor.user == current_user
+        %tr.is-selected
+          %td= instructor.send(:email)
+          - [:qualification, :comment, :accommodation].each do |attr|
+            %td= instructor.send(attr)
+      - else
+        %tr
+          %td= instructor.send(:email)
+          - [:qualification, :comment, :accommodation].each do |attr|
+            %td= instructor.send(attr)
 
 
 = link_to t('edit'), edit_seminar_path(@seminar), class: 'button'
