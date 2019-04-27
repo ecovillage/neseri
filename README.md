@@ -36,6 +36,10 @@ rails db:seed
 ```
 which populates the db with some dummy users.
 
+* Development
+
+You can use mail_catcher; start it; visit http://localhost:1080 in browser, mailer settings in `config/environments/development.rb` is already properly set up.
+
 * How to run the test suite
 
 None yet.
