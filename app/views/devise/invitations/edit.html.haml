@@ -14,5 +14,7 @@
           %br/
           = f.password_field :password_confirmation
         .field
+          = f.check_box :tos_agreement
+          = f.label :tos_agreement, t(:read_and_accepted_tos_html, privacy_path: privacy_path)
       .actions
         = f.submit t("devise.invitations.edit.submit_button"), class: 'button'

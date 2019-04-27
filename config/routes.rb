@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    invitations: "invitations"
+  }
   root 'seminars#index'
 
   get 'impressum', to: 'pages#impressum'

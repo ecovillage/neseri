@@ -35,7 +35,7 @@
 #
 
 class Seminar < ApplicationRecord
-  belongs_to :creator, class_name: "User"
+  belongs_to :creator, class_name: "User", optional: true
   belongs_to :seminar_kind, optional: true
 
   belongs_to :user_seminar, class_name: 'Seminar', optional: true, inverse_of: :admin_seminar, foreign_key: 'user_seminar_id'

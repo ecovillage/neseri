@@ -44,5 +44,16 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
 
     refute_selector '.notification', text: 'Der Einladungslink ist ungültig'
     fill_in 'Passwort', with: 'jones@neseri.tu'
+    fill_in 'Passwortbestätigung', with: 'jones@neseri.tu'
+    find('.actions .button').click
+
+    assert_selector '.notification', text: "Benutzer/In konnte aufgrund eines Fehlers nicht gespeichert werden:\nDatenschutz und AGB muss akzeptiert werden"
+
+    fill_in 'Passwort', with: 'jones@neseri.tu'
+    fill_in 'Passwortbestätigung', with: 'jones@neseri.tu'
+    check "AGB und Datenschutzerklärung gelesen und akzeptiert", allow_label_click: true
+    find('.actions .button').click
+
+    assert_selector '.notification', text: 'Passwort geändert. Du bist nun eingeloggt.'
   end
 end
