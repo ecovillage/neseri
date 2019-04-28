@@ -13,5 +13,5 @@
 class Room < ApplicationRecord
   has_many :seminars
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { case_sensitive: false }
 end

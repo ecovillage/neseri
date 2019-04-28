@@ -46,7 +46,8 @@ class Seminar < ApplicationRecord
   has_many :seminar_instructors, inverse_of: :seminar
   has_many :instructors, through: :seminar_instructors, class_name: "User", source: 'user'
 
-  accepts_nested_attributes_for :seminar_instructors, reject_if: :all_blank, allow_destroy: true
+  accepts_nested_attributes_for :seminar_instructors,
+    reject_if: :all_blank, allow_destroy: true
 
   validates :title, presence: true
 

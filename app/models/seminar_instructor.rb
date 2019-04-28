@@ -20,6 +20,9 @@ class SeminarInstructor < ApplicationRecord
 
   validates :seminar, presence: true
 
+  # or Devise.email_regexp; https://api.rubyonrails.org/v5.1/classes/ActiveModel/Validations/ClassMethods.html#method-i-validates
+  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+
 
   before_validation :downcase_strip_email
 
