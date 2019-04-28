@@ -1,5 +1,18 @@
 ---
 de:
+  date:
+    formats:
+      short_date: '%a %d.%m.%Y'
+      mid_date: '%a, %d. %b %Y'
+  datetime:
+    formats:
+      short_date: '%a %d.%m.%Y'
+      mid: '%a, %d. %b %Y'
+  time:
+    formats:
+      short_date: '%a %d.%m.%Y'
+      mid: '%a, %d. %b %Y %H:%M'
+
   accept_tos: AGB und Datenschutzerklärung gelesen und akzeptiert
   contact:
     contact: Eine E-Mail schicken

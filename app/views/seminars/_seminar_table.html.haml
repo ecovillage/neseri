@@ -1,0 +1,13 @@
+%table.table.is-fullwidth
+  %thead
+    %tr
+      %th= t(:nr)
+      %th= Seminar.human_attribute_name(:title)
+      %th= t('seminars.index.preferred_date')
+      %th= t('seminars.index.created_at')
+      -#%th= Seminar.human_attribute_name(:creator)
+      %th= Seminar.human_attribute_name(:seminar_instructors)
+      %th
+  %tbody
+    = render partial: 'seminar_table_row', collection: seminars, as: 'seminar'
+
