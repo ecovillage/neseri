@@ -63,4 +63,8 @@ In production (haha), make sure to have these environment variables set(with pro
 
 Works fine with dokku.
 
+* Tricks:
+  - multiple flashs via flash_helper
+  - visit /flashs for design stuff
+
 * ...

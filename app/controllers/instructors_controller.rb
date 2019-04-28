@@ -16,7 +16,7 @@ class InstructorsController < NeserituController
     @instructor.update instructor_params
     authorize! @instructor
     if @instructor.save
-      redirect_to instructor_path, notice: :instructor_updated
+      redirect_to instructor_path, notice: t(:instructor_updated)
     else
       render :edit
     end
