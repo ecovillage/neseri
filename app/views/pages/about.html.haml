@@ -2,7 +2,16 @@
   Über
 
 %p
-  Auf diesen Seiten können Vorschläge für Bildungsveranstaltungen im und mit dem Ökodorf Sieben Linden (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
+  Auf diesen Seiten können Vorschläge für (Bildungs-)Veranstaltungen im und mit dem Ökodorf Sieben Linden (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
+
+- if !user_signed_in?
+  %p
+    Um fortzufahren musst du Dich
+    %a.button.is-primary(href=new_user_registration_path style="margin-top: -5px;")
+      %strong= t('devise.registrations.new.sign_up').downcase
+    oder, wenn du bereits ein Konto hast
+    = link_to t('devise.sessions.new.sign_in').downcase, new_user_session_path, class: 'button', style: 'margin-top: -5px;'
+    \.
 
 .section
   %h2.subtitle.has-text-centered
