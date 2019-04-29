@@ -52,6 +52,7 @@ gem 'pagy'
 
 gem 'action_policy'
 
+gem "actionnav", "~> 1.0.0"
 
 gem 'clowne'
 

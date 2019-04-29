@@ -269,6 +269,7 @@ PLATFORMS
 
 DEPENDENCIES
   action_policy
+  actionnav (~> 1.0.0)
   ahoy_email
   annotate
   bootsnap (>= 1.1.0)
