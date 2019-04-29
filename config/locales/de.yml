@@ -52,3 +52,4 @@ de:
     formats:
       mid: "%a, %d. %b %Y %H:%M"
       short_date: "%a %d.%m.%Y"
+  view: Ansehen

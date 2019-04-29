@@ -1,4 +1,4 @@
-%h1.title= t(:mails)
+%h1.title= t("admin.sent_mails")
 
 - if @pagy.pages > 1
   != pagy_bulma_nav(@pagy)
@@ -6,13 +6,15 @@
   %thead
     %tr
       %th
-        = t(:to)
+        = t("admin.mails_table.to")
       %th
-        = t(:subject)
+        = t("admin.mails_table.subject")
       %th
-        = t(:sent_at)
+        = t("admin.mails_table.sent_at")
       %th
-        = t(:mailer)
+        = t("admin.mails_table.mailer")
+      %th
+        = t("admin.mails_table.content")
   %tbody
     - @mails.each do |mail|
       %tr
@@ -20,6 +22,6 @@
         %td= mail.subject
         %td= mail.sent_at
         %td= mail.mailer
-        
+        %td= link_to t(:view), admin_email_path(mail), class: 'button'
 - if @pagy.pages > 1
   != pagy_bulma_nav(@pagy)

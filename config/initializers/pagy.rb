@@ -147,7 +147,8 @@ require 'pagy/extras/bulma'
 #                 {locale: 'xyz',  # not built-in
 #                  filepath: 'path/to/pagy-xyz.yml',
 #                  pluralize: lambda{|count| ... } )
-
+Pagy::I18n.load({locale: 'de'},
+                {locale: 'en'})
 
 # I18n extra: uses the standard i18n gem which is ~18x slower using ~10x more memory
 # than the default pagy internal i18n (see above)

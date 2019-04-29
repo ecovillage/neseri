@@ -1,0 +1,10 @@
+de:
+  admin:
+    mails: E-Mails
+    sent_mails: Versendete E-Mails
+    mails_table:
+      to: An
+      subject: Betreff
+      sent_at: gesendet am
+      mailer: Mail-Komponente
+      content: Inhalt
