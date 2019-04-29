@@ -1,0 +1,7 @@
+de:
+  activerecord:
+    models:
+      room:
+        one: Raum
+        other: Räume
+

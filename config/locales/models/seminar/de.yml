@@ -29,6 +29,7 @@ de:
         seminar_kind_id: Art
         seminar_instructors: Referent*n
         room_wish: Seminar-Raumwunsch
+        wished_room: Seminar-Raumwunsch
         updated_at: Zuletzt geändert am
     errors:
       models:
