@@ -12,6 +12,9 @@ class PagesController < ApplicationController
   def about
   end
 
+  def documentation
+  end
+
   def flashs
     {
       info: "Wow, info",

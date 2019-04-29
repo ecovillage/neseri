@@ -4,11 +4,14 @@ Rails.application.routes.draw do
   }
   root 'seminars#index'
 
-  get 'impressum', to: 'pages#impressum'
-  get 'privacy',   to: 'pages#privacy'
-  get 'contact',   to: 'pages#contact'
-  get 'about',     to: 'pages#about'
-  get 'flashs',    to: 'pages#flashs'
+  root 'pages#about'
+
+  get 'impressum',     to: 'pages#impressum'
+  get 'privacy',       to: 'pages#privacy'
+  get 'contact',       to: 'pages#contact'
+  get 'about',         to: 'pages#about'
+  get 'documentation', to: 'pages#documentation'
+  get 'flashs',        to: 'pages#flashs'
 
   resources :seminars
   namespace :admin do
