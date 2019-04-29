@@ -11,7 +11,7 @@ class NeserituController < ApplicationController
   end
 
   def force_tos_accept!
-    if !current_user.admin && !current_user.tos_accepted_at
+    if current_user && !current_user.admin && !current_user.tos_accepted_at
       redirect_to tos_path, alert: t(':need_to_accept_to_use_service')
     end
   end
