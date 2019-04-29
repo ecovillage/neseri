@@ -5,10 +5,11 @@
 %table.table.is-fullwidth
   %thead
     %tr
-      %th= :name
-      %th= :email
-      %th= :seminars
-      %th= :actions
+      %th= t("admin.users.name")
+      %th= t("admin.users.email")
+      %th= t("admin.users.seminars")
+      %th= t("admin.users.state")
+      %th= t("admin.users.actions")
   %tbody
     - @users.find_each do |user|
       %tr
@@ -20,6 +21,17 @@
 
           - user.teaching_seminars.each do |seminar|
             = link_to seminar.title, seminar_path(seminar)
+        %td
+          .tags
+            - if user.confirmation_token && !user.confirmed_at
+              %span.tag.is-warning
+                =t("admin.users.tags.unconfirmed")
+            - if user.invitation_token
+              %span.tag.is-info
+                =t("admin.users.tags.invitation_pending")
+            - if user.profile_missing?
+              %span.tag
+                =t("admin.users.tags.profile_missing")
         %td
           %a(href="mailto:#{user.email}")
             =t(:send_mail)

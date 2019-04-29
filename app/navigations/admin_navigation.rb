@@ -1,6 +1,6 @@
 class AdminNavigation < ActionNav::Base
   item :admin do
-    title { t(:admin) }
+    title { t(:admin_nav) }
     hide_unless { (allowed_to? :index?, '', with: AdminPolicy) == true }
 
     item :users do

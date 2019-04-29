@@ -69,4 +69,8 @@ class User < ApplicationRecord
   def set_tos_accepted_at
     update(tos_accepted_at: DateTime.now)
   end
+
+  def profile_missing?
+    !firstname || !lastname || !address
+  end
 end

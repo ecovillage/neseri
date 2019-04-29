@@ -1,0 +1,12 @@
+de:
+  admin:
+    users:
+      name: Name
+      email: E-Mail
+      seminars: Seminare
+      state: Zustand
+      actions: Aktionen
+      tags:
+        unconfirmed: E-Mail unbestätigt
+        invitation_pending: Einladung unbestätigt
+        profile_missing: Profil fehlt
