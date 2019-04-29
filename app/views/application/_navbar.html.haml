@@ -1,12 +1,10 @@
-%nav.navbar{"aria-label" => "main navigation", :role => "navigation"}
+%nav.navbar{"aria-label" => "main navigation", :role => "navigation", class: 'is-light'}
   .navbar-brand
-    %a.navbar-item{:href => "https://"}
-      %img{:height => "28", :src => "https://", :width => "112"}/
     %a.navbar-burger.burger{"aria-expanded" => "false", "aria-label" => "menu", "data-target" => "navbarBasicExample", :role => "button"}
       %span{"aria-hidden" => "true"}
       %span{"aria-hidden" => "true"}
       %span{"aria-hidden" => "true"}
-  #navbarBasicExample.navbar-menu
+  #navbar.navbar-menu
     .navbar-start
       %a.navbar-item
         Home
@@ -17,6 +15,21 @@
       = link_to t('pages.privacy'), privacy_path, class: 'navbar-item'
       = link_to t('pages.about'),  about_path, class: 'navbar-item'
     .navbar-end
+      - if current_user&.admin?
+        .navbar-item.has-dropdown.is-hoverable
+          %a.navbar-link
+            = :admin
+          .navbar-dropdown
+            - if allowed_to? :index?, User
+              = link_to User.model_name.human(count: 2), admin_users_path, class: "navbar-item"
+            - if allowed_to? :index?, User
+              = link_to Room.model_name.human(count: 2), admin_rooms_path, class: "navbar-item"
+            - if allowed_to? :index?, User
+              = link_to :settings, admin_users_path, class: "navbar-item"
+            - if allowed_to? :index?, User
+              = link_to :texts, admin_users_path, class: "navbar-item"
+            - if allowed_to? :index?, SeminarKind
+              = link_to SeminarKind.model_name.human(count: 2), admin_seminar_kinds_path, class: "navbar-item"
       .navbar-item
         .buttons
           - if user_signed_in?
@@ -25,5 +38,4 @@
           - else
             %a.button.is-primary(href=new_user_registration_path)
               %strong= t('devise.registrations.new.sign_up')
-            %a.button.is-light
-              = t('devise.sessions.new.sign_in')
+            = link_to t('devise.sessions.new.sign_in'), new_user_session_path, class: 'button'
