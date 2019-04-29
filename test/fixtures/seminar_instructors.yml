@@ -1,0 +1,44 @@
+# == Schema Information
+#
+# Table name: seminar_instructors
+#
+#  id            :integer          not null, primary key
+#  seminar_id    :integer
+#  user_id       :integer
+#  qualification :text
+#  main_contact  :boolean
+#  accommodation :string
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  email         :string
+#  comment       :string
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+bob_and_jane_bob:
+  seminar: bob_and_janes_seminar
+  user: bob
+
+bob_and_jane_jane:
+  seminar: bob_and_janes_seminar
+  user: jane
+  email: jane@jane.jane
+
+unlinked_bob:
+  seminar: bob_and_janes_seminar
+  email: bob@bob.bob
+
+#one:
+#  seminar: one
+#  #instructor: one
+#  qualification: MyText
+#  main_contact: false
+#  accommodation: MyString
+#
+#two:
+#  seminar: two
+#  #instructor: two
+#  qualification: MyText
+#  main_contact: false
+#  accommodation: MyString

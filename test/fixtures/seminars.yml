@@ -1,0 +1,85 @@
+# == Schema Information
+#
+# Table name: seminars
+#
+#  id                          :integer          not null, primary key
+#  title                       :string
+#  subtitle                    :string
+#  description                 :text
+#  attendees_minimum           :integer
+#  attendees_maximum           :integer
+#  attendees_preconditions     :string
+#  please_bring                :string
+#  start_date                  :datetime
+#  end_date                    :datetime
+#  cancellation_time           :integer          default(7)
+#  cancellation_reason         :string
+#  room_material               :string
+#  room_extras                 :string
+#  royalty_participant         :decimal(, )
+#  royalty_participant_reduced :decimal(, )
+#  material_cost               :decimal(, )
+#  honorar                     :decimal(, )
+#  kind                        :string           default("user")
+#  uuid                        :string
+#  locked                      :boolean          default(FALSE)
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  creator_id                  :integer
+#  seminar_kind_id             :integer
+#  accommodation               :string
+#  user_seminar_id             :integer
+#  alternative_dates           :text
+#  other_extras                :text
+#  room_wish_id_id             :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  title: MySeminar
+  subtitle: MyString
+  description: MyText
+  attendees_minimum: 1
+  attendees_maximum: 1
+  attendees_preconditions: MyString
+  please_bring: MyString
+  start_date: 2019-03-12 20:24:16
+  end_date: 2019-03-12 20:24:16
+  cancellation_time: 1
+  cancellation_reason: MyString
+  room_material: MyString
+  room_extras: MyString
+  royalty_participant: 9.99
+  royalty_participant_reduced: 9.99
+  material_cost: 9.99
+  honorar: 9.99
+  kind: MyString
+  uuid: MyString
+  locked: false
+
+two:
+  title: MyString
+  subtitle: MyString
+  description: MyText
+  attendees_minimum: 1
+  attendees_maximum: 1
+  attendees_preconditions: MyString
+  please_bring: MyString
+  start_date: 2019-03-12 20:24:16
+  end_date: 2019-03-12 20:24:16
+  cancellation_time: 1
+  cancellation_reason: MyString
+  room_material: MyString
+  room_extras: MyString
+  royalty_participant: 9.99
+  royalty_participant_reduced: 9.99
+  material_cost: 9.99
+  honorar: 9.99
+  kind: MyString
+  uuid: MyString
+  locked: false
+
+bob_and_janes_seminar:
+  title: Bob and Jane save the world
+  creator: jane

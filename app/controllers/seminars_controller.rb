@@ -26,8 +26,15 @@ class SeminarsController < NeserituController
     @seminar = Seminar.find(params[:id])
 
     authorize! @seminar
-
     if @seminar.update(seminar_params)
+      @seminar.seminar_instructors.find_each do |instructor|
+        next if InstructorUserLink.is_correctly_linked?(instructor)
+        InstructorUserLink.create_and_invite! instructor
+        if !instructor.save
+          helpers.add_flash error: t(:could_not_save_instructor)
+        end
+      end
+
       redirect_to @seminar, notice: I18n.t('seminar.saved')
     else
       render :edit
@@ -45,6 +52,15 @@ class SeminarsController < NeserituController
     authorize!
 
     if @seminar.save
+      # new referees? invite them!
+      @seminar.seminar_instructors.find_each do |instructor|
+        next if InstructorUserLink.is_correctly_linked?(instructor)
+        InstructorUserLink.create_and_invite! instructor
+        if !instructor.save
+          helpers.add_flash error: t(:could_not_save_instructor)
+        end
+      end
+
       redirect_to @seminar, notice: I18n.t('seminar.saved')
     else
       render :new

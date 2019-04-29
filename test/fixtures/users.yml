@@ -1,0 +1,51 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id                     :integer          not null, primary key
+#  email                  :string           default(""), not null
+#  encrypted_password     :string           default(""), not null
+#  reset_password_token   :string
+#  reset_password_sent_at :datetime
+#  remember_created_at    :datetime
+#  confirmation_token     :string
+#  confirmed_at           :datetime
+#  confirmation_sent_at   :datetime
+#  unconfirmed_email      :string
+#  created_at             :datetime         not null
+#  updated_at             :datetime         not null
+#  admin                  :boolean          default(FALSE)
+#  firstname              :string
+#  lastname               :string
+#  address                :string
+#  fax                    :string
+#  phone                  :string
+#  mobile                 :string
+#  homepage               :string
+#  tos_accepted_at        :date
+#  invitation_token       :string
+#  invitation_created_at  :datetime
+#  invitation_sent_at     :datetime
+#  invitation_accepted_at :datetime
+#  invitation_limit       :integer
+#  invited_by_type        :string
+#  invited_by_id          :integer
+#  invitations_count      :integer          default(0)
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+jane:
+  email: jane@jane.jane
+  encrypted_password: <%= User.new.send(:password_digest, 'janespassword') %>
+  confirmed_at: 2019-01-01
+
+bob:
+  email: bob@bob.bob
+  # column: value
+
+admin:
+  email: admin@neseri.tu
+  encrypted_password: <%= User.new.send(:password_digest, 'admin@neseri.tu') %>
+  confirmed_at: 2019-01-01
+  admin: true
