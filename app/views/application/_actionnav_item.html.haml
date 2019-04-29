@@ -1,0 +1,11 @@
+- if item.items.length > 0 #children!
+  .navbar-item.has-dropdown.is-hoverable
+    %a.navbar-link{class: item.active? ? 'is-active' : ''}
+      = item.title
+    .navbar-dropdown
+      - item.items.each do |nested_item|
+        -#{class: item.active? ? 'is-active' : ''}
+        = link_to nested_item.title, nested_item.url, class: (nested_item.active? ? 'navbar-item is-active' : 'navbar-item')
+- else
+  = link_to item.title, item.url, class: (item.active? ? 'navbar-item is-active' : 'navbar-item')
+
