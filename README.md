@@ -52,6 +52,8 @@ None yet.
 
 * Deployment instructions
 
+You need a JavaScript runtime, otherwise rails will bail out (`ExecJS::RuntimeUnavailable: Could not find a JavaScript runtime. See https://github.com/rails/execjs for a list of available runtimes.`). Check the link and install one of the runtimes (I go with [therubyracer](https://github.com/cowboyd/therubyracer)).
+
 In production (haha), make sure to have these environment variables set(with proper values of course):
 
     MAILER_HOST=yourhost.commm # to generate absolute URLs in mails
