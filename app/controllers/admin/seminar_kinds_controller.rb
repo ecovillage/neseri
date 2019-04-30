@@ -1,4 +1,4 @@
-class Admin::SeminarKindsController < NeserituController
+class Admin::SeminarKindsController < NeseriController
   before_action :authenticate_user!
 
   def index

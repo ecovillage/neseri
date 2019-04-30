@@ -1,4 +1,4 @@
-class InstructorsController < NeserituController
+class InstructorsController < NeseriController
   before_action :authenticate_user!
   
   def show

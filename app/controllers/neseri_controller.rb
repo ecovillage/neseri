@@ -1,4 +1,4 @@
-class NeserituController < ApplicationController
+class NeseriController < ApplicationController
   include Pagy::Backend
 
   verify_authorized if !Rails.env.production?

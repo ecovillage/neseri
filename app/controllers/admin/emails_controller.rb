@@ -1,4 +1,4 @@
-class Admin::EmailsController < NeserituController
+class Admin::EmailsController < NeseriController
   before_action :authenticate_user!
 
   def index

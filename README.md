@@ -1,21 +1,23 @@
-# neseritu - workshop proposal system
+# neseri - workshop proposal system
 
-A workshop proposal system for the ecovillage Sieben Linden.
+A workshop proposal system for the ecovillage Sieben Linden (but probably broad enough to be used somewhere else).
+
+Full i18n support, but currently only a proper German locale is available.
 
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
-The name comes from `new seminar registration system 2`.
+The name comes from `new seminar registration system`.
 
 ## Development
 
-`neseritu` is currently developed using Ruby 2.6.1 and Rails 5.x.
+`neseri` is currently developed using Ruby 2.6.1 and Rails 5.x.
 Otherwise it uses a pretty standard Ruby on Rails stack.
 
 ### Gotchas
 
-### Inherit from NeserituController
-For new controllers, inherit from `NeserituController` to include verification and proper redirection for unauthorized (in the sense of `ActionPolicy`) controller actions. We are not using the `ApplicationController` to let devise (the authentication system) behave well without overriding the respective `DeviseController`s to add `skip_authorization_verifiction`. A similar argument can be done for the "static" pages from `PageController`.
+### Inherit from NeseriController
+For new controllers, inherit from `NeseriController` to include verification and proper redirection for unauthorized (in the sense of `ActionPolicy`) controller actions. We are not using the `ApplicationController` to let devise (the authentication system) behave well without overriding the respective `DeviseController`s to add `skip_authorization_verifiction`. A similar argument can be done for the "static" pages from `PageController`.
 
 ## Configuration
 
@@ -54,7 +56,7 @@ In production (haha), make sure to have these environment variables set(with pro
 
     MAILER_HOST=yourhost.commm # to generate absolute URLs in mails
     DATABASEURL=postgres://aksdjl:aslkalksd@djief:342/aksdu
-    #SENDER_EMAIL=registration@yourhost.commm
+    SENDER_EMAIL="Neseri\ Your\ Community\ <registration@yourhost.commm>"
     SMTP_SERVER=yourhost.commm
     SMTP_DOMAIN=yourhost.commm
     SMTP_PORT=587

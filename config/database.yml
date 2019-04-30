@@ -23,6 +23,6 @@ production:
   encoding: unicode
   timeout: 5000
   url: <%= ENV['DATABASE_URL'] %>
-  #database: neseritu
-  #username: neseritu
+  #database: neseri
+  #username: neseri
   #password: <%= ENV['NESERITU_DATABASE_PASSWORD'] %>

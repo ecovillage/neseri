@@ -1,4 +1,4 @@
-class SeminarsController < NeserituController
+class SeminarsController < NeseriController
   before_action :authenticate_user!
 
   def index

@@ -1,4 +1,4 @@
-class Admin::LocksController < NeserituController
+class Admin::LocksController < NeseriController
   before_action :authenticate_user!
 
   def create
