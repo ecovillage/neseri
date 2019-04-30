@@ -56,7 +56,7 @@ class User < ApplicationRecord
   end
 
   def prepend_https_to_homepage
-    if self.homepage
+    if self.homepage.present?
       self.homepage = homepage.strip
       if !self.homepage.start_with? "http"
         self.homepage = "https://#{self.homepage}"
