@@ -1,38 +1,41 @@
 %h1.title.has-text-centered
-  Über
+  Veranstaltungsvorschläge für das Ökodorf Sieben Linden
 
-%p
-  Auf diesen Seiten können Vorschläge für (Bildungs-)Veranstaltungen im und mit dem Ökodorf Sieben Linden (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
-
-- if !user_signed_in?
-  %p
-    Um fortzufahren musst du Dich
-    %a.button.is-primary(href=new_user_registration_path style="margin-top: -5px;")
-      %strong= t('devise.registrations.new.sign_up').downcase
-    oder, wenn du bereits ein Konto hast
-    = link_to t('devise.sessions.new.sign_in').downcase, new_user_session_path, class: 'button', style: 'margin-top: -5px;'
-    \.
-
-.section
-  %h2.subtitle.has-text-centered
-    Die Software
-  
-  .content
+.columns
+  .column.is-8.is-offset-2
     %p
-      Die betriebene Software "neseri" ist Freie Software und unter der
-      %a(href="https://opensource.org/licenses/GPL-3.0")
-        Lizenz GPLv3 (oder einer späteren Version)
-      veröffentlicht.
+      Auf diesen Seiten können Vorschläge für (Bildungs-)Veranstaltungen im und mit dem Ökodorf Sieben Linden (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
     
-    %p
-      Der Quellcode kann auf
-      %a(href="https://github.com/ecovillage/neseri")
-        %span.icon
-          %i.fa.fa-github
-        Github eingesehen werden.
-      Die Betreiber/Innen freuen sich über Feedback und/oder Vorschläge sowie Mitarbeit.
+    - if !user_signed_in?
+      %br
+      %p
+        Um fortzufahren musst du Dich
+        %a.button.is-primary(href=new_user_registration_path style="margin-top: -5px;")
+          %strong= t('devise.registrations.new.sign_up').downcase
+        oder, wenn du bereits ein Konto hast
+        = link_to t('devise.sessions.new.sign_in').downcase, new_user_session_path, class: 'button', style: 'margin-top: -5px;'
+        \.
     
-    %p
-      Solltest Du diese Software selber als Betreiber*in verwenden wollen, gehe einfach mit uns
-      %a(href=contact_path)
-        in Kontakt.
+    .section
+      %h2.subtitle.has-text-centered
+        Die Software
+      
+      .content
+        %p
+          Die betriebene Software "neseri" ist Freie Software und unter der Lizenz
+          %a(href="https://opensource.org/licenses/GPL-3.0")
+            GPLv3 (oder einer späteren Version)
+          veröffentlicht.
+        
+        %p
+          Der Quellcode kann auf
+          %a(href="https://github.com/ecovillage/neseri")
+            %span.icon
+              %i.fa.fa-github
+            Github eingesehen werden.
+          Die Betreiber/Innen freuen sich über Feedback und/oder Vorschläge sowie Mitarbeit.
+        
+        %p
+          Solltest Du diese Software selber als Betreiber*in verwenden wollen, gehe einfach mit uns
+          %a(href=contact_path)
+            in Kontakt.

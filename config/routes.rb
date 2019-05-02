@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     invitations: "invitations"
   }
-  root 'seminars#index'
 
   root 'pages#about'
 
