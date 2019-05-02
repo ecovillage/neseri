@@ -20,5 +20,7 @@ module Neseri
 
     config.i18n.available_locales = [:de, :en]
     config.i18n.default_locale = :de
+
+    Rails.application.routes.default_url_options[:host] = ENV['HOST']
   end
 end

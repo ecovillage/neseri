@@ -52,10 +52,14 @@ None yet.
 
 * Deployment instructions
 
-You need a JavaScript runtime, otherwise rails will bail out (`ExecJS::RuntimeUnavailable: Could not find a JavaScript runtime. See https://github.com/rails/execjs for a list of available runtimes.`). Check the link and install one of the runtimes (I go with [therubyracer](https://github.com/cowboyd/therubyracer)).
+You need a JavaScript runtime, otherwise rails will bail out (`ExecJS::RuntimeUnavailable: Could not find a JavaScript runtime. See https://github.com/rails/execjs for a list of available runtimes.`).
+Check the link and install one of the runtimes.
+If the error persists, mention a gem in the Gemfile (I go with [therubyracer](https://github.com/cowboyd/therubyracer), thus add `gem 'therubyracer'` in `Gemfile` and re-run `bundle`).
+
 
 In production (haha), make sure to have these environment variables set(with proper values of course):
 
+    HOST=yourhost.comm
     MAILER_HOST=yourhost.commm # to generate absolute URLs in mails
     DATABASEURL=postgres://aksdjl:aslkalksd@djief:342/aksdu
     SENDER_EMAIL="Neseri\ Your\ Community\ <registration@yourhost.commm>"
