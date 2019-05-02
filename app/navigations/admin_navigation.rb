@@ -9,6 +9,12 @@ class AdminNavigation < ActionNav::Base
       hide_unless { (allowed_to? :index?, User) == true }
     end
 
+    item :invitation do
+      title { t("devise.invitations.new.submit_button") }
+      url { new_user_invitation_path }
+      hide_unless { (allowed_to? :index?, User) == true }
+    end
+
     item :rooms do
       title { Room.model_name.human(count: 2) }
       url { admin_rooms_path }
