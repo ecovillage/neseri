@@ -48,11 +48,16 @@ class Seminar < ApplicationRecord
 
   accepts_nested_attributes_for :seminar_instructors,
     reject_if: :all_blank, allow_destroy: true
+  # validates_associated :seminar_instructors ?
 
   validates :title, presence: true
 
   validate :end_after_start
   validates :start_date, :end_date, presence: true
+
+  scope :active, -> { where(active: true) }
+  scope :future, -> { where("start_date >= ?", DateTime.now) }
+  scope :past,   -> { where("start_date <= ?", DateTime.now) }
 
   after_initialize do |record|
     record.start_date ||= DateTime.new(DateTime.now.year + 1, 1, 20, 20, 30)
