@@ -12,7 +12,7 @@ class NeseriController < ApplicationController
   end
 
   def show_profile_warning
-    if current_user&.teaching_seminars && current_user.profile_missing?
+    if current_user&.teaching_seminars&.present? && current_user.profile_missing?
       helpers.add_flash notice: t(:please_fill_out_profile_html, profile_path: edit_instructor_path)
     end
   end
