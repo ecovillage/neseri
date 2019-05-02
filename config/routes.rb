@@ -12,8 +12,9 @@ Rails.application.routes.draw do
   get 'documentation', to: 'pages#documentation'
   get 'flashs',        to: 'pages#flashs'
 
-  resources :seminars
-  resource  :clone_seminar, only: :update
+  resources :seminars do
+    resource  :clone, controller: 'seminars/clone', only: :create
+  end
 
   namespace :admin do
     resources :users, only: [:index, :show]
