@@ -22,15 +22,15 @@ class AdminNavigation < ActionNav::Base
     end
 
     item :seminar_kinds do
-       title { SeminarKind.model_name.human(count: 2) }
-       url { admin_seminar_kinds_path }
-       hide_unless { (allowed_to? :index?, SeminarKind) == true }
+      title { SeminarKind.model_name.human(count: 2) }
+      url { admin_seminar_kinds_path }
+      hide_unless { (allowed_to? :index?, SeminarKind) == true }
     end
 
     item :emails do
-       title { Ahoy::Message.model_name.human(count: 2) }
-       url { admin_emails_path }
-       hide_unless { (allowed_to? :index?, Ahoy::Message, with: EmailsPolicy) == true }
+      title { t('admin.mails') }
+      url { admin_emails_path }
+      hide_unless { (allowed_to? :index?, Ahoy::Message, with: EmailsPolicy) == true }
     end
   end
 end
