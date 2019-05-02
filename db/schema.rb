@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_24_174420) do
+ActiveRecord::Schema.define(version: 2019_05_02_151245) do
 
   create_table "ahoy_messages", force: :cascade do |t|
     t.string "user_type"
@@ -85,6 +85,7 @@ ActiveRecord::Schema.define(version: 2019_04_24_174420) do
     t.text "alternative_dates"
     t.text "other_extras"
     t.integer "room_wish_id_id"
+    t.boolean "active", default: true
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
     t.index ["room_wish_id_id"], name: "index_seminars_on_room_wish_id_id"
     t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"
