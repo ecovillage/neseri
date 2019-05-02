@@ -13,6 +13,8 @@ Rails.application.routes.draw do
   get 'flashs',        to: 'pages#flashs'
 
   resources :seminars
+  resource  :clone_seminar, only: :update
+
   namespace :admin do
     resources :users, only: [:index, :show]
     resources :emails, only: [:index, :show]

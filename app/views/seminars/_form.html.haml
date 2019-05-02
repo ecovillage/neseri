@@ -75,9 +75,9 @@
         %i.fa.fa-user-circle
     #instructors
       = f.fields_for :seminar_instructors do |instructor|
-        = render 'seminar_instructor_fields', f: instructor
+        = render 'seminars/seminar_instructor_fields', f: instructor
       .links
-        = link_to_add_association t('seminar_instructors.add'), f, :seminar_instructors, class: 'button', wrap_object: Proc.new {|instructor| instructor.email = current_user.email; instructor }
+        = link_to_add_association t('seminar_instructors.add'), f, :seminar_instructors, partial: 'seminars/seminar_instructor_fields', class: 'button', wrap_object: Proc.new {|instructor| instructor.email = current_user.email; instructor }
 
 
   = f.submit

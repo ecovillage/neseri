@@ -16,6 +16,7 @@
   %td
     - if allowed_to? :edit?, seminar
       = link_to t(:edit), edit_seminar_path(seminar), class: 'button'
+      = link_to t(:clone), clone_seminar_path(clone_seminar_id: seminar.id), class: 'button', method: :patch
 
     - if allowed_to? :create?, with: AdminSeminarPolicy
       - if seminar.admin_seminar
