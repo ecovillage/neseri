@@ -15,7 +15,7 @@ Rails.application.routes.draw do
 
   resources :seminars
   namespace :admin do
-    resources :users, only: [:index]
+    resources :users, only: [:index, :show]
     resources :emails, only: [:index, :show]
     resources :seminar_kinds, only: [:index, :new, :create, :destroy, :update]
     resources :rooms, only: [:index, :new, :create, :destroy, :update]
