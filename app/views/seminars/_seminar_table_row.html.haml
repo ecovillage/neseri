@@ -15,9 +15,17 @@
       = instructor.email
   %td
     - if allowed_to? :edit?, seminar
-      = link_to t(:edit), edit_seminar_path(seminar), class: 'button'
-      = link_to t(:clone), seminar_clone_path(seminar), class: 'button', method: :post
-
+      %p.buttons
+        = link_to edit_seminar_path(seminar), class: 'button' do
+          %span.icon.is-small
+            %i.fa.fa-wrench
+          %span
+            = t(:edit)
+        = link_to seminar_clone_path(seminar), class: 'button is-light', method: :post do
+          %span.icon.is-small
+            %i.fa.fa-clone
+          %span.is-light
+            = t(:clone)
     - if allowed_to? :create?, with: AdminSeminarPolicy
       - if seminar.admin_seminar
         = link_to t("seminar.view_admin_copy"), admin_seminar_path(seminar), class: 'button'

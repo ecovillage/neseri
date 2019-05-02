@@ -2,8 +2,11 @@
 de:
   accept_tos: AGB und Datenschutzerklärung gelesen und akzeptiert
   admin_nav: Administration
+  none: Keine/r
   contact:
     contact: Eine E-Mail schicken
+  clone: Kopie anlegen
+  copy_created: Kopie erstellt
   created_seminars: Erstellte Seminare
   date:
     formats:
