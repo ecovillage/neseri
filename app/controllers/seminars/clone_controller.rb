@@ -1,8 +1,8 @@
-class CloneSeminarsController < NeseriController
+class Seminars::CloneController < NeseriController
   before_action :authenticate_user!
 
-  def update
-    @old_seminar = Seminar.find(params[:clone_seminar_id])
+  def create
+    @old_seminar = Seminar.find(params[:seminar_id])
     authorize! @old_seminar, with: SeminarPolicy
 
     operation = SeminarCloner.call(@old_seminar, current_user: current_user)
