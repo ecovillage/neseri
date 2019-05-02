@@ -54,6 +54,11 @@ class Seminar < ApplicationRecord
   validate :end_after_start
   validates :start_date, :end_date, presence: true
 
+  after_initialize do |record|
+    record.start_date ||= DateTime.new(DateTime.now.year + 1, 1, 20, 20, 30)
+    record.end_date   ||= (record.start_date + 2.days).change({hour: 13})
+  end
+
   def is_user_seminar?
     !user_seminar_id?
   end
