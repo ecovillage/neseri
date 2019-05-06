@@ -58,6 +58,7 @@ class Seminar < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :future, -> { where("start_date >= ?", DateTime.now) }
   scope :past,   -> { where("start_date <= ?", DateTime.now) }
+  scope :admin_copies, -> { where("user_seminar_id NOT NULL") }
 
   after_initialize do |record|
     record.start_date ||= DateTime.new(DateTime.now.year + 1, 1, 20, 20, 30)
