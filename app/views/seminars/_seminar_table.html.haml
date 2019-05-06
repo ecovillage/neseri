@@ -9,5 +9,5 @@
       %th= Seminar.human_attribute_name(:seminar_instructors)
       %th
   %tbody
-    = render partial: 'seminar_table_row', collection: seminars, as: 'seminar'
+    = render partial: 'seminars/seminar_table_row', collection: seminars, as: 'seminar'
 

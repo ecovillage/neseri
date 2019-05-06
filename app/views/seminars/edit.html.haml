@@ -1,4 +1,6 @@
 %h1.title= t('seminar.edit')
 
-= render 'form'
+- if @seminar.is_admin_seminar?
+  %h2.subtitle= t(:is_admin_seminar)
 
+= render 'seminars/form'
