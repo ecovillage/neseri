@@ -1,12 +1,20 @@
 ---
 de:
+  accept: Als gelesen und akzeptiert markieren
   accept_tos: AGB und Datenschutzerklärung gelesen und akzeptiert
   admin_nav: Administration
-  none: Keine/r
+  admin_seminar_created: Admin-Kopie angelegt
+  admin_seminars: Admin-Kopien
+  admin_seminars?: Admin-Kopie?
+  already_admin_seminar: Bereits eine Admin-Kopie
+  back_to_mails: Zurück zu den E-Mails
+  change_password: Password ändern
+  clone: Kopie anlegen
   contact:
     contact: Eine E-Mail schicken
-  clone: Kopie anlegen
   copy_created: Kopie erstellt
+  could_not_save_instructor: Könnte Referent*n nicht anlegen
+  create_admin_copy: Admin-Kopie erstellen
   created_seminars: Erstellte Seminare
   date:
     formats:
@@ -16,20 +24,26 @@ de:
     formats:
       mid: "%a, %d. %b %Y"
       short_date: "%a %d.%m.%Y"
+  documentation: Documentation
   edit: Bearbeiten
   instructor_updated: Profil aktualisiert.
+  lock: Sperren
+  need_to_accept_to_use_service: Datenschutzerklärung und AGB müssen gelesen und zugestimmt werden.
+  no_own_seminars_yet: Noch keine eigenen Seminare
+  none: Keine/r
+  not_available_in_this_language: In dieser Sprache nicht verfügbar
+  notification:
+    nojs: Du musst JavaScript aktiviert haben um Änderungen mit dieser Anwendung durchführen zu können
+  nr: Nr
   pages:
     about: Über
     contact: Kontakt
     documentation: Dokumentation
     impressum: Impressum
     privacy: Datenschutz
-  please_fill_out_profile_html: Du bist als Referent* angegeben, aber uns fehlen Kontakt-Daten.
-    Bitte <a href="%{profile_path}">fülle Dein Profil aus</a>.
-  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige
-    deine Zurkenntnisnahme ganz unten auf der Seite.
-  read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a>
-    gelesen und akzeptiert
+  please_fill_out_profile_html: Du bist als Referent* angegeben, aber uns fehlen Kontakt-Daten. Bitte <a href="%{profile_path}">fülle Dein Profil aus</a>.
+  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige deine Zurkenntnisnahme ganz unten auf der Seite.
+  read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a> gelesen und akzeptiert
   resend_confirmation_instructions: Anleitung erneut schicken
   room:
     create: Neuen Raum anlegen
@@ -37,7 +51,6 @@ de:
     deactivated: "(versteckt)"
     reactivate: Reaktivieren
   save: speichern
-  seminar: 
   seminar_instructors:
     add: Referent/In hinzufügen
     remove: Referent/In entfernen
@@ -46,13 +59,22 @@ de:
     deactivate: Verstecken
     deactivated: "(versteckt)"
     reactivate: Reaktivieren
+  seminar_locked: Seminar gesperrt
+  seminar_locked_failed: Seminar konnte nicht gesperrt werden
+  seminar_unlock_failed: Seminar konnte nicht entsperrt werden
+  seminar_unlocked: Seminar entsperrt
+  send_mail: Mail schicken
   send_me_reset_password_instructions: Anleitung schicken
   sessions:
     destroy:
       sign_out: Abmelden
+  showing_mail: E-Mail anzeige
   teaching_seminars: Seminare in (Mit-)Leitung
   time:
     formats:
       mid: "%a, %d. %b %Y %H:%M"
       short_date: "%a %d.%m.%Y"
+  unlock: Entsperren
   view: Ansehen
+  view_admin_copy: Admin-Kopie ansehen
+  your_instructor_data: Deine Daten
