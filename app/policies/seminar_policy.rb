@@ -1,33 +1,45 @@
 class SeminarPolicy < ApplicationPolicy
-  scope_for :relation do |relation|
-    relation.where(creator: user)
-  end
-
-  def new?
-    true
-  end
 
   alias_rule :index?, :create?, :new?, to: :access?
+  alias_rule :update?, to: :edit?
 
   def access?
     !user.nil?
   end
 
   def show?
-    user.admin? || seminar.creator == user || seminar.instructors.exists?(user.id)
-  end
-
-  def update?
-    user.admin? || (seminar.creator == user && !seminar.locked?) || seminar.instructors.exists?(user.id)
+    !user.nil? && 
+      (user.admin? ||
+        (seminar.is_user_seminar? &&
+          (user_created_seminar? ||
+           user_instructs_seminar?)))
   end
 
   def edit?
-    user.admin? || (seminar.creator == user && !seminar.locked?) || seminar.instructors.exists?(user.id)
+    !user.nil? &&
+      (unlocked_user_seminar? && (user_created_seminar? || user_instructs_seminar?)) ||
+       admin_and_admin_copy?
   end
 
   private
 
   def seminar
     record
+  end
+
+  def user_created_seminar?
+    seminar.creator == user
+  end
+
+  def user_instructs_seminar?
+    seminar.instructors.exists?(user.id)
+  end
+
+  def unlocked_user_seminar?
+    !seminar.locked? && seminar.is_user_seminar?
+  end
+
+  def admin_and_admin_copy?
+    seminar.is_admin_seminar? && user.admin?
   end
 end
