@@ -19,6 +19,10 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: [:index, :show]
     resources :emails, only: [:index, :show]
+    resources :seminars, only: [:index, :edit, :destroy, :update, :show] do
+      resource :admin_copy, controller: 'seminars/admin_copy', only: :create
+      resource :lock,       controller: 'seminars/locks',      only: [:create, :destroy]
+    end
     resources :seminar_kinds, only: [:index, :new, :create, :destroy, :update]
     resources :rooms, only: [:index, :new, :create, :destroy, :update]
   end

@@ -1,0 +1,120 @@
+= form_for [:admin, @seminar], builder: BulmaDoubleFormBuilder do |f|
+  = f.errors
+
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-star
+      = t('seminar.form.section.publication')
+      %span.icon
+        %i.fa.fa-star
+    = f.double_text_input :title
+    = f.double_text_input :subtitle
+
+    = f.double_text_area :description
+
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-calendar
+      = t('seminar.form.section.dates')
+      %span.icon
+        %i.fa.fa-calendar
+    = f.double_datetime_select :start_date
+    = f.double_datetime_select :end_date
+    = f.double_select :seminar_kind_id, SeminarKind.where(active: true), :id, :name
+    = f.double_text_area :alternative_dates
+    -#icon: 'fa-calendar', help_text: t('seminar.helptext.alternative_dates')
+    = f.double_number_field "cancellation_time"
+    -#icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
+
+    = f.double_text_input "cancellation_reason"
+  
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-users
+      = t('seminar.form.section.participants')
+      %span.icon
+        %i.fa.fa-users
+    = f.double_number_field :attendees_minimum
+    -# icon: 'fa-window-minimize'
+    = f.double_number_field :attendees_maximum
+    -# icon: 'fa-window-maximize'
+    = f.double_text_input :accommodation
+    -#icon: 'fa-home', help_text: t('seminar.helptext.accommodation')
+    = f.double_text_input "attendees_preconditions"
+    = f.double_text_input "please_bring"
+    -#, icon: 'fa-suitcase'
+  
+  
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-sitemap
+      = t('seminar.form.section.infrastructure')
+      %span.icon
+        %i.fa.fa-sitemap
+    = f.double_select "wished_room", Room.where(active: true), :id, :name
+    = f.double_text_input "room_material"
+    -#icon: 'fa-clipboard'
+    = f.double_text_input "room_extras"
+    -# icon: 'fa-wrench'
+  
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-money
+      = t('seminar.form.section.costs')
+      %span.icon
+        %i.fa.fa-money
+    = f.double_text_input "royalty_participant"
+    = f.double_text_input "royalty_participant_reduced"
+    = f.double_text_input "material_cost"
+    = f.double_text_input "honorar"
+
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-user-circle
+      = t('seminar.form.section.main_referee')
+      %span.icon
+        %i.fa.fa-user-circle
+    #instructors
+      = f.fields_for :seminar_instructors do |instructor|
+        = render 'seminars/seminar_instructor_fields', f: instructor
+      .links
+        = link_to_add_association t('seminar_instructors.add'), f, :seminar_instructors, partial: 'seminars/seminar_instructor_fields', class: 'button', wrap_object: Proc.new {|instructor| instructor.email = current_user.email; instructor }
+
+    %hr
+
+    %table.table.is-fullwidth.is-striped
+      %tbody
+        %tr
+          %th(colspan=4)
+            %h2
+              = t('seminar.form.section.referees')
+              = t('admin.seminar.referees_from_original')
+        %tr
+          %th= SeminarInstructor.human_attribute_name(:email)
+          %th= SeminarInstructor.human_attribute_name(:qualification)
+          %th= SeminarInstructor.human_attribute_name(:comment)
+          %th= SeminarInstructor.human_attribute_name(:accommodation)
+        - if @seminar.user_seminar.seminar_instructors.empty?
+          %tr
+            %td.is-warning{colspan: 4}
+              =t(:none)
+        - @seminar.user_seminar.seminar_instructors.each do |instructor|
+          - if instructor.user == current_user
+            %tr.is-selected
+              %td= instructor.send(:email)
+              - [:qualification, :comment, :accommodation].each do |attr|
+                %td= instructor.send(attr)
+          - else
+            %tr
+              %td= instructor.send(:email)
+              - [:qualification, :comment, :accommodation].each do |attr|
+                %td= instructor.send(attr)
+
+
+  = f.submit
