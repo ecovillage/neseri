@@ -7,8 +7,8 @@ class NeseriController < ApplicationController
   before_action :show_profile_warning
 
   rescue_from ActionPolicy::Unauthorized do |exception|
-    redirect_back fallback_location: root_path,
-      flash: {alert: :not_authorized }
+    helpers.add_flash alert: t(:unauthorized)
+    redirect_back fallback_location: root_path
   end
 
   def show_profile_warning
