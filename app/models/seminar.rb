@@ -55,6 +55,11 @@ class Seminar < ApplicationRecord
   validate :end_after_start
   validates :start_date, :end_date, presence: true
 
+  validates :attendees_minimum, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
+  validates :attendees_maximum, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
+  validates :cancellation_time, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
+  validate :min_smaller_than_max
+
   scope :active, -> { where(active: true) }
   scope :future, -> { where("start_date >= ?", DateTime.now) }
   scope :past,   -> { where("start_date <= ?", DateTime.now) }
@@ -76,6 +81,14 @@ class Seminar < ApplicationRecord
   protected
 
   private
+
+  def min_smaller_than_max
+    return if attendees_minimum.blank? || attendees_maximum.blank?
+    
+    if attendees_maximum < attendees_minimum
+      errors.add(:attendees_maximum, :must_be_greater_than_minimum)
+    end
+  end
 
   def end_after_start
     return if end_date.blank? || start_date.blank?

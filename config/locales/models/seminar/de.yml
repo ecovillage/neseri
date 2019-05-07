@@ -35,5 +35,7 @@ de:
       models:
         seminar:
           attributes:
+            attendees_maximum:
+              must_be_greater_than_minimum: muss größer als Mindest-Teilnehmer*n-Zahl sein
             end_date:
               must_be_before_start_date: muss nach der Startzeit liegen
