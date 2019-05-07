@@ -67,6 +67,14 @@ class SeminarsController < NeseriController
     end
   end
 
+  def destroy
+    @seminar = Seminar.find(params[:id])
+    authorize! @seminar
+    @seminar.update!(active: false)
+    flash[:success] = t('seminar.pulled_back')
+    redirect_to seminars_path
+  end
+
   private
 
   def seminar_params

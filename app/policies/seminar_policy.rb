@@ -1,7 +1,7 @@
 class SeminarPolicy < ApplicationPolicy
 
   alias_rule :index?, :create?, :new?, to: :access?
-  alias_rule :update?, to: :edit?
+  alias_rule :destroy?, :update?, to: :edit?
 
   def access?
     !user.nil?

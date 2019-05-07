@@ -4,3 +4,8 @@
   %h2.subtitle= t(:is_admin_seminar)
 
 = render 'seminars/form'
+
+%br
+%br
+
+= button_link_to "fa-delete", seminar_path(@seminar), t('seminar.pull_back'), 'is-danger', method: :delete
