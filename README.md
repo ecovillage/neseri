@@ -76,3 +76,12 @@ Works fine with dokku.
   - visit /flashs for design stuff
 
 * ...
+
+## Dealing with legacy data
+
+Some rake-tasks are provided to deal with specific legacy data of a prior application.
+As the data was messy, such is the code.
+
+In a gist:
+  * `rails neseri:create_legacy_json > data.json` creates a JSON file, that
+  * `rails neseri:import_legacy_json` will consume (and create respective users, seminars, etc.)
