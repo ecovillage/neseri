@@ -3,6 +3,15 @@
   = ":"
   = @seminar.title
 
+- if @seminar.locked
+  .notification.is-notice
+    .media
+      .media-left
+        %span.icon.is-size-3
+          %i.fa.fw.fa-lock
+      .media-content
+        = t("seminar.is-locked")
+
 %br
 .subtitle
   - if @seminar.creator
