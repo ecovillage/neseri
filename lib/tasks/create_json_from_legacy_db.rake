@@ -71,9 +71,8 @@ namespace :neseri do
     db = SQLite3::Database.new "neseri_legacy.db"
 
     #CREATE TABLE IF NOT EXISTS "instructors" ("id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "firstname" VARCHAR(255) NOT NULL, "lastname" VARCHAR(255) NOT NULL, "adress" VARCHAR(255), "email" VARCHAR(255), "fax" VARCHAR(255), "phone" VARCHAR(255), "mobile" VARCHAR(255), "homepage" VARCHAR(255), "main" BOOLEAN DEFAULT 'f');
-    instructor_data = []
-    db.execute("SELECT * FROM instructors") do |row|
-      instructor_data << Legacy::SQLiteDB.instructor_hash(row)
+    instructor_data = db.execute("SELECT * FROM instructors").map do |row|
+      Legacy::SQLiteDB.instructor_hash(row)
     end
 
     # clean up data
@@ -82,15 +81,14 @@ namespace :neseri do
     # seminars with instructors
 
     #CREATE TABLE IF NOT EXISTS "seminars" ("id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, "title" VARCHAR(256), "description" TEXT, "attendees_minimum" INTEGER, "attendees_maximum" INTEGER, "attendee_preconditions" VARCHAR(255), "please_bring" VARCHAR(255), "timetype" VARCHAR(255), "start_date" DATE, "end_date" DATE, "start_time" VARCHAR(255) NOT NULL, "end_time" VARCHAR(255) NOT NULL, "alternative_dates" TEXT, "cancellation_time" INTEGER DEFAULT 7, "cancellation_reason" TEXT, "room" VARCHAR(255), "room_material" VARCHAR(255), "room_extras" VARCHAR(255), "participants_housing" VARCHAR(255) DEFAULT 'Gästezimmer', "royalty_participant" FLOAT, "royalty_participant_reduced" FLOAT, "material_cost" FLOAT DEFAULT 0.0, "honorar" FLOAT, "payment_royalties" VARCHAR(255), "regionalplatz" VARCHAR(255), "time_signature" VARCHAR(255) NOT NULL, "active" BOOLEAN DEFAULT 't', "published" BOOLEAN DEFAULT 'f', "instructor_id" INTEGER NOT NULL, "uuid" VARCHAR(255), "locked" BOOLEAN DEFAULT 'f', "origin_id" VARCHAR(255), "subtitle" VARCHAR(256));
-    seminar_data = []
-    db.execute("SELECT * FROM seminars;").each do |row|
+    seminar_data = db.execute("SELECT * FROM seminars;").map do |row|
       next if row == '\'' # TODO remove
 
       instructors = [instructor_data.find{|id| id[:old_id] == row[28] }].compact
 
       seminar = Legacy::SQLiteDB.seminar_hash(row)
       seminar[:instructors] = instructors
-      seminar_data << seminar
+      seminar
     end
 
     # co-instructions
