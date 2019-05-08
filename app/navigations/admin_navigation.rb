@@ -27,6 +27,12 @@ class AdminNavigation < ActionNav::Base
       hide_unless { (allowed_to? :index?, SeminarKind) == true }
     end
 
+    item :settings do
+      title { t('admin.settings') }
+      url { admin_settings_path }
+      hide_unless { (allowed_to? :index?, with: AdminPolicy) == true }
+    end
+
     item :emails do
       title { t('admin.mails') }
       url { admin_emails_path }

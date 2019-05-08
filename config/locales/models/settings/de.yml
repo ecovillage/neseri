@@ -1,0 +1,20 @@
+de:
+  settings:
+    legacy_uri: Adresse des Alt-Systems
+  activerecord:
+    models:
+      settings:
+        one: Einstellungen
+        other: Einstellungen
+      setting:
+        one: Einstellungen
+        other: Einstellungen
+    attributes:
+      settings:
+        key: Einstellung
+        value: Wert
+        legacy_uri: Adresse des Alt-Systems
+      setting:
+        key: Einstellung
+        value: Wert
+

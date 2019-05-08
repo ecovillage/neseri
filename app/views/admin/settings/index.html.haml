@@ -1,0 +1,18 @@
+%h1.title= Setting.model_name.human
+
+%table.table.is-striped
+  %thead
+    %tr
+      %th= Setting.human_attribute_name(:key)
+      %th= Setting.human_attribute_name(:value)
+      %th
+  %tbody
+    - %i{legacy_uri}.each do |setting|
+      %tr
+        %td= t('settings.legacy_uri')
+        %td= @settings.send(setting)
+
+= form_for @settings, url: admin_setting_path(1), builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, method: :patch do |f|
+  = f.errors
+  = f.labeled_text_field :legacy_uri
+  = f.submit
