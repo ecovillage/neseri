@@ -16,7 +16,7 @@ class SeminarPolicy < ApplicationPolicy
   end
 
   def edit?
-    !user.nil? &&
+    !user.nil? && seminar.active &&
       (unlocked_user_seminar? && (user_created_seminar? || user_instructs_seminar?)) ||
        admin_and_admin_copy?
   end
