@@ -14,15 +14,15 @@ de:
         alternative_dates: Alternative Termine
         cancellation_time: Besondere Absagefrist
         cancellation_reason: Begründung
-        attendees_minimum: Mindestanzahl Teilnehmer/Innen
-        attendees_maximum: Höchstanzahl Teilnehmer/Innen
+        attendees_minimum: Mindestanzahl Teilnehmer*innen
+        attendees_maximum: Höchstanzahl Teilnehmer*innen
         attendees_preconditions: Voraussetzungen für Teilnahme
-        accommodation: Unterkunft Teilnehmer/Innen
-        please_bring: Was sollen die Teilnehmer/Innen mitbringen?
+        accommodation: Unterkunft Teilnehmer*innen
+        please_bring: Was sollen die Teilnehmer*innen mitbringen?
         room_material: Zusätzliche Ausstattung
         room_extras: Sonstige Extras
-        royalty_participant: Honorar pro Teilnehmer/In
-        royalty_participant_reduced: Ermäßigtes Honorar pro Teilnehmer/In
+        royalty_participant: Honorar pro Teilnehmer*in
+        royalty_participant_reduced: Ermäßigtes Honorar pro Teilnehmer*in
         material_cost: Materialkosten
         creator: erstellt von
         seminar_kind: Art

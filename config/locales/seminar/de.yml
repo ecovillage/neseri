@@ -10,10 +10,14 @@ de:
         create: Neuen Seminarvorschlag anlegen
         update: Seminarvorschlag speichern
   seminar:
+    files_text_html: "Fotos: bitte hochladen oder an <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Bitte ein digitales Portrait-Foto von dir für die Hompage, minimale Abmessungen 200 px in Breite oder Höhe. Wenn vorhanden, auch gern zum Seminar passende andere Fotos (hier aber keine Garantie, dass sie auf die Homepage kommen). Es ist hilfreich, wenn die Bilder bereits in dem korrekten Seitenverhältnis vorliegen (Referent/Innen-Portraits hochkant). Beispiele können auf <a href=\"siebenlinden.org\" taget=\"_tab\">siebenlinden.org</a> eingesehen werden (z.B. <a href=\"https://siebenlinden.org/event/ich-will-mein-eigenes-essen-anbauen-wo-fang-ich-an-6/\" target=\"_tab\">Seminar-Ansicht</a> und <a href=\"https://siebenlinden.org/referee/sandra-joel-campe/\" target=\"_tab\">Referenten-Ansicht</a>). Stelle unbedingt sicher, dass die Bildrechte erlauben, die Bilder zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit zu verwenden."
+    conditions: Konditionen
+    conditions_text_html: "Der / die Referent*in erklärt sich damit einverstanden, einen Seminarplatz (Regionalplatz) für Menschen mit Wohnsitz in Sieben Linden kostenlos zur Verfügung zu stellen. Diese Person unterstützt die Referent*in und ggf. Teilnehmer*innen in praktischen Fragen und informiert Teilnehmende auf Anfrage über Sieben Linden. Wird das Seminar seitens der/des Referent*in ohne vorliegen höherer Gewalt (z.B. schwere Krankheit) abgesagt, ist eine Ausfallpauschale in Höhe von 200 € zu zahlen. Die Ausfallgebühr ist auch zu zahlen, wenn eine Ersatzveranstaltung für den Termin gefunden wurde bzw. der Seminartermin verlegt wurde. Bei Nicht-Zustandekommen aufgrund zu geringer Anzahl Anmeldungen beträgt die Ausfallpauschale bei Veranstaltungen bis zu 5 Tagen 50 €, ab 6 Tagen 100 €.<br>Der / die Referent*in reicht spätestens innerhalb 14 Tagen nach Seminardurchführung einen Ablaufplan/Konzept des Seminars beim Bildungsreferat ein."
     has_admin_copy_link_html: <a href="%{admin_copy_path}">Admin-Kopie ansehen</a>
     create_admin_copy: Admin-Kopie anlegen
     new: Neuen Seminarvorschlag anlegen
     edit: Vorschlag bearbeiten
+    files: Anhänge
     is-locked: Dieser Veranstaltungsvorschlag wird derzeit durch das Bildungsreferat bearbeitet.
     pull_back: Seminarvorschlag zurückziehen
     saved: Seminarvorschlag gespeichert
@@ -28,21 +32,23 @@ de:
       cancellation_time: bei geringem Anmeldestand (Standard 7 Tage vor Seminarbeginn), in Tagen (nur wenn abweichend von 7 Tagen vor Seminarbeginn)
       attendees_minimum: Inklusive Regionalplatz
       room_material: Der Raum wird spätestens eine Stunde vor Seminarbeginn zur Verfügung stehen und ist ausgestattet mit Moderationskoffer, Flipchart, Stiften und Papier. Besondere Wünsche (Beamer, DVD-Spieler, Materialien, Internetzugang). Bitte sprich das Gäste-Team rechtzeitig an, wenn du Unterstützung benötigst.
-      room_extras: z.B. Internetzugang für TeilnehmerInnen, Kaffee-Trinken
+      room_extras: z.B. Internetzugang für Teilnehmer*innen, Kaffee-Trinken
       attendees_minimum: 'Inklusive Regionalplatz'
       royalty_participant: in Euro
-      royalty_participant_reduced: für Teilnehmer/In, die auch vom FK Sozialermäßigung erhalten. Höchstens 2/3 des normalen Honorars.
+      royalty_participant_reduced: für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 2/3 des normalen Honorars.
       accommodation: "In der Regel: Gästezimmer"
       alternative_dates: So weit gefasst wie möglich, z.B. Quartal, Monat
     form:
       section:
         publication: Veröffentlichung im Seminarprogramm
         dates: Gewünschter Termin
-        participants: Teilnehmer/Innen
+        participants: Teilnehmer*innen
         infrastructure: Infrastrukturelles
         costs: Kosten
         main_referee: Referent*n
         referees: Referent*n
+        files: Anhänge
+        conditions: Konditionen
   seminars:
     index:
       created_at: Erstellt am

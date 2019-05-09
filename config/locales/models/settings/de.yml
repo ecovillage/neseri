@@ -1,6 +1,8 @@
 de:
   settings:
     legacy_uri: Adresse des Alt-Systems
+    help_text:
+      legacy_uri: "Für CouchDB z.B. http://localhost:5984/databasename"
   activerecord:
     models:
       settings:
