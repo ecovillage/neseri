@@ -40,18 +40,6 @@
       = instructor.email
   %td
     .buttons
-      - if allowed_to? :edit?, seminar
-        = button_link_to 'fa-wrench', edit_admin_admin_seminar_path(seminar), t(:edit),  'is-primary is-small is-outlined'
-        = button_link_to 'fa-clone',  seminar_clone_path(seminar), t(:clone), 'is-small is-light', method: :post
-      -#- if !seminar.user_seminar.locked? && seminar.is_user_seminar? && (allowed_to? create?, seminar, with: LockPolicy)
-      -#  = button_link_to 'fa-lock', admin_seminar_lock_path(seminar), t(:lock_user_seminar), 'is-small', method: :post
-      -#- if seminar.user_seminar.locked? && (allowed_to? :create?, seminar, with: LockPolicy)
-      -#  = button_link_to 'fa-unlock', admin_seminar_lock_path(seminar), t(:unlock_user_seminar), 'is-small', method: :delete
-      - if seminar.user_seminar
-        = button_link_to "fa-eye", seminar.user_seminar, t("seminar.view_user_version"), 'is-small'
-      - if seminar.is_admin_seminar?
-        = link_to t("seminar.view_admin_copy"), admin_admin_seminar_path(seminar), class: 'button is-small'
-      - else
-        = link_to t("seminar.create_admin_copy"), admin_seminar_admin_copy_path(seminar), class: 'button is-small', method: :post
-      -#- if !seminar.uuid
-      -#  = link_to t("seminar.publish"), new_admin_admin_seminar_publication_path(seminar), class: 'button is-small'
+      - SeminarAdminActions.new(seminar, current_user).items.each do |item|
+        = button_link_to item.icon, item.url, item.title, "is-small #{item.css_classes}", method: (item.http_method || :get)
+        %br
