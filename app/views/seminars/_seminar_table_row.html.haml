@@ -16,11 +16,8 @@
     - seminar.seminar_instructors.each do |instructor|
       = instructor.email
   %td
-    -if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid || seminar.admin_seminar
+    -if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid 
       .tags
-        - if seminar.admin_seminar
-          %span.tag.is-warning
-            =t("seminar.tags.has_admin_seminar")
         - if seminar.locked?
           %span.tag.is-warning
             =t("seminar.tags.locked")
