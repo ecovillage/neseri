@@ -1,4 +1,4 @@
-= form_for [:admin, @seminar], builder: BulmaDoubleFormBuilder do |f|
+= form_for @seminar, url: admin_admin_seminar_path(@seminar), builder: BulmaDoubleFormBuilder do |f|
   = f.errors
 
   .box
@@ -11,7 +11,7 @@
     = f.double_text_input :title
     = f.double_text_input :subtitle
 
-    = f.double_text_area :description
+    = f.double_text_area :description, 12
 
   .box
     %h2.subtitle.has-text-centered
@@ -23,7 +23,7 @@
     = f.double_datetime_select :start_date
     = f.double_datetime_select :end_date
     = f.double_select :seminar_kind_id, SeminarKind.where(active: true), :id, :name
-    = f.double_text_area :alternative_dates
+    = f.double_text_area :alternative_dates, 5
     -#icon: 'fa-calendar', help_text: t('seminar.helptext.alternative_dates')
     = f.double_number_field "cancellation_time"
     -#icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
@@ -116,5 +116,6 @@
               - [:qualification, :comment, :accommodation].each do |attr|
                 %td= instructor.send(attr)
 
+  -#= f.file_field :files, multiple: true
 
   = f.submit
