@@ -1,0 +1,12 @@
+%table.table.is-fullwidth.is-narrow.is-striped
+  %thead
+    %tr
+      %th= t(:nr)
+      %th= Seminar.human_attribute_name(:title)
+      %th= t('seminars.index.preferred_date')
+      %th= t('seminars.index.created_at')
+      %th= Seminar.human_attribute_name(:seminar_instructors)
+      %th
+  %tbody
+    = render partial: 'admin/seminars/admin_seminar_table_row', collection: seminars, as: 'seminar'
+

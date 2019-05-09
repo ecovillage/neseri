@@ -1,0 +1,51 @@
+%tr
+  %td
+    = link_to seminar.id, [:admin, seminar]
+  %td
+    = link_to seminar.title, [:admin, seminar]
+    -if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid || seminar.admin_seminar
+      .tags
+        - if seminar.admin_seminar
+          %span.tag.is-warning
+            =t("seminar.tags.has_admin_seminar")
+        - if seminar.locked?
+          %span.tag.is-warning
+            =t("seminar.tags.locked")
+        - if seminar.is_admin_seminar?
+          %span.tag.is-info
+            =t("seminar.tags.is-admin")
+        - if !seminar.active?
+          %span.tag.is-danger
+            =t("seminar.tags.is-pulled-back")
+        - if seminar.uuid
+          %span.tag.is-success
+            =t("seminar.tags.is-published")
+  %td
+    = l(seminar.start_date, format: :short_date)
+    %br
+    ="-"
+    %br
+    = l(seminar.end_date, format: :short_date)
+  %td
+    = l(seminar.created_at, format: :shorter_date)
+    #{"(" + seminar.creator&.email + ")" if seminar.creator}
+  %td
+    - seminar.seminar_instructors.each do |instructor|
+      = instructor.email
+  %td
+    .buttons
+      - if allowed_to? :edit?, seminar
+        = button_link_to 'fa-wrench', edit_admin_admin_seminar_path(seminar), t(:edit),  'is-primary is-small is-outlined'
+        = button_link_to 'fa-clone',  seminar_clone_path(seminar), t(:clone), 'is-small is-light', method: :post
+      -#- if !seminar.user_seminar.locked? && seminar.is_user_seminar? && (allowed_to? create?, seminar, with: LockPolicy)
+      -#  = button_link_to 'fa-lock', admin_seminar_lock_path(seminar), t(:lock_user_seminar), 'is-small', method: :post
+      -#- if seminar.user_seminar.locked? && (allowed_to? :create?, seminar, with: LockPolicy)
+      -#  = button_link_to 'fa-unlock', admin_seminar_lock_path(seminar), t(:unlock_user_seminar), 'is-small', method: :delete
+      - if seminar.user_seminar
+        = button_link_to "fa-eye", seminar.user_seminar, t("seminar.view_user_version"), 'is-small'
+      - if seminar.is_admin_seminar?
+        = link_to t("seminar.view_admin_copy"), admin_admin_seminar_path(seminar), class: 'button is-small'
+      - else
+        = link_to t("seminar.create_admin_copy"), admin_seminar_admin_copy_path(seminar), class: 'button is-small', method: :post
+      - if !seminar.uuid
+        = link_to t("seminar.publish"), new_admin_admin_seminar_publication_path(seminar), class: 'button is-small'
