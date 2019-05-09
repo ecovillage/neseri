@@ -113,6 +113,14 @@ ActiveRecord::Schema.define(version: 2019_05_09_094111) do
     t.index ["user_seminar_id"], name: "index_seminars_on_user_seminar_id"
   end
 
+  create_table "settings", force: :cascade do |t|
+    t.string "key"
+    t.string "value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_settings_on_key", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false

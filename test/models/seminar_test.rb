@@ -32,6 +32,7 @@
 #  alternative_dates           :text
 #  other_extras                :text
 #  room_wish_id_id             :integer
+#  active                      :boolean          default(TRUE)
 #
 
 require 'test_helper'
