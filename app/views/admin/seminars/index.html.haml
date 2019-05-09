@@ -1,3 +1,23 @@
-%h1.title= t(:admin_seminars)
+.level
+  .level-item-left
+    %h1.title= t("admin.seminar.current_proposals")
+  .level-item-right
+    - if @pagy_current.pages > 1
+      != pagy_bulma_nav(@pagy_current)
 
-= render 'seminars/seminar_table', seminars: @seminars
+= render 'admin/seminars/admin_seminar_table', seminars: @current_seminars
+- if @pagy_current.pages > 1
+  != pagy_bulma_nav(@pagy_current)
+
+%hr
+
+.level
+  .level-item-left
+    %h2.subtitle= t("admin.seminar.past_proposals")
+  .level-item-right
+    - if @pagy_past.pages > 1
+      != pagy_bulma_nav(@pagy_past)
+
+= render 'admin/seminars/admin_seminar_table', seminars: @past_seminars
+- if @pagy_past.pages > 1
+  != pagy_bulma_nav(@pagy_past)

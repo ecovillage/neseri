@@ -20,10 +20,15 @@ Rails.application.routes.draw do
     resources :settings, only: [:index, :update]
     resources :users, only: [:index, :show]
     resources :emails, only: [:index, :show]
-    resources :seminars, only: [:index, :edit, :destroy, :update, :show] do
-      resource :admin_copy, controller: 'seminars/admin_copy', only: :create
-      resource :lock,       controller: 'seminars/locks',      only: [:create, :destroy]
+
+    resources :seminars, only: [:index, :show] do
+      resource :admin_copy,  controller: 'seminars/admin_copy',  only: :create
+      resource :lock,        controller: 'seminars/locks',       only: [:create, :destroy]
     end
+
+    resources :admin_seminars, only: [:index, :edit, :destroy, :update, :show] do
+    end
+
     resources :seminar_kinds, only: [:index, :new, :create, :destroy, :update]
     resources :rooms, only: [:index, :new, :create, :destroy, :update]
   end

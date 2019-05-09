@@ -29,6 +29,7 @@ class MainNavigation < ActionNav::Base
   item :documentation do
     title { t('pages.documentation') }
     url   { documentation_path }
+    hide_unless { true == current_user&.admin? }
   end
 end
 

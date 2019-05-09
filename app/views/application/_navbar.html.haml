@@ -6,20 +6,15 @@
       %span{"aria-hidden" => "true"}
   #navbar.navbar-menu
     .navbar-start
+      - if allowed_to? :index?, Seminar, with: AdminSeminarPolicy
+        = link_to t(:admin_seminars), admin_admin_seminars_path, class: 'navbar-item'
+        = link_to t(:proposed_seminars), admin_seminars_path, class: 'navbar-item'
+
       - navigation[:main].items.each do |item|
         = render 'actionnav_item', item: item
     .navbar-end
       - navigation[:admin].items.each do |item|
         = render 'actionnav_item', item: item
-      - if current_user&.admin?
-        .navbar-item.has-dropdown.is-hoverable
-          %a.navbar-link
-            = :admin
-          .navbar-dropdown
-            - if allowed_to? :index?, User
-              = link_to :settings, admin_users_path, class: "navbar-item"
-            - if allowed_to? :index?, User
-              = link_to :texts, admin_users_path, class: "navbar-item"
       .navbar-item
         .buttons
           - if user_signed_in?

@@ -5,7 +5,7 @@ class SeminarsController < NeseriController
     if current_user.admin?
       helpers.add_flash(hint:
         t(:admin_seminars_click_here_html,
-          admin_seminars_link: admin_seminars_path))
+          admin_seminars_link: admin_admin_seminars_path))
     end
 
     future_own_seminars = Seminar.with_user(current_user).

@@ -32,4 +32,4 @@
       - if seminar.admin_seminar
         = link_to t("seminar.view_admin_copy"), admin_seminar_path(seminar), class: 'button'
       - else
-        = link_to t("seminar.create_admin_copy"), admin_seminar_path(seminar), class: 'button'
+        = link_to t("seminar.create_admin_copy"), admin_seminar_admin_copy_path(seminar), class: 'button is-small', method: :post

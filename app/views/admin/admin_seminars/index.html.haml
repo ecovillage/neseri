@@ -1,0 +1,12 @@
+.level
+  .level-item-left
+    %h1.title= t(:admin_seminars)
+  .level-item-right
+    - if @pagy.pages > 1
+      != pagy_bulma_nav(@pagy)
+
+= render 'admin/seminars/admin_seminar_table', seminars: @seminars
+
+- if @pagy.pages > 1
+  != pagy_bulma_nav(@pagy)
+
