@@ -47,5 +47,5 @@
         = link_to t("seminar.view_admin_copy"), admin_admin_seminar_path(seminar), class: 'button is-small'
       - else
         = link_to t("seminar.create_admin_copy"), admin_seminar_admin_copy_path(seminar), class: 'button is-small', method: :post
-      - if !seminar.uuid
-        = link_to t("seminar.publish"), new_admin_admin_seminar_publication_path(seminar), class: 'button is-small'
+      -#- if !seminar.uuid
+      -#  = link_to t("seminar.publish"), new_admin_admin_seminar_publication_path(seminar), class: 'button is-small'

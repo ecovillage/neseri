@@ -30,7 +30,7 @@ class AdminNavigation < ActionNav::Base
     item :settings do
       title { t('admin.settings') }
       url { admin_settings_path }
-      hide_unless { (allowed_to? :index?, with: AdminPolicy) == true }
+      hide_unless { (allowed_to? :index?, :index?, with: AdminPolicy) == true }
     end
 
     item :emails do
