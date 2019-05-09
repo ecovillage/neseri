@@ -28,7 +28,13 @@ class SeminarInstructor < ApplicationRecord
 
   before_validation :downcase_strip_email
 
+  after_validation :set_user, on: [ :create, :update ]
+
   def downcase_strip_email
     self.email = email.downcase.strip
+  end
+
+  def set_user
+    self.user = User.find_by(email: self.email)
   end
 end
