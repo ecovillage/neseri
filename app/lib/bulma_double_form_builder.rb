@@ -23,10 +23,10 @@ class BulmaDoubleFormBuilder< BulmaFormBuilder::HorizontalBulmaFormBuilder
       ->{ @template.text_field_tag :no_op, user_seminar_value(attr_name), class: 'input disabled', disabled: true }
   end
 
-  def double_text_area attr_name
+  def double_text_area attr_name, size=5
     labeled_columns attr_name,
-      ->{ text_area attr_name, class: 'input' },
-      ->{ @template.text_area_tag :no_op, user_seminar_value(attr_name), class: 'input disabled', disabled: true }
+      ->{ text_area attr_name, class: 'input textarea', size: "10x#{size}" },
+      ->{ @template.text_area_tag :no_op, user_seminar_value(attr_name), class: 'input textarea disabled', disabled: true, size: "10x#{size}" }
   end
 
   def double_datetime_select attr_name
