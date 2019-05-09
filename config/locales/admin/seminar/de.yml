@@ -1,4 +1,8 @@
 de:
   seminar:
-   view_admin_copy: Admin-Kopie ansehen 
-   create_admin_copy: Admin-Kopie anlegen
+    view_admin_copy: Admin-Kopie ansehen 
+    create_admin_copy: Admin-Kopie anlegen
+  admin:
+    seminar:
+      current_proposals: Aktuelle Vorschläge
+      past_proposals: Ältere Vorschläge

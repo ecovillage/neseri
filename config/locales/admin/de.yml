@@ -1,7 +1,14 @@
 de:
   admin:
     mails: E-Mails
+    proposed_seminars: Vorschläge
     sent_mails: Versendete E-Mails
+    seminar:
+      edit: Admin-Kopie bearbeiten
+      admin_copy:
+        is_already: Ist bereits Admin-Kopie
+        created: Admin-Kopie angelegt
+        has_already: Admin-Kopie besteht bereits
     mails_table:
       to: An
       subject: Betreff
