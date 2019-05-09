@@ -24,7 +24,7 @@
         %span.icon.is-size-3
           %i.fa.fw.fa-info
       .media-content
-        = t("seminar.has_admin_copy_link_html", admin_copy_path: admin_seminar_path(@seminar.admin_seminar))
+        = t("seminar.has_admin_copy_link_html", admin_copy_path: admin_admin_seminar_path(@seminar.admin_seminar))
 
 %br
 .is-small
@@ -117,7 +117,7 @@
     %tbody
       %tr
         %th(colspan=4)
-          %h2.subtitle 
+          %h2.subtitle
             %span.icon
               %i.fa.fa-user-circle
             = t('seminar.form.section.referees')
@@ -165,11 +165,14 @@
         %tr
           %td
             = link_to file.filename, url_for(file), target: '_new'
+            = link_to url_for(file), target: '_new' do
+              %span.icon
+                %i.fa.fa-trash
 
               
 
 .box
-  %h2.subtitle= t(:actions)
+  %h2.subtitle= t("seminar.user_actions")
   .level
     .level-item-left
       .buttons
@@ -185,9 +188,15 @@
         %span
           = t('seminar.pull_back')
 
-.box
-  %hr
-  - if !@seminar.locked? && (allowed_to? :create?, with: LockPolicy)
-    = link_to t(:lock), admin_seminar_lock_path(@seminar), class: 'button', method: :post
-  - if @seminar.locked? && (allowed_to? :create?, with: LockPolicy)
-    = link_to t(:unlock), admin_seminar_lock_path(@seminar), class: 'button', method: :delete
+- if current_user.admin?
+  .box
+    %hr
+    - if !@seminar.locked? && (allowed_to? :create?, with: LockPolicy)
+      = button_link_to 'fa-lock', admin_seminar_lock_path(@seminar), t(:lock), '', method: :post
+    - if @seminar.locked? && (allowed_to? :create?, with: LockPolicy)
+      = button_link_to 'fa-unlock', admin_seminar_lock_path(@seminar), t(:unlock), '', method: :delete
+    - if allowed_to? :create?, with: AdminSeminarPolicy
+      - if @seminar.admin_seminar
+        = link_to t(:view_admin_copy), admin_admin_seminar_path(@seminar), class: 'button'#, method: :post
+      - else
+        = link_to t(:create_admin_copy), admin_admin_seminars_path(user_seminar_id: @seminar.id), class: 'button', method: :post

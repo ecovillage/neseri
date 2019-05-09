@@ -16,6 +16,23 @@
     - seminar.seminar_instructors.each do |instructor|
       = instructor.email
   %td
+    -if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid || seminar.admin_seminar
+      .tags
+        - if seminar.admin_seminar
+          %span.tag.is-warning
+            =t("seminar.tags.has_admin_seminar")
+        - if seminar.locked?
+          %span.tag.is-warning
+            =t("seminar.tags.locked")
+        - if seminar.is_admin_seminar?
+          %span.tag.is-info
+            =t("seminar.tags.is-admin")
+        - if !seminar.active?
+          %span.tag.is-danger
+            =t("seminar.tags.is-pulled-back")
+        - if seminar.uuid
+          %span.tag.is-success
+            =t("seminar.tags.is-published")
     - if allowed_to? :edit?, seminar
       %p.buttons
         = link_to edit_seminar_path(seminar), class: 'button' do

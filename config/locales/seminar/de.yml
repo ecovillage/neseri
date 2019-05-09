@@ -10,6 +10,7 @@ de:
         create: Neuen Seminarvorschlag anlegen
         update: Seminarvorschlag speichern
   seminar:
+    view_user_version: Original ansehen
     tags:
       locked: gesperrt
       is-admin: (Admin-Kopie)

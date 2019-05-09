@@ -1,15 +1,21 @@
 %tr
   %td
-    = link_to seminar.id, [:admin, seminar]
+    - if seminar.is_user_seminar?
+      = link_to seminar.id, seminar
+    - else
+      = link_to seminar.id, admin_admin_seminar_path(seminar)
   %td
-    = link_to seminar.title, [:admin, seminar]
-    -if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid || seminar.admin_seminar
+    - if seminar.is_user_seminar?
+      = link_to seminar.title, seminar
+    - else
+      = link_to seminar.title, admin_admin_seminar_path(seminar)
+    - if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid || seminar.admin_seminar
       .tags
         - if seminar.admin_seminar
           %span.tag.is-warning
             =t("seminar.tags.has_admin_seminar")
         - if seminar.locked?
-          %span.tag.is-warning
+          %span.tag.is-link
             =t("seminar.tags.locked")
         - if seminar.is_admin_seminar?
           %span.tag.is-info
