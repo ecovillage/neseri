@@ -22,12 +22,12 @@
         = t("seminar.has_admin_copy_link_html", admin_copy_path: admin_seminar_path(@seminar.admin_seminar))
 
 %br
-.subtitle
+.is-small
   - if @seminar.creator
     = Seminar.human_attribute_name(:creator).capitalize
     = @seminar.creator.email
   = l(@seminar.created_at, format: :long)
-.subtitle
+.is-small
   = Seminar.human_attribute_name(:updated_at)
   = l(@seminar.updated_at, format: :long)
 
@@ -99,60 +99,71 @@
                 %i.fa.fa-sitemap
               = t('seminar.form.section.infrastructure')
           %tr
-            %th= Seminar.human_attribute_name(:wished_room)
+            %th= Seminar.human_attribute_name(:room_wish)
             %td= @seminar.wished_room&.name
         - [:room_material, :room_extras].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
     
-    
-%table.table.box.is-fullwidth
-  %tbody
-    %tr
-      %th(colspan=4)
-        %h2.subtitle 
-          %span.icon
-            %i.fa.fa-user-circle
-          = t('seminar.form.section.referees')
-    %tr
-      %th= SeminarInstructor.human_attribute_name(:email)
-      %th= SeminarInstructor.human_attribute_name(:qualification)
-      %th= SeminarInstructor.human_attribute_name(:comment)
-      %th= SeminarInstructor.human_attribute_name(:accommodation)
-    - if @seminar.seminar_instructors.empty?
+
+.box
+  %table.table.is-fullwidth
+    %tbody
       %tr
-        %td.is-warning{colspan: 4}
-          =t(:none)
-    - @seminar.seminar_instructors.each do |instructor|
-      - if instructor.user == current_user
-        %tr.is-selected
-          %td= instructor.send(:email)
-          - [:qualification, :comment, :accommodation].each do |attr|
-            %td= instructor.send(attr)
-      - else
+        %th(colspan=4)
+          %h2.subtitle 
+            %span.icon
+              %i.fa.fa-user-circle
+            = t('seminar.form.section.referees')
+              
+      %tr
+        %th= SeminarInstructor.human_attribute_name(:email)
+        %th= SeminarInstructor.human_attribute_name(:qualification)
+        %th= SeminarInstructor.human_attribute_name(:comment)
+        %th= SeminarInstructor.human_attribute_name(:accommodation)
+      - if @seminar.seminar_instructors.empty?
         %tr
-          %td= instructor.send(:email)
-          - [:qualification, :comment, :accommodation].each do |attr|
-            %td= instructor.send(attr)
+          %td.is-warning{colspan: 4}
+            =t(:none)
+      - @seminar.seminar_instructors.each do |instructor|
+        - if instructor.user == current_user
+          %tr.is-selected
+            %td
+              = instructor.send(:email)
+            - [:qualification, :comment, :accommodation].each do |attr|
+              %td= instructor.send(attr)
+        - else
+          %tr
+            %td
+              = mail_to instructor.email do
+                %span.icon
+                  %i.fa.fa-envelope.fa-border
+              = instructor.send(:email)
+            - [:qualification, :comment, :accommodation].each do |attr|
+              %td= instructor.send(attr)
+
 
 
 .box
+  %h2.subtitle= t(:actions)
   .level
     .level-item-left
-      - if allowed_to? :edit?, @seminar
-        = link_to edit_seminar_path(@seminar), class: 'button is-primary' do
-          %span.icon.is-small
-            %i.fa.fa-wrench
-          %span
-            = t(:edit)
+      .buttons
+        - navigation[:seminar_user_actions].items.each do |item|
+          - method, classes = item.description.to_s.split(' ')
+          - classes ||= ''
+          - method ||= :get
+          = button_link_to item.icon, item.url, item.title, classes, method: method
+    .level-item-right
+      = link_to edit_seminar_path(@seminar), class: 'button is-danger' do
+        %span.icon.is-small
+          %i.fa.fa-trash
+        %span
+          = t('seminar.pull_back')
+
+.box
   %hr
-  = link_to t('seminar.new'), new_seminar_path, class: 'button is-link'
-  = link_to seminar_clone_path(@seminar), class: 'button is-link', method: :post do
-    %span.icon.is-small
-      %i.fa.fa-clone
-    %span.is-light
-      = t(:clone)
   - if !@seminar.locked? && (allowed_to? :create?, with: LockPolicy)
     = link_to t(:lock), admin_seminar_lock_path(@seminar), class: 'button', method: :post
   - if @seminar.locked? && (allowed_to? :create?, with: LockPolicy)

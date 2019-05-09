@@ -28,11 +28,11 @@ class SeminarPolicy < ApplicationPolicy
   end
 
   def user_created_seminar?
-    seminar.creator == user
+    seminar.creator && (seminar.creator == user)
   end
 
   def user_instructs_seminar?
-    seminar.instructors.exists?(user.id)
+    user.id && seminar.instructors.exists?(user.id)
   end
 
   def unlocked_user_seminar?
