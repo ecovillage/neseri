@@ -8,7 +8,7 @@
     .navbar-start
       - if allowed_to? :index?, Seminar, with: AdminSeminarPolicy
         = link_to t(:admin_seminars), admin_admin_seminars_path, class: 'navbar-item'
-        = link_to t(:proposed_seminars), admin_seminars_path, class: 'navbar-item'
+        = link_to t("admin.proposed_seminars"), admin_seminars_path, class: 'navbar-item'
 
       - navigation[:main].items.each do |item|
         = render 'actionnav_item', item: item
@@ -19,7 +19,7 @@
         .buttons
           - if user_signed_in?
             = link_to current_user.email, instructor_path, class: 'button'
-            = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-light"
+            = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
           - else
             %a.button.is-primary(href=new_user_registration_path)
               %strong= t('devise.registrations.new.sign_up')
