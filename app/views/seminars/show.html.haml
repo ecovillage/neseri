@@ -1,7 +1,12 @@
-%h1.title
-  = Seminar.model_name.human
-  = ":"
-  = @seminar.title
+.level
+  .level-item-left
+    %h1.title
+      = Seminar.model_name.human
+      = ":"
+      = @seminar.title
+  .level-item-right
+    - if allowed_to?(:edit?, @seminar)
+      = button_link_to 'fa-edit', edit_seminar_path(@seminar), t(:edit), 'is-link'
 
 - if @seminar.locked
   .notification.is-notice
