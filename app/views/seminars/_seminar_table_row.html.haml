@@ -5,7 +5,9 @@
     = link_to seminar.title, seminar
   %td
     = l(seminar.start_date, format: :short_date)
+    %br
     ="-"
+    %br
     = l(seminar.end_date, format: :short_date)
   %td
     = l(seminar.created_at, format: :mid)

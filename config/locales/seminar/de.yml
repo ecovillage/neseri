@@ -10,8 +10,11 @@ de:
         create: Neuen Seminarvorschlag anlegen
         update: Seminarvorschlag speichern
   seminar:
+    has_admin_copy_link_html: <a href="%{admin_copy_path}">Admin-Kopie ansehen</a>
+    create_admin_copy: Admin-Kopie anlegen
     new: Neuen Seminarvorschlag anlegen
     edit: Vorschlag bearbeiten
+    is-locked: Dieser Veranstaltungsvorschlag wird derzeit durch das Bildungsreferat bearbeitet.
     pull_back: Seminarvorschlag zurückziehen
     saved: Seminarvorschlag gespeichert
     my: Meine Seminare

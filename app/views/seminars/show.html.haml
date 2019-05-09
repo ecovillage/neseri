@@ -12,6 +12,15 @@
       .media-content
         = t("seminar.is-locked")
 
+- if @seminar.admin_seminar && allowed_to?(:show?, @seminar.admin_seminar, with: AdminSeminarPolicy)
+  .notification.is-link
+    .media
+      .media-left
+        %span.icon.is-size-3
+          %i.fa.fw.fa-info
+      .media-content
+        = t("seminar.has_admin_copy_link_html", admin_copy_path: admin_seminar_path(@seminar.admin_seminar))
+
 %br
 .subtitle
   - if @seminar.creator
