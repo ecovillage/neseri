@@ -18,7 +18,10 @@ class Admin::AdminSeminarsController < NeseriController
     elsif @seminar.is_user_seminar? && @seminar.admin_seminar
       @seminar = @seminar.admin_seminar
     end
+
     authorize! @seminar
+
+    redirect_to edit_admin_admin_seminar_path(@seminar)
   end
 
   def edit
