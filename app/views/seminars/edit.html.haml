@@ -1,11 +1,10 @@
-%h1.title= t('seminar.edit')
-
-- if @seminar.is_admin_seminar?
-  %h2.subtitle= t(:is_admin_seminar)
+.level
+  .level-item-left
+    %h1.title= t('seminar.edit')
+    - if @seminar.is_admin_seminar?
+      %h2.subtitle= t(:is_admin_seminar)
+  .level-item-right
+    = button_link_to "fa-delete", seminar_path(@seminar), t('seminar.pull_back'), 'is-danger', method: :delete
 
 = render 'seminars/form'
 
-%br
-%br
-
-= button_link_to "fa-delete", seminar_path(@seminar), t('seminar.pull_back'), 'is-danger', method: :delete

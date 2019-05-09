@@ -161,7 +161,7 @@
           - method ||= :get
           = button_link_to item.icon, item.url, item.title, classes, method: method
     .level-item-right
-      = link_to edit_seminar_path(@seminar), class: 'button is-danger' do
+      = link_to seminar_path(@seminar), class: 'button is-danger', method: :delete do
         %span.icon.is-small
           %i.fa.fa-trash
         %span

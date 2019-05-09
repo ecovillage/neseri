@@ -79,5 +79,41 @@
       .links
         = link_to_add_association t('seminar_instructors.add'), f, :seminar_instructors, partial: 'seminars/seminar_instructor_fields', class: 'button', wrap_object: Proc.new {|instructor| instructor.email = current_user.email; instructor }
 
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-file
+      = t('seminar.files')
+      %span.icon
+        %i.fa.fa-file
+    %p
+      = t("seminar.files_text_html")
+      %br
+    %p
+      %br
+      %ul
+        %li
+          - @seminar.files.each do |file|
+            = link_to file.filename, url_for(file)
 
-  = f.submit
+      %br
+      = f.file_field :files, multiple: true
+
+
+  .box
+    %h2.subtitle.has-text-centered
+      %span.icon
+        %i.fa.fa-umbrella
+      = t('seminar.form.section.conditions')
+      %span.icon
+        %i.fa.fa-umbrella
+    %p
+      = t("seminar.conditions_text_html")
+
+
+  .level
+    .level-item-left
+      = f.submit
+    .level-item-right
+      - if @seminar.persisted?
+        = button_link_to "fa-delete", seminar_path(@seminar), t('seminar.pull_back'), 'is-danger', method: :delete
