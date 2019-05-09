@@ -94,7 +94,8 @@ class SeminarsController < NeseriController
       :room_extras, :room_material,
       :seminar_kind_id,
       :royalty_participant, :royalty_participant_reduced, :material_cost, :honorar,
-      seminar_instructors_attributes: [:id, :email, :comment, :accommodation, :qualification, :_destroy]
+      files: [],
+      seminar_instructors_attributes: [:id, :email, :comment, :accommodation, :qualification, :_destroy],
     )
   end
 end

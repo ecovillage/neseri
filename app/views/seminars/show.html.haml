@@ -149,6 +149,24 @@
               %td= instructor.send(attr)
 
 
+.box
+  %table.table.is-fullwidth
+    %tbody
+      %tr
+        %th(colspan=1)
+          %h2.subtitle 
+            %span.icon
+              %i.fa.fa-file
+            = t('seminar.files')
+      - if @seminar.files.empty?
+        %tr
+          %td.is-warning= t(:none)
+      - @seminar.files.each do |file|
+        %tr
+          %td
+            = link_to file.filename, url_for(file), target: '_new'
+
+              
 
 .box
   %h2.subtitle= t(:actions)
