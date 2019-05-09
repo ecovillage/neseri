@@ -3,12 +3,21 @@ class SeminarsController < NeseriController
 
   def index
     if current_user.admin?
-      @seminars = Seminar.all
-    else
-      @seminars = current_user.seminars
+      helpers.add_flash(hint:
+        t(:admin_seminars_click_here_html,
+          admin_seminars_link: admin_seminars_path))
     end
-    @created_seminars  = current_user.created_seminars.order(created_at: :desc)
-    @teaching_seminars = current_user.teaching_seminars.order(created_at: :desc)
+
+    future_own_seminars = Seminar.with_user(current_user).
+      user_versions.future.order(created_at: :desc)
+    @pagy_current, @current_seminars = pagy(future_own_seminars,
+      page_param: :current_page, items: 10)
+
+    past_own_seminars = Seminar.with_user(current_user).
+      user_versions.past.order(created_at: :desc)
+    @pagy_past, @past_seminars = pagy(past_own_seminars,
+      page_param: :past_page, items: 10)
+
     authorize!
   end
 

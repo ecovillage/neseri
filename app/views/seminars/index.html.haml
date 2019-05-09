@@ -1,29 +1,45 @@
-- if @created_seminars.present?
-  %h2.title= t(:created_seminars)
+-#  %h1.title= Seminar.model_name.human(count: 2)
 
-  = render 'seminar_table', seminars: @created_seminars
-  
-- if @teaching_seminars.present?
-  %h2.title= t(:teaching_seminars)
+- if @current_seminars.present?
+  .level
+    .level-item-left
+      %h2.title= t("seminars.my")
+    .level-item-right
+      - if @pagy_current.pages > 1
+        != pagy_bulma_nav(@pagy_current)
+  = render 'seminar_table', seminars: @current_seminars
+  .level
+    .level-item-left
+    .level-item-right
+      - if @pagy_current.pages > 1
+        != pagy_bulma_nav(@pagy_current)
 
-  = render 'seminar_table', seminars: @teaching_seminars
 
-- if @seminars.present?
-  %h1.title= Seminar.model_name.human(count: 2)
+- if @past_seminars.present?
+  .level
+    .level-item-left
+      %h2.subtitle= t("seminars.past")
+    .level-item-right
+      - if @pagy_past.pages > 1
+        != pagy_bulma_nav(@pagy_past)
+  = render 'seminar_table', seminars: @past_seminars
+  - if @pagy_past.pages > 1
+    != pagy_bulma_nav(@pagy_past)
+  .level
+    .level-item-left
+    .level-item-right
+      - if @pagy_past.pages > 1
+        != pagy_bulma_nav(@pagy_past)
 
-  = render 'seminar_table', seminars: @seminars
-  -#- @seminars.each do |seminar|
-  -#      - if allowed_to? :create?, with: AdminSeminarPolicy
-  -#        - if seminar.admin_seminar
-  -#          = link_to t(:view_admin_copy), admin_seminar_path(seminar), class: 'button'
-  -#        - else
-  -#          = link_to t(:create_admin_copy), admin_seminar_path(seminar), class: 'button'
-  -#      - if allowed_to? :edit?, seminar
-  -#        = link_to t(:edit), edit_seminar_path(seminar), class: 'button'
-  -#      - else
-  -#        = link_to t(:view), seminar_path(seminar), class: 'button'
+- if @current_seminars.empty? && @past_seminars.empty?
+  .hero.is-primary.is-bold.is-large.is-fullwidth
+    .hero-body
+      .container.has-text-centered
+        %h1.title= t(:no_own_seminars_yet)
+        .container.has-text-centered
+        = link_to t('seminar.new'), new_seminar_path, class: 'button is-primary is-large'
 - else
-  %h1.subtitle= t(:no_own_seminars_yet)
-
-= link_to t('seminar.new'), new_seminar_path, class: 'button is-primary'
+  %hr
+  .has-text-centered
+    = link_to t('seminar.new'), new_seminar_path, class: 'button is-primary is-medium'
 

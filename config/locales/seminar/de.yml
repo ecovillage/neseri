@@ -21,7 +21,6 @@ de:
     is-locked: Dieser Veranstaltungsvorschlag wird derzeit durch das Bildungsreferat bearbeitet.
     pull_back: Seminarvorschlag zurückziehen
     saved: Seminarvorschlag gespeichert
-    my: Meine Seminare
     placeholder:
       title: Name des Seminars
       subtitle: Untertitel des Seminars
@@ -50,6 +49,8 @@ de:
         files: Anhänge
         conditions: Konditionen
   seminars:
+    my: Meine Seminare
+    past: Ältere Seminarvorschläge
     index:
       created_at: Erstellt am
       preferred_date: Lieblingsdatum
