@@ -32,6 +32,7 @@
 #  alternative_dates           :text
 #  other_extras                :text
 #  room_wish_id_id             :integer
+#  active                      :boolean          default(TRUE)
 #
 
 class Seminar < ApplicationRecord
@@ -45,6 +46,8 @@ class Seminar < ApplicationRecord
 
   has_many :seminar_instructors, inverse_of: :seminar
   has_many :instructors, through: :seminar_instructors, class_name: "User", source: 'user'
+
+  has_many_attached :files
 
   accepts_nested_attributes_for :seminar_instructors,
     reject_if: :all_blank, allow_destroy: true
@@ -60,10 +63,14 @@ class Seminar < ApplicationRecord
   validates :cancellation_time, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
   validate :min_smaller_than_max
 
+  validate :file_sizes
+
   scope :active, -> { where(active: true) }
   scope :future, -> { where("start_date >= ?", DateTime.now) }
   scope :past,   -> { where("start_date <= ?", DateTime.now) }
   scope :admin_copies, -> { where("user_seminar_id NOT NULL") }
+  scope :user_versions, -> { where("user_seminar_id IS NULL") }
+  scope :with_user, ->(user) { where(creator: user).or(Seminar.where(seminar_instructors: user.seminar_instructors)) }
 
   after_initialize do |record|
     record.start_date ||= DateTime.new(DateTime.now.year + 1, 1, 20, 20, 30)
@@ -95,6 +102,20 @@ class Seminar < ApplicationRecord
     
     if end_date < start_date
       errors.add(:end_date, :must_be_before_start_date)
+    end
+  end
+
+  def file_sizes
+    if files.attached?
+      files.each do |file|
+        if file.blob.byte_size > 10000000
+          file.purge
+          errors[:base] << I18n.t('Too big')
+        #elsif !file.blob.content_type.starts_with?('image/')
+        #  logo.purge
+        #  errors[:base] << 'Wrong format'
+        end
+      end
     end
   end
 end
