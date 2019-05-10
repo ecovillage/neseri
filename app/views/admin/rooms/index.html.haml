@@ -1,0 +1,23 @@
+%h1.title= Room.model_name.human(count: 2)
+
+%table.table.is-fullwidth
+  %thead
+    %tr
+      %th
+      %th
+  %tbody
+    - @rooms.each do |room|
+      - if room.active?
+        %tr
+          %td
+            = room.name
+          %td= link_to t("room.deactivate"), admin_room_path(room), method: :delete
+      - else
+        %tr.is-selected
+          %td
+            = room.name
+            #{t('room.deactivated')}
+          %td= link_to t("room.reactivate"), admin_room_path(room), method: :patch
+    %tr
+      %td.has-text-centered(colspan=2)= link_to t('room.create'), new_admin_room_path, class: 'button is-primary'
+
