@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_10_145108) do
+ActiveRecord::Schema.define(version: 2019_05_10_181044) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -106,6 +106,7 @@ ActiveRecord::Schema.define(version: 2019_05_10_145108) do
     t.text "other_extras"
     t.integer "room_wish_id"
     t.boolean "active", default: true
+    t.text "room_comment"
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
     t.index ["room_wish_id"], name: "index_seminars_on_room_wish_id"
     t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"

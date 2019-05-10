@@ -11,7 +11,7 @@
     = f.double_text_input :title
     = f.double_text_input :subtitle
 
-    = f.double_text_area :description, 12
+    = f.double_text_area :description, size: 12
 
   .box
     %h2.subtitle.has-text-centered
@@ -23,7 +23,7 @@
     = f.double_datetime_select :start_date
     = f.double_datetime_select :end_date
     = f.double_select :seminar_kind_id, SeminarKind.where(active: true), :id, :name
-    = f.double_text_area :alternative_dates, 5
+    = f.double_text_area :alternative_dates, size: 5
     -#icon: 'fa-calendar', help_text: t('seminar.helptext.alternative_dates')
     = f.double_number_field "cancellation_time"
     -#icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
@@ -56,6 +56,7 @@
       %span.icon
         %i.fa.fa-sitemap
     = f.double_select "wished_room", Room.where(active: true), :id, :name
+    = f.double_text_area "room_comment", size: 3
     = f.double_text_input "room_material"
     -#icon: 'fa-clipboard'
     = f.double_text_input "room_extras"

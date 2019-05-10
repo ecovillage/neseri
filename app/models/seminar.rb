@@ -32,6 +32,7 @@
 #  other_extras                :text
 #  room_wish_id                :integer
 #  active                      :boolean          default(TRUE)
+#  room_comment                :text
 #
 
 class Seminar < ApplicationRecord
