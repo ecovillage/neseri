@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_05_09_094111) do
+ActiveRecord::Schema.define(version: 2019_05_10_145108) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -93,7 +93,6 @@ ActiveRecord::Schema.define(version: 2019_05_09_094111) do
     t.decimal "royalty_participant"
     t.decimal "royalty_participant_reduced"
     t.decimal "material_cost"
-    t.decimal "honorar"
     t.string "kind", default: "user"
     t.string "uuid"
     t.boolean "locked", default: false
@@ -105,10 +104,10 @@ ActiveRecord::Schema.define(version: 2019_05_09_094111) do
     t.integer "user_seminar_id"
     t.text "alternative_dates"
     t.text "other_extras"
-    t.integer "room_wish_id_id"
+    t.integer "room_wish_id"
     t.boolean "active", default: true
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
-    t.index ["room_wish_id_id"], name: "index_seminars_on_room_wish_id_id"
+    t.index ["room_wish_id"], name: "index_seminars_on_room_wish_id"
     t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"
     t.index ["user_seminar_id"], name: "index_seminars_on_user_seminar_id"
   end

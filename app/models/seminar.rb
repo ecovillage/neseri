@@ -19,7 +19,6 @@
 #  royalty_participant         :decimal(, )
 #  royalty_participant_reduced :decimal(, )
 #  material_cost               :decimal(, )
-#  honorar                     :decimal(, )
 #  kind                        :string           default("user")
 #  uuid                        :string
 #  locked                      :boolean          default(FALSE)
@@ -31,7 +30,7 @@
 #  user_seminar_id             :integer
 #  alternative_dates           :text
 #  other_extras                :text
-#  room_wish_id_id             :integer
+#  room_wish_id                :integer
 #  active                      :boolean          default(TRUE)
 #
 
