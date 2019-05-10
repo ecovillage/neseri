@@ -8,7 +8,7 @@ class MainNavigation < ActionNav::Base
 
   item :contact do
     title { t('pages.contact') }
-    url   { contact_message_path }
+    url   { contact_path }
   end
 
   item :impressum do

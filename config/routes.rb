@@ -40,8 +40,5 @@ Rails.application.routes.draw do
   resource :instructor, only: [:show, :edit, :update]
   resolve('Instructor') { :instructor }
 
-  resource :contact_message, only: [:show, :create, :new]
-  resolve('contact') { :contact_message }
-
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
