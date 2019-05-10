@@ -36,7 +36,6 @@ de:
   not_available_in_this_language: In dieser Sprache nicht verfügbar
   notification:
     nojs: Du musst JavaScript aktiviert haben um Änderungen mit dieser Anwendung durchführen zu können
-  unauthorized: Keine Berechtigung, diese Seite anzusehen!
   nr: Nr
   pages:
     about: Über
@@ -80,6 +79,7 @@ de:
       mid: "%a, %d. %b %Y %H:%M"
       short_date: "%a %d.%m.%Y"
       shorter_date: "%d.%m.%Y"
+  unauthorized: Keine Berechtigung, diese Seite anzusehen!
   unlock: Entsperren
   view: Ansehen
   view_admin_copy: Admin-Kopie ansehen

@@ -1,26 +1,27 @@
+---
 de:
   devise:
     failure:
-      invited: "Du bist eingeladen worden. Nimm die Einladung an um dein Konto zu erstellen."
+      invited: Du bist eingeladen worden. Nimm die Einladung an um dein Konto zu erstellen.
     invitations:
-      send_instructions: "Eine Einladungs-mail wurde an %{email} versandt."
-      invitation_token_invalid: "Der Einladungslink ist ungültig"
-      updated: "Passwort geändert. Du bist nun eingeloggt."
-      updated_not_active: "Passwort geändert."
-      new:
-        header: "Einladung erstellen"
-        submit_button: "Einladung schicken"
       edit:
-        header: "Passwort setzen"
-        submit_button: "Mein Passwort setzen"
+        header: Passwort setzen
+        submit_button: Mein Passwort setzen
+      invitation_token_invalid: Der Einladungslink ist ungültig
+      new:
+        header: Einladung erstellen
+        submit_button: Einladung schicken
+      send_instructions: Eine Einladungs-mail wurde an %{email} versandt.
+      updated: Passwort geändert. Du bist nun eingeloggt.
+      updated_not_active: Passwort geändert.
     mailer:
       invitation_instructions:
-        subject: "Seminarvorschlag Ökodorf Sieben Linden"
-        hello: "Hallo %{email}"
-        someone_invited_you: "Jemand hat dich eingeladen oder ein Seminar mit dir als Referent/In auf %{url} angelegt. Du kannst die Einladung mit einem Click auf den unten stehendem Link annehmen."
-        accept: "Einladung annehmen"
-        accept_until: "Diese Einladung ist gültig bis zum %{due_date}."
-        ignore: "Falls du die Einladung nicht annehmen möchtest, ignoriere Diese mail. Dein Konto wird nicht erstellt werden bis du auf den Link clickst und ein Passwort erstellst. Bitte beachte aber, dass das Bildungsreferat im Ökodorf Sieben Linden deine persönlichen Daten benötigt, wenn du dort eine Veranstaltung mitgestalten willst."
+        accept: Einladung annehmen
+        accept_until: Diese Einladung ist gültig bis zum %{due_date}.
+        hello: Hallo %{email}
+        ignore: Falls du die Einladung nicht annehmen möchtest, ignoriere Diese mail. Dein Konto wird nicht erstellt werden bis du auf den Link clickst und ein Passwort erstellst. Bitte beachte aber, dass das Bildungsreferat im Ökodorf Sieben Linden deine persönlichen Daten benötigt, wenn du dort eine Veranstaltung mitgestalten willst.
+        someone_invited_you: Jemand hat dich eingeladen oder ein Seminar mit dir als Referent/In auf %{url} angelegt. Du kannst die Einladung mit einem Click auf den unten stehendem Link annehmen.
+        subject: Seminarvorschlag Ökodorf Sieben Linden
   time:
     formats:
       devise:
