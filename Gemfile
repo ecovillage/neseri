@@ -27,6 +27,8 @@ gem 'jbuilder', '~> 2.5'
 
 gem 'pg'
 
+gem 'image_processing', '~> 1.2'
+
 gem 'rails-i18n', '~> 5.1'
 
 gem 'devise'
