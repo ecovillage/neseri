@@ -190,7 +190,6 @@
 
 - if current_user.admin?
   .box
-    %hr
     - if !@seminar.locked? && (allowed_to? :create?, with: LockPolicy)
       = button_link_to 'fa-lock', admin_seminar_lock_path(@seminar), t(:lock), '', method: :post
     - if @seminar.locked? && (allowed_to? :create?, with: LockPolicy)

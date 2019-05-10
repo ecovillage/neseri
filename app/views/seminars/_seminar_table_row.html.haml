@@ -32,18 +32,12 @@
             =t("seminar.tags.is-published")
     - if allowed_to? :edit?, seminar
       %p.buttons
-        = link_to edit_seminar_path(seminar), class: 'button' do
-          %span.icon.is-small
-            %i.fa.fa-wrench
-          %span
-            = t(:edit)
-        = link_to seminar_clone_path(seminar), class: 'button is-light', method: :post do
-          %span.icon.is-small
-            %i.fa.fa-clone
-          %span.is-light
-            = t(:clone)
+        -# link_to_if
+        = button_link_to 'fa-wrench', edit_seminar_path(seminar),  t(:edit),  'is-small is-outlined'
+    - if allowed_to? :show?, seminar
+      %p.buttons
+        = button_link_to 'fa-clone',  seminar_clone_path(seminar), t(:clone), 'is-small is-light', method: :post
     - if allowed_to? :create?, with: AdminSeminarPolicy
-      - if seminar.admin_seminar
-        = link_to t("seminar.view_admin_copy"), admin_seminar_path(seminar), class: 'button'
-      - else
-        = link_to t("seminar.create_admin_copy"), admin_seminar_admin_copy_path(seminar), class: 'button is-small', method: :post
+      - SeminarAdminActions.new(seminar, current_user).items.each do |item|
+        = button_link_to item.icon, item.url, item.title, "is-small #{item.css_classes}", method: (item.http_method || :get)
+        %br
