@@ -161,14 +161,19 @@
       - if @seminar.files.empty?
         %tr
           %td.is-warning= t(:none)
-      - @seminar.files.each do |file|
+      - else
         %tr
           %td
-            = link_to file.filename, url_for(file), target: '_new'
-            = link_to url_for(file), target: '_new' do
-              %span.icon
-                %i.fa.fa-trash
-
+            .columns.is-multiline
+              - @seminar.files.each do |file|
+                .column.is-2
+                  = link_to file.filename, url_for(file), target: '_new'
+                  = link_to seminar_attachment_path(@seminar, file), method: :delete do
+                    %span.icon
+                      %i.fa.fa-trash
+                  - if file.blob.content_type.start_with? 'image'
+                    = link_to url_for(file), target: '_new' do
+                      = image_tag file.variant(resize: "180x100").processed
               
 
 .box

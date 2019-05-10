@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :seminars do
     resource  :clone, controller: 'seminars/clone', only: :create
+    resources :attachments, controller: 'seminars/attachments', only: [:destroy]
   end
 
   namespace :admin do
