@@ -14,11 +14,11 @@ module FlashHelper
   def add_flash key, value=nil
     if key.is_a? Hash
       hash = key
-      hash.each {|k,v| (flash[k.to_sym] ||= []) << v}
+      hash.each {|k,v| (flash[k.to_sym] ||= Set.new) << v}
       #if message.to_s != '' && !flash[message_type.to_sym]&.include?(message)
     else
       return if key.nil? || value.nil?
-      (flash[key.to_sym] ||= []) << value
+      (flash[key.to_sym] ||= Set.new) << value
     end
   end
 

@@ -71,6 +71,6 @@ class User < ApplicationRecord
   end
 
   def profile_missing?
-    !firstname || !lastname || !address
+    firstname.to_s == '' || lastname.to_s == '' || address.to_s == ''
   end
 end
