@@ -19,7 +19,10 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :settings, only: [:index, :update]
-    resources :users, only: [:index, :show]
+    resources :users, only: [:index, :show] do
+      post :impersonate, on: :member
+      post :stop_impersonating, on: :collection
+    end
     resources :emails, only: [:index, :show]
 
     resources :seminars, only: [:index, :show] do

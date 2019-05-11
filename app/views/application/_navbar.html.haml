@@ -19,7 +19,11 @@
         .buttons
           - if user_signed_in?
             = link_to current_user.email, instructor_path, class: 'button'
-            = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
+            - if current_user != true_user
+              -#You #{true_user.email} are signed in as #{current_user.email}
+              = link_to "Back to admin", stop_impersonating_admin_users_path, method: :post, class: 'button is-dark'
+            - else
+              = link_to t('sessions.destroy.sign_out'), destroy_user_session_path, method: :delete, class: "button is-dark"
           - else
             %a.button.is-primary(href=new_user_registration_path)
               %strong= t('devise.registrations.new.sign_up')

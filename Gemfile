@@ -36,6 +36,8 @@ gem 'devise-i18n'
 
 gem 'devise_invitable', '~> 2.0.0'
 
+gem 'pretender'
+
 gem 'haml'
 gem 'haml-rails'
 

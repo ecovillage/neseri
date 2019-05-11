@@ -40,7 +40,9 @@
         %td
           %a(href="mailto:#{user.email}")
             =t(:send_mail)
-          -#= link_to t(:show), admin_user_path(user), class: 'button'
+          - if user != current_user
+            %br
+            = link_to t(:impersonate), impersonate_admin_user_path(user), method: :post
 - if @pagy.pages > 1
   != pagy_bulma_nav(@pagy)
 
