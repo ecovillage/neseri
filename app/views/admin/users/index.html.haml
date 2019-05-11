@@ -1,12 +1,11 @@
 .level
   .level-item-left
     %h1.title= t(:users_index)
-    %h2.subtitle (#{User.count} #{User.model_name.human(count: 2)})
+    %h2.subtitle (#{@users.count} #{User.model_name.human(count: 2)})
   .level-item-right
-    = link_to t("devise.invitations.new.submit_button"), new_user_invitation_path, class: 'button is-dark'
+    - if @pagy.pages > 1
+      != pagy_bulma_nav(@pagy)
 
-- if @pagy.pages > 1
-  != pagy_bulma_nav(@pagy)
 %table.table.is-fullwidth
   %thead
     %tr
@@ -16,33 +15,28 @@
       %th= t("admin.users.state")
       %th= t("admin.users.actions")
   %tbody
-    - @users.find_each do |user|
-      %tr
-        %td= link_to user_name(user), admin_user_path(user)
-        %td= user.email
-        %td
-          - user.created_seminars.each do |seminar|
-            = link_to seminar.title, seminar_path(seminar)
-
-          - user.teaching_seminars.each do |seminar|
-            = link_to seminar.title, seminar_path(seminar)
-        %td
-          .tags
-            - if user.confirmation_token && !user.confirmed_at
-              %span.tag.is-warning
-                =t("admin.users.tags.unconfirmed")
-            - if user.invitation_token
-              %span.tag.is-info
-                =t("admin.users.tags.invitation_pending")
-            - if user.profile_missing?
-              %span.tag
-                =t("admin.users.tags.profile_missing")
-        %td
-          %a(href="mailto:#{user.email}")
-            =t(:send_mail)
-          - if user != current_user
-            %br
-            = link_to t(:impersonate), impersonate_admin_user_path(user), method: :post
+    = render partial: 'user_table_row', collection: @users, as: 'user'
 - if @pagy.pages > 1
   != pagy_bulma_nav(@pagy)
+
+.level
+  .level-item-left
+    %h2.subtitle
+      = t(:admin_users_index)
+      (#{@admin_users.count})
+  .level-item-right
+    - if @pagy_admin.pages > 1
+      != pagy_bulma_nav(@pagy_admin)
+%table.table.is-fullwidth
+  %thead
+    %tr
+      %th= t("admin.users.name")
+      %th= t("admin.users.email")
+      %th= t("admin.users.seminars")
+      %th= t("admin.users.state")
+      %th= t("admin.users.actions")
+  %tbody
+    = render partial: 'user_table_row', collection: @admin_users, as: 'user'
+- if @pagy_admin.pages > 1
+  != pagy_bulma_nav(@pagy_admin)
 

@@ -1,0 +1,31 @@
+%tr
+  %td= link_to user_name(user), admin_user_path(user)
+  %td= user.email
+  %td
+    - user.created_seminars.each do |seminar|
+      = link_to seminar.title, seminar_path(seminar)
+
+    - user.teaching_seminars.each do |seminar|
+      = link_to seminar.title, seminar_path(seminar)
+  %td
+    .tags
+      - if user.admin
+        %span.tag.is-warning
+          =t("user.is-admin")
+      - if user.confirmation_token && !user.confirmed_at
+        %span.tag.is-warning
+          =t("admin.users.tags.unconfirmed")
+      - if user.invitation_token
+        %span.tag.is-info
+          =t("admin.users.tags.invitation_pending")
+      - if user.profile_missing?
+        %span.tag
+          =t("admin.users.tags.profile_missing")
+  %td
+    -#= link_to t(:show), admin_user_path(user), class: 'button'
+    %a(href="mailto:#{user.email}")
+      =t(:send_mail)
+    - if user != current_user
+      %br
+      = link_to t(:impersonate), impersonate_admin_user_path(user), method: :post
+

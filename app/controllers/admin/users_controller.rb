@@ -2,12 +2,14 @@ class Admin::UsersController < NeseriController
   before_action :authenticate_user!
 
   def index
-    @pagy, @users = pagy(User.all.order(created_at: :desc))
+    @pagy_admin, @admin_users = pagy(User.all.where(admin: true).order(created_at: :desc))
+    @pagy, @users = pagy(User.all.where(admin: false).order(created_at: :desc))
     authorize!
   end
 
   def show
-    @user = User.find(params[:id])
+    @user     = User.find(params[:id])
+    @seminars = Seminar.with_user(@user)
     authorize! @user
   end
 

@@ -11,44 +11,9 @@
             %td= @user.send(attr)
 
 
-- if @user.created_seminars.present?
+- if @seminars.present?
   .level
     .level-item-left
-      %h2.title= t(:created_seminars)
+      %h2.title= t(:involved_seminars)
     .level-item-right
-  = render 'seminar_table', seminars: @user.created_seminars
-  
--#- if @teaching_seminars.present?
--#  %h2.title= t(:teaching_seminars)
--#
--#  - if @pagy_teaching_seminars.pages > 1
--#    != pagy_bulma_nav(@pagy_teaching_seminars)
--#  = render 'seminar_table', seminars: @teaching_seminars
--#  - if @pagy_teaching_seminars.pages > 1
--#    != pagy_bulma_nav(@pagy_teaching_seminars)
--#
--#- if @seminars.present?
--#  %h1.title= Seminar.model_name.human(count: 2)
--#
--#  - if @pagy_seminars.pages > 1
--#    != pagy_bulma_nav(@pagy_seminars)
--#  = render 'seminar_table', seminars: @seminars
--#  - if @pagy_seminars.pages > 1
--#    != pagy_bulma_nav(@pagy_seminars)
--#
--#  -#- @seminars.each do |seminar|
--#  -#      - if allowed_to? :create?, with: AdminSeminarPolicy
--#  -#        - if seminar.admin_seminar
--#  -#          = link_to t(:view_admin_copy), admin_seminar_path(seminar), class: 'button'
--#  -#        - else
--#  -#          = link_to t(:create_admin_copy), admin_seminar_path(seminar), class: 'button'
--#  -#      - if allowed_to? :edit?, seminar
--#  -#        = link_to t(:edit), edit_seminar_path(seminar), class: 'button'
--#  -#      - else
--#  -#        = link_to t(:view), seminar_path(seminar), class: 'button'
--#- else
--#  %h1.subtitle= t(:no_own_seminars_yet)
--#
--#= link_to t('seminar.new'), new_seminar_path, class: 'button is-primary'
--#
--#
+  = render 'seminars/seminar_table', seminars: @seminars
