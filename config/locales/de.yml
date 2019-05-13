@@ -10,6 +10,7 @@ de:
   attachment:
     deleted: Anhang gelöscht
   back_to_mails: Zurück zu den E-Mails
+  back_to_admin: Zurück als Admin
   change_password: Password ändern
   clone: Kopie anlegen
   contact:
@@ -31,6 +32,7 @@ de:
   documentation: Documentation
   edit: Bearbeiten
   instructor_updated: Profil aktualisiert.
+  imporsonate: Anmelden als
   lock: Sperren
   need_to_accept_to_use_service: Datenschutzerklärung und AGB müssen gelesen und zugestimmt werden.
   no_own_seminars_yet: Noch keine eigenen Seminare
