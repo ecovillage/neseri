@@ -1,0 +1,71 @@
+%table.table.is-fullwidth.is-striped
+  %tbody
+    %tr
+      %th(colspan=6)
+        %h2.subtitle
+          %span.icon
+            %i.fa.fa-user-circle
+          = t('seminar.form.section.referees')
+          - if !seminar.seminar_instructors.empty?
+            = mail_to '', cc: seminar.seminar_instructors.pluck(:email).join(','), class: 'button is-outlined' do
+              %span.icon
+                %i.fa.fa-envelope.fa-border
+              = t(:mail_all_referees)
+          - if defined? subheading
+            %br
+            %small
+              = subheading
+    %tr
+      %th= SeminarInstructor.human_attribute_name(:email)
+      %th= SeminarInstructor.human_attribute_name(:qualification)
+      %th= SeminarInstructor.human_attribute_name(:comment)
+      %th= SeminarInstructor.human_attribute_name(:accommodation)
+      %th= SeminarInstructor.human_attribute_name(:main_contact)
+      %th= SeminarInstructor.human_attribute_name(:contactable)
+    - if seminar.seminar_instructors.empty?
+      %tr
+        %td.is-warning{colspan: 6}
+          =t(:none)
+    - seminar.seminar_instructors.each do |instructor|
+      - if instructor.user == current_user
+        %tr.is-selected
+          %td
+            = instructor.send(:email)
+          - [:qualification, :comment, :accommodation].each do |attr|
+            %td= instructor.send(attr)
+          %td
+            - if instructor.contactable
+              %span.icon
+                %i.fa.fa-check
+            - else
+              %span.icon
+                %i.fa.fa-cross
+          %td
+            - if instructor.main
+              %span.icon
+                %i.fa.fa-check
+            - else
+              %span.icon
+                %i.fa.fa-cross
+      - else
+        %tr
+          %td
+            = mail_to instructor.email do
+              %span.icon
+                %i.fa.fa-envelope.fa-border
+            = instructor.send(:email)
+          - [:qualification, :comment, :accommodation].each do |attr|
+            %td= instructor.send(attr)
+          %td
+            - if instructor.contactable
+              %span.icon
+                %i.fa.fa-check
+            - else
+              %span.delete
+          %td
+            - if instructor.main
+              %span.icon
+                %i.fa.fa-check
+            - else
+              %span.delete
+

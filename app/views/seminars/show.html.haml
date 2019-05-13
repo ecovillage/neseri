@@ -113,41 +113,7 @@
     
 
 .box
-  %table.table.is-fullwidth
-    %tbody
-      %tr
-        %th(colspan=4)
-          %h2.subtitle
-            %span.icon
-              %i.fa.fa-user-circle
-            = t('seminar.form.section.referees')
-              
-      %tr
-        %th= SeminarInstructor.human_attribute_name(:email)
-        %th= SeminarInstructor.human_attribute_name(:qualification)
-        %th= SeminarInstructor.human_attribute_name(:comment)
-        %th= SeminarInstructor.human_attribute_name(:accommodation)
-      - if @seminar.seminar_instructors.empty?
-        %tr
-          %td.is-warning{colspan: 4}
-            =t(:none)
-      - @seminar.seminar_instructors.each do |instructor|
-        - if instructor.user == current_user
-          %tr.is-selected
-            %td
-              = instructor.send(:email)
-            - [:qualification, :comment, :accommodation].each do |attr|
-              %td= instructor.send(attr)
-        - else
-          %tr
-            %td
-              = mail_to instructor.email do
-                %span.icon
-                  %i.fa.fa-envelope.fa-border
-              = instructor.send(:email)
-            - [:qualification, :comment, :accommodation].each do |attr|
-              %td= instructor.send(attr)
-
+  = render 'seminars/instructors/table', seminar: @seminar
 
 .box
   %table.table.is-fullwidth
