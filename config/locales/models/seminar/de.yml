@@ -19,6 +19,7 @@ de:
         attendees_preconditions: Voraussetzungen für Teilnahme
         accommodation: Unterkunft Teilnehmer*innen
         please_bring: Was sollen die Teilnehmer*innen mitbringen?
+        room_comment: Kommentar zum Seminar-Raum
         room_material: Zusätzliche Ausstattung
         room_extras: Sonstige Extras
         royalty_participant: Honorar pro Teilnehmer*in
@@ -37,5 +38,7 @@ de:
           attributes:
             attendees_maximum:
               must_be_greater_than_minimum: muss größer als Mindest-Teilnehmer*n-Zahl sein
+            base:
+              file_too_big: Angehängte Datei zu groß!
             end_date:
               must_be_before_start_date: muss nach der Startzeit liegen

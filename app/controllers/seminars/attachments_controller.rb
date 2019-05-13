@@ -5,7 +5,7 @@ class Seminars::AttachmentsController < NeseriController
     @attachment = ActiveStorage::Attachment.find(params[:id])
     authorize! @attachment, to: :destroy?, with: AttachmentPolicy
     @attachment.purge
-    helpers.add_flash info: 'attachment.deleted'
+    helpers.add_flash info: t('attachment.deleted')
     redirect_back fallback_location: @attachment.record
   end
 end

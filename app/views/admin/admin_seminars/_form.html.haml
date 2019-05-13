@@ -92,5 +92,29 @@
     = render 'seminars/instructors/table', seminar: @seminar.user_seminar, subheading: t('admin.seminar.referees_from_original')
 
   -#= f.file_field :files, multiple: true
+  - if @seminar.user_seminar.files.attached?
+    .box
+      %table.table.is-fullwidth
+        %tbody
+          %tr
+            %th(colspan=1)
+              %h2.subtitle 
+                %span.icon
+                  %i.fa.fa-file
+                = t('seminar.files')
+                = t('seminar.of_original')
+          - if @seminar.user_seminar.files.empty?
+            %tr
+              %td.is-warning= t(:none)
+          - else
+            %tr
+              %td
+                .columns.is-multiline
+                  - @seminar.user_seminar.files.each do |file|
+                    .column.is-2
+                      = link_to file.filename, url_for(file), target: '_new'
+                      - if file.blob.content_type.start_with? 'image'
+                        = link_to url_for(file), target: '_new' do
+                          = image_tag file.variant(resize: "180x100").processed
 
   = f.submit

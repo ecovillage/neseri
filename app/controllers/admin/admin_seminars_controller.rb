@@ -62,10 +62,10 @@ class Admin::AdminSeminarsController < NeseriController
       :start_date, :end_date,
       :cancellation_time, :cancellation_reason,
       :attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring, 
-      :room_extras, :room_material,
+      :room_extras, :room_material, :room_comment,
       :seminar_kind_id,
       :royalty_participant, :royalty_participant_reduced, :material_cost, :honorar, :locked,
-      seminar_instructors_attributes: [:id, :email, :comment, :accommodation, :qualification, :_destroy]
+      seminar_instructors_attributes: [:id, :email, :main_contact, :contactable, :comment, :accommodation, :qualification, :_destroy]
     )
   end
 end

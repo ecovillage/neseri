@@ -1,6 +1,20 @@
 .nested-fields
   .field
   = f.labeled_email_field :email, icon: 'fa-envelope', help_text: t('seminar_instructor.helptext.email')
+  .field.is-horizontal
+    .field-label.is-normal
+    .field-body
+      .control
+        = f.check_box :main_contact
+        %b
+          = f.label :main_contact
+  .field.is-horizontal
+    .field-label.is-normal
+    .field-body
+      .control
+        = f.check_box :contactable
+        %b
+          = f.label :contactable
   = f.labeled_text_field :accommodation, icon: 'fa-home'
   = f.labeled_text_field :comment, icon: 'fa-comment-o'
   = f.labeled_text_area  :qualification, icon: 'fa-adress-card', help_text: t('seminar_instructor.helptext.qualification')

@@ -7,6 +7,8 @@ de:
   admin_seminars: Admin-Kopien
   admin_seminars_click_here_html: Admin-Kopien lassen sich <a href="%{admin_seminars_link}">hier anzeigen</a>
   already_admin_seminar: Bereits eine Admin-Kopie
+  attachment:
+    deleted: Anhang gelöscht
   back_to_mails: Zurück zu den E-Mails
   change_password: Password ändern
   clone: Kopie anlegen

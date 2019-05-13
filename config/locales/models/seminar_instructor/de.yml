@@ -8,8 +8,10 @@ de:
       seminar_instructor:
         email: E-Mail-Adresse
         qualification: Qualifikation
-        comment: Erläuterung/Kommentar
+        comment: Erläuterung
         accommodation: Unterbringung
+        contactable: Kontaktierbar
+        main_contact: Haupt-?
     errors:
       models:
         seminar_instructors:

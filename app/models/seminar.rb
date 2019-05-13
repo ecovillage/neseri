@@ -110,10 +110,7 @@ class Seminar < ApplicationRecord
       files.each do |file|
         if file.blob.byte_size > 10000000
           file.purge
-          errors[:base] << I18n.t('Too big')
-        #elsif !file.blob.content_type.starts_with?('image/')
-        #  logo.purge
-        #  errors[:base] << 'Wrong format'
+          errors.add(:base, :file_too_big)
         end
       end
     end
