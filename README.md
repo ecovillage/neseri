@@ -4,12 +4,9 @@ A workshop proposal system for the ecovillage Sieben Linden (but probably broad 
 
 Full i18n support, but currently only a proper German locale is available.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
 The name comes from `new seminar registration system`.
 
-## Development
+The code is published under the [AGPLv3+](LICENSE.txt) and Copyright 2019 Felix Wolfsteller.
 
 `neseri` is currently developed using Ruby 2.6.1 and Rails 5.x.
 Otherwise it uses a pretty standard Ruby on Rails stack.
