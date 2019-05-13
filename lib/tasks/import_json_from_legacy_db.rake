@@ -25,11 +25,12 @@ namespace :neseri do
       user = User.find_or_initialize_by(instructor_data)
 
       generated_password = Devise.friendly_token.first(8)
-      instructor_data["password"] = generated_password
+      instructor_data["password"]              = generated_password
       instructor_data["password_confirmation"] = generated_password
-      instructor_data["tos_agreement"] = true
-      # find_or_initialize
-      if user.save
+      instructor_data["tos_agreement"]         = true
+      instructor_data["confirmed_at"]          = DateTime.now
+
+      if user.update(instructor_data)
         user.tos_accepted_at = nil
         user.save!
         instructor_user_id_map[old_id] = user
