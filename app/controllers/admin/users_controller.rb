@@ -2,10 +2,14 @@ class Admin::UsersController < NeseriController
   before_action :authenticate_user!
 
   def index
-    @pagy_admin, @admin_users = pagy(User.all.where(admin: true).order(created_at: :desc),
-                                    page_param: :admin_users_page)
-    @pagy, @users = pagy(User.all.where(admin: false).order(created_at: :desc),
-                        page_param: :users_page)
+    search = UserSearch.new(params[:q])
+    admin_users = search.apply(User.all.where(admin: true).order(created_at: :desc))
+    @pagy_admin, @admin_users = pagy(admin_users,
+                                     page_param: :admin_users_page)
+
+    users = search.apply(User.all.where(admin: false).order(created_at: :desc))
+    @pagy, @users = pagy(users,
+                         page_param: :users_page)
     authorize!
   end
 

@@ -2,6 +2,18 @@
   .level-item-left
     %h1.title= t(:users_index)
     %h2.subtitle (#{@pagy.count} #{User.model_name.human(count: 2)})
+  .level-item
+    = form_with url: admin_users_path, method: :get, local: true do |f|
+      .field.has-addons
+        .control
+          -#.has-icons-left
+          = f.text_field :q, class: 'input is-rounded', size: 6, placeholder: t('search_term'), value: params[:q]
+          -#%span.icon.is-small.is-left
+          -#  %i.fa.fa-search
+        .control
+          %button.button.is-info
+            %span.icon.is-small
+              %i.fa.fa-search
   .level-item-right
     - if @pagy.pages > 1
       != pagy_bulma_nav(@pagy)
