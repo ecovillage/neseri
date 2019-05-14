@@ -74,6 +74,7 @@ de:
   seminar_unlocked: Seminar entsperrt
   send_mail: Mail schicken
   send_me_reset_password_instructions: Anleitung schicken
+  reset_password_instructions: Anleitung für ein neues Password schicken
   sessions:
     destroy:
       sign_out: Abmelden

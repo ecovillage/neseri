@@ -1,8 +1,8 @@
-%h1.title.has-text-centered
-  Veranstaltungsvorschläge für das Ökodorf Sieben Linden
-
 .columns
   .column.is-8.is-offset-2
+    %h1.title.has-text-centered
+      Veranstaltungsvorschläge für das Ökodorf Sieben Linden
+
     %p
       Auf diesen Seiten können Vorschläge für (Bildungs-)Veranstaltungen im und mit dem Ökodorf Sieben Linden (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
     
@@ -15,6 +15,16 @@
         oder, wenn du bereits ein Konto hast
         = link_to t('devise.sessions.new.sign_in').downcase, new_user_session_path, class: 'button', style: 'margin-top: -5px;'
         \.
+      %p
+        %br
+        Solltest Du dich bereits angemeldet, aber dein
+        %b
+          Passwort vergessen
+        haben, kannst Du Dir eine
+        %br
+        .has-text-centered
+          = link_to t('reset_password_instructions'), new_user_password_path, class: 'button is-warning', style: 'margin-top: -5px;'
+          lassen.
     
     .section
       %h2.subtitle.has-text-centered
