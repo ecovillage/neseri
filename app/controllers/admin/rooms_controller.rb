@@ -16,7 +16,7 @@ class Admin::RoomsController < NeseriController
     @room.kind = 'event'
     authorize!
     if @room.save
-      flash[:success] = t('rooms.create.success')
+      helpers.add_flash success: t('rooms.create.success')
       redirect_to admin_rooms_path
     else
       render :new
@@ -27,7 +27,7 @@ class Admin::RoomsController < NeseriController
     @room = Room.find(params[:id])
     authorize!
     @room.update!(active: false)
-    flash[:success] = t('rooms.deactivated')
+    add_flash success: t('rooms.deactivated')
     redirect_to admin_rooms_path
   end
 
