@@ -12,7 +12,6 @@
 #  updated_at    :datetime         not null
 #  email         :string
 #  comment       :string
-#  main          :boolean          default(FALSE)
 #  contactable   :boolean          default(FALSE)
 #
 

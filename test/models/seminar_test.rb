@@ -19,7 +19,6 @@
 #  royalty_participant         :decimal(, )
 #  royalty_participant_reduced :decimal(, )
 #  material_cost               :decimal(, )
-#  honorar                     :decimal(, )
 #  kind                        :string           default("user")
 #  uuid                        :string
 #  locked                      :boolean          default(FALSE)

@@ -7,7 +7,7 @@
             %i.fa.fa-user-circle
           = t('seminar.form.section.referees')
           - if !seminar.seminar_instructors.empty?
-            = mail_to '', cc: seminar.seminar_instructors.pluck(:email).join(','), class: 'button is-outlined' do
+            = mail_to '', cc: seminar.seminar_instructors.pluck(:email).join(','), class: 'is-outlined is-size-7' do
               %span.icon
                 %i.fa.fa-envelope.fa-border
               = t(:mail_all_referees)
@@ -41,7 +41,7 @@
               %span.icon
                 %i.fa.fa-cross
           %td
-            - if instructor.main
+            - if instructor.main_contact
               %span.icon
                 %i.fa.fa-check
             - else
@@ -63,7 +63,7 @@
             - else
               %span.delete
           %td
-            - if instructor.main
+            - if instructor.main_contact
               %span.icon
                 %i.fa.fa-check
             - else

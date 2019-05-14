@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 2019_05_10_181044) do
     t.datetime "updated_at", null: false
     t.string "email"
     t.string "comment"
-    t.boolean "main", default: false
     t.boolean "contactable", default: false
     t.index ["email"], name: "index_seminar_instructors_on_email"
     t.index ["seminar_id"], name: "index_seminar_instructors_on_seminar_id"

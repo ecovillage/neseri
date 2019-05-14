@@ -52,7 +52,7 @@ class User < ApplicationRecord
   validates_acceptance_of :tos_agreement, :allow_nil => false, on: :create
 
   def downcase_strip_email
-    self.email = email.downcase.strip
+    self.email = self.email.downcase.strip
   end
 
   def prepend_https_to_homepage

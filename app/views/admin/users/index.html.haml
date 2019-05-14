@@ -1,7 +1,7 @@
 .level
   .level-item-left
     %h1.title= t(:users_index)
-    %h2.subtitle (#{@users.count} #{User.model_name.human(count: 2)})
+    %h2.subtitle (#{@pagy.count} #{User.model_name.human(count: 2)})
   .level-item-right
     - if @pagy.pages > 1
       != pagy_bulma_nav(@pagy)
@@ -23,7 +23,7 @@
   .level-item-left
     %h2.subtitle
       = t(:admin_users_index)
-      (#{@admin_users.count})
+      (#{@pagy_admin.count})
   .level-item-right
     - if @pagy_admin.pages > 1
       != pagy_bulma_nav(@pagy_admin)
