@@ -47,11 +47,11 @@ If the error persists, mention a gem in the Gemfile (I go with [therubyracer](ht
   * clone the git repository (`git clone https://github.com/ecovillage/neseri`)
   * `cd neseri` into the directory
   * run `bundle`
-  * then `RAILS_ENV=production rails db:migrate`
+  * then `RAILS_ENV=production rails db:schema:load` (or `rails db:migrate` to update)
   * `RAILS_ENV=production rails credentials:edit` (delete config/master.key and similar if already present)
   * export `SERVE_STATIC_FILES=true` environment variable
   * set mailhost and other ENVs (see below)
-  * `rails assets:precompile``
+  * `rails assets:precompile`
   * fire up `rails s -p 4000 -b 0.0.0.0` to run the application on **port 4000** on all (even public) IPs of the machine.
 
 In production, make sure to have these environment variables set (with proper values of course):
@@ -86,6 +86,8 @@ The small test-suite is written using MiniTest, make a test run with `rails t`
 
 Contributions are welcome. Please respect the [Code of Conduct](CODE_OF_CONDUCT.md) and drop me a line or create a github issue.
 
+neseri is released under the [AGPLv3 or any later version](LICENSE.txt) which is [included in the source code](agpl-3.0.md)
+
 ### Gotchas and architectural documentation
 
 ### Inherit from NeseriController
@@ -94,9 +96,10 @@ For new controllers, inherit from `NeseriController` to include verification and
 
 ### Tricks and nice additions from other gems
 
-  - multiple flashs via [app/helpers/flash_helper.rb](a flash helper).
-  - visit [/flashs] to see how the rendered flashs look like
+  - multiple flashs via [a flash helper](app/helpers/flash_helper.rb).
+  - visit [/flashs](/flashs) to see how the rendered flashs look like
   - [https://ddnexus.github.io/pagy/](pagy) for pagination, despite the loud self-praise
+  - authentication via [devise](https://github.com/plataformatec/devise)
   - authorization via [action_policy](https://actionpolicy.evilmartians.io/)
   - some navigation via the yet underdeveloped but cool [actionnav](https://github.com/adamcooke/actionnav)
   - nested forms magic with [cocoon](https://github.com/nathanvda/cocoon)
@@ -105,7 +108,11 @@ For new controllers, inherit from `NeseriController` to include verification and
   - [bulma](http://bulma.io/) as a decent css framework with a ill-conceived but handy [Form Builder](https://github.com/fwolfst/bulma_form_builder) for some visual consistency.
   - [FontAwesome Icons](http://fontawesome.com/)
 
-And of course all the awesomeness by the rest of the ecosystem.
+And of course all the awesomeness by the rest of the ecosystem. Obviously, see the [Gemfile](Gemfile) for some direct dependencies.
+
+### I18n
+
+A config for [i18n-tasks](https://github.com/glebm/i18n-tasks) is prepared under `config/i18n-tasks.yml`
 
 ### Dealing with legacy data
 
