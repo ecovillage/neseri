@@ -36,6 +36,8 @@
 #
 
 class Seminar < ApplicationRecord
+  attr_accessor :accept_conditions
+
   belongs_to :creator, class_name: "User", optional: true
   belongs_to :seminar_kind, optional: true
 
@@ -64,6 +66,8 @@ class Seminar < ApplicationRecord
   validate :min_smaller_than_max
 
   validate :file_sizes
+
+  validates :accept_conditions, acceptance: true, unless: :is_admin_seminar?
 
   scope :active, -> { where(active: true) }
   scope :future, -> { where("start_date >= ?", DateTime.now) }

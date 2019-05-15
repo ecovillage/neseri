@@ -108,6 +108,17 @@
         %i.fa.fa-umbrella
     %p
       = t("seminar.conditions_text_html")
+      %br
+      %br
+      .field.is-horizontal
+        .field-label.is-normal
+        .field-body
+          .control.button.is-outlined
+            = f.check_box :accept_conditions
+            &nbsp;
+            %b
+              = f.label :accept_conditions
+
 
 
   .level
