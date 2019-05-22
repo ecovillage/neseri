@@ -12,8 +12,8 @@
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  name: MyString
+big_room:
+  name: Big Room
 
 two:
   name: MyString

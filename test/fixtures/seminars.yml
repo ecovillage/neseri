@@ -41,22 +41,24 @@ one:
   title: MySeminar
   subtitle: MyString
   description: MyText
+  accommodation: Tent
   attendees_minimum: 1
-  attendees_maximum: 1
+  attendees_maximum: 2
   attendees_preconditions: MyString
   please_bring: MyString
-  start_date: 2019-03-12 20:24:16
-  end_date: 2019-03-12 20:24:16
+  start_date: 2019-03-12 20:00:00
+  end_date: 2019-03-13 18:00:00
   cancellation_time: 1
   cancellation_reason: MyString
-  room_material: MyString
-  room_extras: MyString
-  royalty_participant: 9.99
-  royalty_participant_reduced: 9.99
-  material_cost: 9.99
+  room_material: TV
+  room_extras: Beamer
+  royalty_participant: 250.0
+  royalty_participant_reduced: 150
+  material_cost: 10
   kind: MyString
   uuid: MyString
   locked: false
+  wished_room: big_room
 
 two:
   title: MyString

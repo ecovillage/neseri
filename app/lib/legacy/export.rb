@@ -92,18 +92,18 @@ module Legacy
           end_time:     @seminar.end_date.strftime("%H:%M"),
           not_enough_attendees_cancel_date: @seminar.cancellation_time,
           not_enough_attendees_cancel_comment: @seminar.cancellation_reason,
-          room: @seminar.wished_room&.name,
-          infrastructure: [@seminar.room_extras, @seminar.room_material].compact.join(","),
+          room:           @seminar.wished_room&.name,
+          infrastructure: [@seminar.room_extras, @seminar.room_material].compact.join(", "),
           comment_attendee_housing:     @seminar.accommodation,
           cost_adult_normal_royalties:  @seminar.royalty_participant,
           cost_adult_reduced_royalties: @seminar.royalty_participant_reduced,
           cost_material:    @seminar.material_cost,
           #property :payment_royalties,    as: :cost_comment_internal
           neseri_origin_id: @seminar.id,
-          regional_slot_booking_id: 'r????sbid',
+          regional_slot_booking_id: regional_slot_booking_id,
           # property :tour_without_regional_slot, as: :tour_without_regional_slot, :getter => lambda {|v| true }
           # property :regional_slot, as: :regional_slot, :getter => lambda {|v| true }
-          cancel_conditions: 'conditi===??ons',
+          cancel_conditions: "Bei Rücktritt bis 28 Tage vor Seminarbeginn: keine Rücktrittsgebühr. Bei Rücktritt 28-14 Tage vor Seminarbeginn: 50 Eur Rücktrittsgebühr pro Person. Bei Rücktritt ab dem 14. Tag vor Seminarbeginn ist der volle Teilnahmebeitrag inkl. Unterkunftskosten zu zahlen. Bei Rücktritt ab 7 Tage vor Seminarbeginn oder Nichtteilnahme ohne Abmeldung ist der volle Teilnahmebeitrag inkl. Unterkunfts- und Verpflegungskosten zu zahlen.",
           instructor_hash: {r: [a: 'nnoo']},
           web_notice_array: web_notice_array
         }
