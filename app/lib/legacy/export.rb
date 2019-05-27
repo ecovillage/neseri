@@ -57,8 +57,8 @@ module Legacy
           #property :payment_royalties,    as: :cost_comment_internal
           neseri_origin_id: @seminar.id,
           regional_slot_booking_id: regional_slot_booking_uuid,
+          regional_slot: true,
           # property :tour_without_regional_slot, as: :tour_without_regional_slot, :getter => lambda {|v| true }
-          # property :regional_slot, as: :regional_slot, :getter => lambda {|v| true }
           cancel_conditions: "Bei Rücktritt bis 28 Tage vor Seminarbeginn: keine Rücktrittsgebühr. Bei Rücktritt 28-14 Tage vor Seminarbeginn: 50 Eur Rücktrittsgebühr pro Person. Bei Rücktritt ab dem 14. Tag vor Seminarbeginn ist der volle Teilnahmebeitrag inkl. Unterkunftskosten zu zahlen. Bei Rücktritt ab 7 Tage vor Seminarbeginn oder Nichtteilnahme ohne Abmeldung ist der volle Teilnahmebeitrag inkl. Unterkunfts- und Verpflegungskosten zu zahlen.",
           web_notice_array: web_notice_array,
           referees: seminar_referees_subdoc,
@@ -111,7 +111,8 @@ module Legacy
           l_seminar: seminar_uuid,
           nodelete:  true,
           regional_slot: true,
-          hidden:    true
+          hidden:    true,
+          persons:   []
         }
       }
     end

@@ -57,7 +57,8 @@ class ExportBookingTest < ActiveSupport::TestCase
         l_seminar: 'seminar_uuid',
         nodelete: true,
         hidden:   true,
-        regional_slot: true
+        regional_slot: true,
+        persons:  []
       }
     }
 

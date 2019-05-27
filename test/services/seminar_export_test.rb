@@ -38,7 +38,7 @@ class SeminarExportTest < ActiveSupport::TestCase
         neseri_origin_id: seminar.id,
         regional_slot_booking_id: 'regional_slot_booking_uuid',
         # property :tour_without_regional_slot, as: :tour_without_regional_slot, :getter => lambda {|v| true }
-        # property :regional_slot, as: :regional_slot, :getter => lambda {|v| true }
+        regional_slot: true,
         cancel_conditions: 'Bei Rücktritt bis 28 Tage vor Seminarbeginn: keine Rücktrittsgebühr. Bei Rücktritt 28-14 Tage vor Seminarbeginn: 50 Eur Rücktrittsgebühr pro Person. Bei Rücktritt ab dem 14. Tag vor Seminarbeginn ist der volle Teilnahmebeitrag inkl. Unterkunftskosten zu zahlen. Bei Rücktritt ab 7 Tage vor Seminarbeginn oder Nichtteilnahme ohne Abmeldung ist der volle Teilnahmebeitrag inkl. Unterkunfts- und Verpflegungskosten zu zahlen.',
         web_notice_array: [{:text=>"Anreise Freitag 17-18 Uhr, 18:30 Abendessen", :label=>"Anreise", :field=>"arrival"}, {:text=>"Sonntag 13 Uhr Mittagessen, anschließend Abreise", :label=>"Abreise", :field=>"departure"}, {:text=>"€ (erm. €)", :label=>"Seminarkosten", :field=>"cost_seminar"}, {:text=>" €", :label=>"Biovollverpflegung", :field=>"cost_housing"}, {:text=>"Preise für Übernachtungen in Sieben Linden <a href='index.php?id=85'>hier</a>", :label=>"Unterkunft", :field=>"housing"}, {:text=>"MyString", :label=>"Voraussetzungen der TeilnehmerInnen", :field=>nil}],
         referees: []
