@@ -10,6 +10,8 @@ class SeminarExportTest < ActiveSupport::TestCase
     export = ::Legacy::Export.new seminar
     
     template = {
+      _id: 'seminar_uuid',
+      g_meta: { type: 'slseminar_seminar' },
       g_value: {
         title: "MySeminar",
         subtitle: "MyString",
@@ -18,8 +20,8 @@ class SeminarExportTest < ActiveSupport::TestCase
         attendees_minimum: 1,
         attendee_preconditions: 'MyString',
         please_bring: 'MyString',
-        start_date: '12.03.2019',
-        end_date:   '13.03.2019',
+        date_from: '12.03.2019',
+        date_to:   '13.03.2019',
         start_time: '20:00',
         end_time: '18:00',
         not_enough_attendees_cancel_date: 1,
@@ -41,9 +43,9 @@ class SeminarExportTest < ActiveSupport::TestCase
       }
     }
 
-    uuids = %w{regional_slot_booking_uuid uuid2 uuid3 uuid4 uuid5}
+    uuids = %w{seminar_uuid regional_slot_booking_uuid uuid2 uuid3 uuid4 uuid5}
     export_response = SecureRandom.stub :uuid, lambda {uuids.shift} do
-      assert_equal(export.to_json, template)
+      assert_equal(template, export.to_json)
     end
   end
 

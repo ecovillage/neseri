@@ -1,5 +1,7 @@
 module Legacy
   Notice = Struct.new(:text, :label, :field)
+  TIME_FMT = '%H:%M'
+  DATE_FMT = '%d.%m.%Y'
 
   class Export
     attr_accessor :seminar
@@ -38,10 +40,10 @@ module Legacy
         g_value: {
           #property :l_room
           #property :comments
-          date_from: @seminar.start_date.strftime("%d.%m.%Y"),
-          date_to:   @seminar.end_date.strftime("%d.%m.%Y"),
-          time_from: @seminar.start_date.strftime("%H:%M"),
-          time_to:   @seminar.end_date.strftime("%H:%M"),
+          date_from: @seminar.start_date.strftime(DATE_FMT),
+          date_to:   @seminar.end_date.strftime(DATE_FMT),
+          time_from: @seminar.start_date.strftime(TIME_FMT),
+          time_to:   @seminar.end_date.strftime(TIME_FMT),
         }
       }
     end
@@ -78,8 +80,8 @@ module Legacy
       }
     end
 
-    def regional_slot_booking_id
-      @regional_slot_booking_id ||= regional_slot_booking_json[:_id]
+    def regional_slot_booking_uuid
+      @regional_slot_booking_uuid ||= regional_slot_booking_json[:_id]
     end
 
     def regional_slot_booking_json
@@ -102,6 +104,8 @@ module Legacy
 
     def to_json
       {
+        _id: seminar_uuid,
+        g_meta: { type: 'slseminar_seminar' },
         g_value: {
           title:    @seminar.title,
           subtitle: @seminar.subtitle,
@@ -110,10 +114,10 @@ module Legacy
           attendees_minimum: @seminar.attendees_minimum,
           attendee_preconditions: @seminar.attendees_preconditions,
           please_bring: @seminar.please_bring,
-          start_date:   @seminar.start_date.strftime("%d.%m.%Y"),
-          end_date:     @seminar.end_date.strftime("%d.%m.%Y"),
-          start_time:   @seminar.start_date.strftime("%H:%M"),
-          end_time:     @seminar.end_date.strftime("%H:%M"),
+          date_from:    @seminar.start_date.strftime(DATE_FMT),
+          date_to:      @seminar.end_date.strftime(DATE_FMT),
+          start_time:   @seminar.start_date.strftime(TIME_FMT),
+          end_time:     @seminar.end_date.strftime(TIME_FMT),
           not_enough_attendees_cancel_date: @seminar.cancellation_time,
           not_enough_attendees_cancel_comment: @seminar.cancellation_reason,
           room:           @seminar.wished_room&.name,
@@ -124,7 +128,7 @@ module Legacy
           cost_material:    @seminar.material_cost,
           #property :payment_royalties,    as: :cost_comment_internal
           neseri_origin_id: @seminar.id,
-          regional_slot_booking_id: regional_slot_booking_id,
+          regional_slot_booking_id: regional_slot_booking_uuid,
           # property :tour_without_regional_slot, as: :tour_without_regional_slot, :getter => lambda {|v| true }
           # property :regional_slot, as: :regional_slot, :getter => lambda {|v| true }
           cancel_conditions: "Bei Rücktritt bis 28 Tage vor Seminarbeginn: keine Rücktrittsgebühr. Bei Rücktritt 28-14 Tage vor Seminarbeginn: 50 Eur Rücktrittsgebühr pro Person. Bei Rücktritt ab dem 14. Tag vor Seminarbeginn ist der volle Teilnahmebeitrag inkl. Unterkunftskosten zu zahlen. Bei Rücktritt ab 7 Tage vor Seminarbeginn oder Nichtteilnahme ohne Abmeldung ist der volle Teilnahmebeitrag inkl. Unterkunfts- und Verpflegungskosten zu zahlen.",
