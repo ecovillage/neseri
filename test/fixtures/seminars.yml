@@ -89,3 +89,6 @@ admin_copy_bob_and_janes_seminar:
   title: Bob and Jane save the world (Admin)
   user_seminar: bob_and_janes_seminar
   creator: jane
+
+publishable:
+  title: Bob and Jane are ready to go

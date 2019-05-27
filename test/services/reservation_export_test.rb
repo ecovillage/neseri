@@ -16,7 +16,7 @@ class ReservationExportTest < ActiveSupport::TestCase
           time_from: '20:00',
           time_to:   '18:00'
         }
-      }, export.reservation_json)
+      }, export.reservation_doc(nil))
     end
 
     seminar = seminars(:bob_and_janes_seminar)
@@ -38,7 +38,7 @@ class ReservationExportTest < ActiveSupport::TestCase
 
     uuids = %w{uuid1 uuid2 uuid3}
     SecureRandom.stub :uuid, lambda {uuids.pop} do
-      assert_equal(asserted_response, export.reservation_json)
+      assert_equal(asserted_response, export.reservation_doc(nil))
     end
   end
 end

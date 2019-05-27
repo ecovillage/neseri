@@ -5,8 +5,19 @@ module Legacy
     attr_accessor :seminar
 
     def initialize seminar
-      @seminar = seminar
-      #@seminar.uuid = SecureRandom.uuid
+      @seminar          = seminar
+      @seminar_doc      = nil
+      @reservation_docs = {}
+      @booking_docs     = {}
+      @booking_person_subdocs = {}
+    end
+
+    def seminar_uuid
+      @seminar_uuid ||= SecureRandom.uuid
+    end
+
+    def create_documents
+      
     end
 
     def push
@@ -17,7 +28,7 @@ module Legacy
       # seminar
     end
 
-    def reservation_json
+    def create_reservation_doc
       uuid = SecureRandom.uuid
       {
         _id: uuid,
@@ -35,18 +46,25 @@ module Legacy
       }
     end
 
-    def booking_person_json seminar_instructor, reservation_uuid
+    def booking_person_doc instructor:
+      @booking_person_subdocs[instructor] ||= create_booking_person_subdoc(instructor: instructor)
+    end
+
+    def create_booking_person_subdoc instructor:
       {
-        l_reservation: reservation_uuid,
-        l_person:      Publication::UserMapping.find_by(user: seminar_instructor.user).uuid,
+        l_reservation: reservation_doc(instructor: instructor).dig(:_id),
+        l_person:      Publication::UserMapping.find_by(user: instructor.user).uuid,
         state:         'referee',
         role:          'referee'
       }
     end
 
-    def booking_json seminar_instructor:,
-                     seminar_uuid:,
-                     reservation_uuid:
+
+    def booking_doc instructor:
+      @booking_docs[instructor] ||= create_booking_doc(instructor: instructor)
+    end
+
+    def create_booking_doc instructor:
       uuid = SecureRandom.uuid
       {
         _id: uuid,
@@ -55,14 +73,20 @@ module Legacy
         },
         g_value: {
           l_seminar: seminar_uuid,
-          persons:   [booking_person_json(seminar_instructor, reservation_uuid)]
+          persons:   [booking_person_doc(instructor: instructor)]
         }
       }
     end
 
-    def regional_slot_booking_json seminar_uuid:
+    def regional_slot_booking_id
+      @regional_slot_booking_id ||= regional_slot_booking_json[:_id]
+    end
+
+    def regional_slot_booking_json
+      return @regional_slot_booking if @regional_slot_booking
+
       uuid = SecureRandom.uuid
-      {
+      @regional_slot_booking = {
         _id: uuid,
         g_meta: {
           type: 'slseminar_booking'
@@ -104,10 +128,22 @@ module Legacy
           # property :tour_without_regional_slot, as: :tour_without_regional_slot, :getter => lambda {|v| true }
           # property :regional_slot, as: :regional_slot, :getter => lambda {|v| true }
           cancel_conditions: "Bei Rücktritt bis 28 Tage vor Seminarbeginn: keine Rücktrittsgebühr. Bei Rücktritt 28-14 Tage vor Seminarbeginn: 50 Eur Rücktrittsgebühr pro Person. Bei Rücktritt ab dem 14. Tag vor Seminarbeginn ist der volle Teilnahmebeitrag inkl. Unterkunftskosten zu zahlen. Bei Rücktritt ab 7 Tage vor Seminarbeginn oder Nichtteilnahme ohne Abmeldung ist der volle Teilnahmebeitrag inkl. Unterkunfts- und Verpflegungskosten zu zahlen.",
-          instructor_hash: {r: [a: 'nnoo']},
-          web_notice_array: web_notice_array
+          web_notice_array: web_notice_array,
+          referees: seminar_referees_subdoc,
         }
       }
+    end
+    
+    def seminar_referees_subdoc
+      @seminar.seminar_instructors.map do |instructor|
+        {
+          can_talk_to:   instructor.contactable,
+          qualification: instructor.qualification,
+          l_person:      Publication::UserMapping.find_by(user: instructor.user.id).uuid,
+          l_reservation: reservation_doc(instructor: instructor).dig(:_id),
+          l_booking:     booking_doc(instructor: instructor).dig(:_id)
+        }
+      end
     end
 
     def web_notice_array

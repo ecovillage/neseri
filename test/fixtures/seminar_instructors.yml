@@ -30,6 +30,17 @@ unlinked_bob:
   seminar: bob_and_janes_seminar
   email: bob@bob.bob
 
+bob_and_jane_bob2:
+  seminar: publishable
+  user: bob
+  qualification: degree
+
+bob_and_jane_jane2:
+  seminar: publishable
+  user: jane
+  email: jane@jane.jane
+  contactable: true
+
 #one:
 #  seminar: one
 #  #instructor: one

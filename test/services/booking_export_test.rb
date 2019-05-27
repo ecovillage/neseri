@@ -4,14 +4,16 @@ require 'minitest/mock'
 class ExportBookingTest < ActiveSupport::TestCase
   test "it does produce a json representation for person entry in bookings" do
     seminar_instructor = seminar_instructors(:bob_and_jane_bob)
-    export = ::Legacy::Export.new ''
+    export = ::Legacy::Export.new seminars(:one)
     uuid   = SecureRandom.uuid
 
-    assert_equal({l_reservation: uuid,
-                  l_person: 'bob_uuid',
-                  state:    'referee',
-                  role:     'referee'},
-     export.booking_person_json(seminar_instructor, uuid))
+    export_response = SecureRandom.stub :uuid, uuid do
+      assert_equal({l_reservation: uuid,
+                    l_person: 'bob_uuid',
+                    state:    'referee',
+                    role:     'referee'},
+        export.booking_person_doc(instructor: seminar_instructor))
+    end
   end
 
   test "it does produce a json representation for needed bookings" do
@@ -22,13 +24,9 @@ class ExportBookingTest < ActiveSupport::TestCase
 
     export = ::Legacy::Export.new seminar
 
-    uuids = %w{booking_uuid reservation_uuid}
+    uuids = %w{booking_uuid seminar_uuid reservation_uuid}
     export_response = SecureRandom.stub :uuid, lambda {uuids.shift} do
-      export.booking_json(
-        seminar_instructor: seminar_instructor,
-        seminar_uuid:     seminar_uuid,
-        reservation_uuid: reservation_uuid
-      )
+      export.booking_doc(instructor: seminar_instructor)
     end
 
     asserted_response = {
@@ -63,8 +61,9 @@ class ExportBookingTest < ActiveSupport::TestCase
       }
     }
 
-    export_response = SecureRandom.stub :uuid, 'regional_slot_booking_uuid' do
-      export.regional_slot_booking_json seminar_uuid: 'seminar_uuid'
+    uuids = %w{seminar_uuid regional_slot_booking_uuid}
+    export_response = SecureRandom.stub :uuid, lambda {uuids.pop} do
+      export.regional_slot_booking_json
     end
 
     assert_equal asserted_response, export_response
