@@ -3,6 +3,7 @@ module Legacy
   TIME_FMT = '%H:%M'
   DATE_FMT = '%d.%m.%Y'
 
+  # Push seminar to legacy database (couchdb)
   class Export
     attr_accessor :seminar
 
@@ -18,16 +19,20 @@ module Legacy
       @seminar_uuid ||= SecureRandom.uuid
     end
 
-    def create_documents
-      
+    def push legacy_db_uri
+      regional_slot_json = regional_slot_booking_json
+
+      seminar_json = to_json
+
+      (@booking_docs.values | @reservation_docs.values | [seminar_json, regional_slot_json]).each do |doc|
+        uri = legacy_db_uri + "/" + doc[:_id]
+        response = RestClient.put uri, doc.to_json, {content_type: :json, accept: :json}
+        puts "pushed: #{response}"
+      end
     end
 
-    def push
-      seminar_uuid = SecureRandom.uuid
-      # reservations for instructor/referees
-      # bookings for instructors/referees
-      # keep the uuids for later references
-      # seminar
+    def reservation_doc instructor
+      @reservation_docs[instructor] ||= create_reservation_doc
     end
 
     def create_reservation_doc
