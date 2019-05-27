@@ -47,6 +47,8 @@ module Legacy
           not_enough_attendees_cancel_date: @seminar.cancellation_time,
           not_enough_attendees_cancel_comment: @seminar.cancellation_reason,
           room:           @seminar.wished_room&.name,
+          reserved_from:  (@seminar.start_date - 1.hours).strftime("#{DATE_FMT} #{TIME_FMT}"),
+          reserved_to:    (@seminar.end_date   + 1.hours).strftime("#{DATE_FMT} #{TIME_FMT}"),
           infrastructure: [@seminar.room_extras, @seminar.room_material].compact.join(", "),
           comment_attendee_housing:     @seminar.accommodation,
           cost_adult_normal_royalties:  @seminar.royalty_participant,

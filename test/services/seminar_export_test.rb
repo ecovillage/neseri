@@ -27,6 +27,8 @@ class SeminarExportTest < ActiveSupport::TestCase
         not_enough_attendees_cancel_date: 1,
         not_enough_attendees_cancel_comment: 'MyString',
         room: 'Big Room',
+        reserved_from: '12.03.2019 19:00',
+        reserved_to:   '13.03.2019 19:00',
         infrastructure: 'Beamer, TV',
         comment_attendee_housing: 'Tent',
         cost_adult_normal_royalties: BigDecimal(250.0,2),
