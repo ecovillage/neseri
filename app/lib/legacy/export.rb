@@ -15,10 +15,6 @@ module Legacy
       @booking_person_subdocs = {}
     end
 
-    def seminar_uuid
-      @seminar_uuid ||= SecureRandom.uuid
-    end
-
     def push legacy_db_uri
       regional_slot_json = regional_slot_booking_json
 
@@ -31,82 +27,7 @@ module Legacy
       end
     end
 
-    def reservation_doc instructor
-      @reservation_docs[instructor] ||= create_reservation_doc
-    end
-
-    def create_reservation_doc
-      uuid = SecureRandom.uuid
-      {
-        _id: uuid,
-        g_meta: {
-          type: 'slseminar_reservation'
-        },
-        g_value: {
-          #property :l_room
-          #property :comments
-          date_from: @seminar.start_date.strftime(DATE_FMT),
-          date_to:   @seminar.end_date.strftime(DATE_FMT),
-          time_from: @seminar.start_date.strftime(TIME_FMT),
-          time_to:   @seminar.end_date.strftime(TIME_FMT),
-        }
-      }
-    end
-
-    def booking_person_doc instructor:
-      @booking_person_subdocs[instructor] ||= create_booking_person_subdoc(instructor: instructor)
-    end
-
-    def create_booking_person_subdoc instructor:
-      {
-        l_reservation: reservation_doc(instructor: instructor).dig(:_id),
-        l_person:      Publication::UserMapping.find_by(user: instructor.user).uuid,
-        state:         'referee',
-        role:          'referee'
-      }
-    end
-
-
-    def booking_doc instructor:
-      @booking_docs[instructor] ||= create_booking_doc(instructor: instructor)
-    end
-
-    def create_booking_doc instructor:
-      uuid = SecureRandom.uuid
-      {
-        _id: uuid,
-        g_meta: {
-          type: 'slseminar_booking'
-        },
-        g_value: {
-          l_seminar: seminar_uuid,
-          persons:   [booking_person_doc(instructor: instructor)]
-        }
-      }
-    end
-
-    def regional_slot_booking_uuid
-      @regional_slot_booking_uuid ||= regional_slot_booking_json[:_id]
-    end
-
-    def regional_slot_booking_json
-      return @regional_slot_booking if @regional_slot_booking
-
-      uuid = SecureRandom.uuid
-      @regional_slot_booking = {
-        _id: uuid,
-        g_meta: {
-          type: 'slseminar_booking'
-        },
-        g_value: {
-          l_seminar: seminar_uuid,
-          nodelete:  true,
-          regional_slot: true,
-          hidden:    true
-        }
-      }
-    end
-
+    # TODO infrastructure, housing
     def to_json
       {
         _id: seminar_uuid,
@@ -143,6 +64,10 @@ module Legacy
       }
     end
     
+    def seminar_uuid
+      @seminar_uuid ||= SecureRandom.uuid
+    end
+
     def seminar_referees_subdoc
       @seminar.seminar_instructors.map do |instructor|
         {
@@ -153,6 +78,83 @@ module Legacy
           l_booking:     booking_doc(instructor: instructor).dig(:_id)
         }
       end
+    end
+
+    def reservation_doc instructor
+      @reservation_docs[instructor] ||= create_reservation_doc
+    end
+
+    def booking_person_doc instructor:
+      @booking_person_subdocs[instructor] ||= create_booking_person_subdoc(instructor: instructor)
+    end
+
+    def booking_doc instructor:
+      @booking_docs[instructor] ||= create_booking_doc(instructor: instructor)
+    end
+
+    def regional_slot_booking_uuid
+      @regional_slot_booking_uuid ||= regional_slot_booking_json[:_id]
+    end
+
+    def regional_slot_booking_json
+      return @regional_slot_booking if @regional_slot_booking
+
+      uuid = SecureRandom.uuid
+      @regional_slot_booking = {
+        _id: uuid,
+        g_meta: {
+          type: 'slseminar_booking'
+        },
+        g_value: {
+          l_seminar: seminar_uuid,
+          nodelete:  true,
+          regional_slot: true,
+          hidden:    true
+        }
+      }
+    end
+
+    private
+
+    def create_reservation_doc
+      uuid = SecureRandom.uuid
+      {
+        _id: uuid,
+        g_meta: {
+          type: 'slseminar_reservation'
+        },
+        g_value: {
+          #property :l_room
+          #property :comments
+          date_from: @seminar.start_date.strftime(DATE_FMT),
+          date_to:   @seminar.end_date.strftime(DATE_FMT),
+          time_from: @seminar.start_date.strftime(TIME_FMT),
+          time_to:   @seminar.end_date.strftime(TIME_FMT),
+        }
+      }
+    end
+
+    def create_booking_person_subdoc instructor:
+      {
+        l_reservation: reservation_doc(instructor: instructor).dig(:_id),
+        l_person:      Publication::UserMapping.find_by(user: instructor.user).uuid,
+        state:         'referee',
+        role:          'referee'
+      }
+    end
+
+    def create_booking_doc instructor:
+      uuid = SecureRandom.uuid
+      {
+        _id: uuid,
+        g_meta: {
+          type: 'slseminar_booking'
+        },
+        g_value: {
+          l_seminar: seminar_uuid,
+          persons:   [booking_person_doc(instructor: instructor)]
+        }
+      }
     end
 
     def web_notice_array

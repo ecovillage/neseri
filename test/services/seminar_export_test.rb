@@ -78,13 +78,15 @@ class SeminarExportTest < ActiveSupport::TestCase
   end
 
   test "create_documents populates all the relevant uuids and local vars" do
-    seminar = seminars(:bob_and_janes_seminar)
+    seminar = seminars(:publishable)
 
     export = ::Legacy::Export.new seminar
-    export_response = SecureRandom.stub :uuid, lambda {uuids.shift} do
-      export.create_documents
+    uuids = %w{seminar_uuid regional_slot_booking_uuid uuid2 uuid3 uuid4 uuid5}
+    RestClient.stub :put, {respone: 'OK'} do
+      export_response = SecureRandom.stub :uuid, lambda {uuids.shift} do
+        export.push 'http://localhost:5984/db'
+      end
     end
-    skip
   end
 end
 
