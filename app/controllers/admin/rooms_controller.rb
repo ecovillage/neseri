@@ -27,7 +27,7 @@ class Admin::RoomsController < NeseriController
     @room = Room.find(params[:id])
     authorize!
     @room.update!(active: false)
-    add_flash success: t('rooms.deactivated')
+    helpers.add_flash success: t('rooms.deactivated')
     redirect_to admin_rooms_path
   end
 

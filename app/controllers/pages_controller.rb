@@ -27,5 +27,6 @@ class PagesController < ApplicationController
       alert: 'Careful, alert',
       failure: 'there was a failure',
     }.each {|k,v| helpers.add_flash(k => v)}
+    helpers.add_flash info: 'There is a second info'
   end
 end
