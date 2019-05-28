@@ -13,18 +13,16 @@
         %span.icon.is-size-3
           %i.fa.fw.fa-lock
       .media-content
-        = t("seminar.published")
-        = t("data.from.publication")
         %span.tag.is-primary
-          = t('published')
+          = t('seminar.tags.is-published')
 
 .is-small
   = Seminar.human_attribute_name(:updated_at)
   = l(@seminar.updated_at, format: :long)
 
 .buttons.is-fullwidth.has-text-centered
-  = link_to t('publication.view_in_legacy_system'), legacy_web_url(@seminar), class: 'button is-primary'
-  = link_to t('view_user_seminar'), seminar_path(@seminar.user_seminar), class: 'button is-info'
+  = link_to t('seminar.publication.view_in_legacy_system'), legacy_web_url(@seminar), class: 'button is-primary'
+  = link_to t('seminar.view_user_version'), seminar_path(@seminar.user_seminar), class: 'button is-info'
 
 %br
 
@@ -136,6 +134,6 @@
 
 - if current_user.admin?
   .box
-    .buttons.is-fullwidth.has-text-centered
-      = link_to t('publication.view_in_legacy_system'), legacy_web_url(@seminar), class: 'button is-primary'
-      = link_to t('view_user_seminar'), seminar_path(@seminar.user_seminar), class: 'button is-info'
+    .buttons.field.is-grouped.is-grouped-centered.is-fullwidth.has-text-centered
+      = link_to t('seminar.publication.view_in_legacy_system'), legacy_web_url(@seminar), class: 'button is-primary'
+      = link_to t('seminar.view_user_version'), seminar_path(@seminar.user_seminar), class: 'button is-info'
