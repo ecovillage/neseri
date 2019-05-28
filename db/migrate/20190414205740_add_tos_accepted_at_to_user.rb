@@ -1,5 +1,5 @@
 class AddTosAcceptedAtToUser < ActiveRecord::Migration[5.2]
   def change
-    add_column :users, :tos_accepted_at, :date
+    add_column :users, :tos_accepted_at, :datetime
   end
 end

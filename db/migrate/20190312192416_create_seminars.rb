@@ -14,10 +14,10 @@ class CreateSeminars < ActiveRecord::Migration[5.2]
       t.string :cancellation_reason
       t.string :room_material
       t.string :room_extras
-      t.decimal :royalty_participant
-      t.decimal :royalty_participant_reduced
-      t.decimal :material_cost
-      t.decimal :honorar
+      t.decimal :royalty_participant, precision: 8, scale: 2
+      t.decimal :royalty_participant_reduced, precision: 8, scale: 2
+      t.decimal :material_cost, precision: 8, scale: 2
+      t.decimal :honorar, precision: 8, scale: 2
       t.string :kind, default: :user
       t.string :uuid
       t.boolean :locked, default: false
