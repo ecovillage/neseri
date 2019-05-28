@@ -1,0 +1,3 @@
+de:
+  publication:
+    success_with_link_html: Erfolgreich übernommen. <a href="%{link_url}">Ansehen</a>.
