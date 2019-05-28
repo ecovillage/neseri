@@ -38,9 +38,8 @@ class SeminarAdminActions
     NavigationalItem.new(title: I18n.t("seminar.publish"),
       icon: 'fa-arrow-right',
       url: new_admin_admin_seminar_publication_path(@seminar)
-    ) if !@seminar.uuid
+      ) if (@seminar.is_admin_seminar? && !@seminar.uuid && !@seminar.user_seminar.uuid)
   end
-
 
   def create_or_view_admin_copy
     if @seminar.is_user_seminar?
