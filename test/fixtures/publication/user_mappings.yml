@@ -1,0 +1,21 @@
+# == Schema Information
+#
+# Table name: publication_user_mappings
+#
+#  id         :integer          not null, primary key
+#  user_id    :integer
+#  uuid       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+jane_map:
+  user: jane
+  uuid: jane_uuid
+
+bob_map:
+  user: bob
+  uuid: bob_uuid
+
