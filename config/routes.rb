@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show] do
       post :impersonate, on: :member
       post :stop_impersonating, on: :collection
+      resource :user_mapping, controller: 'admin_seminars/publication/user_mappings', only: :create
     end
     resources :emails, only: [:index, :show]
 
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
     end
 
     resources :admin_seminars, only: [:index, :edit, :destroy, :update, :show] do
+      resource :publication, controller: 'admin_seminars/publication', only: [:new, :create]
     end
 
     resources :seminar_kinds, only: [:index, :new, :create, :destroy, :update]
