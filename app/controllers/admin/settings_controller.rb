@@ -17,6 +17,6 @@ class Admin::SettingsController < NeseriController
   private
   
   def settings_params
-    params.require(:settings).permit(:legacy_uri)
+    params.require(:settings).permit(:legacy_db_uri, :legacy_web_url)
   end
 end

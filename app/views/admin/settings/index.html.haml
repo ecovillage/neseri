@@ -7,13 +7,13 @@
       %th= Setting.human_attribute_name(:value)
       %th
   %tbody
-    - %i{legacy_uri production_url}.each do |setting|
+    - %i{legacy_db_uri legacy_web_url}.each do |setting|
       %tr
-        %td= t('settings.legacy_uri')
+        %td= t('settings.legacy_db_uri')
         %td= @settings.send(setting)
 
 = form_for @settings, url: admin_setting_path(1), builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, method: :patch do |f|
   = f.errors
-  = f.labeled_text_field :legacy_uri, help_text: t('setting.help_texts.legacy_uri')
-  = f.labeled_text_field :production_url
+  = f.labeled_text_field :legacy_db_uri, help_text: t('setting.help_texts.legacy_uri')
+  = f.labeled_text_field :legacy_web_url
   = f.submit
