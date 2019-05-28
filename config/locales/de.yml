@@ -78,7 +78,7 @@ de:
   sessions:
     destroy:
       sign_out: Abmelden
-  showing_mail: E-Mail anzeige
+  showing_mail: E-Mail anzeigen
   teaching_seminars: Seminare in (Mit-)Leitung
   time:
     formats:
@@ -90,4 +90,4 @@ de:
   view: Ansehen
   search_term: Suchbegriff
   view_admin_copy: Admin-Kopie ansehen
-  your_instructor_data: Deine Daten
+  edit_your_instructor_data: Deine Kontakt-Daten bearbeiten
