@@ -4,4 +4,10 @@ de:
       room:
         one: Raum
         other: Räume
-
+  room:
+    create: Neuen Veranstaltungsraum anlegen
+    placeholder:
+      name: Raum-Name
+  rooms:
+    create:
+      success: Raum angelegt

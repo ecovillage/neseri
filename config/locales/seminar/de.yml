@@ -11,6 +11,7 @@ de:
         update: Seminarvorschlag speichern
   seminar:
     view_user_version: Original ansehen
+    publish: Übernehmen
     tags:
       locked: gesperrt
       is-admin: (Admin-Kopie)
