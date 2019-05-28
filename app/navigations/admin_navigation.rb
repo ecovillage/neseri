@@ -28,7 +28,7 @@ class AdminNavigation < ActionNav::Base
     end
 
     item :settings do
-      title { t('admin.settings') }
+      title {Setting.model_name.human }
       url { admin_settings_path }
       hide_unless { (allowed_to? :index?, :index?, with: AdminPolicy) == true }
     end

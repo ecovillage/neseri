@@ -16,7 +16,7 @@ class SeminarAdminActions
   def items
     return [] if (!@seminar || !@user)
     
-    [edit_item, view_user_seminar, create_or_view_admin_copy, lock_or_unlock].compact
+    [edit_item, view_user_seminar, create_or_view_admin_copy, lock_or_unlock, publish].compact
   end
 
   def edit_item
@@ -32,6 +32,13 @@ class SeminarAdminActions
                          css_classes: '',
                          url: @seminar.user_seminar
                         ) if @seminar.user_seminar
+  end
+
+  def publish
+    NavigationalItem.new(title: I18n.t("seminar.publish"),
+      icon: 'fa-arrow-right',
+      url: new_admin_admin_seminar_publication_path(@seminar)
+    ) if !@seminar.uuid
   end
 
 
