@@ -20,6 +20,8 @@ de:
         view_in_legacy_system: In Altsystem ansehen
         choose: Auswählen
         change: Auswählen
+        create: Neu anlegen
+        recreate: Neu
     tags:
       locked: gesperrt
       is-admin: (Admin-Kopie)
