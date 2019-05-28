@@ -62,6 +62,8 @@ gem 'clowne'
 
 gem 'ahoy_email'
 
+gem 'rest-client'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
@@ -87,6 +89,9 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate'
+  gem "better_errors"
+  gem "binding_of_caller"
+  #gem 'mailcatcher'
 end
 
 group :test do
