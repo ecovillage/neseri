@@ -80,7 +80,8 @@ You can use mail_catcher; start it; visit http://localhost:1080 in browser, mail
 
 ### Tests
 
-The small test-suite is written using MiniTest, make a test run with `rails t`
+The small test-suite is written using MiniTest, make a test run with `rails t`.
+System-tests have to be run manually with `rails t test/system` (they are not run by default).
 
 ## Contributing
 
