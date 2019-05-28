@@ -22,7 +22,6 @@ class Admin::AdminSeminarsController < NeseriController
     authorize! @seminar
 
     if @seminar.uuid
-      helpers.add_flash notice: t('published')
       redirect_to admin_admin_seminar_publication_path(@seminar)
     else
       redirect_to edit_admin_admin_seminar_path(@seminar)
@@ -41,7 +40,6 @@ class Admin::AdminSeminarsController < NeseriController
     authorize! @seminar
 
     if @seminar.uuid
-      helpers.add_flash notice: t('published')
       redirect_to admin_admin_seminar_path(@seminar) and return
     end
   end
