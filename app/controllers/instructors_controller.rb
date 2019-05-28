@@ -3,18 +3,18 @@ class InstructorsController < NeseriController
   
   def show
     @instructor = current_user
-    authorize! @instructor
+    authorize! @instructor, with: InstructorPolicy
   end
 
   def edit
     @instructor = current_user
-    authorize! @instructor
+    authorize! @instructor, with: InstructorPolicy
   end
 
   def update
     @instructor = current_user
     @instructor.update instructor_params
-    authorize! @instructor
+    authorize! @instructor, with: InstructorPolicy
     if @instructor.save
       redirect_to instructor_path, notice: t(:instructor_updated)
     else
