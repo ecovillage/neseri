@@ -10,6 +10,8 @@
 #
 
 class Publication::UserMapping < ApplicationRecord
+  self.table_name = "publication_user_mappings"
+
   belongs_to :user
 
   validates :user, uniqueness: true
