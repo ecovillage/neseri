@@ -44,7 +44,7 @@ class Seminar < ApplicationRecord
   belongs_to :user_seminar, class_name: 'Seminar', optional: true, inverse_of: :admin_seminar, foreign_key: 'user_seminar_id'
   has_one :admin_seminar, class_name: 'Seminar', inverse_of: :user_seminar, foreign_key: 'user_seminar_id'
 
-  belongs_to :wished_room, class_name: 'Room', optional: true, inverse_of: :seminars, foreign_key: 'wished_room_id'
+  belongs_to :wished_room, class_name: 'Room', optional: true, inverse_of: :seminars, foreign_key: 'room_wish_id'
 
   has_many :seminar_instructors, inverse_of: :seminar
   has_many :instructors, through: :seminar_instructors, class_name: "User", source: 'user'

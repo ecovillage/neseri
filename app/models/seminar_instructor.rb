@@ -24,13 +24,12 @@ class SeminarInstructor < ApplicationRecord
   # or Devise.email_regexp; https://api.rubyonrails.org/v5.1/classes/ActiveModel/Validations/ClassMethods.html#method-i-validates
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
 
-
   before_validation :downcase_strip_email
 
   after_validation :set_user, on: [ :create, :update ]
 
   def downcase_strip_email
-    self.email = email.downcase.strip
+    self.email = self.email.downcase.strip
   end
 
   def set_user
