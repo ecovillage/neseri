@@ -32,7 +32,7 @@ Rails.application.routes.draw do
     end
 
     resources :admin_seminars, only: [:index, :edit, :destroy, :update, :show] do
-      resource :publication, controller: 'admin_seminars/publication', only: [:new, :create]
+      resource :publication, controller: 'admin_seminars/publication', only: [:new, :create, :show]
     end
 
     resources :seminar_kinds, only: [:index, :new, :create, :destroy, :update]

@@ -1,6 +1,12 @@
 class Admin::AdminSeminars::PublicationController < NeseriController
   before_action :authenticate_user!
 
+  def show
+    authorize! :create?,  with: AdminPolicy
+
+    @seminar = Seminar.find(params[:admin_seminar_id])
+  end
+
   def new
     authorize! :create?,  with: AdminPolicy
     authorize! :publish?, with: AdminSeminarPolicy
@@ -37,7 +43,7 @@ class Admin::AdminSeminars::PublicationController < NeseriController
       @can_publish = true
     end
 
-    render "show"
+    render "new"
   end
 
   def create

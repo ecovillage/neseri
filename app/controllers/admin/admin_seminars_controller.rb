@@ -21,7 +21,12 @@ class Admin::AdminSeminarsController < NeseriController
 
     authorize! @seminar
 
-    redirect_to edit_admin_admin_seminar_path(@seminar)
+    if @seminar.uuid
+      helpers.add_flash notice: t('published')
+      redirect_to admin_admin_seminar_publication_path(@seminar)
+    else
+      redirect_to edit_admin_admin_seminar_path(@seminar)
+    end
   end
 
   def edit
@@ -34,6 +39,11 @@ class Admin::AdminSeminarsController < NeseriController
     end
 
     authorize! @seminar
+
+    if @seminar.uuid
+      helpers.add_flash notice: t('published')
+      redirect_to admin_admin_seminar_path(@seminar) and return
+    end
   end
 
   def update

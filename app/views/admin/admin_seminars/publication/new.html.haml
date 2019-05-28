@@ -1,0 +1,44 @@
+%h1.title= t('seminar.publication.select_referees_and_publish')
+%h2.subtitle=@seminar.title
+- @legacy_data_instructor_map.each_with_index do |(instructor, legacy_instructors), idx|
+  - chosen_one = @user_map[instructor]
+  .columns.is-multiline
+    .column
+      .box.has-background-warning
+        .has-text-centered.is-size-7
+          = t('seminar.publication.referee.from_neseri')
+        %h2.subtitle
+          = idx+1
+          = user_name(instructor.user)
+        %table.table.is-small.is-round
+          - [:email, :firstname, :lastname, :address, :phone, :mobile, :homepage, :fax].each do |attr|
+            %tr
+              %th.is-size-7= User.human_attribute_name(attr)
+              %td.is-size-7= instructor.user.send(attr)
+    - [*legacy_instructors].each do |legacy_instructor|
+      .column
+        - box_style = (chosen_one&.uuid == legacy_instructor[:id]) ? 'has-background-success' : ''
+        .box(class = box_style)
+          .has-text-centered.is-size-7
+            = t('seminar.publication.referee.from_legacy')
+          %h2.subtitle= "#{legacy_instructor[:firstname]} #{legacy_instructor[:lastname]}"
+          %table.table
+            - [:email, :firstname, :lastname, :place, :zip, :address, :telephone, :homepage, :cellphone, :fax, :homepage].each do |attr|
+              %tr
+                %th.is-size-7
+                  = attr
+                %td.is-size-7
+                  = legacy_instructor[attr]
+          .buttons
+            = link_to t("seminar.publication.referee.view_in_legacy_system"), legacy_instructor[:link], class: 'button', target: '_new'
+            - if !chosen_one
+              = link_to t("seminar.publication.referee.choose"), admin_user_user_mapping_path(instructor.user, uuid: legacy_instructor[:id]), method: :post, class: 'button'
+            - elsif chosen_one.uuid != legacy_instructor[:id]
+              = link_to t("seminar.publication.referee.change"), admin_user_user_mapping_path(instructor.user, uuid: legacy_instructor[:id]), method: :post, class: 'button'
+    .column
+      .box
+        = link_to t('recreate'), '', class: 'button'
+        Neu anlegen
+
+- if @can_publish && true # TODO true -> check connection to legacy system
+  = link_to t('seminar.publish'), admin_admin_seminar_publication_path, class: 'button is-primary', method: :post

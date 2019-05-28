@@ -1,0 +1,141 @@
+.level
+  .level-item-left
+    %h1.title
+      = Seminar.model_name.human
+      = ":"
+      = @seminar.title
+  .level-item-right
+
+- if @seminar.uuid
+  .notification.is-notice
+    .media
+      .media-left
+        %span.icon.is-size-3
+          %i.fa.fw.fa-lock
+      .media-content
+        = t("seminar.published")
+        = t("data.from.publication")
+        %span.tag.is-primary
+          = t('published')
+
+.is-small
+  = Seminar.human_attribute_name(:updated_at)
+  = l(@seminar.updated_at, format: :long)
+
+.buttons.is-fullwidth.has-text-centered
+  = link_to t('publication.view_in_legacy_system'), legacy_web_url(@seminar), class: 'button is-primary'
+  = link_to t('view_user_seminar'), seminar_path(@seminar.user_seminar), class: 'button is-info'
+
+%br
+
+.columns.is-multiline
+  .column.is-12
+    .box
+      %table.table.is-fullwidth
+        %tbody
+          %tr
+            %th(colspan=2)
+              %h2.subtitle 
+                %span.icon
+                  %i.fa.fa-star
+                = t('seminar.form.section.publication')
+          - [:title, :subtitle, :description].each do |attr|
+            %tr
+              %th= Seminar.human_attribute_name(attr)
+              %td= @seminar.send(attr)
+
+  .column.is-6
+    %table.table.is-fullwidth.box
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-calendar
+              = t('seminar.form.section.dates')
+        - [:start_date, :end_date, :seminar_kind, :cancellation_time, :cancellation_reason].each do |attr|
+          %tr
+            %th= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+  .column.is-6
+    %table.table.box.is-fullwidth
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-money
+              = t('seminar.form.section.costs')
+        - [:royalty_participant, :royalty_participant_reduced, :material_cost].each do |attr|
+          %tr
+            %th= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+  .column.is-6
+    %table.table.box.is-fullwidth
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-users
+              = t('seminar.form.section.participants')
+        - [:attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring].each do |attr|
+          %tr
+            %td= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+    
+  .column.is-6
+    %table.table.box.is-fullwidth
+      %tbody
+        %tr
+          %th(colspan=2)
+            %h2.subtitle 
+              %span.icon
+                %i.fa.fa-sitemap
+              = t('seminar.form.section.infrastructure')
+          %tr
+            %th= Seminar.human_attribute_name(:room_wish)
+            %td= @seminar.wished_room&.name
+        - [:room_comment, :room_material, :room_extras].each do |attr|
+          %tr
+            %th= Seminar.human_attribute_name(attr)
+            %td= @seminar.send(attr)
+    
+
+.box
+  = render 'seminars/instructors/table', seminar: @seminar
+
+.box
+  %table.table.is-fullwidth
+    %tbody
+      %tr
+        %th(colspan=1)
+          %h2.subtitle 
+            %span.icon
+              %i.fa.fa-file
+            = t('seminar.files')
+      - if @seminar.files.empty?
+        %tr
+          %td.is-warning= t(:none)
+      - else
+        %tr
+          %td
+            .columns.is-multiline
+              - @seminar.files.each do |file|
+                .column.is-2
+                  = link_to file.filename, url_for(file), target: '_new'
+                  - if allowed_to? :destroy?, file, with: AttachmentPolicy
+                    -# confirm, disable_with
+                    = link_to seminar_attachment_path(@seminar, file), method: :delete do
+                      %span.icon
+                        %i.fa.fa-trash
+                  - if file.blob.content_type.start_with? 'image'
+                    = link_to url_for(file), target: '_new' do
+                      = image_tag file.variant(resize: "180x100").processed
+              
+
+- if current_user.admin?
+  .box
+    .buttons.is-fullwidth.has-text-centered
+      = link_to t('publication.view_in_legacy_system'), legacy_web_url(@seminar), class: 'button is-primary'
+      = link_to t('view_user_seminar'), seminar_path(@seminar.user_seminar), class: 'button is-info'

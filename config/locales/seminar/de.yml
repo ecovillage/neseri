@@ -12,6 +12,14 @@ de:
   seminar:
     view_user_version: Original ansehen
     publish: Übernehmen
+    publication:
+      select_referees_and_publish: Referenten wählen und übernehmen
+      referee:
+        from_neseri: In neseri
+        from_legacy: In Altsystem
+        view_in_legacy_system: In Altsystem ansehen
+        choose: Auswählen
+        change: Auswählen
     tags:
       locked: gesperrt
       is-admin: (Admin-Kopie)
