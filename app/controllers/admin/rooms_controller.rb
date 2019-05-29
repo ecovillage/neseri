@@ -13,6 +13,7 @@ class Admin::RoomsController < NeseriController
 
   def create
     @room = Room.new(room_params)
+    @room.active = true
     @room.kind = 'event'
     authorize!
     if @room.save
