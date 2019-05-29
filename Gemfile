@@ -47,7 +47,7 @@ end
 
 gem 'bulma_form_builder', git: 'https://github.com/fwolfst/bulma_form_builder.git'
 
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 5.8.1'
 
 gem 'jquery-rails' # unfortunately needed for cocoon
 gem 'cocoon'
