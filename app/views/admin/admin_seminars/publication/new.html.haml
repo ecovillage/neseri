@@ -26,7 +26,7 @@
                 = t('seminar.publication.referee.from_legacy')
                 %h2.subtitle= "#{legacy_instructor[:firstname]} #{legacy_instructor[:lastname]}"
               %table.table.is-fullwidth
-                - [:email, :firstname, :lastname, :place, :zip, :address, :telephone, :homepage, :cellphone, :fax, :homepage].each do |attr|
+                - [:email, :firstname, :lastname, :place, :zip, :address, :telephone, :cellphone, :homepage, :fax].each do |attr|
                   %tr
                     %th.is-size-7
                       = attr
@@ -44,7 +44,7 @@
               = t('seminar.publication.referee.from_legacy')
               %h2.subtitle= t('seminar.publication.referee.recreate')
             .buttons.field.is-grouped.is-grouped-centered
-              = link_to t('seminar.publication.referee.create'), '', class: 'button'
+              = link_to t('seminar.publication.referee.create'), admin_admin_seminar_publication_path(@seminar, instructor_id: instructor.id), method: :put, class: 'button'
 
 - if @can_publish && true # TODO true -> check connection to legacy system
   = link_to t('seminar.publish'), admin_admin_seminar_publication_path, class: 'button is-primary', method: :post

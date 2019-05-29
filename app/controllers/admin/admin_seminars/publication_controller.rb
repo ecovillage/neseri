@@ -5,6 +5,24 @@ class Admin::AdminSeminars::PublicationController < NeseriController
     authorize! :create?,  with: AdminPolicy
 
     @seminar = Seminar.find(params[:admin_seminar_id])
+    if !@seminar.uuid
+      redirect_to new_admin_admin_seminar_publication_path(@seminar)
+    end
+  end
+
+  def update
+    @seminar = Seminar.find(params[:admin_seminar_id])
+    authorize! :create?,  with: AdminPolicy
+
+    instructor = @seminar.seminar_instructors.find(params[:instructor_id])
+    export = Legacy::PersonExport.new
+    result_uuid = export.push_to_legacy instructor, Settings.load.legacy_db_uri
+
+    user_mapping = ::Publication::UserMapping.find_or_create_by(user: instructor.user)
+    user_mapping.update!(uuid: result_uuid)
+
+    helpers.add_flash notice: t('publication.instructor_created')
+    redirect_to admin_admin_seminar_publication_path(@seminar)
   end
 
   def new

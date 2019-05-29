@@ -1,5 +1,12 @@
 module Legacy
   class PersonExport
+    def push_to_legacy instructor, legacy_db_uri
+      doc = create_person_doc instructor
+      uri = legacy_db_uri + "/" + doc[:_id]
+      response = RestClient.put uri, doc.to_json, {content_type: :json, accept: :json}
+      doc[:_id]
+    end
+
     def create_person_doc instructor
       {
         _id: SecureRandom.uuid,
