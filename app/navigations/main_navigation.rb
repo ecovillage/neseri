@@ -3,7 +3,7 @@ class MainNavigation < ActionNav::Base
     title { Seminar.model_name.human(count: 2) }
     url   { seminars_path }
     #hide_unless { allowed_to? :index?, Seminar }
-    hide_unless { allowed_to? :index?, Seminar }
+    hide_unless { (allowed_to?(:index?, Seminar) && !current_user&.admin) }
   end
 
   item :contact do
