@@ -1,15 +1,20 @@
 .has-text-centered
-  Zuletzt geändert am 1.4.2019 .
+  Zuletzt geändert am 1.4.2019
+  = current_user.tos_accepted_at
+
+  - if current_user && current_user.tos_accepted_at
+    (zugestimmt am #{l(current_user.tos_accepted_at, format: :long)})
+  \.
 .columns
   .column.is-6
     %h1.title.has-text-centered
-      Datenschutz
+      Datenschutzerklärung
     
     .section
       %h2.subtitle.has-text-centered
         Wer wir sind
     
-      Die Adresse unserer Website ist: http://neseri.siebenlinden.de.
+      Die Adresse unserer Website ist: https://siebenlinden.org .
     
       Verantwortlich ist der Freundeskreis Ökdorf e.V.,
       %pre
@@ -18,7 +23,7 @@
         Deutschland
         Tel.: +49-39000-51235
         E-Mail: info@siebenlinden.org
-        Website: http://neseri.siebenlinden.de
+        Website: https://siebenlinden.org
         Umsatzsteueridentifikationsnummer: DE 249278851
         Vereinsregister Stendal, VR 53348
         Vorstand: Simone Britsch, Hanne Kaiser-Gottwald, Giselher Dahmen, Claudia Marx.
@@ -28,49 +33,66 @@
         Welche personenbezogenen (und andere) Daten wir "sammeln"" und warum wir sie sammeln
     
       %p
-        Dieses Seite wird benutzt um Veranstaltungen im Ökodorf Sieben Linden zu organisieren. Dazu geben Referent/Innen und andere Veranstalter/innen ihre E-Mail-Adresse, sowie andere Kontaktdaten und Informationen zu Veranstaltungsvorschlägen und -abläufen an. Die angegebenen Informationen sind notwendig um die Veranstaltung ggfs. später auch zu veröffentlichen und (auch im Eigeninteresse der Nutzer/Innen) zu bewerben, weswegen wir keinen erhöhten Schutzbedarf dieser Daten sehen. Trotzdem sind die meisten Angaben freiwillig.
+        Dieses Seite wird benutzt um Veranstaltungen im Ökodorf Sieben Linden zu organisieren. Dazu geben Referent/Innen (Nutzer dieser Seite) und andere Veranstalter/innen ihre E-Mail-Adresse, sowie andere Kontaktdaten und Informationen zu Veranstaltungsvorschlägen und -abläufen an. Die angegebenen Informationen sind notwendig um die Veranstaltung ggfs. später auch zu veröffentlichen und (auch im Eigeninteresse der Nutzer/Innen) zu bewerben, weswegen wir keinen erhöhten Schutzbedarf dieser Daten sehen. Trotzdem sind die meisten Angaben freiwillig und die Anwendung speichert z.B. keine Passwörter im Klartext. Desweiteren werden beim Besuch der Seite weitere Daten automatisch erfasst, vor allem technische Daten, die bei einer Fehleranalyse hilfreich sein können.
     
     
     .section
       %h2.subtitle.has-text-centered
         Cookies
-      Anmeldedaten und Benachrichtigungen werden in Cookies gespeichert.
+      %p
+        Anmeldedaten und Benachrichtigungen werden in Cookies gespeichert.
+        Du kannst Deinen Browser so einstellen, dass Du über das Setzen von Cookies informiert wirst order Cookies nur im Einzelfall erlauben, generell ausschließen, das automatische Löschen der Cookies beim Schließen des Browser aktivieren, etc.pp. Durch die Deaktivierung von Cookies wird die Funktionalität dieser Website eingeschränkt sein.
     
     .section
-      %h2.subtitle
+      %h2.subtitle.has-text-centered
         Analysedienste
-      Die Kommunikationsdaten werden nicht weiter analysiert, aber in normalen Maße in Protokolldateien gespeichert (um den Server- und Applikationsbetrieb sicherzustellen).  Insbesondere werden die versandten E-Mails gespeichert, um nachvollziehen zu können ob das System korrekt funktioniert.
+      %p
+        Die Kommunikationsdaten werden nicht weiter analysiert, aber in normalen Maße in Protokolldateien gespeichert (um den Server- und Applikationsbetrieb sicherzustellen).  Insbesondere werden die versandten E-Mails gespeichert, um nachvollziehen zu können ob das System korrekt funktioniert.
     
     .section
-      %h2.subtitle
+      %h2.subtitle.has-text-centered
         Mit wem wir deine Daten teilen
       %p
         Die persönlichen und Kommunikationsdaten werden nicht weiter mit anderen Instanzen geteilt.
+
+    .section
+      %h2.subtitle.has-text-centered
+        Wer Zugriff auf deine Daten hat
+      %p
+        Der Server wird von der Firma Strato AG (strato.de, Pascalstraße 10 - 10587 Berlin) betrieben.
+        %br
+        Andere angegebene Daten werden nur vom Freundeskreis e.V. genutzt - bis zu dem Zeitpunkt an dem die eingetragenen Veranstaltungen beworben und damit - im Sinne des/der Nutzer*in - veröffentlicht werden.
+        %br
+        Veranstaltungsdaten sind außerdem für alle eingetragenen Referent*n sichtbar, ebenso wie deren E-Mail-Adresse, nicht aber Anschrift, Name etc.
     
     .section
-      %h2.subtitle
+      %h2.subtitle.has-text-centered
         Wie lange wir deine Daten speichern
     
-      Die Daten werden im Sinne der Nutzer/innen 10 Jahre gespeichert, um eine Veranstaltungsvorschlag aus einem vorherigen Jahr problemlos und einfach erneut einreichen zu können. Solltest du eine frühere Löschung wünschen, reicht eine einfache mail an bildungsreferat@siebenlinden.org (oder ein Anruf bei o.g. Telefonnummer).
+      %p
+        Die Daten werden im Sinne der Nutzer/innen 10 Jahre gespeichert, um eine Veranstaltungsvorschlag aus einem vorherigen Jahr problemlos und einfach erneut einreichen zu können. Solltest du eine frühere Löschung wünschen, reicht eine einfache mail an bildungsreferat@siebenlinden.org (oder ein Anruf bei o.g. Telefonnummer).
     
     .section
-      %h2.subtitle
+      %h2.subtitle.has-text-centered
         Welche Rechte du an deinen Daten hast
     
-      Du kannst jederzeit eine Löschung oder Herausgabe der Daten verlangen. Dazu reicht eine einfache mail an bildungsreferat@siebenlinden.org (oder ein Anruf bei o.g. Telefonnummer).
+      %p
+        Du kannst jederzeit eine Löschung oder Herausgabe der Daten verlangen. Dazu reicht eine einfache mail an bildungsreferat@siebenlinden.org (oder ein Anruf bei o.g. Telefonnummer).
     
     .section
-      %h2.subtitle
+      %h2.subtitle.has-text-centered
         Wie wir deine Daten schützen
     
-      Wir sehen aufgrund des Zweckes der Applikation (Veranstaltungsplanung und -bewerbung) keine erhöhte Schutzwürdigkeit der Daten. Im Zweifelsfall können die Daten auch via E-Mail oder telefonisch eingereicht werden.
-      Die persönlichen Daten wie z.B. Telefonnummer sind nur für Administrator*n (Mitarbeiter der Betreiberin) einsichtlich.
-      Passwörter werden verschlüsselt gespeichert.
+      %p
+        Wir sehen aufgrund des Zweckes der Applikation (Veranstaltungsplanung und -bewerbung) keine erhöhte Schutzwürdigkeit der Daten. Im Zweifelsfall können die Daten auch via E-Mail oder telefonisch eingereicht werden.
+        Die persönlichen Daten wie z.B. Telefonnummer sind nur für Administrator*n (Mitarbeiter der Betreiberin) einsichtlich.
+        Passwörter werden verschlüsselt gespeichert.
     
     .section
-      %h2.subtitle
+      %h2.subtitle.has-text-centered
         Welche automatisierte Entscheidungsfindung und/oder Profilerstellung wir mit Benutzerdaten durchführen
-      Keine 
+      %p
+        Keine 
 
   .column.is-6
     %h1.title.has-text-centered
@@ -80,12 +102,25 @@
       %h2.subtitle
         Was du beachten solltest
 
-    .sectionc
+    .section
       %h2.subtitle.has-text-centered
         Medien
     
       %p
-        Wenn du ein registrierter Benutzer bist und Fotos auf diese Website lädst, solltest du vermeiden, Fotos mit einem EXIF-GPS-Standort hochzuladen. Besucher dieser Website könnten Fotos, die auf dieser Website gespeichert sind, herunterladen und deren Standort-Informationen extrahieren. Außerdem musst Du Nutzungsrechte an den hochgeladenen oder versandten Daten benutzen und zustimmen, dass der Freundeskreis Ökordof e.V. diese zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit nutzt sowie gegebenenfalls weitergibt. Bitte stelle auch sicher, dass du Nutzungsrechte an eingegebenen Texten besitzt (also z.B. keine Textpassagen aus Büchern nutzen ohne sich eine Einverständniserklärung einzuholen).
+        Wenn du ein registrierter Benutzer bist und Fotos auf diese Website lädst, solltest du vermeiden, Fotos mit einem EXIF-GPS-Standort hochzuladen. Besucher dieser Website könnten Fotos, die auf dieser Website gespeichert sind, herunterladen und deren Standort-Informationen extrahieren.
+        
+    .section
+      %h2.subtitle.has-text-centered
+        Nutzungsrecht der angegebenen Daten
+      %p
+        Du stellst sicher, dass Du Nutzungsrechte an den hochgeladenen, angegebenen oder versandten Daten bisitzt und stimmst zu, dass der Freundeskreis Ökordof e.V. diese zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit nutzen sowie gegebenenfalls weitergeben darf. Dies bezieht sich auch auf die angebenen Texte (z.B. Zitate in Seminarbeschreibung)! Hole im Zweifel lieber eine Einverständniserklärung bei de* Urheber* ein.
+
+    .section
+      %h2.subtitle.has-text-centered
+        E-Mail Adressen und andere persönliche Daten dritter
+    
+      %p
+        Beim Anlegen von Veranstaltungsvorschlägen können Referent*n angelegt werden. Dazu gibst Du eine E-Mail- Adresse an. Der/Die Besitzer* der E-Mail-Adresse wird daraufhin (via E-Mail) benachrichtigt, soweit ein Konto mit dieser E-Mail-Adresse noch nicht registriert wurde. Diese Benachrichtigung wird nur einmal versandt. Ab diesem Zeitpunkt hat das Konto Zugriff auf den Seminarvorschlag, kann also Daten einsehen und ändern (nicht aber persönliche Daten im Profil der anderen Nutzer, wie z.B. die Telefonnummer). Vergewissere Dich bitte vorher, dass der/die Besitzer* dieser E-Mail-Adresse damit einverstanden ist. Falls ein* weitere* Referent* hinzugefügt wird, sieht diese* ebenfalls die E-Mail-Adressen der anderen Referent*n. Wir gehen davon aus, dass dies im im Interesse der Nutzer* ist(immerhin wollen die Personen zusammen eine Veranstaltung im Ökodorf leiten). Bitte mach dir dies bewusst.
 
 - if current_user&.tos_accepted_at
   .notification.has-text-centered
