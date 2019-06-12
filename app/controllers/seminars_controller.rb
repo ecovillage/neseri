@@ -90,6 +90,8 @@ class SeminarsController < NeseriController
   def seminar_params
     params.require(:seminar).permit(:title, :subtitle, :description,
       :start_date, :end_date,
+      :alternative_dates,
+      :accommodation,
       :cancellation_time, :cancellation_reason,
       :attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring, 
       :accept_conditions,

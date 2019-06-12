@@ -67,7 +67,7 @@
           %tr
             %th= Seminar.human_attribute_name(attr)
             %td= l(@seminar.send(attr), format: :long)
-        - [:seminar_kind, :cancellation_time, :cancellation_reason].each do |attr|
+        - [:alternative_dates, :seminar_kind, :cancellation_time, :cancellation_reason].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)

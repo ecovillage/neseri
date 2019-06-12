@@ -68,6 +68,8 @@ class Admin::AdminSeminarsController < NeseriController
     # TODO these should be taken from and/or shared with seminar_controller
     params.require(:seminar).permit(:title, :subtitle, :description,
       :start_date, :end_date,
+      :alternative_dates,
+      :accommodation,
       :cancellation_time, :cancellation_reason,
       :attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring, 
       :room_extras, :room_material, :room_comment,
