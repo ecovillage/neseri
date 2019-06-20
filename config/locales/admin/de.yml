@@ -9,6 +9,10 @@ de:
         is_already: Ist bereits Admin-Kopie
         created: Admin-Kopie vorbereitet
         has_already: Admin-Kopie besteht bereits
+      search_page: Seminarsuche
+      search:
+        results:
+          Suchergebnisse
     mails_table:
       to: An
       subject: Betreff

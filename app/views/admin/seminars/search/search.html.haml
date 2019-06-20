@@ -1,0 +1,21 @@
+.level
+  .level-item-left
+    %h1.title= t("admin.seminar.search.results")
+    %h2.subtitle (#{@pagy.count} #{Seminar.model_name.human(count: 2)})
+  .level-item
+    = form_with url: search_admin_seminars_path, method: :get, local: true do |f|
+      .field.has-addons
+        .control
+          = f.text_field :q, class: 'input is-rounded', size: 6, placeholder: t('search_term'), value: params[:q]
+        .control
+          %button.button.is-info
+            %span.icon.is-small
+              %i.fa.fa-search
+  .level-item-right
+    - if @pagy.pages > 1
+      != pagy_bulma_nav(@pagy)
+
+= render 'admin/seminars/admin_seminar_table', seminars: @seminars
+- if @pagy.pages > 1
+  != pagy_bulma_nav(@pagy)
+

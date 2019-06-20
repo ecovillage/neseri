@@ -6,6 +6,12 @@ class MainNavigation < ActionNav::Base
     hide_unless { (allowed_to?(:index?, Seminar) && !current_user&.admin) }
   end
 
+  item :search_seminars do
+    title { t('admin.seminar.search_page') }
+    url   { search_admin_seminars_path }
+    hide_unless { true == current_user&.admin? }
+  end
+
   item :contact do
     title { t('pages.contact') }
     url   { contact_path }

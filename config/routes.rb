@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     resources :seminars, only: [:index, :show] do
       resource :admin_copy,  controller: 'seminars/admin_copy',  only: :create
       resource :lock,        controller: 'seminars/locks',       only: [:create, :destroy]
+      collection do
+        get 'search', to: 'seminars/search#search'
+      end
     end
 
     resources :admin_seminars, only: [:index, :edit, :destroy, :update, :show] do
