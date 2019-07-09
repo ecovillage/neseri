@@ -1,5 +1,7 @@
 # neseri - workshop proposal system
 
+[![Build Status](https://travis-ci.org/ecovillage/neseri.svg?branch=master)](https://travis-ci.org/ecovillage/neseri)
+
 A workshop proposal system for the [ecovillage Sieben Linden](https://siebenlinden.org) (but probably broad enough to be used somewhere else).
 
 Full i18n support, but currently only a proper German locale is available.
