@@ -42,7 +42,14 @@ jane:
 
 bob:
   email: bob@bob.bob
-  # column: value
+  firstname: Bob
+  lastname: Jones
+  address: Bobstreet 1, 123456 Bobtown
+  fax:     441122442
+  mobile:  441122441
+  phone:   44112244
+  homepage: 'https://bob.bob'
+  
 
 veteran:
   email: aunt@old.ie
