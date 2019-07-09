@@ -1,6 +1,7 @@
 language: ruby
 rvm:
-  - 2.6.1
+  - 2.6.3
 cache: bundler
 script:
   - bundle exec rails db:migrate RAILS_ENV=test
+  - bundle exec rake
