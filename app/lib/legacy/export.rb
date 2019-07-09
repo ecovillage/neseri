@@ -23,7 +23,7 @@ module Legacy
       (@booking_docs.values | @reservation_docs.values | [seminar_json, regional_slot_json]).map do |doc|
         uri = legacy_db_uri + "/" + doc[:_id]
         response = RestClient.put uri, doc.to_json, {content_type: :json, accept: :json}
-        puts "pushed: #{response}"
+        #puts "pushed: #{response}"
         response
       end
     end
