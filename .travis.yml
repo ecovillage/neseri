@@ -6,7 +6,7 @@ script:
 env:
   HOST: localhost
   MAILER_HOST: localhost
-  SENDER_EMAIL="Neseri\ Your\ Community\ <registration@yourhost.commm>"
+  SENDER_EMAIL: "Neseri\ Your\ Community\ <registration@yourhost.commm>"
   SMTP_SERVER: localhost
   SMTP_DOMAIN: localhost
   SMTP_PORT: 587
