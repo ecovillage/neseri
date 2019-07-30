@@ -89,9 +89,9 @@ class Admin::AdminSeminars::PublicationController < NeseriController
       if result == [:failure]
         helpers.add_flash failure: t('publication.failed')
       else
-        helpers.add_flash success: t('publication.success_with_link_html', link_url: helpers.legacy_web_url(@seminar))
         @seminar.update!(uuid: export.seminar_uuid)
         @seminar.user_seminar.update!(uuid: export.seminar_uuid)
+        helpers.add_flash success: t('publication.success_with_link_html', link_url: helpers.legacy_web_url(@seminar))
       end
 
       redirect_to admin_admin_seminars_path
