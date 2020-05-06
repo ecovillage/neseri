@@ -82,8 +82,8 @@ You can use mail_catcher; start it; visit http://localhost:1080 in browser, mail
 
 ### Tests
 
-The small test-suite is written using MiniTest, make a test run with `rails t`.
-System-tests have to be run manually with `rails t test/system` (they are not run by default).
+The smallish test-suite is written using MiniTest, make a test run with `rails t`.
+System-tests have to be run manually with `rails t test/system` (they are not run by default) and use the selenium chrom(ium)-driver. 
 
 ## Contributing
 
@@ -130,6 +130,7 @@ In a gist:
 
 TBD
 
-#### Exporting directly into legacy data
+#### Exporting directly into legacy database
 
-TBD
+Data can be "exported" into Sieben Lindens legacy system.  This is done via simple JSON pushes (the legacy system involves a CouchDB).
+
