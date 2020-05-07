@@ -5,6 +5,10 @@
     - else
       = link_to seminar.id, admin_admin_seminar_path(seminar)
   %td
+    - if seminar.locked?
+      %span.icon
+        %i.fas.fa-lock
+  %td
     - if seminar.is_user_seminar?
       = link_to seminar.title, seminar
     - else
@@ -14,9 +18,9 @@
         - if seminar.admin_seminar
           %span.tag.is-warning
             =t("seminar.tags.has_admin_seminar")
-        - if seminar.locked?
-          %span.tag.is-link
-            =t("seminar.tags.locked")
+        -#- if seminar.locked?
+        -#  %span.tag.is-link
+        -#    =t("seminar.tags.locked")
         - if seminar.is_admin_seminar?
           %span.tag.is-info
             =t("seminar.tags.is-admin")

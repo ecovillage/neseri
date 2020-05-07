@@ -1,6 +1,8 @@
 %tr
   %td
-    = link_to seminar.id, seminar
+    - if seminar.locked?
+      %span.icon
+        %i.fa.fa-lock
   %td
     = link_to seminar.title, seminar
   %td
@@ -14,7 +16,8 @@
     #{"(" + seminar.creator&.email + ")" if seminar.creator}
   %td
     - seminar.seminar_instructors.each do |instructor|
-      = instructor.email
+      %small
+        = instructor.email
   %td
     -if seminar.locked? || seminar.is_admin_seminar? || !seminar.active? || seminar.uuid 
       .tags
