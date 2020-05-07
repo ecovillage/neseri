@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   end
 
   resource :tos, only: :show
-  resource :tos_acceptance, only: :create
+  resource :terms_acceptance, only: :create
 
   resource :instructor, only: [:show, :edit, :update]
   resolve('Instructor') { :instructor }
