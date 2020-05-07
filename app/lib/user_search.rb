@@ -7,11 +7,15 @@ class UserSearch
   def apply relation
     return relation if @search_term.blank?
 
-    users = User.arel_table
+    users = search_model.arel_table
     term_matcher = "%#{@search_term}%"
     relation.where(users[:email].matches(term_matcher).or(
       users[:firstname].matches(term_matcher).or(
       users[:lastname].matches(term_matcher)
     )))
+  end
+
+  def search_model
+    User
   end
 end
