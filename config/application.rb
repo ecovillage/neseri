@@ -8,6 +8,7 @@ Bundler.require(*Rails.groups)
 
 module Neseri
   class Application < Rails::Application
+    VERSION = "0.2".freeze
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.2
 
