@@ -22,16 +22,18 @@ class ReservationExportTest < ActiveSupport::TestCase
     seminar = seminars(:bob_and_janes_seminar)
     export = ::Legacy::Export.new seminar
 
+    next_year = DateTime.current.year + 1
+
     asserted_response = [
       {:_id    =>"uuid3",
        :g_meta =>{:type=>"slseminar_reservation"},
-       :g_value=>{:date_from=>"20.01.2020", :date_to=>"22.01.2020", :time_from=>"20:30", :time_to=>"13:00"}},
+       :g_value=>{:date_from=>"20.01.#{next_year}", :date_to=>"22.01.#{next_year}", :time_from=>"20:30", :time_to=>"13:00"}},
       {:_id=>"uuid2",
        :g_meta =>{:type=>"slseminar_reservation"},
-       :g_value=>{:date_from=>"20.01.2020", :date_to=>"22.01.2020", :time_from=>"20:30", :time_to=>"13:00"}},
+       :g_value=>{:date_from=>"20.01.#{next_year}", :date_to=>"22.01.#{next_year}", :time_from=>"20:30", :time_to=>"13:00"}},
       {:_id=>"uuid1",
        :g_meta =>{:type=>"slseminar_reservation"},
-       :g_value=>{:date_from=>"20.01.2020", :date_to=>"22.01.2020", :time_from=>"20:30", :time_to=>"13:00"}}
+       :g_value=>{:date_from=>"20.01.#{next_year}", :date_to=>"22.01.#{next_year}", :time_from=>"20:30", :time_to=>"13:00"}}
     ].first
 
     # TODO: we just test a single reservation (first) and ignore room and comment thus far.
