@@ -77,8 +77,6 @@ GEM
     annotate (3.1.1)
       activerecord (>= 3.2, < 7.0)
       rake (>= 10.4, < 14.0)
-    archive-zip (0.12.0)
-      io-like (~> 0.3.0)
     bcrypt (3.1.13)
     better_errors (2.7.0)
       coderay (>= 1.0.0)
@@ -100,9 +98,6 @@ GEM
       regexp_parser (~> 1.5)
       xpath (~> 3.2)
     childprocess (3.0.0)
-    chromedriver-helper (2.1.1)
-      archive-zip (~> 0.10)
-      nokogiri (~> 1.8)
     clowne (1.1.0)
     cocoon (1.2.14)
     coderay (1.1.2)
@@ -160,7 +155,6 @@ GEM
     image_processing (1.10.3)
       mini_magick (>= 4.9.5, < 5)
       ruby-vips (>= 2.0.17, < 3)
-    io-like (0.3.1)
     jbuilder (2.10.0)
       activesupport (>= 5.0.0)
     jquery-rails (4.3.5)
@@ -301,6 +295,10 @@ GEM
       activemodel (>= 6.0.0)
       bindex (>= 0.4.0)
       railties (>= 6.0.0)
+    webdrivers (4.2.0)
+      nokogiri (~> 1.6)
+      rubyzip (>= 1.3.0)
+      selenium-webdriver (>= 3.0, < 4.0)
     websocket-driver (0.7.1)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.4)
@@ -322,7 +320,6 @@ DEPENDENCIES
   bulma_form_builder!
   byebug
   capybara (>= 2.15)
-  chromedriver-helper
   clowne
   cocoon
   coffee-rails (~> 5)
@@ -353,6 +350,7 @@ DEPENDENCIES
   tzinfo-data
   uglifier (>= 1.3.0)
   web-console (>= 3.3.0)
+  webdrivers
 
 RUBY VERSION
    ruby 2.6.1p33
