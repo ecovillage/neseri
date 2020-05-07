@@ -4,7 +4,9 @@
       Veranstaltungsvorschläge für das Ökodorf Sieben Linden
 
     %p
-      Auf diesen Seiten können Vorschläge für (Bildungs-)Veranstaltungen im und mit dem Ökodorf Sieben Linden (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
+      Auf diesen Seiten können Vorschläge für (Bildungs-)Veranstaltungen im und mit dem
+      = link_to 'Ökodorf Sieben Linden', "https://siebenlinden.org"
+      (beziehungsweise dem "Freundeskreis Ökodorf e.V.") eingereicht werden.
     
     - if !user_signed_in?
       %br
@@ -12,12 +14,13 @@
         Um fortzufahren musst du Dich
         %a.button.is-primary(href=new_user_registration_path style="margin-top: -5px;")
           %strong= t('devise.registrations.new.sign_up').downcase
-        oder, wenn du bereits ein Konto hast
+        oder,
+        %strong wenn Du bereits ein Konto hast
         = link_to t('devise.sessions.new.sign_in').downcase, new_user_session_path, class: 'button', style: 'margin-top: -5px;'
         \.
       %p
         %br
-        Solltest Du dich bereits angemeldet, aber dein
+        Solltest Du dich bereits registriert, aber dein
         %b
           Passwort vergessen
         haben, kannst Du Dir eine
@@ -49,3 +52,5 @@
           Solltest Du diese Software selber als Betreiber*in verwenden wollen, gehe einfach mit uns
           %a(href=contact_path)
             in Kontakt.
+    .section
+      Copyright 2019,2020 Freundeskreis Ökodorf Sieben Linden e.V.
