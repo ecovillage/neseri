@@ -49,7 +49,20 @@ bob:
   mobile:  441122441
   phone:   44112244
   homepage: 'https://bob.bob'
-  
+
+fulluser:
+  email: full@us.er
+  encrypted_password: <%= User.new.send(:password_digest, 'fulluserpassword') %>
+  firstname: Full
+  lastname: User
+  address: complete adress
+  fax: 111
+  mobile: 111
+  phone: 111
+  homepage: 'https://fullus.er'
+  confirmed_at: 2019-01-01
+  tos_accepted_at: 2019-01-01
+  admin: false
 
 veteran:
   email: aunt@old.ie
