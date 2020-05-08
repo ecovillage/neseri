@@ -3,6 +3,7 @@ class InstructorUserLink
   def self.create_and_invite! instructor
     email = instructor.email
 
+    # TODO That is a pretty nasty conditional and probably not test covered
     if email.nil? && instructor.user
       instructor.email = instructor.user.email
     elsif instructor.user&.email == email
