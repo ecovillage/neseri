@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+  authorize :user, through: :current_user
+
   before_action :configure_permitted_devise_parameters, if: :devise_controller?
   impersonates :user
 
