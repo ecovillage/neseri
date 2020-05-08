@@ -11,25 +11,25 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
     refute User.find_by(email: 'jones@neseri.tu')
     assert_equal 0, ActionMailer::Base.deliveries.count
 
-    # Add invited user (add instructor)
-    visit edit_seminar_path(seminars(:one))
+    # Visit an admin copy seminar page
+    visit edit_seminar_path(seminars(:admin_copy_bob_and_janes_seminar))
     assert_selector "h1", text: "Vorschlag bearbeiten"
-                       # 'Referent/In hinzufügen'
+
+    # Add invited user (add instructor)
     click_link_or_button 'Referent/In hinzufügen'
     fill_in 'E-Mail-Adresse', with: 'jones@neseri.tu'
     click_link_or_button 'Seminarvorschlag speichern'
-    #assert_response :success
 
-    # a new user was created.
+    # A new user was created.
     assert (user_count + 1) == User.count
     jones = User.find_by(email: 'jones@neseri.tu')
     assert jones
 
-    # log out as admin
+    # Log out as admin
     sign_out users(:admin)
 
 
-    # Follow invitation link as jones.
+    # Follow an invalid invitation link as jones.
     # click the link but you have to accept tos/terms.
     visit 'users/invitation/accept?invitation_token=hns-dvpnWby-TsLD-AnK'
     assert_selector '.notification', text: 'Der Einladungslink ist ungültig'
@@ -40,8 +40,10 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
     # e.g. http://localhost/users/invitation/accept?invitation_token=yySnSWtD8ERZWDPNkW6s\r
     /^http:\/\/localhost\/(?<invitation_path>.*)/ =~ mail_body
 
+    # Accept invitation by clicking correct link
     visit invitation_path
 
+    # Forget to tick the TOS/Privacy Statement box
     refute_selector '.notification', text: 'Der Einladungslink ist ungültig'
     fill_in 'Passwort', with: 'jones@neseri.tu'
     fill_in 'Passwortbestätigung', with: 'jones@neseri.tu'
