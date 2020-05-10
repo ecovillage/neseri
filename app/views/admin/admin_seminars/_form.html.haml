@@ -8,10 +8,9 @@
       = t('seminar.form.section.publication')
       %span.icon
         %i.fa.fa-star
-    = f.double_text_input :title
-    = f.double_text_input :subtitle
-
-    = f.double_text_area :description, size: 12
+    = f.double_text_input :title, "copy"
+    = f.double_text_input :subtitle, "copy"
+    = f.double_text_area :description, "copy", size: 12
 
   .box
     %h2.subtitle.has-text-centered
@@ -23,13 +22,13 @@
     = f.double_datetime_select :start_date
     = f.double_datetime_select :end_date
     = f.double_select :seminar_kind_id, SeminarKind.where(active: true), :id, :name
-    = f.double_text_area :alternative_dates, size: 5
+    = f.double_text_area :alternative_dates, "copy", size: 5
     -#icon: 'fa-calendar', help_text: t('seminar.helptext.alternative_dates')
-    = f.double_number_field "cancellation_time"
+    = f.double_number_field  "cancellation_time", "copy"
     -#icon: 'fa-calendar', help_text: t('seminar.helptext.cancellation_time')
 
-    = f.double_text_input "cancellation_reason"
-  
+    = f.double_text_input "cancellation_reason", "copy"
+
   .box
     %h2.subtitle.has-text-centered
       %span.icon
@@ -37,17 +36,16 @@
       = t('seminar.form.section.participants')
       %span.icon
         %i.fa.fa-users
-    = f.double_number_field :attendees_minimum
+    = f.double_number_field :attendees_minimum, "copy"
     -# icon: 'fa-window-minimize'
-    = f.double_number_field :attendees_maximum
+    = f.double_number_field :attendees_maximum, "copy"
     -# icon: 'fa-window-maximize'
-    = f.double_text_input :accommodation
+    = f.double_text_input :accommodation, "copy"
     -#icon: 'fa-home', help_text: t('seminar.helptext.accommodation')
-    = f.double_text_input "attendees_preconditions"
-    = f.double_text_input "please_bring"
+    = f.double_text_input "attendees_preconditions", "copy"
+    = f.double_text_input "please_bring", "copy"
     -#, icon: 'fa-suitcase'
-  
-  
+
   .box
     %h2.subtitle.has-text-centered
       %span.icon
@@ -56,12 +54,12 @@
       %span.icon
         %i.fa.fa-sitemap
     = f.double_select "wished_room", Room.where(active: true), :id, :name
-    = f.double_text_area "room_comment", size: 3
-    = f.double_text_input "room_material"
+    = f.double_text_area "room_comment", "copy", size: 3
+    = f.double_text_input "room_material", "copy"
     -#icon: 'fa-clipboard'
-    = f.double_text_input "room_extras"
+    = f.double_text_input "room_extras", "copy"
     -# icon: 'fa-wrench'
-  
+
   .box
     %h2.subtitle.has-text-centered
       %span.icon
@@ -69,9 +67,9 @@
       = t('seminar.form.section.costs')
       %span.icon
         %i.fa.fa-money
-    = f.double_text_input "royalty_participant"
-    = f.double_text_input "royalty_participant_reduced"
-    = f.double_text_input "material_cost"
+    = f.double_text_input "royalty_participant", "copy"
+    = f.double_text_input "royalty_participant_reduced", "copy"
+    = f.double_text_input "material_cost", "copy"
 
   .box
     %h2.subtitle.has-text-centered
@@ -97,7 +95,7 @@
         %tbody
           %tr
             %th(colspan=1)
-              %h2.subtitle 
+              %h2.subtitle
                 %span.icon
                   %i.fa.fa-file
                 = t('seminar.files')
