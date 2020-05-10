@@ -22,6 +22,7 @@
       %th= SeminarInstructor.human_attribute_name(:accommodation)
       %th= SeminarInstructor.human_attribute_name(:main_contact)
       %th= SeminarInstructor.human_attribute_name(:contactable)
+      %th= SeminarInstructor.human_attribute_name(:info)
     - if seminar.seminar_instructors.empty?
       %tr
         %td.is-warning{colspan: 6}
@@ -47,6 +48,13 @@
             - else
               %span.icon
                 %i.fa.fa-times
+          %td
+            - user = User.where(:id => instructor.user_id).first
+            - [:address, :fax, :phone, :mobile, :homepage].each do |attr|
+              - if user.send(attr)
+                %div
+                  %b= User.human_attribute_name(attr) + ":"
+                  = user.send(attr)
       - else
         %tr
           %td
@@ -69,3 +77,10 @@
             - else
               %span.delete
 
+          %td
+            - user = User.where(:id => instructor.user_id).first
+            - [:address, :fax, :phone, :mobile, :homepage].each do |attr|
+              - if user.send(attr)
+                %div
+                  %b= User.human_attribute_name(attr) + ":"
+                  = user.send(attr)
