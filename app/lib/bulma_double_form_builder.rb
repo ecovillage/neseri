@@ -17,15 +17,15 @@ class BulmaDoubleFormBuilder< BulmaFormBuilder::HorizontalBulmaFormBuilder
     end
   end
 
-  def double_text_input attr_name, classes = ''
+  def double_text_input attr_name, classes: ''
     labeled_columns attr_name,
-      ->{ text_field attr_name, class: 'input' + get_classes(classes)  },
+      ->{ text_field attr_name, class: join_classes('input', classes)  },
       ->{ @template.text_field_tag :no_op, user_seminar_value(attr_name), class: 'input disabled', disabled: true }
   end
 
-  def double_text_area attr_name, classes = '', size: 5
+  def double_text_area attr_name, classes: '', size: 5
     labeled_columns attr_name,
-      ->{ text_area attr_name, class: 'input textarea' + get_classes(classes) , size: "10x#{size}" },
+      ->{ text_area attr_name, class: join_classes('input textarea', classes) , size: "10x#{size}" },
       ->{ @template.text_area_tag :no_op, user_seminar_value(attr_name), class: 'input textarea disabled', disabled: true, size: "10x#{size}" }
   end
 
@@ -57,13 +57,13 @@ class BulmaDoubleFormBuilder< BulmaFormBuilder::HorizontalBulmaFormBuilder
       -> { content_tag 'i', user_seminar_value(attr_name).to_s}
   end
 
-  def double_number_field attr_name, classes = ''
+  def double_number_field attr_name, classes: ''
     labeled_columns attr_name,
-      -> { number_field attr_name, class: 'input' + get_classes(classes) },
+      -> { number_field attr_name, class: join_classes('input', classes) },
       -> { content_tag 'i', user_seminar_value(attr_name) }
   end
 
-  private def get_classes classes
-    return classes ? + ' ' + classes : ''
+  private def join_classes base_class='', classes=''
+    "#{base_class} #{classes}".strip
   end
 end
