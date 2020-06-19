@@ -24,4 +24,12 @@ class PageVisitTest < ActionDispatch::IntegrationTest
 
     assert_select '.has-text-centered', text: /zugestimmt am/
   end
+
+  test "anonymous can visit impressum page" do
+    get impressum_path
+    assert_response :success
+
+    assert_select '.title', text: 'Impressum'
+  end
+
 end
