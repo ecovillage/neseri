@@ -10,7 +10,7 @@ de:
         qualification: Qualifikation
         comment: Erläuterung
         accommodation: Unterbringung
-        contactable: Kontaktierbar
+        contactable: Für Seminar-Organisation verantwortlich
         main_contact: Haupt-?
     errors:
       models:
