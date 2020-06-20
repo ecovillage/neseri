@@ -29,6 +29,10 @@ de:
       mid: "%a, %d. %b %Y"
       short_date: "%a %d.%m.%Y"
       shorter_date: "%d.%m.%Y"
+  devise:
+    registrations:
+      new:
+        sign_up: Neu registrieren
   documentation: Documentation
   edit: Bearbeiten
   instructor_updated: Profil aktualisiert.
