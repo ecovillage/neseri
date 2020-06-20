@@ -4,7 +4,6 @@
 
 .has-text-centered
   Zuletzt geändert am 1.4.2019
-  = current_user.tos_accepted_at
 
   - if current_user && current_user.tos_accepted_at
     (zugestimmt am #{l(current_user.tos_accepted_at, format: :long)})
