@@ -3,4 +3,4 @@
 
 = render template: 'pages/privacy'
 
-= button_to t(:accept), tos_acceptance_path, class: 'button is-primary', method: :post
+= button_to t(:accept), terms_acceptance_path(tos: true), class: 'button is-primary', method: :post
