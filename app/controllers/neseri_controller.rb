@@ -22,7 +22,7 @@ class NeseriController < ApplicationController
   end
 
   def force_tos_accept!
-    if (current_user && !true_user) && !current_user.admin && !current_user.tos_accepted_at
+    if (current_user && (current_user == true_user)) && !current_user.admin && !current_user.tos_accepted_at
       helpers.add_flash alert: t(:need_to_accept_to_use_service)
       redirect_to tos_path
     end
