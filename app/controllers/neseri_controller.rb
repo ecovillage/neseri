@@ -4,7 +4,9 @@ class NeseriController < ApplicationController
   verify_authorized if !Rails.env.production?
   before_action :authenticate_user!
   before_action :force_tos_accept!
-  before_action :show_profile_warning
+  # delayed to next version, because for now we tie
+  # the contact data to SeminarInstructor (not user)
+  #before_action :show_profile_warning
 
   rescue_from ActionPolicy::Unauthorized do |exception|
     helpers.add_flash alert: t(:unauthorized)

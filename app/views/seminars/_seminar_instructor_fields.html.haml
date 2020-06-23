@@ -18,6 +18,14 @@
   = f.labeled_text_field :accommodation, icon: 'fa-home'
   = f.labeled_text_field :comment, icon: 'fa-comment-o'
   = f.labeled_text_area  :qualification, icon: 'fa-adress-card', help_text: t('seminar_instructor.helptext.qualification')
+  = f.labeled_text_field :firstname
+  = f.labeled_text_field :lastname
+  = f.labeled_text_area "address", help_text: t('instructor.helptext.address')
+  = f.labeled_text_field "fax", icon: 'fa-fax'
+  = f.labeled_text_field "phone", icon: 'fa-phone'
+  = f.labeled_text_field "mobile", icon: 'fa-mobile'
+  = f.labeled_text_field "homepage"
+
   .field.is-grouped.is-grouped-right
     .control
       -# This needs an arrow up or clearer wording (to make clear which referee is meant)

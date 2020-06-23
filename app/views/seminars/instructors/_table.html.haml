@@ -49,12 +49,15 @@
               %span.icon
                 %i.fa.fa-times
           %td
-            - user = User.where(:id => instructor.user_id).first
-            - [:address, :fax, :phone, :mobile, :homepage].each do |attr|
-              - if user.send(attr)
+            -#  delayed to next version, for now we pull address info
+            -#- user = User.where(:id => instructor.user_id).first
+            - [:firstname, :lastname, :address, :fax, :phone, :mobile, :homepage].each do |attr|
+              -#- if user.send(attr)
+              - if instructor.send(attr)
                 %div
                   %b= User.human_attribute_name(attr) + ":"
-                  = user.send(attr)
+                  -#= user.send(attr)
+                  = instructor.send(attr)
       - else
         %tr
           %td
@@ -78,9 +81,13 @@
               %span.delete
 
           %td
-            - user = User.where(:id => instructor.user_id).first
-            - [:address, :fax, :phone, :mobile, :homepage].each do |attr|
-              - if user.send(attr)
+            -#  delayed to next version, for now we pull address info
+            -# from instructor, not user profile
+            -#- user = User.where(:id => instructor.user_id).first
+            - [:firstname, :lastname, :address, :fax, :phone, :mobile, :homepage].each do |attr|
+              -#- if user.send(attr)
+              - if instructor.send(attr)
                 %div
                   %b= User.human_attribute_name(attr) + ":"
-                  = user.send(attr)
+                  -#= user.send(attr)
+                  = instructor.send(attr)
