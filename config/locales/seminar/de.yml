@@ -13,7 +13,7 @@ de:
     view_user_version: Original ansehen
     publish: Übernehmen
     publication:
-      select_referees_and_publish: Referenten wählen und übernehmen
+      select_referees_and_publish: Referent*n wählen und übernehmen
       view_in_legacy_system: In Altsystem ansehen
       referee:
         from_neseri: In neseri
@@ -29,7 +29,7 @@ de:
       has_admin_seminar: hat Admin-Kopie
       is-pulled-back: zurückgezogen
       is-published: veröffentlicht
-    files_text_html: "<b>Fotos</b>: bitte hochladen oder an <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Bitte ein digitales Portrait-Foto von dir für die Hompage, minimale Abmessungen 200 px in Breite oder Höhe. Wenn vorhanden, auch gern zum Seminar passende andere Fotos (hier aber keine Garantie, dass sie auf die Homepage kommen). Es ist hilfreich, wenn die Bilder bereits in dem korrekten Seitenverhältnis vorliegen (Referent/Innen-Portraits hochkant). Beispiele können auf <a href=\"siebenlinden.org\" taget=\"_tab\">siebenlinden.org</a> eingesehen werden (z.B. <a href=\"https://siebenlinden.org/event/ich-will-mein-eigenes-essen-anbauen-wo-fang-ich-an-6/\" target=\"_tab\">Seminar-Ansicht</a> und <a href=\"https://siebenlinden.org/referee/sandra-joel-campe/\" target=\"_tab\">Referenten-Ansicht</a>). Stelle unbedingt sicher, dass die Bildrechte erlauben, die Bilder zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit zu verwenden.</br>Es können auch andere für die Veranstaltung wichtige Dateien (z.B. Mitbringlisten, Info-Texte für mails, ...) angehängt werden."
+    files_text_html: "<b>Fotos</b>: bitte hochladen oder an <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Bitte ein digitales Portrait-Foto von dir für die Hompage, minimale Abmessungen 200 px in Breite oder Höhe. Wenn vorhanden, auch gern zum Seminar passende andere Fotos (hier aber keine Garantie, dass sie auf die Homepage kommen). Es ist hilfreich, wenn die Bilder bereits in dem korrekten Seitenverhältnis vorliegen (Referent*innen-Portraits hochkant). Beispiele können auf <a href=\"siebenlinden.org\" taget=\"_tab\">siebenlinden.org</a> eingesehen werden (z.B. <a href=\"https://siebenlinden.org/event/ich-will-mein-eigenes-essen-anbauen-wo-fang-ich-an-6/\" target=\"_tab\">Seminar-Ansicht</a> und <a href=\"https://siebenlinden.org/referee/sandra-joel-campe/\" target=\"_tab\">Referent*in-Ansicht</a>). Stelle unbedingt sicher, dass die Bildrechte erlauben, die Bilder zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit zu verwenden.</br>Es können auch andere für die Veranstaltung wichtige Dateien (z.B. Mitbringlisten, Info-Texte für mails, ...) angehängt werden."
     user_actions: Aktionen
     conditions: Konditionen
     conditions_text_html: "Der / die Referent*in erklärt sich damit einverstanden, <b>einen Seminarplatz (Regionalplatz)</b> für Menschen mit Wohnsitz in Sieben Linden <b>kostenlos</b> zur Verfügung zu stellen. Diese Person unterstützt die Referent*in und ggf. Teilnehmer*innen in praktischen Fragen und informiert Teilnehmende auf Anfrage über Sieben Linden.<br/>Wird das Seminar seitens der/des Referent*in ohne vorliegen höherer Gewalt (z.B. schwere Krankheit) abgesagt, ist eine <b>Ausfallpauschale</b> in Höhe von 200 € zu zahlen. Die Ausfallgebühr ist auch zu zahlen, wenn eine Ersatzveranstaltung für den Termin gefunden wurde bzw. der Seminartermin verlegt wurde. Bei Nicht-Zustandekommen aufgrund zu geringer Anzahl Anmeldungen beträgt die Ausfallpauschale bei Veranstaltungen bis zu 5 Tagen 50 €, ab 6 Tagen 100 €.<br>Der / die Referent*in reicht spätestens innerhalb 14 Tagen nach Seminardurchführung einen Ablaufplan/Konzept des Seminars beim Bildungsreferat ein."
@@ -48,7 +48,7 @@ de:
       subtitle: Untertitel des Seminars
     helptext:
       description: "Max. 1200 Zeichen. Gliederung: Einführung in Thema - Inhalte und Ablauf - Welche Kompetenzen/Fähigkeiten/Wissen wird erworben - Methoden. Die ersten 300 Zeichen erscheinen im Seminarüberblick."
-      start_date: (Seminararbeitszeit, nicht Anreisezeit). Leider werden wir nicht alle Wünsche berücksichtigen können.
+      start_date: (Seminararbeitszeit, nicht Anreisezeit). Seminare beginnen bei uns i. d. R. um 20 Uhr (Winterzeit) bzw. um 20:30 Uhr (Sommerzeit) und enden am Abreisetag nach dem Mittagessen. Davon weichen wir nur in besonderen Fällen ab z.B. Beginn schon vor dem Abendessen, Abreise nach dem Frühstück.
       end_date: (Seminararbeitszeit, nicht Abreisezeit).
       cancellation_time: bei geringem Anmeldestand (Standard 7 Tage vor Seminarbeginn), in Tagen (nur wenn abweichend von 7 Tagen vor Seminarbeginn)
       attendees_minimum: Inklusive Regionalplatz
@@ -66,8 +66,8 @@ de:
         participants: Teilnehmer*innen
         infrastructure: Infrastrukturelles
         costs: Kosten
-        main_referee: Referent*n
-        referees: Referent*n
+        main_referee: Referent*in
+        referees: Referent*innen
         files: Anhänge
         conditions: Konditionen
   seminars:

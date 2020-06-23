@@ -16,7 +16,7 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
     assert_selector "h1", text: "Vorschlag bearbeiten"
 
     # Add invited user (add instructor)
-    click_link_or_button 'Referent/In hinzufügen'
+    click_link_or_button 'Referent*in hinzufügen'
     fill_in 'E-Mail-Adresse', with: 'jones@neseri.tu'
     click_link_or_button 'Seminarvorschlag speichern'
 

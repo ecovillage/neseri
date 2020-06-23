@@ -16,7 +16,7 @@ de:
   contact:
     contact: Eine E-Mail schicken
   copy_created: Kopie erstellt
-  could_not_save_instructor: Könnte Referent*n nicht anlegen
+  could_not_save_instructor: Könnte Referent*in nicht anlegen
   create_admin_copy: Admin-Kopie erstellen
   created_seminars: Erstellte Seminare
   date:
@@ -52,7 +52,7 @@ de:
     documentation: Dokumentation
     impressum: Impressum
     privacy: Datenschutz
-  please_fill_out_profile_html: Du bist als Referent* angegeben, aber uns fehlen Kontakt-Daten. Bitte <a href="%{profile_path}">fülle Dein Profil aus</a>.
+  please_fill_out_profile_html: Du bist als Referent*in angegeben, aber uns fehlen Kontakt-Daten. Bitte <a href="%{profile_path}">fülle Dein Profil aus</a>.
   please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige deine Zurkenntnisnahme ganz unten auf der Seite.
   publication:
     connection_refused: Konnte nicht mit Alt-System verbinden!
@@ -65,8 +65,8 @@ de:
     reactivate: Reaktivieren
   save: speichern
   seminar_instructors:
-    add: Referent/In hinzufügen
-    remove: Referent/In entfernen
+    add: Referent*in hinzufügen
+    remove: Referent*in entfernen
   seminar_kind:
     create: Neue Veranstaltungs-Art anlegen
     deactivate: Verstecken

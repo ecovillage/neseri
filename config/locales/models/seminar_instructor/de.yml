@@ -2,8 +2,8 @@ de:
   activerecord:
     models:
       seminar_instructor:
-        one: Referent/In
-        other: Referent/Innen
+        one: Referent*in
+        other: Referent*innen
     attributes:
       seminar_instructor:
         email: E-Mail-Adresse

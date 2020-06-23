@@ -12,7 +12,7 @@ class InstructorLinkingHappensAutomatically < ApplicationSystemTestCase
 
     ## Add invited user (add instructor)
     visit edit_seminar_path(seminars(:one))
-    click_link_or_button 'Referent/In hinzufügen'
+    click_link_or_button 'Referent*in hinzufügen'
     fill_in 'E-Mail-Adresse', with: 'new@neseri.tu'
     click_link_or_button 'Seminarvorschlag speichern'
     ##assert_response :success
@@ -35,7 +35,7 @@ class InstructorLinkingHappensAutomatically < ApplicationSystemTestCase
     ## Add invited user (add instructor)
     visit new_seminar_path(seminars(:one))
     fill_in 'Titel', with: 'New Event'
-    click_link_or_button 'Referent/In hinzufügen'
+    click_link_or_button 'Referent*in hinzufügen'
     fill_in 'E-Mail-Adresse', with: 'newer@neseri.tu'
     click_link_or_button 'Neuen Seminarvorschlag anlegen'
     ##assert_response :success
