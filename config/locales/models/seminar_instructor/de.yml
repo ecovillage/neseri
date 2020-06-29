@@ -12,6 +12,11 @@ de:
         accommodation: Unterbringung
         contactable: Für Seminar-Organisation verantwortlich
         main_contact: Haupt-?
+        firstname: Vorname
+        lastname: Nachname
+        address: Adresse
+        phone: Telefonnummer
+        mobile: Mobilfunknummer
     errors:
       models:
         seminar_instructors:
