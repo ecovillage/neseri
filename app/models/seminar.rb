@@ -77,7 +77,7 @@ class Seminar < ApplicationRecord
   scope :with_user, ->(user) { where(creator: user).or(self.where(seminar_instructors: user.seminar_instructors)) }
 
   after_initialize do |record|
-    record.start_date ||= DateTime.new(DateTime.now.year + 1, 1, 20, 20, 30)
+    record.start_date ||= DateTime.new(DateTime.now.year + 1, 1, 20, 20, 00)
     record.end_date   ||= (record.start_date + 2.days).change({hour: 13})
   end
 

@@ -48,7 +48,7 @@ de:
       subtitle: Untertitel des Seminars
     helptext:
       description: "Max. 1200 Zeichen. Gliederung: Einführung in Thema - Inhalte und Ablauf - Welche Kompetenzen/Fähigkeiten/Wissen wird erworben - Methoden. Die ersten 300 Zeichen erscheinen im Seminarüberblick."
-      start_date: (Seminararbeitszeit, nicht Anreisezeit). Seminare beginnen bei uns i. d. R. um 20 Uhr (Winterzeit) bzw. um 20:30 Uhr (Sommerzeit) und enden am Abreisetag nach dem Mittagessen. Davon weichen wir nur in besonderen Fällen ab z.B. Beginn schon vor dem Abendessen, Abreise nach dem Frühstück.
+      start_date: (Seminararbeitszeit, nicht Anreisezeit). Seminare beginnen bei uns i. d. R. um 19:30 Uhr (Winterzeit) bzw. um 20:00 Uhr (Sommerzeit) und enden am Abreisetag nach dem Mittagessen. Davon weichen wir nur in besonderen Fällen ab z.B. Beginn schon vor dem Abendessen, Abreise nach dem Frühstück.
       end_date: (Seminararbeitszeit, nicht Abreisezeit).
       cancellation_time: bei geringem Anmeldestand (Standard 7 Tage vor Seminarbeginn), in Tagen (nur wenn abweichend von 7 Tagen vor Seminarbeginn)
       attendees_minimum: Inklusive Regionalplatz
