@@ -67,7 +67,7 @@
       .field-body
         .field.is-expanded
           %p.control.is-expanded
-            %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]")
+            %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]" value="#{(@seminar.royalty_participant.to_f/0.67).to_i}")
           %p.help
             in Euro
         .field.is-expanded
@@ -75,7 +75,7 @@
             x 0.67
         .field.is-expanded
           %p.control.is-expanded
-            %input#seminar_royalty_participant.input.control.is-expanded(type="text" name="seminar[royalty_participant]" readonly=true)
+            %input#seminar_royalty_participant.input.control.is-expanded(type="text" name="seminar[royalty_participant]" readonly=true value="#{@seminar.royalty_participant}")
           %p.help
             Honorar in Euro
         .field-label.is-normal
@@ -93,7 +93,6 @@
       }
 
       costInputElement.oninput = setSeminarCost
-      setSeminarCost()
 
     .field.is-horizontal
       .field-label.is-normal
@@ -102,7 +101,7 @@
       .field-body
         .field.is-expanded
           %p.control.is-expanded
-            %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]")
+            %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]" value="#{(@seminar.royalty_participant_reduced.to_f/0.67).to_i}")
           %p.help
             für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 2/3 des normalen Honorars.
         .field.is-expanded
@@ -110,7 +109,7 @@
             x 0.67
         .field.is-expanded
           %p.control.is-expanded
-            %input#seminar_royalty_participant_reduced.input.control.is-expanded(type="text" name="seminar[royalty_participant_reduced]" readonly=true)
+            %input#seminar_royalty_participant_reduced.input.control.is-expanded(type="text" name="seminar[royalty_participant_reduced]" readonly=true value="#{@seminar.royalty_participant_reduced}")
           %p.help
             Honorar in Euro
         .field-label.is-normal
@@ -128,7 +127,6 @@
       }
 
       costReducedInputElement.oninput = setSeminarCostReduced
-      setSeminarCostReduced()
 
     = f.labeled_text_field "material_cost"
     -#= f.labeled_string "kind", default: "user"
