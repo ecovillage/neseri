@@ -95,6 +95,7 @@ class SeminarsController < NeseriController
       :cancellation_time, :cancellation_reason,
       :attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring, 
       :accept_conditions,
+      :room_wish_id,
       :room_extras, :room_material, :room_comment,
       :seminar_kind_id,
       :royalty_participant, :royalty_participant_reduced, :material_cost, :honorar,
