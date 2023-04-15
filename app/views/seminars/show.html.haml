@@ -84,6 +84,12 @@
           %tr
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
+        %tr
+          %th Seminarkosten für Teilnehmer*in
+          %td= (@seminar.royalty_participant.to_f / 0.67).to_i
+        %tr
+          %th Ermäßigte Seminarkosten für Teilnehmer*in
+          %td= (@seminar.royalty_participant_reduced.to_f / 0.67).to_i
   .column.is-6
     %table.table.box.is-fullwidth
       %tbody
