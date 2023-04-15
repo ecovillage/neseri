@@ -8,7 +8,7 @@ Full i18n support, but currently only a proper German locale is available.
 
 The name comes from `new seminar registration system`.
 
-The code is published under the [AGPLv3+](LICENSE.txt) and Copyright 2019 Felix Wolfsteller.
+The code is published under the [AGPLv3+](LICENSE.txt) and Copyright 2019-2023 Felix Wolfsteller.
 
 ## Incomplete list of features (work flows)
 
