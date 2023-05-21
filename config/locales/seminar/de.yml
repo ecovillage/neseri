@@ -56,7 +56,7 @@ de:
       room_extras: z.B. Internetzugang für Teilnehmer*innen
       attendees_minimum: 'Inklusive Regionalplatz'
       royalty_participant: in Euro
-      royalty_participant_reduced: für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 2/3 des normalen Honorars.
+      royalty_participant_reduced: 'für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 75% der normalen Seminarkosten.'
       accommodation: "In der Regel: Gästezimmer"
       alternative_dates: So weit gefasst wie möglich, z.B. Quartal, Monat
     form:
