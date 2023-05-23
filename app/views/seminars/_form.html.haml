@@ -67,7 +67,7 @@
       .field-body
         .field.is-expanded
           %p.control.is-expanded
-            %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]" value="#{(@seminar.royalty_participant.to_f/0.67).to_i}")
+            %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]" value="#{(@seminar.royalty_participant.to_f/0.67)}")
           %p.help
             in Euro
         .field.is-expanded
@@ -77,7 +77,7 @@
           %p.control.is-expanded
             %input#seminar_royalty_participant.input.control.is-expanded(type="text" name="seminar[royalty_participant]" readonly=true value="#{@seminar.royalty_participant}")
           %p.help
-            Honorar in Euro
+            Honorar in Euro (wird noch gerunded)
         .field-label.is-normal
           %label.label(for="seminar_royalty_participant")
             Honorar pro Teilnehmer*in
@@ -89,7 +89,8 @@
 
       function setSeminarCost() {
         cost = parseFloat(costInputElement.value.replace(',','.').replace(' ',''))
-        royaltyElement.value = Math.round(cost * 0.67)
+        royaltyElement.value = (cost * 0.67).toFixed(2)
+        //Math.round(cost * 0.67)
       }
 
       costInputElement.oninput = setSeminarCost
@@ -101,7 +102,7 @@
       .field-body
         .field.is-expanded
           %p.control.is-expanded
-            %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]" value="#{(@seminar.royalty_participant_reduced.to_f/0.67).to_i}")
+            %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]" value="#{(@seminar.royalty_participant_reduced.to_f/0.67)}")
           %p.help
             für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 75% der normalen Seminarkosten.
         .field.is-expanded
@@ -111,7 +112,7 @@
           %p.control.is-expanded
             %input#seminar_royalty_participant_reduced.input.control.is-expanded(type="text" name="seminar[royalty_participant_reduced]" readonly=true value="#{@seminar.royalty_participant_reduced}")
           %p.help
-            Honorar in Euro
+            Honorar in Euro (wird noch gerundet)
         .field-label.is-normal
           %label.label(for="seminar_royalty_participant_reduced")
             Honorar pro ermäßigte*m Teilnehmer*in
@@ -123,7 +124,7 @@
 
       function setSeminarCostReduced() {
         cost = parseFloat(costReducedInputElement.value.replace(',','.').replace(' ',''))
-        royaltyReducedElement.value = Math.round(cost * 0.67)
+        royaltyReducedElement.value = (cost * 0.67).toFixed(2)
       }
 
       costReducedInputElement.oninput = setSeminarCostReduced
