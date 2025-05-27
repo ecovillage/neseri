@@ -93,14 +93,14 @@ class SeminarsController < NeseriController
       :alternative_dates,
       :accommodation,
       :cancellation_time, :cancellation_reason,
-      :attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring, 
+      :attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring,
       :accept_conditions,
       :room_wish_id,
       :room_extras, :room_material, :room_comment,
       :seminar_kind_id,
       :royalty_participant, :royalty_participant_reduced, :material_cost, :honorar,
       files: [],
-      seminar_instructors_attributes: [:id, :email, :main_contact, :contactable, :comment, :accommodation, :qualification, :_destroy, :lastname, :firstname, :address, :fax, :phone, :mobile, :homepage],
+      seminar_instructors_attributes: [:id, :email, :main_contact, :contactable, :comment, :accommodation, :qualification, :_destroy, :lastname, :firstname, :address, :phone, :mobile, :homepage],
     )
   end
 end

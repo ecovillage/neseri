@@ -12,7 +12,7 @@
             = idx+1
           = user_name(instructor.user)
         %table.table.is-small.is-round.is-fullwidth.is-narrow
-          - [:email, :firstname, :lastname, :address, :phone, :mobile, :homepage, :fax].each do |attr|
+          - [:email, :firstname, :lastname, :address, :phone, :mobile, :homepage].each do |attr|
             %tr
               %th.is-size-7= User.human_attribute_name(attr)
               %td.is-size-7= instructor.user.send(attr)
@@ -26,7 +26,7 @@
                 = t('seminar.publication.referee.from_legacy')
                 %h2.subtitle= "#{legacy_instructor[:firstname]} #{legacy_instructor[:lastname]}"
               %table.table.is-fullwidth
-                - [:email, :firstname, :lastname, :place, :zip, :address, :telephone, :cellphone, :homepage, :fax].each do |attr|
+                - [:email, :firstname, :lastname, :place, :zip, :address, :telephone, :cellphone, :homepage].each do |attr|
                   %tr
                     %th.is-size-7
                       = attr

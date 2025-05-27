@@ -51,7 +51,7 @@
           %td
             -#  delayed to next version, for now we pull address info
             -#- user = User.where(:id => instructor.user_id).first
-            - [:firstname, :lastname, :address, :fax, :phone, :mobile, :homepage].each do |attr|
+            - [:firstname, :lastname, :address, :phone, :mobile, :homepage].each do |attr|
               -#- if user.send(attr)
               - if instructor.send(attr)
                 %div
@@ -84,7 +84,7 @@
             -#  delayed to next version, for now we pull address info
             -# from instructor, not user profile
             -#- user = User.where(:id => instructor.user_id).first
-            - [:firstname, :lastname, :address, :fax, :phone, :mobile, :homepage].each do |attr|
+            - [:firstname, :lastname, :address, :phone, :mobile, :homepage].each do |attr|
               -#- if user.send(attr)
               - if instructor.send(attr)
                 %div
