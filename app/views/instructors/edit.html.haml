@@ -7,10 +7,8 @@
     = f.labeled_text_field :firstname, placeholder: t('instructor.placeholder.lastname')
     = f.labeled_text_field :lastname, placeholder: t('instructor.placeholder.lastname')
     = f.labeled_text_area "address", help_text: t('instructor.helptext.address')
-    = f.labeled_text_field "fax", icon: 'fa-fax'
     = f.labeled_text_field "phone", icon: 'fa-phone'
     = f.labeled_text_field "mobile", icon: 'fa-mobile'
     = f.labeled_text_field "homepage"
 
   = f.submit t(:save)
-

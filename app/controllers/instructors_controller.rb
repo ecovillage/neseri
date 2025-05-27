@@ -1,6 +1,6 @@
 class InstructorsController < NeseriController
   before_action :authenticate_user!
-  
+
   def show
     @instructor = current_user
     authorize! @instructor, with: InstructorPolicy
@@ -28,7 +28,6 @@ class InstructorsController < NeseriController
     params.require(:user).permit(:firstname,
       :lastname,
       :address,
-      :fax,
       :phone,
       :mobile,
       :homepage)

@@ -5,9 +5,9 @@
   .column.is-offset-3.is-6
     %table.table.is-fullwidth
       %tbody
-        - [:firstname, :lastname, :address, :fax, :phone, :mobile, :homepage].each do |attr|
+        - [:firstname, :lastname, :address, :phone, :mobile, :homepage].each do |attr|
           %tr
             %th= User.human_attribute_name(attr)
             %td= @instructor.send(attr)
-    
+
     = link_to t(:edit), edit_instructor_path, class: 'button is-primary'
