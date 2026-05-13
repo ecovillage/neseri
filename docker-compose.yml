@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    command: bash -lc "bundle check >/dev/null 2>&1 || bundle install && bin/rails server -b 0.0.0.0 -p 3000"
+    volumes:
+      - .:/app
+      - ./vendor:/app/vendor
+    ports:
+      - "3000:3000"
+    environment:
+      RAILS_ENV: development
+      BUNDLE_PATH: /app/vendor/bundle
+    stdin_open: true
+    tty: true
