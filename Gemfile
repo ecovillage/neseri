@@ -35,7 +35,7 @@ gem 'font-awesome-sass', '~> 6.5'
 gem 'jquery-rails'
 gem 'cocoon'
 
-gem 'pagy'
+gem 'pagy', '~> 8.0'
 
 gem 'action_policy'
 
