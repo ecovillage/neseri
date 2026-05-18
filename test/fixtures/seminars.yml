@@ -15,7 +15,6 @@
 #  cancellation_time           :integer          default(7)
 #  cancellation_reason         :string
 #  room_material               :string
-#  room_extras                 :string
 #  royalty_participant         :decimal(, )
 #  royalty_participant_reduced :decimal(, )
 #  material_cost               :decimal(, )
@@ -51,7 +50,6 @@ one:
   cancellation_time: 1
   cancellation_reason: MyString
   room_material: TV
-  room_extras: Beamer
   royalty_participant: 250.0
   royalty_participant_reduced: 150
   material_cost: 10
@@ -73,7 +71,6 @@ two:
   cancellation_time: 1
   cancellation_reason: MyString
   room_material: MyString
-  room_extras: MyString
   royalty_participant: 9.99
   royalty_participant_reduced: 9.99
   material_cost: 9.99

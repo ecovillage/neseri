@@ -10,8 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_05_10_181044) do
 
+=======
+ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
+>>>>>>> c764513 (Remove Seminar#room_extras and blend previously entered data)
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -78,6 +82,35 @@ ActiveRecord::Schema.define(version: 2019_05_10_181044) do
   end
 
   create_table "seminars", force: :cascade do |t|
+<<<<<<< HEAD
+=======
+    t.string "accommodation"
+    t.boolean "active", default: true
+    t.text "alternative_dates"
+    t.integer "attendees_maximum"
+    t.integer "attendees_minimum"
+    t.string "attendees_preconditions"
+    t.string "cancellation_reason"
+    t.integer "cancellation_time", default: 7
+    t.datetime "created_at", precision: nil, null: false
+    t.integer "creator_id"
+    t.text "description"
+    t.datetime "end_date", precision: nil
+    t.string "kind", default: "user"
+    t.boolean "locked", default: false
+    t.decimal "material_cost", precision: 8, scale: 2
+    t.text "other_extras"
+    t.string "please_bring"
+    t.datetime "privacy_terms_accepted_at", precision: nil
+    t.text "room_comment"
+    t.string "room_material"
+    t.integer "room_wish_id"
+    t.decimal "royalty_participant", precision: 8, scale: 2
+    t.decimal "royalty_participant_reduced", precision: 8, scale: 2
+    t.integer "seminar_kind_id"
+    t.datetime "start_date", precision: nil
+    t.string "subtitle"
+>>>>>>> c764513 (Remove Seminar#room_extras and blend previously entered data)
     t.string "title"
     t.string "subtitle"
     t.text "description"

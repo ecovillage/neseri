@@ -94,7 +94,7 @@
           %tr
             %th= Seminar.human_attribute_name(:room_wish)
             %td= @seminar.wished_room&.name
-        - [:room_comment, :room_material, :room_extras].each do |attr|
+        - [:room_comment, :room_material].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
