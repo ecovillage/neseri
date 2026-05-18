@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_18_084661) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.integer "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -106,7 +106,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_18_084661) do
     t.datetime "updated_at", precision: nil, null: false
   end
 
-  create_table "seminars", id: :integer, default: nil, force: :cascade do |t|
+  create_table "seminars", force: :cascade do |t|
     t.string "accommodation"
     t.boolean "active", default: true
     t.text "alternative_dates"
@@ -126,7 +126,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_18_084661) do
     t.string "please_bring"
     t.datetime "privacy_terms_accepted_at", precision: nil
     t.text "room_comment"
-    t.string "room_extras"
     t.string "room_material"
     t.integer "room_wish_id"
     t.decimal "royalty_participant", precision: 8, scale: 2

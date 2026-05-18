@@ -15,7 +15,6 @@
 #  cancellation_time           :integer          default(7)
 #  cancellation_reason         :string
 #  room_material               :string
-#  room_extras                 :string
 #  royalty_participant         :decimal(, )
 #  royalty_participant_reduced :decimal(, )
 #  material_cost               :decimal(, )
