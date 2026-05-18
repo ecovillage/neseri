@@ -86,7 +86,7 @@ de:
       end_date: (Seminararbeitszeit, nicht Abreisezeit).
       cancellation_time: bei geringem Anmeldestand (Standard min. 7 Tage vor Seminarbeginn), in Tagen (nur wenn abweichend von 7 Tagen vor Seminarbeginn)
       attendees_minimum: Inklusive Regionalplatz
-      room_material: Der Raum wird spätestens eine Stunde vor Seminarbeginn zur Verfügung stehen und ist ausgestattet mit Moderationskoffer, Flipchart, Stiften und Papier. Besondere Wünsche, z.B. Beamer, DVD-Spieler, besondere Materialien bitte oben eintragen. Bitte sprich das Gäste-Team rechtzeitig an, wenn du Unterstützung benötigst.
+      room_material: Der Raum wird i.d.R. zwei Stunden vor Seminarbeginn zur Verfügung stehen und ist ausgestattet mit Moderationskoffer, WLAN, Flipchart, Stiften, Papier, Musikanlage und Beamer. Besondere Wünsche, z.B. DVD-Spieler, Laptop, Tische, besondere Materialien bitte oben eintragen. Bitte sprich das Gäste-Team rechtzeitig an, wenn du Unterstützung benötigst.
       room_extras: z.B. Internetzugang für Teilnehmer*innen
       attendees_minimum: 'Inklusive Regionalplatz'
       royalty_participant: in Euro
