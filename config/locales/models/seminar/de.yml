@@ -24,6 +24,8 @@ de:
         room_material: Zusätzliche Ausstattung und sonstige Extras
         royalty_participant: Honorar pro Teilnehmer*in
         royalty_participant_reduced: Ermäßigtes Honorar pro Teilnehmer*in
+        cost_participant: Seminarkosten für Teilnehmer*in
+        cost_participant_reduced: Ermäßigte Seminarkosten für Teilnehmer*in
         material_cost: Materialkosten
         creator: erstellt von
         seminar_kind: Art
@@ -33,6 +35,7 @@ de:
         room_wish_id: Seminar-Raumwunsch
         wished_room: Seminar-Raumwunsch
         updated_at: Zuletzt geändert am
+        media_coverage_links: Links zu Medienbeiträgen
     errors:
       models:
         seminar:

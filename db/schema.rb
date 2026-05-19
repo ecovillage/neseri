@@ -12,6 +12,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_05_10_181044) do
 
 =======
@@ -20,6 +21,9 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
 =======
 ActiveRecord::Schema[8.1].define(version: 2026_05_19_123822) do
 >>>>>>> 888641a (Add cost_participant to seminar table)
+=======
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_135144) do
+>>>>>>> e93eb25 (Add Seminar#media_coverage_links)
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -105,6 +109,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_19_123822) do
     t.string "kind", default: "user"
     t.boolean "locked", default: false
     t.decimal "material_cost", precision: 8, scale: 2
+    t.text "media_coverage_links"
     t.text "other_extras"
     t.string "please_bring"
     t.datetime "privacy_terms_accepted_at", precision: nil
