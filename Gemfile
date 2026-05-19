@@ -1,62 +1,47 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '>= 2.6.1'
+ruby '>= 3.2'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.0.2'
-# Use Puma as the app server
-gem 'puma', '~> 4.3.8'
-# Use SCSS for stylesheets
-gem 'sass-rails', '>= 6.0'
-# Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
-# See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'mini_racer', platforms: :ruby
+gem 'rails', '~> 8.0'
+gem 'puma', '~> 6.4'
+gem 'sass-rails', '~> 6.0'
+gem 'sprockets-rails'
 
-# Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 5'
-# Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
 gem 'turbolinks', '~> 5'
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
-# Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
-# Use ActiveModel has_secure_password
-# gem 'bcrypt', '~> 3.1.7'
+gem 'jbuilder', '~> 2.11'
 
 gem 'pg'
 
-gem 'image_processing', '~> 1.2'
+gem 'image_processing', '~> 1.12'
 
-gem 'rails-i18n', '~> 6.0'
+gem 'rails-i18n', '~> 8.0'
 
 gem 'devise'
 gem 'devise-i18n'
 
-gem 'devise_invitable', '~> 2.0.0'
+gem 'devise_invitable', '~> 2.0'
 
 gem 'pretender'
 
 gem 'haml'
 gem 'haml-rails'
 
-source 'https://rails-assets.org' do
-  gem 'rails-assets-bulma'
-end
+gem 'bulma-rails', '~> 0.9.4'
+# TODO: Check if the functionality provided by this gem could be available in
+# bulma oder bulma-rails by now. Then replace gem and usages throughout codebase.
+gem 'bulma_form_builder', git: 'https://github.com/meismann/bulma_form_builder.git'
 
-gem 'bulma_form_builder', git: 'https://github.com/fwolfst/bulma_form_builder.git'
+gem 'font-awesome-sass', '~> 6.5'
 
-gem 'font-awesome-sass', '~> 5.8.1'
-
-gem 'jquery-rails' # unfortunately needed for cocoon
+gem 'jquery-rails'
 gem 'cocoon'
 
-gem 'pagy'
+gem 'pagy', '~> 8.0'
 
-gem 'action_policy', '~> 0.4'
+gem 'action_policy'
 
-gem "actionnav", "~> 1.0.0"
+gem 'actionnav'
 
 gem 'clowne'
 
@@ -64,43 +49,24 @@ gem 'ahoy_email'
 
 gem 'rest-client'
 
-# Use ActiveStorage variant
-# gem 'mini_magick', '~> 4.8'
-
-# Use Capistrano for deployment
-# gem 'capistrano-rails', group: :development
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  # Use sqlite3 as the database for Active Record
-  # version because of rails/rails#35153
-  gem 'sqlite3', '~> 1.4'
+  gem 'sqlite3', '~> 2.0'
 end
 
 group :development do
-  # Access an interactive console on exception pages or by calling 'console' anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'spring-watcher-listen', '~> 2.0.0'
+  gem 'web-console'
+  gem 'listen'
   gem 'annotate'
-  gem "better_errors"
-  gem "binding_of_caller"
-  #gem 'mailcatcher'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
-  # Adds support for Capybara system testing and selenium driver
-  gem 'capybara', '>= 2.15'
+  gem 'capybara'
   gem 'selenium-webdriver'
-  # Easy installation and use of chromedriver to run system tests with Chrome
-  gem 'webdrivers'
 end
 
-# Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
