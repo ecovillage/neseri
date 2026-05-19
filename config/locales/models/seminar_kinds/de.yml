@@ -4,7 +4,3 @@ de:
       seminar_kind:
         one: Art
         other: Veranstaltungs-Arten
-    attributes:
-      seminar:
-        name: Name
-        description: (interne) Beschreibung
