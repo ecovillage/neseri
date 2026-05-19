@@ -11,6 +11,7 @@
     = f.double_text_input :title, classes: "copy"
     = f.double_text_input :subtitle, classes: "copy"
     = f.double_text_area :description, classes: "copy", size: 12
+    = f.double_text_area :media_coverage_links, classes: "copy", size: 4
 
   .box
     %h2.subtitle.has-text-centered
@@ -64,9 +65,11 @@
       = t('seminar.form.section.costs.title')
       %span.icon
         %i.fa.fa-money
-    = f.double_text_input "royalty_participant", classes: "copy"
-    = f.double_text_input "royalty_participant_reduced", classes: "copy"
-    = f.double_text_input "material_cost", classes: "copy"
+    = f.double_text_input :royalty_participant, classes: "copy"
+    = f.double_text_input :royalty_participant_reduced, classes: "copy"
+    = f.double_text_input :cost_participant, classes: "copy"
+    = f.double_text_input :cost_participant_reduced, classes: "copy"
+    = f.double_text_input :material_cost, classes: "copy"
 
   .box
     %h2.subtitle.has-text-centered

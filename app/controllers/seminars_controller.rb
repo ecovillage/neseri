@@ -98,6 +98,7 @@ class SeminarsController < NeseriController
       :room_wish_id,
       :room_material, :room_comment,
       :seminar_kind_id,
+      :media_coverage_links,
       :cost_participant, :cost_participant_reduced,
       :royalty_participant, :royalty_participant_reduced, :material_cost, :honorar,
       files: [],

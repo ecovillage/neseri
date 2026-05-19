@@ -49,7 +49,7 @@
                 %span.icon
                   %i.fa.fa-star
                 = t('seminar.form.section.publication')
-          - [:title, :subtitle, :description].each do |attr|
+          - [:title, :subtitle, :description, :media_coverage_links].each do |attr|
             %tr
               %th= Seminar.human_attribute_name(attr)
               %td= @seminar.send(attr)
@@ -85,10 +85,10 @@
             %th= Seminar.human_attribute_name(attr)
             %td= @seminar.send(attr)
         %tr
-          %th Seminarkosten für Teilnehmer*in
+          %th= Seminar.human_attribute_name(:cost_participant)
           %td= @seminar.cost_participant.to_i
         %tr
-          %th Ermäßigte Seminarkosten für Teilnehmer*in
+          %th= Seminar.human_attribute_name(:cost_participant_reduced)
           %td= @seminar.cost_participant_reduced.to_i
   .column.is-6
     %table.table.box.is-fullwidth
