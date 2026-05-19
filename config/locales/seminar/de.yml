@@ -92,13 +92,20 @@ de:
       royalty_participant_reduced: 'für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 75% der normalen Seminarkosten.'
       accommodation: "In der Regel: Gästezimmer"
       alternative_dates: So weit gefasst wie möglich, z.B. Quartal, Monat
+      material_cost: … pro Teilnehmer*in, die ggf. gesondert gezahlt sollen, z.B. Holz zum Schnitzen
     form:
       section:
         publication: Veröffentlichung im Seminarprogramm
         dates: Gewünschter Termin
         participants: Teilnehmer*innen
         infrastructure: Infrastrukturelles
-        costs: Kosten
+        costs: 
+          title: Kosten
+          tabs:
+            in_person_seminar: Präsenzseminar (max. 2-teilig)
+            year_group: Jahresgruppe (ab drei Teile)
+            online_seminar: Online-Seminar
+            none_selected: Um Kosten anzugeben, wähl bitte einen Seminartyp aus.
         main_referee: Referent*in
         referees: Referent*innen
         files: Anhänge
