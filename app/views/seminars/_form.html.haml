@@ -146,10 +146,12 @@
       royaltyFactorLabels = document.querySelectorAll('.royalty-factor');
 
       function setSeminarCost() {
+        if (!costInputElement.value) return;
         cost = parseFloat(costInputElement.value.replace(',','.').replace(' ',''))
         royaltyElement.value = (cost * royaltyFactor).toFixed(2)
       }
       function setSeminarCostReduced() {
+        if (!costReducedInputElement.value) return;
         cost = parseFloat(costReducedInputElement.value.replace(',','.').replace(' ',''))
         royaltyReducedElement.value = (cost * royaltyFactor).toFixed(2)
       }
