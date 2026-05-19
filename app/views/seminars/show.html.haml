@@ -78,8 +78,8 @@
           %th(colspan=2)
             %h2.subtitle 
               %span.icon
-                %i.fa.fa-money
-              = t('seminar.form.section.costs')
+                %i.fa.fa-credit-card
+              = t('seminar.form.section.costs.title')
         - [:royalty_participant, :royalty_participant_reduced, :material_cost].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
