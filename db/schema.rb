@@ -11,11 +11,15 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 2019_05_10_181044) do
 
 =======
 ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
 >>>>>>> c764513 (Remove Seminar#room_extras and blend previously entered data)
+=======
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_123822) do
+>>>>>>> 888641a (Add cost_participant to seminar table)
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -92,6 +96,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
     t.string "attendees_preconditions"
     t.string "cancellation_reason"
     t.integer "cancellation_time", default: 7
+    t.decimal "cost_participant", precision: 8, scale: 2
+    t.decimal "cost_participant_reduced", precision: 8, scale: 2
     t.datetime "created_at", precision: nil, null: false
     t.integer "creator_id"
     t.text "description"
