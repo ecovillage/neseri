@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
+ActiveRecord::Schema[8.1].define(version: 2026_05_19_123822) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.integer "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -115,6 +115,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_05_18_085900) do
     t.string "attendees_preconditions"
     t.string "cancellation_reason"
     t.integer "cancellation_time", default: 7
+    t.decimal "cost_participant", precision: 8, scale: 2
+    t.decimal "cost_participant_reduced", precision: 8, scale: 2
     t.datetime "created_at", precision: nil, null: false
     t.integer "creator_id"
     t.text "description"
