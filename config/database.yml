@@ -19,10 +19,14 @@ test:
   database: db/test.sqlite3
 
 production:
-  adapter: postgresql
-  encoding: unicode
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
-  url: <%= ENV['DATABASE_URL'] %>
+  database: db/production.sqlite3
+  #adapter: postgresql
+  #encoding: unicode
+  #timeout: 5000
+  #url: <%= ENV['DATABASE_URL'] %>
   #database: neseri
   #username: neseri
   #password: <%= ENV['NESERITU_DATABASE_PASSWORD'] %>
