@@ -27,8 +27,8 @@
 /public/assets
 .byebug_history
 
-# Ignore master key for decrypting credentials and more.
-/config/master.key
+# Ignore master and prod keys for decrypting credentials and more.
+*.key
 
 *.swp
 *.json
