@@ -81,7 +81,7 @@ de:
       title: Name des Seminars
       subtitle: Untertitel des Seminars
     helptext:
-      description: "Max. 1200 Zeichen. Gliederung: Einführung in Thema - Inhalte und Ablauf - Welche Kompetenzen/Fähigkeiten/Wissen wird erworben - Methoden."
+      description: "Max. 1800 Zeichen. Gliederung: Einführung in Thema - Inhalte und Ablauf - Welche Kompetenzen/Fähigkeiten/Wissen wird erworben - Methoden."
       start_date: (Seminararbeitszeit, nicht Anreisezeit). Seminare beginnen bei uns i. d. R. um 20:00 Uhr und enden am Abreisetag nach dem Mittagessen. Davon weichen wir nur in besonderen Fällen ab z.B. Beginn schon vor dem Abendessen, Abreise nach dem Frühstück.
       end_date: (Seminararbeitszeit, nicht Abreisezeit).
       cancellation_time: bei geringem Anmeldestand (Standard min. 7 Tage vor Seminarbeginn), in Tagen (nur wenn abweichend von 7 Tagen vor Seminarbeginn)

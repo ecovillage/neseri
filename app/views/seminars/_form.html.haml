@@ -10,7 +10,7 @@
         %i.fa.fa-star
     = f.labeled_text_field :title, placeholder: t('seminar.placeholder.title')
     = f.labeled_text_field :subtitle, placeholder: t('seminar.placeholder.subtitle')
-    = f.labeled_text_area :description, help_text: t('seminar.helptext.description')
+    = f.labeled_text_area :description, help_text: t('seminar.helptext.description'), maxlength: 1800
     = f.labeled_text_area :media_coverage_links, help_text: t('seminar.helptext.media_coverage_links'), size: 2
 
   .box

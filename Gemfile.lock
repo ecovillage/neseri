@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/fwolfst/bulma_form_builder.git
-  revision: 3545d5c4db432c290e7c1fd7e8879bb9e4a8a199
+  revision: cfe542b10590262fc9f5958a99ca427968e34602
   specs:
-    bulma_form_builder (0.2.1)
+    bulma_form_builder (0.2.2)
       rails (>= 6.0.2)
 
 GEM
