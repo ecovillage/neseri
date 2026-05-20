@@ -84,23 +84,14 @@
         .field-body
           .field.is-expanded
             %p.control.is-expanded
-              %input#seminar_cost_participant.input.control.is-expanded{
-                type: "text",
-                name: "seminar[cost_participant]",
-                value: @seminar.cost_participant
-              }
+              %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]" value="#{@seminar.cost_participant}")
             %p.help
               in Euro
           .field.is-expanded
             %p.is-expanded.royalty-factor
           .field.is-expanded
             %p.control.is-expanded
-              %input#seminar_royalty_participant.input.control.is-expanded{
-                type: "text",
-                name: "seminar[royalty_participant]",
-                readonly: true,
-                value: @seminar.royalty_participant
-              }
+              %input#seminar_royalty_participant.input.control.is-expanded(type="text" name="seminar[royalty_participant]" readonly=true value="#{@seminar.royalty_participant}")
             %p.help
               Honorar in Euro (wird noch gerunded)
           .field-label.is-normal
@@ -114,23 +105,14 @@
         .field-body
           .field.is-expanded
             %p.control.is-expanded
-              %input#seminar_cost_participant_reduced.input.control.is-expanded{
-                type: "text",
-                name: "seminar[cost_participant_reduced]",
-                value: @seminar.cost_participant_reduced
-              }
+              %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]" value="#{@seminar.cost_participant_reduced}")
             %p.help
               für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 75% der normalen Seminarkosten.
           .field.is-expanded
             %p.is-expanded.royalty-factor
           .field.is-expanded
             %p.control.is-expanded
-              %input#seminar_royalty_participant_reduced.input.control.is-expanded{
-                type: "text",
-                name: "seminar[royalty_participant_reduced]",
-                readonly: true,
-                value: @seminar.royalty_participant_reduced
-              }
+              %input#seminar_royalty_participant_reduced.input.control.is-expanded(type="text" name="seminar[royalty_participant_reduced]" readonly=true value="#{@seminar.royalty_participant_reduced}")
             %p.help
               Honorar in Euro (wird noch gerundet)
           .field-label.is-normal
