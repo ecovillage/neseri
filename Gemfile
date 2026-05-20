@@ -45,7 +45,7 @@ source 'https://rails-assets.org' do
   gem 'rails-assets-bulma'
 end
 
-gem 'bulma_form_builder', git: 'https://github.com/fwolfst/bulma_form_builder.git'
+gem 'bulma_form_builder', git: 'https://github.com/meismann/bulma_form_builder.git'
 
 gem 'font-awesome-sass', '~> 5.8.1'
 
