@@ -73,7 +73,7 @@ Works fine with dokku.
 
 ## Development
 
-`neseri` is currently developed using Ruby 2.6.1 and Rails 5.x.
+`neseri` is currently developed using Ruby 2.6.3 and Rails 6.x.
 It uses a pretty standard Ruby on Rails stack.
 
 To get started, `git checkout` the code, `bundle` to install the required ruby gems, `db:setup` the database and `rails s` the server.
@@ -134,3 +134,6 @@ TBD
 
 Data can be "exported" into Sieben Lindens legacy system.  This is done via simple JSON pushes (the legacy system involves a CouchDB).
 
+### As of 2026
+
+New Rails and Ruby versions cannot be run on the rather old server, while old Rails (because of some dependencies) cannot be run on a new development workstation. To get code developed and tested locally, use the single commit out of the branch `dockerise-and-update`. It contains a dockerised Rails 8 version with most gems up to date and should always be (that single) one commit ahead of `master`. When developing, checkout a new branch from it and develop there. When it is time to raise a pull request, rebase on `master` interactively and remove the update-commit that came from `dockerise-and-update`. When the PR is through, rebase `dockerise-and-update` to be ahead of `master` again.
