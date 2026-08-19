@@ -40,7 +40,11 @@
           - [:title, :subtitle, :description].each do |attr|
             %tr
               %th= Seminar.human_attribute_name(attr)
-              %td= @seminar.send(attr)
+              %td
+                - if attr == :description
+                  = simple_format(@seminar.send(attr), {}, wrapper_tag: 'span')
+                - else
+                  = @seminar.send(attr)
 
   .column.is-6
     %table.table.is-fullwidth.box
