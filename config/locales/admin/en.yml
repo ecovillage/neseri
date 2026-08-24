@@ -1,0 +1,21 @@
+en:
+  admin:
+    mails: Emails
+    proposed_seminars: Proposals
+    sent_mails: Sent emails
+    seminar:
+      edit: Edit admin copy
+      admin_copy:
+        is_already: Already an admin copy
+        created: Admin copy prepared
+        has_already: Admin copy already exists
+      search_page: Seminar search
+      search:
+        results:
+          Search results
+    mails_table:
+      to: To
+      subject: Subject
+      sent_at: sent on
+      mailer: Mailer
+      content: Content

@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    models:
+      room:
+        one: Room
+        other: Rooms
+  room:
+    create: Create new event room
+    placeholder:
+      name: Room name
+  rooms:
+    create:
+      success: Room created

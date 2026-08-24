@@ -45,4 +45,4 @@ de:
             base:
               file_too_big: Angehängte Datei zu groß!
             end_date:
-              must_be_before_start_date: muss nach der Startzeit liegen
+              must_be_after_start_date: muss nach der Startzeit liegen

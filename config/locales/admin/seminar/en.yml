@@ -1,0 +1,8 @@
+en:
+  seminar:
+    view_admin_copy: View admin copy
+    create_admin_copy: Create admin copy
+  admin:
+    seminar:
+      current_proposals: Current proposals
+      past_proposals: Older proposals

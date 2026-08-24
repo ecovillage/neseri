@@ -1,0 +1,16 @@
+en:
+  activerecord:
+    models:
+      user:
+        one: User
+        other: Users
+    attributes:
+      user:
+        firstname: First name
+        lastname: Last name
+        address: Address
+        fax: Fax
+        phone: Phone number
+        mobile: Mobile number
+        homepage: Website
+        tos_agreement: Privacy policy and terms of service

@@ -1,0 +1,111 @@
+en:
+  activerecord:
+    models:
+      seminar:
+        one: Seminar proposal
+        other: Seminar proposals
+  helpers:
+    submit:
+      seminar:
+        create: Create new seminar proposal
+        update: Save seminar proposal
+  seminar:
+    view_user_version: View original
+    publish: Publish
+    publication:
+      select_referees_and_publish: Select instructors and publish
+      view_in_legacy_system: View in legacy system
+      referee:
+        from_neseri: In neseri
+        from_legacy: In legacy system
+        view_in_legacy_system: View in legacy system
+        choose: Select
+        change: Select
+        create: Create new
+        recreate: New
+    tags:
+      locked: locked
+      is-admin: (admin copy)
+      has_admin_seminar: has admin copy
+      is-pulled-back: withdrawn
+      is-published: published
+    files_text_html: "<b>Photos</b>: please upload them or send them to <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Please include a digital portrait photo of yourself for the website, at least 200 px in width or height. It will be shown cropped to a circle on the website. If available, feel free to add other photos that fit the seminar too (though there's no guarantee they'll be used on the website). It helps if the images are already in the right aspect ratio (720px x 340px), otherwise we'll try to crop them. Bigger is always better than smaller here. File size should be at least 1 MB. <a href=\"https://siebenlinden.org/wp-content/uploads/2021/06/Vorgaben_Bilder_Webseite.pdf\">Further notes and illustrated examples</a>. Please make sure the image rights allow the photos to be used for event promotion and public relations.</br>Other files relevant to the event (e.g. packing lists, info texts for emails, ...) can also be attached."
+    user_actions: Actions
+    conditions: Conditions
+    conditions_text_html: |
+      The instructor(s) agree to make <b>one seminar place (regional place)</b> available <b>free of charge</b> for people living in Sieben Linden. This person supports the instructor(s) and, where applicable, participants with practical questions and informs participants about Sieben Linden on request.</p>
+      <p>If the seminar is cancelled by the instructor(s) without a case of force majeure (e.g. serious illness) before the agreed cancellation deadline, the instructor(s) shall pay a <b>cancellation fee</b> of €200. This fee is also due if a replacement event was found for the date, or the seminar date was rescheduled.</p>
+      <p>If the seminar does not take place due to too few registrations, the cancellation fee to be paid by the instructor(s) is €50 for events of up to 5 days, and €100 from 6 days on. The instructor(s) shall submit a schedule/concept of the seminar to the education office no later than 14 days after the seminar takes place.</p>
+      <p>Working as an instructor within the submitted seminar offer constitutes <b>self-employed work on a fee basis</b>.</p>
+      <h4>Data protection</h4>
+      <p>By taking on my/our role as instructor(s) for Freundeskreis Ökodorf e.V., I/we accept the following conditions:</p>
+      <ol>
+         <li>
+            <b>Purpose limitation:</b><br/>
+            The personal data of participants provided to us (e.g. name, email address) may only be used to prepare, run, and follow up on the specifically named seminar.
+         </li>
+         <li><b>No disclosure:</b><br/>
+            Passing the data on to third parties, or using it for other purposes (e.g. advertising, own offers), is not permitted.
+         </li>
+         <li><b>Deletion:</b><br/>
+            After the seminar has ended and its communication purpose has been fulfilled, all personal data received must be deleted promptly and in a data-protection-compliant manner.
+         </li>
+         <li><b>Data protection compliance:</b><br/>
+            The provisions of the General Data Protection Regulation (GDPR) and the German Federal Data Protection Act (BDSG) apply. Instructors are responsible for handling the data securely.
+         </li>
+      </ol>
+      <p><b>Image rights: </b>The passage on "image rights" in the <a href="https://siebenlinden.org/de/seminare/agb/">terms and conditions</a> for seminar participants applies equally to instructors.
+      </p>
+      <p><big><b>My co-instructors have been informed of these terms and confirm them.</b></big></p>
+    has_admin_copy_link_html: <a href="%{admin_copy_path}">View admin copy</a>
+    create_admin_copy: Create admin copy
+    new: Create new seminar proposal
+    edit: Edit proposal
+    files: Attachments
+    of_original: of the original
+    is-locked: This event proposal is currently being processed by the education office.
+    pull_back: Withdraw seminar proposal
+    pulled_back: Seminar proposal withdrawn
+    saved: Seminar proposal saved
+    placeholder:
+      title: Name of the seminar
+      subtitle: Subtitle of the seminar
+    helptext:
+      description: "Max. 1800 characters. Structure: introduction to the topic - content and schedule - which skills/abilities/knowledge will be gained - methods."
+      start_date: (Seminar working hours, not travel time). Our seminars usually start at 8:00 pm and end on the departure day after lunch. We only deviate from this in special cases, e.g. starting before dinner, departure after breakfast.
+      end_date: (Seminar working hours, not departure time).
+      cancellation_time: for low registration numbers (default min. 7 days before the seminar starts), in days (only if different from 7 days before the seminar starts)
+      attendees_minimum: Including regional place
+      room_material: The room will generally be available two hours before the seminar starts and comes equipped with a facilitation kit, WiFi, flipchart, pens, paper, sound system, and a projector. Please note special requests above, e.g. DVD player, laptop, tables, special materials. Please contact the guest team in good time if you need support.
+      royalty_participant: in euros
+      royalty_participant_reduced: 'for participants who also receive a social discount from the Freundeskreis. No more than 75% of the normal seminar cost.'
+      accommodation: "Usually: guest room"
+      alternative_dates: As broad as possible, e.g. quarter, month
+      material_cost: … per participant, to be paid separately where applicable, e.g. wood for carving
+      media_coverage_links: If there's a recent documentary, podcast, or online article/blog post about you and your work that directly relates to the seminar topic, please add the link here.
+    form:
+      section:
+        publication: Publication in the seminar program
+        dates: Preferred date
+        participants: Participants
+        infrastructure: Infrastructure
+        costs:
+          title: Costs
+          tabs:
+            in_person_seminar: In-person seminar (max. 2 parts)
+            year_group: Year group (three parts or more)
+            online_seminar: Online seminar
+            none_selected: To enter costs, please select a seminar type first.
+        main_referee: Instructor
+        referees: Instructors
+        files: Attachments
+        conditions: Conditions
+  seminars:
+    my: My seminars
+    past: Older seminar proposals
+    index:
+      created_at: Created on
+      preferred_date: Preferred date
+  no_own_seminars_yet: No seminars of your own to display yet
+  please_read_and_accept_below: Please read the following text carefully and accept it at the bottom of this page.
+  accept: Mark as read and accepted

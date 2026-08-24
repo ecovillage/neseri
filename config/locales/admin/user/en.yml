@@ -1,0 +1,12 @@
+en:
+  admin:
+    users:
+      name: Name
+      email: Email
+      seminars: Seminars
+      state: Status
+      actions: Actions
+      tags:
+        unconfirmed: Email unconfirmed
+        invitation_pending: Invitation pending
+        profile_missing: Profile missing

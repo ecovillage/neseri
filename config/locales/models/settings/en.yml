@@ -1,0 +1,22 @@
+en:
+  settings:
+    legacy_uri: Address of the legacy system
+    help_text:
+      legacy_uri: "For CouchDB e.g. http://localhost:5984/databasename"
+  activerecord:
+    models:
+      settings:
+        one: Settings
+        other: Settings
+      setting:
+        one: Settings
+        other: Settings
+    attributes:
+      settings:
+        key: Setting
+        value: Value
+        legacy_uri: Address of the legacy system
+      setting:
+        key: Setting
+        value: Value
+  settings_saved: Settings saved
