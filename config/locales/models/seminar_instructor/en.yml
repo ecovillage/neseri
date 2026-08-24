@@ -1,0 +1,22 @@
+en:
+  activerecord:
+    models:
+      seminar_instructor:
+        one: Instructor
+        other: Instructors
+    attributes:
+      seminar_instructor:
+        email: Email address
+        qualification: Qualification
+        comment: Comment
+        accommodation: Accommodation
+        contactable: Responsible for seminar organization
+        main_contact: Main contact?
+        firstname: First name
+        lastname: Last name
+        address: Address
+        phone: Phone number
+        mobile: Mobile number
+    errors:
+      models:
+        seminar_instructors:

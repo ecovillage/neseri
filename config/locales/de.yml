@@ -36,7 +36,8 @@ de:
   documentation: Documentation
   edit: Bearbeiten
   instructor_updated: Profil aktualisiert.
-  imporsonate: Anmelden als
+  impersonate: Anmelden als
+  cannot_impersonate_self: Du kannst dich nicht selbst als jemand anderes anmelden.
   lock: Sperren
   need_to_accept_to_use_service: Datenschutzerklärung und AGB müssen gelesen und zugestimmt werden.
   no_own_seminars_yet: Noch keine eigenen Seminare

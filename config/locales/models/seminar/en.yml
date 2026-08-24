@@ -1,0 +1,48 @@
+en:
+  activerecord:
+    models:
+      seminar:
+        one: Seminar
+        other: Seminars
+    attributes:
+      seminar:
+        title: Title
+        subtitle: Subtitle
+        description: Text for the seminar program
+        start_date: Start date and time
+        end_date: End date and time
+        alternative_dates: Alternative dates
+        cancellation_time: Special cancellation deadline
+        cancellation_reason: Reason
+        attendees_minimum: Minimum number of participants
+        attendees_maximum: Maximum number of participants
+        attendees_preconditions: Requirements for participation
+        accommodation: Accommodation for participants
+        accept_conditions: I accept these conditions
+        please_bring: What should participants bring?
+        room_comment: Comment on the seminar room
+        room_material: Additional equipment and other extras
+        royalty_participant: Fee per participant
+        royalty_participant_reduced: Reduced fee per participant
+        cost_participant: Seminar cost per participant
+        cost_participant_reduced: Reduced seminar cost per participant
+        material_cost: Material costs
+        creator: created by
+        seminar_kind: Type
+        seminar_kind_id: Type
+        seminar_instructors: Instructors
+        room_wish: Preferred seminar room
+        room_wish_id: Preferred seminar room
+        wished_room: Preferred seminar room
+        updated_at: Last changed on
+        media_coverage_links: Links to media coverage
+    errors:
+      models:
+        seminar:
+          attributes:
+            attendees_maximum:
+              must_be_greater_than_minimum: must be greater than the minimum number of participants
+            base:
+              file_too_big: Attached file is too big!
+            end_date:
+              must_be_after_start_date: must be after the start time

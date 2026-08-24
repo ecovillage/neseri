@@ -1,0 +1,7 @@
+en:
+  instructor:
+    placeholder:
+      lastname: Your last name
+      firstname: Your first name
+    helptext:
+      address: Address

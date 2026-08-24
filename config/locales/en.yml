@@ -1,3 +1,98 @@
 ---
 en:
-  hello: Hello world
+  accept: Mark as read and accepted
+  accept_tos: Terms and privacy policy read and accepted
+  admin_nav: Administration
+  admin_seminar_created: Admin copy created
+  admin_seminars: Admin copies
+  admin_seminars_click_here_html: Admin copies can be viewed <a href="%{admin_seminars_link}">here</a>
+  already_admin_seminar: Already has an admin copy
+  attachment:
+    deleted: Attachment deleted
+  back_to_mails: Back to emails
+  back_to_admin: Back as admin
+  change_password: Change password
+  clone: Create copy
+  contact:
+    contact: Send an email
+  copy_created: Copy created
+  could_not_save_instructor: Could not create instructor
+  create_admin_copy: Create admin copy
+  created_seminars: Created seminars
+  date:
+    formats:
+      mid_date: "%a, %b %d, %Y"
+      short_date: "%a %m/%d/%Y"
+      shorter_date: "%m/%d/%Y"
+  datetime:
+    formats:
+      mid: "%a, %b %d, %Y"
+      short_date: "%a %m/%d/%Y"
+      shorter_date: "%m/%d/%Y"
+  devise:
+    registrations:
+      new:
+        sign_up: Sign up
+  documentation: Documentation
+  edit: Edit
+  instructor_updated: Profile updated.
+  impersonate: Log in as
+  cannot_impersonate_self: You can't log in as yourself.
+  lock: Lock
+  need_to_accept_to_use_service: The privacy policy and terms of service must be read and agreed to.
+  no_own_seminars_yet: No seminars of your own yet
+  none: None
+  not_available_in_this_language: Not available in this language
+  notification:
+    nojs: You need to have JavaScript enabled to make changes in this application
+  nr: "No."
+  mail_all_referees: Write email to all instructors
+  pages:
+    about: About
+    contact: Contact
+    documentation: Documentation
+    impressum: Legal notice
+    privacy: Privacy
+  please_fill_out_profile_html: You are listed as an instructor, but we're missing your contact details. Please <a href="%{profile_path}">fill out your profile</a>.
+  please_read_and_accept_below: Please read the text carefully and confirm you've taken note of it at the bottom of the page.
+  publication:
+    connection_refused: Could not connect to the legacy system!
+  read_and_accepted_tos_html: <a href="%{privacy_path}">Terms and privacy policy</a> read and accepted
+  resend_confirmation_instructions: Resend instructions
+  room:
+    create: Create new room
+    deactivate: Hide
+    deactivated: "(hidden)"
+    reactivate: Reactivate
+  save: save
+  seminar_instructors:
+    add: Add instructor
+    remove: Remove instructor
+  seminar_kind:
+    create: Create new event type
+    deactivate: Hide
+    deactivated: "(hidden)"
+    reactivate: Reactivate
+  seminar_locked: Seminar locked
+  seminar_locked_failed: Seminar could not be locked
+  seminar_unlock_failed: Seminar could not be unlocked
+  seminar_unlocked: Seminar unlocked
+  send_mail: Send email
+  send_me_reset_password_instructions: Send instructions
+  reset_password_instructions: Send instructions for a new password
+  sessions:
+    destroy:
+      sign_out: Signed out successfully.
+  showing_mail: Show email
+  teaching_seminars: Seminars as (co-)instructor
+  time:
+    formats:
+      mid: "%a, %b %d, %Y %H:%M"
+      short_date: "%a %m/%d/%Y"
+      shorter_date: "%m/%d/%Y"
+  unauthorized: Not authorized to view this page!
+  unlock: Unlock
+  view: View
+  search_term: Search term
+  view_admin_copy: View admin copy
+  edit_your_instructor_data: Edit your contact details
