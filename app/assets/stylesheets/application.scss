@@ -17,3 +17,9 @@
 @import "bulma-form-builder";
 @import "font-awesome-sprockets";
 @import "font-awesome";
+
+.copy-icon {
+  cursor: pointer;
+  margin-left: 0.25rem;
+  transition: color 0.15s ease-in-out;
+}

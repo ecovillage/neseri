@@ -15,6 +15,7 @@ en:
   clone: Create copy
   contact:
     contact: Send an email
+  copy: Copy
   copy_created: Copy created
   could_not_save_instructor: Could not create instructor
   create_admin_copy: Create admin copy
