@@ -17,6 +17,8 @@ en:
         address: Address
         phone: Phone number
         mobile: Mobile number
+        homepage: Homepage
+        fax: Fax
     errors:
       models:
-        seminar_instructors:
+        seminar_instructor:

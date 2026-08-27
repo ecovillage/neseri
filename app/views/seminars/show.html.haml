@@ -38,6 +38,8 @@
 
 %br
 
+- admin = current_user.admin?
+
 .columns.is-multiline
   .column.is-12
     .box
@@ -57,6 +59,8 @@
                   = simple_format(@seminar.send(attr), {}, wrapper_tag: 'span')
                 - else
                   = @seminar.send(attr)
+                - if admin
+                  = copy_icon(@seminar.send(attr))
 
   .column.is-6
     %table.table.is-fullwidth.box
@@ -74,7 +78,10 @@
         - [:alternative_dates, :seminar_kind, :cancellation_time, :cancellation_reason].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
-            %td= @seminar.send(attr)
+            %td
+              = @seminar.send(attr)
+              - if admin && attr == :cancellation_reason
+                = copy_icon(@seminar.send(attr))
   .column.is-6
     %table.table.box.is-fullwidth
       %tbody
@@ -87,13 +94,22 @@
         - [:royalty_participant, :royalty_participant_reduced, :material_cost].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
-            %td= @seminar.send(attr)
+            %td
+              = number_with_precision(@seminar.send(attr), precision: 2)
+              - if admin
+                = copy_icon(number_with_precision(@seminar.send(attr), precision: 2))
         %tr
           %th= Seminar.human_attribute_name(:cost_participant)
-          %td= @seminar.cost_participant.to_i
+          %td
+            = number_with_precision(@seminar.cost_participant, precision: 2)
+            - if admin
+              = copy_icon(number_with_precision(@seminar.cost_participant, precision: 2))
         %tr
           %th= Seminar.human_attribute_name(:cost_participant_reduced)
-          %td= @seminar.cost_participant_reduced.to_i
+          %td
+            = number_with_precision(@seminar.cost_participant_reduced, precision: 2)
+            - if admin
+              = copy_icon(number_with_precision(@seminar.cost_participant_reduced, precision: 2))
   .column.is-6
     %table.table.box.is-fullwidth
       %tbody
@@ -106,7 +122,10 @@
         - [:attendees_minimum, :attendees_maximum, :attendees_preconditions, :please_bring].each do |attr|
           %tr
             %td= Seminar.human_attribute_name(attr)
-            %td= @seminar.send(attr)
+            %td
+              = @seminar.send(attr)
+              - if admin && [:attendees_preconditions, :please_bring].include?(attr)
+                = copy_icon(@seminar.send(attr))
     
   .column.is-6
     %table.table.box.is-fullwidth
@@ -123,7 +142,10 @@
         - [:room_comment, :room_material].each do |attr|
           %tr
             %th= Seminar.human_attribute_name(attr)
-            %td= @seminar.send(attr)
+            %td
+              = @seminar.send(attr)
+              - if admin
+                = copy_icon(@seminar.send(attr))
     
 
 .box

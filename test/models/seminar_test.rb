@@ -38,7 +38,7 @@ require 'test_helper'
 
 class SeminarTest < ActiveSupport::TestCase
   test "can be an admin_seminar (which is related to a user_seminar)" do
-    user_seminar = Seminar.new(title: 'Users Version', creator: users(:jane), start_date: DateTime.now, end_date: DateTime.now + 1)
+    user_seminar = Seminar.new(title: 'Users Version', creator: users(:jane), start_date: DateTime.now, end_date: DateTime.now + 1, cost_participant: 100)
     assert user_seminar.is_user_seminar?
 
     user_seminar.save!

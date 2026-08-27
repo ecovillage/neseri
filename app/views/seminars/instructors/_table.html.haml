@@ -1,3 +1,5 @@
+- admin = current_user.admin?
+
 %table.table.is-fullwidth.is-striped
   %tbody
     %tr
@@ -32,8 +34,13 @@
         %tr.is-selected
           %td
             = instructor.send(:email)
+            - if admin
+              = copy_icon(instructor.email)
           - [:qualification, :comment, :accommodation].each do |attr|
-            %td= instructor.send(attr)
+            %td
+              = instructor.send(attr)
+              - if admin
+                = copy_icon(instructor.send(attr))
           %td
             - if instructor.contactable
               %span.icon
@@ -58,6 +65,8 @@
                   %b= User.human_attribute_name(attr) + ":"
                   -#= user.send(attr)
                   = instructor.send(attr)
+                  - if admin
+                    = copy_icon(instructor.send(attr))
       - else
         %tr
           %td
@@ -65,8 +74,13 @@
               %span.icon
                 %i.fa.fa-envelope.fa-border
             = instructor.send(:email)
+            - if admin
+              = copy_icon(instructor.email)
           - [:qualification, :comment, :accommodation].each do |attr|
-            %td= instructor.send(attr)
+            %td
+              = instructor.send(attr)
+              - if admin
+                = copy_icon(instructor.send(attr))
           %td
             - if instructor.contactable
               %span.icon
@@ -91,3 +105,5 @@
                   %b= User.human_attribute_name(attr) + ":"
                   -#= user.send(attr)
                   = instructor.send(attr)
+                  - if admin
+                    = copy_icon(instructor.send(attr))

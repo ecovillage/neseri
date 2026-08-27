@@ -52,6 +52,8 @@ one:
   room_material: TV
   royalty_participant: 250.0
   royalty_participant_reduced: 150
+  cost_participant: 375.0
+  cost_participant_reduced: 225
   material_cost: 10
   kind: MyString
   uuid: MyString
@@ -73,6 +75,8 @@ two:
   room_material: MyString
   royalty_participant: 9.99
   royalty_participant_reduced: 9.99
+  cost_participant: 14.99
+  cost_participant_reduced: 9.99
   material_cost: 9.99
   kind: MyString
   uuid: MyString

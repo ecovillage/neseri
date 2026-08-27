@@ -84,7 +84,7 @@
         .field-body
           .field.is-expanded
             %p.control.is-expanded
-              %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]" value="#{@seminar.cost_participant}")
+              %input#seminar_cost_participant.input.control.is-expanded(type="text" name="seminar[cost_participant]" value="#{number_with_precision(@seminar.cost_participant, precision: 2)}")
             %p.help
               in Euro
           .field.is-expanded
@@ -105,7 +105,7 @@
         .field-body
           .field.is-expanded
             %p.control.is-expanded
-              %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]" value="#{@seminar.cost_participant_reduced}")
+              %input#seminar_cost_participant_reduced.input.control.is-expanded(type="text" name="seminar[cost_participant_reduced]" value="#{number_with_precision(@seminar.cost_participant_reduced, precision: 2)}")
             %p.help
               für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 75% der normalen Seminarkosten.
           .field.is-expanded
@@ -118,7 +118,8 @@
           .field-label.is-normal
             %label.label(for="seminar_royalty_participant_reduced")
               Honorar pro ermäßigte*m Teilnehmer*in
-      = f.labeled_text_field "material_cost", help_text: t('seminar.helptext.material_cost')
+      = f.horizontal_field_wrap "material_cost", help_text: t('seminar.helptext.material_cost') do |classes|
+        = f.text_field "material_cost", class: "input #{classes}", value: number_with_precision(@seminar.material_cost, precision: 2)
 
     :javascript
       var royaltyFactor = null;
@@ -127,16 +128,17 @@
       costReducedInputElement = document.getElementById('seminar_cost_participant_reduced');
       royaltyReducedElement   = document.getElementById("seminar_royalty_participant_reduced");
       royaltyFactorLabels = document.querySelectorAll('.royalty-factor');
+      royaltyFormatter = new Intl.NumberFormat(navigator.language, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
       function setSeminarCost() {
         if (!costInputElement.value) return;
         cost = parseFloat(costInputElement.value.replace(',','.').replace(' ',''))
-        royaltyElement.value = (cost * royaltyFactor).toFixed(2)
+        royaltyElement.value = royaltyFormatter.format(cost * royaltyFactor)
       }
       function setSeminarCostReduced() {
         if (!costReducedInputElement.value) return;
         cost = parseFloat(costReducedInputElement.value.replace(',','.').replace(' ',''))
-        royaltyReducedElement.value = (cost * royaltyFactor).toFixed(2)
+        royaltyReducedElement.value = royaltyFormatter.format(cost * royaltyFactor)
       }
       costInputElement.oninput = setSeminarCost
       costReducedInputElement.oninput = setSeminarCostReduced
