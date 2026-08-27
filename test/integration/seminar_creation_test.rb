@@ -9,7 +9,7 @@ class SeminarCreationTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select '.notification-alert' do
-      assert_select '.media-content', text: 'Sie müssen sich anmelden oder registrieren, bevor Sie fortfahren können.'
+      assert_select '.media-content', text: 'Sie müssen sich anmelden oder registrieren, um fortzufahren.'
     end
 
     post "/users/sign_in", params: {
@@ -22,7 +22,7 @@ class SeminarCreationTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_select '.notification' do
-      assert_select '.media-content', 'Erfolgreich angemeldet.'
+      assert_select '.media-content', 'Sie sind nun angemeldet.'
     end
 
     num_seminars = Seminar.count
@@ -32,6 +32,7 @@ class SeminarCreationTest < ActionDispatch::IntegrationTest
     post "/seminars", params: {
       seminar: {
         title: '',
+        cost_participant: '100',
       }
     }
 
@@ -45,7 +46,25 @@ class SeminarCreationTest < ActionDispatch::IntegrationTest
       seminar: {
         title: 'Minimum title',
         start_date: '2020-01-01',
-        start_date: '2020-01-02'
+        start_date: '2020-01-02',
+        cost_participant: '100',
+        cost_participant_reduced: '80'
+      }
+    }
+
+    assert_select '.notification.is-danger' do
+      assert_select 'li', 'Ermäßigte Seminarkosten für Teilnehmer*in darf höchstens 75 % der Seminarkosten für Teilnehmer*in betragen'
+    end
+
+    assert_equal num_seminars, Seminar.count
+
+    post "/seminars", params: {
+      seminar: {
+        title: 'Minimum title',
+        start_date: '2020-01-01',
+        start_date: '2020-01-02',
+        cost_participant: '100',
+        cost_participant_reduced: '75'
       }
     }
     assert_equal num_seminars + 1, Seminar.count

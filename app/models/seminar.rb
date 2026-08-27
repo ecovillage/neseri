@@ -37,6 +37,8 @@
 class Seminar < ApplicationRecord
   attr_accessor :accept_conditions
 
+  COST_PARTICIPANT_REDUCED_MAX_RATIO = 0.75
+
   belongs_to :creator, class_name: "User", optional: true
   belongs_to :seminar_kind, optional: true
 
@@ -63,6 +65,9 @@ class Seminar < ApplicationRecord
   validates :attendees_maximum, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
   validates :cancellation_time, numericality: { only_integer: true, greater_than: 0, allow_nil: true }
   validate :min_smaller_than_max
+
+  validates :cost_participant, presence: true
+  validate :cost_participant_reduced_not_too_high
 
   validate :file_sizes
 
@@ -94,9 +99,17 @@ class Seminar < ApplicationRecord
 
   def min_smaller_than_max
     return if attendees_minimum.blank? || attendees_maximum.blank?
-    
+
     if attendees_maximum < attendees_minimum
       errors.add(:attendees_maximum, :must_be_greater_than_minimum)
+    end
+  end
+
+  def cost_participant_reduced_not_too_high
+    return if cost_participant_reduced.blank? || cost_participant.blank?
+
+    if cost_participant_reduced > cost_participant * COST_PARTICIPANT_REDUCED_MAX_RATIO
+      errors.add(:cost_participant_reduced, :must_not_exceed_75_percent_of_cost_participant)
     end
   end
 

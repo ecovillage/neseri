@@ -36,6 +36,16 @@ en:
         wished_room: Preferred seminar room
         updated_at: Last changed on
         media_coverage_links: Links to media coverage
+      # Used when validation errors on nested seminar_instructors records are
+      # attributed to the parent seminar (e.g. "seminar_instructors.email");
+      # without this Rails falls back to an untranslated, humanized
+      # "Seminar instructors email" instead of "Instructor email address".
+      seminar/seminar_instructors:
+        email: Instructor email address
+        firstname: Instructor first name
+        lastname: Instructor last name
+        address: Instructor address
+        phone: Instructor phone number
     errors:
       models:
         seminar:
@@ -46,3 +56,5 @@ en:
               file_too_big: Attached file is too big!
             end_date:
               must_be_after_start_date: must be after the start time
+            cost_participant_reduced:
+              must_not_exceed_75_percent_of_cost_participant: must not exceed 75% of the seminar cost per participant
