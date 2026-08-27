@@ -47,6 +47,11 @@ gem 'ahoy_email'
 
 gem 'rest-client'
 
+# Used to check that an email address' domain has a real, IANA-registered
+# top-level domain (includes internationalized/IDN TLDs). No network access
+# required, the suffix list ships with the gem.
+gem 'public_suffix'
+
 gem 'bootsnap', require: false
 
 group :development, :test do

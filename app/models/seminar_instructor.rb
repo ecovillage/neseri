@@ -21,8 +21,10 @@ class SeminarInstructor < ApplicationRecord
 
   validates :seminar, presence: true
 
-  # or Devise.email_regexp; https://api.rubyonrails.org/v5.1/classes/ActiveModel/Validations/ClassMethods.html#method-i-validates
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  # Custom validator (app/validators/email_validator.rb): checks syntax
+  # *and* that the domain has a real, IANA-registered TLD (also accepts
+  # internationalized domains), which plain format regexps don't catch.
+  validates :email, presence: true, email: true
   validates :firstname, presence: true
   validates :lastname, presence: true
   validates :address, presence: true
@@ -34,7 +36,7 @@ class SeminarInstructor < ApplicationRecord
   after_validation :set_user, on: [ :create, :update ]
 
   def downcase_strip_email
-    self.email = self.email.downcase.strip
+    self.email = self.email.downcase.strip if self.email.present?
   end
 
   def set_user
