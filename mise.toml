@@ -1,2 +1,6 @@
+# mise (https://mise.jdx.dev) installs and pins Ruby, for local dev and
+# (via ansible/) for production alike - both just `mise install`/`mise exec`
+# straight out of a checkout of this repo, so this file is the one place a
+# Ruby version is pinned.
 [tools]
-ruby = "latest"
+ruby = "4.0.4"

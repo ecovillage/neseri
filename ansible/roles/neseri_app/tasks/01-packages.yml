@@ -1,0 +1,98 @@
+---
+# Everything apt needs to install once: base tools, Postgres, mise (installs
+# Ruby per-release - see 04-deploy.yml) and Caddy (both native this time -
+# no Docker).
+
+- name: Install base packages and native-gem build dependencies
+  ansible.builtin.apt:
+    name:
+      - git
+      - curl
+      - ca-certificates
+      - gnupg
+      - build-essential  # native gems (pg, ...) still compile from source
+      - autoconf         # via bundler regardless of how Ruby itself was
+      - bison             # installed; these also cover mise falling back to
+      - patch             # compiling Ruby from source when it has no
+      - pkg-config         # precompiled binary for a given version/platform.
+      - rustc          # needed to build Ruby's YJIT, if it comes to that
+      - libssl-dev
+      - libyaml-dev
+      - libreadline-dev
+      - zlib1g-dev
+      - libgmp-dev
+      - libncurses-dev
+      - libffi-dev
+      - libgdbm-dev
+      - libgdbm-compat-dev
+      - libpq-dev       # for the `pg` gem
+      - libvips         # for image processing
+      - python3-psycopg2 # for the community.postgresql ansible modules
+    state: present
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install postgres
+  ansible.builtin.apt:
+    name:
+      - postgresql
+      - postgresql-contrib
+    state: present
+
+- name: Ensure postgresql is enabled and running
+  ansible.builtin.systemd:
+    name: postgresql
+    state: started
+    enabled: true
+
+- name: Create the apt keyrings directory
+  ansible.builtin.file:
+    path: /etc/apt/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Download and dearmor the mise apt signing key
+  ansible.builtin.shell:
+    cmd: >-
+      curl -fsSL https://mise.jdx.dev/gpg-key.pub |
+      gpg --dearmor -o /etc/apt/keyrings/mise-archive-keyring.gpg
+  args:
+    creates: /etc/apt/keyrings/mise-archive-keyring.gpg
+
+- name: Add the mise apt repository
+  ansible.builtin.apt_repository:
+    repo: "deb [signed-by=/etc/apt/keyrings/mise-archive-keyring.gpg arch=amd64] https://mise.jdx.dev/deb stable main"
+    filename: mise
+    state: present
+
+- name: Install mise
+  ansible.builtin.apt:
+    name: mise
+    state: present
+
+- name: Ensure /usr/share/keyrings exists (caddy's repo file hardcodes a key path there)
+  ansible.builtin.file:
+    path: /usr/share/keyrings
+    state: directory
+    mode: "0755"
+
+- name: Download and dearmor the caddy apt signing key
+  ansible.builtin.shell:
+    cmd: >-
+      curl -fsSL https://dl.cloudsmith.io/public/caddy/stable/gpg.key |
+      gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+  args:
+    creates: /usr/share/keyrings/caddy-stable-archive-keyring.gpg
+
+- name: Add the caddy apt repository
+  ansible.builtin.get_url:
+    url: https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt
+    dest: /etc/apt/sources.list.d/caddy-stable.list
+    mode: "0644"
+  register: neseri_caddy_repo
+
+- name: Install caddy
+  ansible.builtin.apt:
+    name: caddy
+    state: present
+    update_cache: "{{ neseri_caddy_repo.changed }}"

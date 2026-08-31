@@ -1,0 +1,16 @@
+{{ ansible_managed | comment }}
+#
+# Internal edge for the app itself. TLS here is *not* a publicly-trusted
+# Let's Encrypt certificate - neseri.siebenlinden.org's DNS record points at
+# the Hostsharing Caddy, not at pfsense, so this box can never complete an
+# ACME HTTP-01/TLS-ALPN-01 challenge for that name. Instead Caddy mints its
+# own local-CA certificate ("tls internal"); the Hostsharing edge is handed
+# that CA's root certificate (see ansible/playbooks/caddy-edge.yml) so it can
+# validate this leg properly instead of disabling verification.
+{{ neseri_domain }} {
+	tls internal
+
+	encode gzip
+
+	reverse_proxy 127.0.0.1:3000
+}

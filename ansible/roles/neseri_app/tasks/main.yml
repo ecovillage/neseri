@@ -1,0 +1,27 @@
+---
+- name: Sanity-check that the vault was loaded
+  ansible.builtin.assert:
+    that:
+      - vault_rails_master_key is defined
+      - vault_postgres_password is defined
+    fail_msg: >-
+      inventory/group_vars/proxmox_container/vault.yml didn't decrypt. Pass
+      --ask-vault-pass or check ansible.cfg's vault_password_file.
+
+- name: Install system packages (build deps, postgres, mise, caddy)
+  ansible.builtin.import_tasks: 01-packages.yml
+
+- name: Create the deploy user and app directory layout
+  ansible.builtin.import_tasks: 02-user.yml
+
+- name: Set up the postgres role and database
+  ansible.builtin.import_tasks: 03-database.yml
+
+- name: Deploy the app (git pull, mise/bundle install, migrate, restart)
+  ansible.builtin.import_tasks: 04-deploy.yml
+
+- name: Configure the internal Caddy site
+  ansible.builtin.import_tasks: 05-caddy.yml
+
+- name: Configure the host firewall
+  ansible.builtin.import_tasks: 06-firewall.yml

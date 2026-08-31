@@ -1,0 +1,204 @@
+---
+# Capistrano-style layout: a fresh checkout per deploy under releases/,
+# `current` only flips to it once mise install/bundle install/precompile/
+# migrate all succeeded, and the last {{ neseri_keep_releases }} releases
+# stick around for a one-command rollback (point `current` at an older one,
+# restart).
+
+- name: Pick a release directory name
+  ansible.builtin.set_fact:
+    neseri_release: "{{ lookup('pipe', 'date -u +%Y%m%d%H%M%S') }}"
+
+- name: Build the app's runtime environment (shared across the systemd unit and this deploy's commands)
+  ansible.builtin.set_fact:
+    neseri_app_env:
+      RAILS_ENV: production
+      RAILS_LOG_TO_STDOUT: "true"
+      RAILS_SERVE_STATIC_FILES: "true"
+      RAILS_MAX_THREADS: "3"
+      DATABASE_URL: "postgresql://{{ postgres_db_user }}:{{ vault_postgres_password }}@127.0.0.1:5432/{{ postgres_db_name }}"
+      HOST: "{{ neseri_host }}"
+      MAILER_HOST: "{{ neseri_mailer_host }}"
+      SENDER_EMAIL: "{{ vault_sender_email }}"
+      SMTP_SERVER: "{{ vault_smtp_server }}"
+      SMTP_DOMAIN: "{{ vault_smtp_domain }}"
+      SMTP_PORT: "{{ vault_smtp_port }}"
+      SMTP_PWD: "{{ vault_smtp_pwd }}"
+      SMTP_USER: "{{ vault_smtp_user }}"
+  no_log: true
+
+- name: Write the Rails master key (shared across releases)
+  ansible.builtin.copy:
+    content: "{{ vault_rails_master_key }}"
+    dest: "{{ neseri_app_dir }}/shared/config/master.key"
+    owner: "{{ neseri_deploy_user }}"
+    mode: "0600"
+  no_log: true
+
+- name: Render config/database.yml (shared across releases)
+  ansible.builtin.template:
+    src: database.yml.j2
+    dest: "{{ neseri_app_dir }}/shared/config/database.yml"
+    owner: "{{ neseri_deploy_user }}"
+    mode: "0640"
+
+- name: Render the systemd EnvironmentFile (shared across releases)
+  ansible.builtin.template:
+    src: app.env.j2
+    dest: "{{ neseri_app_dir }}/shared/app.env"
+    owner: "{{ neseri_deploy_user }}"
+    mode: "0600"
+  no_log: true
+
+- name: Create the deploy user's .ssh directory
+  ansible.builtin.file:
+    path: "{{ neseri_app_dir }}/.ssh"
+    state: directory
+    owner: "{{ neseri_deploy_user }}"
+    group: "{{ neseri_deploy_user }}"
+    mode: "0700"
+
+- name: Generate the deploy SSH key (once - reused by every subsequent deploy)
+  ansible.builtin.command:
+    cmd: >-
+      ssh-keygen -t ed25519 -f {{ neseri_app_dir }}/.ssh/id_ed25519 -N ""
+      -C "neseri-deploy@{{ inventory_hostname }}"
+  args:
+    creates: "{{ neseri_app_dir }}/.ssh/id_ed25519"
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+
+- name: Read the deploy public key
+  ansible.builtin.slurp:
+    src: "{{ neseri_app_dir }}/.ssh/id_ed25519.pub"
+  register: neseri_deploy_pubkey
+
+- name: Show the deploy public key
+  ansible.builtin.debug:
+    msg: >-
+      If the clone below fails with "Permission denied (publickey)", add this
+      as a read-only deploy key at
+      https://github.com/{{ neseri_github_owner }}/{{ neseri_github_repo }}/settings/keys
+      (leave "Allow write access" unchecked) and rerun:
+      {{ neseri_deploy_pubkey.content | b64decode | trim }}
+
+- name: Trust GitHub's pinned SSH host key
+  ansible.builtin.known_hosts:
+    path: "{{ neseri_app_dir }}/.ssh/known_hosts"
+    name: github.com
+    key: "{{ neseri_github_ssh_host_key }}"
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+
+- name: Clone the app at {{ neseri_deploy_ref }}
+  ansible.builtin.git:
+    repo: "git@github.com:{{ neseri_github_owner }}/{{ neseri_github_repo }}.git"
+    dest: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
+    version: "{{ neseri_deploy_ref }}"
+    key_file: "{{ neseri_app_dir }}/.ssh/id_ed25519"
+    depth: 1
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+
+- name: Symlink shared config/storage into the new release
+  ansible.builtin.file:
+    src: "{{ neseri_app_dir }}/shared/{{ item }}"
+    dest: "{{ neseri_app_dir }}/releases/{{ neseri_release }}/{{ item }}"
+    state: link
+    force: true
+    owner: "{{ neseri_deploy_user }}"
+  loop:
+    - config/master.key
+    - config/database.yml
+    - storage
+
+- name: "Install this release's pinned Ruby via mise (reads mise.toml from the checkout itself)"
+  ansible.builtin.command:
+    cmd: "{{ neseri_mise_bin }} install"
+    chdir: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
+  environment:
+    HOME: "{{ neseri_app_dir }}"
+    # Every deploy's mise.toml lives at a new releases/<timestamp>/ path;
+    # trust the whole tree instead of an explicit `mise trust` per release.
+    MISE_TRUSTED_CONFIG_PATHS: "{{ neseri_app_dir }}"
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+  changed_when: true
+
+- name: bundle install (gems live in shared/bundle, so this only fetches the delta)
+  ansible.builtin.shell:
+    cmd: >-
+      {{ neseri_mise_bin }} exec -- bash -c '
+        bundle config set --local deployment true &&
+        bundle config set --local without "development test" &&
+        bundle config set --local path {{ neseri_app_dir }}/shared/bundle &&
+        bundle install --jobs {{ ansible_processor_vcpus | default(2) }} --retry 3
+      '
+    chdir: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
+  environment:
+    HOME: "{{ neseri_app_dir }}"
+    # Every deploy's mise.toml lives at a new releases/<timestamp>/ path;
+    # trust the whole tree instead of an explicit `mise trust` per release.
+    MISE_TRUSTED_CONFIG_PATHS: "{{ neseri_app_dir }}"
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+  changed_when: true
+
+- name: Precompile assets
+  ansible.builtin.command:
+    cmd: "{{ neseri_mise_bin }} exec -- bundle exec rails assets:precompile"
+    chdir: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
+  environment: "{{ neseri_app_env | combine({'HOME': neseri_app_dir, 'MISE_TRUSTED_CONFIG_PATHS': neseri_app_dir}) }}"
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+  no_log: true
+  changed_when: true
+
+- name: Prepare the database (create + migrate, idempotent)
+  ansible.builtin.command:
+    cmd: "{{ neseri_mise_bin }} exec -- bundle exec rails db:prepare"
+    chdir: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
+  environment: "{{ neseri_app_env | combine({'HOME': neseri_app_dir, 'MISE_TRUSTED_CONFIG_PATHS': neseri_app_dir}) }}"
+  become: true
+  become_user: "{{ neseri_deploy_user }}"
+  no_log: true
+  changed_when: true
+
+- name: Point `current` at the new release
+  ansible.builtin.file:
+    src: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
+    dest: "{{ neseri_app_dir }}/current"
+    state: link
+    force: true
+    owner: "{{ neseri_deploy_user }}"
+
+- name: Render the systemd unit
+  ansible.builtin.template:
+    src: neseri-puma.service.j2
+    dest: /etc/systemd/system/neseri-puma.service
+    mode: "0644"
+  register: neseri_unit
+
+- name: Reload systemd if the unit changed
+  ansible.builtin.systemd:
+    daemon_reload: true
+  when: neseri_unit.changed
+
+- name: Enable and restart the app (always restarts, even without changes above)
+  ansible.builtin.systemd:
+    name: neseri-puma
+    state: restarted
+    enabled: true
+
+- name: List existing releases
+  ansible.builtin.find:
+    paths: "{{ neseri_app_dir }}/releases"
+    file_type: directory
+  register: neseri_releases_found
+
+- name: Prune releases beyond the last {{ neseri_keep_releases }} (rollback window)
+  ansible.builtin.file:
+    path: "{{ item.path }}"
+    state: absent
+  loop: "{{ (neseri_releases_found.files | sort(attribute='path'))[:-neseri_keep_releases] }}"
+  when: (neseri_releases_found.files | length) > neseri_keep_releases

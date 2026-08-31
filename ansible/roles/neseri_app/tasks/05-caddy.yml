@@ -1,0 +1,22 @@
+---
+- name: Ensure caddy is enabled and running
+  ansible.builtin.systemd:
+    name: caddy
+    state: started
+    enabled: true
+
+- name: Render the internal Caddyfile
+  ansible.builtin.template:
+    src: Caddyfile.j2
+    dest: /etc/caddy/Caddyfile
+    mode: "0644"
+  notify: reload caddy
+
+- name: Apply the Caddyfile now (the CA cert fetch below needs it live)
+  ansible.builtin.meta: flush_handlers
+
+- name: Fetch the Caddy-internal CA root certificate (needed by the edge Caddy)
+  ansible.builtin.fetch:
+    src: /var/lib/caddy/.local/share/caddy/pki/authorities/local/root.crt
+    dest: "{{ role_path }}/../caddy_edge/files/neseri-backend-ca.crt"
+    flat: true

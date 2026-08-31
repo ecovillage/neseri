@@ -1,0 +1,57 @@
+---
+# Non-secret configuration for the neseri deployment on the Proxmox container.
+#
+# No Docker here: the app is deployed the old-fashioned way - git pull,
+# bundle install, migrate, restart. Ruby comes from mise, same as for local
+# development (see the repo root mise.toml) - Postgres and the internal
+# Caddy are native apt packages/systemd services.
+
+neseri_domain: neseri.siebenlinden.org
+
+# Where the app lives on the container, Capistrano-style:
+#   {{ neseri_app_dir }}/releases/<timestamp>/  one checkout per deploy
+#   {{ neseri_app_dir }}/current                symlink to the active release
+#   {{ neseri_app_dir }}/shared/                persists across releases:
+#     bundle/          installed gems (shared so a deploy only installs the
+#                       delta instead of recompiling everything every time)
+#     storage/          Active Storage files
+#     config/master.key, config/database.yml    symlinked into each release
+#     app.env           EnvironmentFile for the systemd unit
+neseri_app_dir: /opt/neseri
+neseri_deploy_user: neseri
+# How many old releases to keep around for rollback (rollback = point
+# `current` at an older releases/<timestamp> dir and restart the service).
+neseri_keep_releases: 5
+
+# What to deploy: this repo, at this ref. Must be pushed to GitHub first -
+# unlike the old rsync-based deploy, uncommitted local changes are never
+# deployed.
+neseri_github_owner: ecovillage
+neseri_github_repo: neseri
+neseri_deploy_ref: master
+
+# GitHub's SSH host key (ed25519, current since their March 2023 key
+# rotation - https://github.blog/2023-03-23-we-updated-our-rsa-ssh-host-key/),
+# pinned here rather than trusted-on-first-use so the first clone doesn't
+# have to blindly accept whatever key answers on port 22. Re-verify at
+# https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/githubs-ssh-key-fingerprints
+# if this ever needs to change.
+neseri_github_ssh_host_key: "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl"
+
+# mise (https://mise.jdx.dev) itself comes from apt (01-packages.yml); the
+# Ruby version it installs is never hardcoded here - it's read straight out
+# of each release's own mise.toml by `mise install`/`mise exec` (04-deploy.yml),
+# the same as it is for local dev. One less thing to keep in sync.
+neseri_mise_bin: /usr/bin/mise
+
+postgres_db_name: neseri_production
+postgres_db_user: neseri
+# Conservative-but-not-starved defaults now that the container has 1GB+ RAM;
+# bump alongside the container's RAM if postgres ever needs more headroom.
+postgres_shared_buffers: 128MB
+postgres_max_connections: 50
+postgres_work_mem: 8MB
+
+# HOST/MAILER_HOST used by Rails to build absolute URLs (routes + mailers).
+neseri_host: "{{ neseri_domain }}"
+neseri_mailer_host: "{{ neseri_domain }}"

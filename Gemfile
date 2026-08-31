@@ -28,8 +28,6 @@ gem 'haml'
 gem 'haml-rails'
 
 gem 'bulma-rails', '~> 0.9.4'
-# TODO: Check if the functionality provided by this gem could be available in
-# bulma oder bulma-rails by now. Then replace gem and usages throughout codebase.
 gem 'bulma_form_builder', git: 'https://github.com/meismann/bulma_form_builder.git'
 
 gem 'font-awesome-sass', '~> 6.5'

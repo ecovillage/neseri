@@ -1,8 +1,0 @@
-.git
-log/*
-tmp/*
-storage/*
-node_modules
-vendor/bundle
-.byebug_history
-*.swp

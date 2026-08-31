@@ -1,0 +1,22 @@
+{{ ansible_managed | comment }}
+[Unit]
+Description=neseri (Rails/Puma)
+After=network.target postgresql.service
+Wants=postgresql.service
+
+[Service]
+Type=simple
+User={{ neseri_deploy_user }}
+WorkingDirectory={{ neseri_app_dir }}/current
+EnvironmentFile={{ neseri_app_dir }}/shared/app.env
+Environment=HOME={{ neseri_app_dir }}
+Environment=MISE_TRUSTED_CONFIG_PATHS={{ neseri_app_dir }}
+ExecStart={{ neseri_mise_bin }} exec -- bundle exec puma -C config/puma.rb
+Restart=on-failure
+RestartSec=3
+# RAILS_LOG_TO_STDOUT=true (in app.env) sends Rails/Puma logs here.
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

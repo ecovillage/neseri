@@ -1,0 +1,14 @@
+---
+# Configures the Hostsharing Caddy (tallyman@vm4007.hostsharing.net) to
+# terminate the public TLS connection for neseri.siebenlinden.org (it's the
+# only place that CAN get a real Let's Encrypt cert for that name, since DNS
+# points here) and forward it on, still encrypted, to pfsense's public IP,
+# which pfsense in turn NATs to the Proxmox container.
+#
+# Requires playbooks/deploy-app.yml to have run first - it produces the
+# backend CA root certificate this play trusts for the second TLS leg.
+- name: Configure the Hostsharing Caddy edge for neseri
+  hosts: caddy_edge
+  become: false
+  roles:
+    - caddy_edge

@@ -1,0 +1,25 @@
+---
+# Runs before Ruby is installed - mise (and later, the app itself) installs
+# into this user's home, so both need to exist first.
+
+- name: Create the deploy/runtime user
+  ansible.builtin.user:
+    name: "{{ neseri_deploy_user }}"
+    system: true
+    home: "{{ neseri_app_dir }}"
+    create_home: false
+    shell: /usr/sbin/nologin
+
+- name: Create the app directory layout
+  ansible.builtin.file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ neseri_deploy_user }}"
+    group: "{{ neseri_deploy_user }}"
+    mode: "0750"
+  loop:
+    - "{{ neseri_app_dir }}"
+    - "{{ neseri_app_dir }}/releases"
+    - "{{ neseri_app_dir }}/shared"
+    - "{{ neseri_app_dir }}/shared/config"
+    - "{{ neseri_app_dir }}/shared/storage"
