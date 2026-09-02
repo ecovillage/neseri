@@ -100,6 +100,11 @@
   become: true
   become_user: "{{ neseri_deploy_user }}"
 
+- name: Remove the release's placeholder storage directory (git tracks it via .keep; shared/storage replaces it)
+  ansible.builtin.file:
+    path: "{{ neseri_app_dir }}/releases/{{ neseri_release }}/storage"
+    state: absent
+
 - name: Symlink shared config/storage into the new release
   ansible.builtin.file:
     src: "{{ neseri_app_dir }}/shared/{{ item }}"
