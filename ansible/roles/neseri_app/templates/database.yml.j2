@@ -1,0 +1,27 @@
+{{ ansible_managed | comment }}
+#
+# Lives at shared/config/database.yml and is symlinked into every release -
+# not the repo's own config/database.yml, which stays sqlite3 for local dev.
+# The sqlite3 gem lives in the :development/:test Gemfile group, so
+# production must use postgresql (the `pg` gem is in the main group) - this
+# just uncomments/activates what the app's own database.yml already sketches
+# out.
+
+default: &default
+  adapter: sqlite3
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  timeout: 5000
+
+development:
+  <<: *default
+  database: db/development.sqlite3
+
+test:
+  <<: *default
+  database: db/test.sqlite3
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  url: <%= ENV.fetch("DATABASE_URL") %>

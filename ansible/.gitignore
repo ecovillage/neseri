@@ -1,0 +1,8 @@
+# Vault password - never commit this. Keep it in a password manager instead;
+# this file is only here so ansible-playbook can find it locally.
+.vault_pass.txt
+
+# Fetched at deploy time, contains no secret but is generated, not authored.
+roles/caddy_edge/files/neseri-backend-ca.crt
+
+*.retry

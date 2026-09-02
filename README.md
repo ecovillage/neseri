@@ -73,10 +73,21 @@ Works fine with dokku.
 
 ## Development
 
-`neseri` is currently developed using Ruby 2.6.3 and Rails 6.x.
-It uses a pretty standard Ruby on Rails stack.
+It uses a pretty standard Ruby on Rails stack. Ruby is installed via
+[mise](https://mise.jdx.dev), pinned in `mise.toml` - production deploys
+(see `ansible/`) install Ruby via mise too, reading that same file straight
+out of the git checkout, so there's a single place to bump the version.
 
-To get started, `git checkout` the code, `bundle` to install the required ruby gems, `db:setup` the database and `rails s` the server.
+```bash
+curl https://mise.run | sh   # if you don't have mise yet
+mise install                 # installs the Ruby version pinned in mise.toml
+bundle install
+bin/rails db:setup
+bin/rails s
+```
+
+No Docker needed locally - `development`/`test` use sqlite3
+(`config/database.yml`), so there's nothing else to run alongside it.
 
 You can use mail_catcher; start it; visit http://localhost:1080 in browser, mailer settings in `config/environments/development.rb` are already properly set up.
 
@@ -133,7 +144,3 @@ TBD
 #### Exporting directly into legacy database
 
 Data can be "exported" into Sieben Lindens legacy system.  This is done via simple JSON pushes (the legacy system involves a CouchDB).
-
-### As of 2026
-
-New Rails and Ruby versions cannot be run on the rather old server, while old Rails (because of some dependencies) cannot be run on a new development workstation. To get code developed and tested locally, use the single commit out of the branch `dockerise-and-update`. It contains a dockerised Rails 8 version with most gems up to date and should always be (that single) one commit ahead of `master`. When developing, checkout a new branch from it and develop there. When it is time to raise a pull request, rebase on `master` interactively and remove the update-commit that came from `dockerise-and-update`. When the PR is through, rebase `dockerise-and-update` to be ahead of `master` again.

@@ -1,0 +1,63 @@
+---
+- name: Check that the backend CA certificate has been fetched
+  ansible.builtin.stat:
+    path: "{{ role_path }}/files/{{ caddy_backend_ca_cert_file }}"
+  delegate_to: localhost
+  become: false
+  register: neseri_ca_cert_stat
+
+- name: Fail with instructions if the CA certificate is missing
+  ansible.builtin.assert:
+    that: neseri_ca_cert_stat.stat.exists
+    fail_msg: >-
+      {{ role_path }}/files/{{ caddy_backend_ca_cert_file }} doesn't exist yet.
+      Run playbooks/deploy-app.yml first - it deploys the app and fetches
+      this certificate as its last step.
+
+- name: Copy the backend CA certificate to the edge
+  ansible.builtin.copy:
+    src: "{{ caddy_backend_ca_cert_file }}"
+    dest: "{{ caddy_remote_config_dir }}/{{ caddy_backend_ca_cert_file }}"
+    mode: "0644"
+  register: neseri_ca_copy
+
+- name: Add the neseri site block to the Hostsharing Caddyfile
+  ansible.builtin.blockinfile:
+    path: "{{ caddy_remote_config_dir }}/Caddyfile"
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - neseri.siebenlinden.org"
+    block: "{{ lookup('template', 'neseri.caddy.j2') }}"
+    backup: true
+  register: neseri_caddyfile_edit
+
+- name: Validate the Caddyfile before reloading
+  ansible.builtin.command:
+    cmd: >-
+      docker exec {{ caddy_container_name }}
+      caddy validate --config /etc/caddy/Caddyfile --adapter caddyfile
+  register: neseri_caddy_validate
+  changed_when: false
+  failed_when: false
+
+- name: Restore the previous Caddyfile if validation failed
+  ansible.builtin.copy:
+    src: "{{ neseri_caddyfile_edit.backup_file }}"
+    dest: "{{ caddy_remote_config_dir }}/Caddyfile"
+    remote_src: true
+  when:
+    - neseri_caddy_validate.rc != 0
+    - neseri_caddyfile_edit.backup_file is defined
+
+- name: Fail loudly if the Caddyfile did not validate
+  ansible.builtin.fail:
+    msg: >-
+      `caddy validate` failed, the previous Caddyfile has been restored:
+      {{ neseri_caddy_validate.stderr }}
+  when: neseri_caddy_validate.rc != 0
+
+- name: Reload Caddy
+  ansible.builtin.command:
+    cmd: >-
+      docker exec {{ caddy_container_name }}
+      caddy reload --config /etc/caddy/Caddyfile --adapter caddyfile
+  when: neseri_caddyfile_edit.changed or neseri_ca_copy.changed
+  changed_when: true

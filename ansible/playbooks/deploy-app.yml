@@ -1,0 +1,16 @@
+---
+# Deploys neseri to the Proxmox container without Docker: installs Ruby,
+# Postgres and Caddy natively, git-clones the app from GitHub, bundle
+# installs, precompiles assets, migrates the database, (re)starts it under
+# systemd, and fetches the internal Caddy's CA root cert so
+# playbooks/caddy-edge.yml can trust it.
+#
+# Run this BEFORE caddy-edge.yml - the edge Caddy needs the CA cert this
+# produces.
+- name: Deploy neseri to the Proxmox container
+  hosts: proxmox_container
+  # ansible_user is already root on this container - no sudo needed (and a
+  # minimal LXC template may not even have the sudo package installed).
+  become: false
+  roles:
+    - neseri_app

@@ -1,0 +1,31 @@
+---
+- name: Tune postgres for this box and restart it
+  community.postgresql.postgresql_set:
+    name: "{{ item.name }}"
+    value: "{{ item.value }}"
+  loop:
+    - { name: shared_buffers, value: "{{ postgres_shared_buffers }}" }
+    - { name: max_connections, value: "{{ postgres_max_connections }}" }
+    - { name: work_mem, value: "{{ postgres_work_mem }}" }
+  become: true
+  become_user: postgres
+  notify: restart postgres
+
+- name: Flush handlers so the role's own DB tasks see the tuned settings
+  ansible.builtin.meta: flush_handlers
+
+- name: Ensure the app's postgres role exists
+  community.postgresql.postgresql_user:
+    name: "{{ postgres_db_user }}"
+    password: "{{ vault_postgres_password }}"
+    encrypted: true
+  become: true
+  become_user: postgres
+  no_log: true
+
+- name: Ensure the app's database exists
+  community.postgresql.postgresql_db:
+    name: "{{ postgres_db_name }}"
+    owner: "{{ postgres_db_user }}"
+  become: true
+  become_user: postgres

@@ -1,0 +1,27 @@
+---
+# Non-secret configuration for the Hostsharing Caddy edge.
+
+neseri_domain: neseri.siebenlinden.org
+
+# Contact address used for the Let's Encrypt account that issues the *public*
+# certificate for neseri_domain (this is the only Caddy instance that can
+# legitimately obtain that certificate, because it's the one DNS actually
+# points at).
+letsencrypt_email: it@fk.siebenlinden.org
+
+# pfsense's fixed public WAN IP. pfsense port-forwards 443 on this address to
+# the Proxmox container (see the README / chat for the pfsense NAT rule).
+neseri_backend_host: "212.91.243.26"
+neseri_backend_port: 443
+neseri_backend_tls_server_name: "{{ neseri_domain }}"
+
+# Where Hostsharing's per-account Caddy config lives and how the caddy
+# container is named in `docker compose ps` there.
+caddy_remote_config_dir: "/home/tallyman/caddy/config"
+caddy_container_name: caddy
+
+# Filename (inside caddy_remote_config_dir) for the trust anchor used to
+# validate the TLS connection to the backend. This is the Caddy-internal CA
+# root certificate generated on the Proxmox container; playbooks/deploy-app.yml
+# fetches it into roles/caddy_edge/files/ after the app has been deployed.
+caddy_backend_ca_cert_file: neseri-backend-ca.crt
