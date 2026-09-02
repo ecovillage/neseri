@@ -1,0 +1,19 @@
+{{ ansible_managed | comment }}
+--
+-- Data-only load: the target tables already exist (created by `rails
+-- db:prepare`), so pgloader is told not to touch DDL - just TRUNCATE each
+-- table it can match by name (schema_migrations/ar_internal_metadata
+-- included) and reload it from the sqlite3 file's rows, then fix up the
+-- Postgres sequences so the next INSERT continues past whatever IDs came
+-- in from sqlite3.
+
+LOAD DATABASE
+     FROM sqlite:///{{ neseri_import_remote_tmp }}/import.sqlite3
+     INTO postgresql://{{ postgres_db_user }}:{{ vault_postgres_password }}@127.0.0.1:5432/{{ postgres_db_name }}
+
+WITH data only, truncate, reset sequences
+
+SET PostgreSQL PARAMETERS
+    maintenance_work_mem to '128MB',
+    work_mem to '12MB'
+;

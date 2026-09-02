@@ -1,0 +1,153 @@
+---
+# One-off data import: load the content of a local sqlite3 file into the
+# already-provisioned production Postgres database (see roles/neseri_app,
+# playbooks/deploy-app.yml). Uses pgloader for the sqlite3 -> postgresql
+# type conversion.
+#
+# This REPLACES data, it does not merge: every table pgloader finds in the
+# sqlite3 file - including `schema_migrations` and `ar_internal_metadata` -
+# is TRUNCATEd on the Postgres side and reloaded from the file's rows. That
+# means the sqlite3 file's migration history overwrites whatever
+# `rails db:prepare` had recorded; if the two disagree on which migrations
+# were applied, run `rails db:migrate` on the container afterwards to bring
+# the schema itself back in line with that history.
+#
+# The app is stopped for the duration of the load and restarted afterwards
+# (avoids writes racing the truncate), and a pg_dump safety backup is taken
+# on the target - under {{ neseri_app_dir }}/shared/backups/ - before
+# anything is truncated.
+#
+# Usage:
+#   ansible-playbook playbooks/import-sqlite.yml -e sqlite_db_path=/path/to/file.sqlite3
+
+- name: Import a sqlite3 file's content into the production Postgres database
+  hosts: proxmox_container
+
+  vars:
+    neseri_import_remote_tmp: /tmp/neseri-import
+    neseri_import_backup_dir: "{{ neseri_app_dir }}/shared/backups"
+
+  vars_prompt:
+    - name: neseri_import_confirm
+      prompt: >-
+        This TRUNCATES every table pgloader finds in the sqlite3 file -
+        including schema_migrations/ar_internal_metadata - and reloads it
+        from there, replacing current production data. A pg_dump backup is
+        taken first. Type 'yes' to continue
+      private: false
+
+  pre_tasks:
+    - name: Abort unless the import was confirmed
+      ansible.builtin.assert:
+        that: neseri_import_confirm == 'yes'
+        fail_msg: "Aborted - confirmation not given."
+        success_msg: "Confirmed - proceeding with the import."
+      run_once: true
+
+    - name: Require sqlite_db_path
+      ansible.builtin.assert:
+        that:
+          - sqlite_db_path is defined
+          - sqlite_db_path | length > 0
+        fail_msg: >-
+          Pass the sqlite3 file to import: ansible-playbook
+          playbooks/import-sqlite.yml -e sqlite_db_path=/path/to/file.sqlite3
+      run_once: true
+
+    - name: Check the sqlite3 file exists locally
+      ansible.builtin.stat:
+        path: "{{ sqlite_db_path }}"
+      register: neseri_sqlite_stat
+      delegate_to: localhost
+      become: false
+      run_once: true
+
+    - name: Fail if it doesn't
+      ansible.builtin.assert:
+        that: neseri_sqlite_stat.stat.exists and neseri_sqlite_stat.stat.isreg
+        fail_msg: "No such file: {{ sqlite_db_path }}"
+      run_once: true
+
+  tasks:
+    - name: Install pgloader
+      ansible.builtin.apt:
+        name: pgloader
+        state: present
+        update_cache: true
+      become: true
+
+    - name: Stop the app for the duration of the import
+      ansible.builtin.systemd:
+        name: neseri-puma
+        state: stopped
+      become: true
+
+    - name: Ensure the backup directory exists
+      ansible.builtin.file:
+        path: "{{ neseri_import_backup_dir }}"
+        state: directory
+        owner: "{{ neseri_deploy_user }}"
+        mode: "0700"
+      become: true
+
+    - name: Pick a backup filename
+      ansible.builtin.set_fact:
+        neseri_backup_file: "{{ neseri_import_backup_dir }}/pre-import-{{ lookup('pipe', 'date -u +%Y%m%d%H%M%S') }}.sql.gz"
+
+    - name: Safety backup of the production database before truncating anything
+      ansible.builtin.shell:
+        cmd: "pg_dump {{ postgres_db_name }} | gzip > {{ neseri_backup_file }}"
+      become: true
+      become_user: postgres
+      changed_when: true
+
+    - name: Create the remote import working directory
+      ansible.builtin.file:
+        path: "{{ neseri_import_remote_tmp }}"
+        state: directory
+        owner: "{{ neseri_deploy_user }}"
+        mode: "0700"
+      become: true
+
+    - name: Copy the sqlite3 file to the target
+      ansible.builtin.copy:
+        src: "{{ sqlite_db_path }}"
+        dest: "{{ neseri_import_remote_tmp }}/import.sqlite3"
+        owner: "{{ neseri_deploy_user }}"
+        mode: "0600"
+      become: true
+
+    - name: Render the pgloader load script (contains the DB password, hence no_log)
+      ansible.builtin.template:
+        src: import.load.j2
+        dest: "{{ neseri_import_remote_tmp }}/import.load"
+        owner: "{{ neseri_deploy_user }}"
+        mode: "0600"
+      become: true
+      no_log: true
+
+    - name: Run pgloader
+      ansible.builtin.command:
+        cmd: "pgloader {{ neseri_import_remote_tmp }}/import.load"
+      become: true
+      become_user: "{{ neseri_deploy_user }}"
+      register: neseri_pgloader_result
+      changed_when: true
+      failed_when: neseri_pgloader_result.rc != 0
+
+    - name: Show pgloader's summary
+      ansible.builtin.debug:
+        msg: "{{ neseri_pgloader_result.stdout_lines }}"
+
+    - name: Remove the temporary import files (sqlite3 copy + load script)
+      ansible.builtin.file:
+        path: "{{ neseri_import_remote_tmp }}"
+        state: absent
+      become: true
+
+  post_tasks:
+    - name: Restart the app
+      ansible.builtin.systemd:
+        name: neseri-puma
+        state: restarted
+      become: true

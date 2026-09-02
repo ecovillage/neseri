@@ -137,6 +137,29 @@ release and restarts the app - Ruby/Postgres/Caddy installs and old releases
 beyond `neseri_keep_releases` are left alone (build/prune) or updated in
 place (config).
 
+## Importing a sqlite3 file into production
+
+`playbooks/import-sqlite.yml` loads the content of a local sqlite3 file
+into the production Postgres database, via
+[pgloader](https://pgloader.io/). Run it after `deploy-app.yml` has created
+the schema at least once:
+
+```bash
+cd ansible
+ansible-playbook playbooks/import-sqlite.yml -e sqlite_db_path=/path/to/file.sqlite3
+```
+
+This **replaces** data - every table pgloader finds in the sqlite3 file,
+including `schema_migrations` and `ar_internal_metadata`, is truncated on
+the Postgres side and reloaded from the file. That means the sqlite3
+file's migration history overwrites whatever `rails db:prepare` had
+recorded - if the two disagree on which migrations were applied, run
+`rails db:migrate` on the container afterwards to bring the schema back in
+line. The app is stopped for the duration and restarted afterwards, and a
+`pg_dump` safety backup is taken on the container under `shared/backups/`
+before anything is truncated. The playbook asks for an explicit `yes`
+before doing any of this.
+
 ## Resource note
 
 The container has 1GB+ RAM / 8GB disk. Postgres is tuned down
