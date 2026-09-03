@@ -49,7 +49,7 @@ one:
   end_date: 2019-03-13 18:00:00
   cancellation_time: 1
   cancellation_reason: MyString
-  room_material: TV
+  room_material: "TV, Beamer"
   royalty_participant: 250.0
   royalty_participant_reduced: 150
   cost_participant: 375.0

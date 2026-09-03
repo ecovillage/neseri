@@ -61,6 +61,8 @@ end
 group :test do
   gem 'capybara'
   gem 'selenium-webdriver'
+  # minitest 6 split Minitest::Mock out into its own gem; test/services/booking_export_test.rb needs it.
+  gem 'minitest-mock'
 end
 
 gem 'tzinfo-data', platforms: [:windows, :jruby]

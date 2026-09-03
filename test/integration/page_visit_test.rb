@@ -22,7 +22,7 @@ class PageVisitTest < ActionDispatch::IntegrationTest
 
     #assert_equal response.parsed_body, ''
 
-    assert_select '.has-text-centered', text: /zugestimmt am/
+    assert_select '.has-text-centered', text: /Zustimmung von dir am/
   end
 
   test "anonymous can visit impressum page" do

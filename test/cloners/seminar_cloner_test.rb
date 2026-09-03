@@ -3,7 +3,7 @@ require 'test_helper'
 class SeminarClonerTest < ActiveSupport::TestCase
   test 'it does reset the important values' do
     seminar_one = seminars(:one)
-    operation   = SeminarCloner.call(seminar_one)
+    operation   = SeminarCloner.call(seminar_one, current_user: users(:jane))
     copy        = operation.to_record
 
     refute seminar_one.locked?

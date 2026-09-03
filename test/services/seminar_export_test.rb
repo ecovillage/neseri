@@ -29,7 +29,7 @@ class SeminarExportTest < ActiveSupport::TestCase
         room: 'Big Room',
         reserved_from: '12.03.2019 19:00',
         reserved_to:   '13.03.2019 19:00',
-        infrastructure: 'Beamer, TV',
+        infrastructure: 'TV, Beamer',
         comment_attendee_housing: 'Tent',
         cost_adult_normal_royalties: BigDecimal(250.0,2),
         cost_adult_reduced_royalties: BigDecimal(150.0,2),

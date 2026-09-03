@@ -50,7 +50,7 @@ module Legacy
           room:           @seminar.wished_room&.name,
           reserved_from:  (@seminar.start_date - 1.hours).strftime("#{DATE_FMT} #{TIME_FMT}"),
           reserved_to:    (@seminar.end_date   + 1.hours).strftime("#{DATE_FMT} #{TIME_FMT}"),
-          infrastructure: [@seminar.room_extras, @seminar.room_material].compact.join(", "),
+          infrastructure: @seminar.room_material,
           comment_attendee_housing:     @seminar.accommodation,
           cost_adult_normal_royalties:  @seminar.royalty_participant,
           cost_adult_reduced_royalties: @seminar.royalty_participant_reduced,
