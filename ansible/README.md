@@ -163,7 +163,10 @@ before doing any of this.
 ## Resource note
 
 The container has 1GB+ RAM / 8GB disk. Postgres is tuned down
-(see `vars.yml`) and Puma runs a single worker (`RAILS_MAX_THREADS: "3"`).
+(see `vars.yml`) and Puma runs 2 clustered workers x 5 threads each
+(`WEB_CONCURRENCY: "2"`, `RAILS_MAX_THREADS: "5"`) - a single worker with
+just 3 threads turned out to be too little headroom against the constant
+background noise of vulnerability-scanner bots hitting the public URL.
 Compiling Ruby and native gems is one-off/incremental work (skipped once
 already built/installed), not something that happens on every deploy.
 

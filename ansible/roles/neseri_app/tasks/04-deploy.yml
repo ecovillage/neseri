@@ -15,7 +15,8 @@
       RAILS_ENV: production
       RAILS_LOG_TO_STDOUT: "true"
       RAILS_SERVE_STATIC_FILES: "true"
-      RAILS_MAX_THREADS: "3"
+      RAILS_MAX_THREADS: "5"
+      WEB_CONCURRENCY: "2"
       DATABASE_URL: "postgresql://{{ postgres_db_user }}:{{ vault_postgres_password }}@127.0.0.1:5432/{{ postgres_db_name }}"
       HOST: "{{ neseri_host }}"
       MAILER_HOST: "{{ neseri_mailer_host }}"
