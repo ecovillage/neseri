@@ -47,7 +47,7 @@ en:
   notification:
     nojs: You need to have JavaScript enabled to make changes in this application
   nr: "No."
-  mail_all_referees: Write email to all instructors
+  mail_all_instructors: Write email to all instructors
   pages:
     about: About
     contact: Contact

@@ -12,7 +12,7 @@
             = mail_to '', cc: seminar.seminar_instructors.pluck(:email).join(','), class: 'is-outlined is-size-7' do
               %span.icon
                 %i.fa.fa-envelope.fa-border
-              = t(:mail_all_referees)
+              = t(:mail_all_instructors)
           - if defined? subheading
             %br
             %small
