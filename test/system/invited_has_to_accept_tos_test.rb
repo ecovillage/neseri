@@ -8,7 +8,7 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
 
     # User will be created on invitation
     user_count = User.count
-    refute User.find_by(email: 'jones@neseri.tu')
+    refute User.find_by(email: 'jones@neseri.de')
     assert_equal 0, ActionMailer::Base.deliveries.count
 
     # Visit an admin copy seminar page
@@ -17,12 +17,16 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
 
     # Add invited user (add instructor)
     click_link_or_button 'Referent*in hinzufügen'
-    fill_in 'E-Mail-Adresse', with: 'jones@neseri.tu'
+    fill_in 'E-Mail-Adresse', with: 'jones@neseri.de'
+    fill_in 'Vorname', with: 'Jones'
+    fill_in 'Nachname', with: 'Jonestown'
+    fill_in 'Adresse', with: 'Musterstraße 1, 12345 Musterstadt'
+    fill_in 'Telefonnummer', with: '0123456789'
     click_link_or_button 'Seminarvorschlag speichern'
 
     # A new user was created.
     assert (user_count + 1) == User.count
-    jones = User.find_by(email: 'jones@neseri.tu')
+    jones = User.find_by(email: 'jones@neseri.de')
     assert jones
 
     # Log out as admin
@@ -49,7 +53,7 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
     fill_in 'Passwortbestätigung', with: 'jones@neseri.tu'
     find('.actions .button').click
 
-    assert_selector '.notification', text: "Benutzer/In konnte aufgrund eines Fehlers nicht gespeichert werden:\nDatenschutz und AGB muss akzeptiert werden"
+    assert_selector '.notification', text: "Benutzer/In konnte wegen eines Fehlers nicht gespeichert werden:\nDatenschutz und AGB muss akzeptiert werden"
 
     fill_in 'Passwort', with: 'jones@neseri.tu'
     fill_in 'Passwortbestätigung', with: 'jones@neseri.tu'

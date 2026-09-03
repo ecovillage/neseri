@@ -6,11 +6,11 @@ class MakeSeminarAdminSeminarsTest < ApplicationSystemTestCase
   test "make a copy of a seminar" do
     sign_in users(:admin)
     visit seminar_path(seminars(:one))
-    assert_selector "h1", text: "Seminar : MySeminar"
+    assert_selector "h1", text: "Seminarvorschlag : MySeminar"
 
     num_seminars = Seminar.count
 
-    click_on "Create Admin Copy"
+    click_on "Admin-Kopie erstellen"
     assert seminars(:one).is_user_seminar?
     assert seminars(:one).admin_seminar.is_admin_seminar?
 

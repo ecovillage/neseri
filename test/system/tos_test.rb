@@ -7,13 +7,13 @@ class TosTest < ApplicationSystemTestCase
     visit seminars_path
   
     # Cannot access that page
-    assert_selector ".notification", text: "Sie müssen sich anmelden oder registrieren, bevor Sie fortfahren können."
+    assert_selector ".notification", text: "Sie müssen sich anmelden oder registrieren, um fortzufahren."
  
     # Fill in wrong password
     fill_in "E-Mail", with: "jane@jane.jane"
     fill_in "Passwort", with: "test123456"
     find('.actions .button').click #_on "Anmelden"
-    assert_selector '.notification', text: "E-Mail oder Passwort ungültig"
+    assert_selector '.notification', text: "E-Mail oder Passwort ist ungültig."
 
     # Here we go, correct password
     fill_in "E-Mail", with: "jane@jane.jane"
@@ -33,6 +33,6 @@ class TosTest < ApplicationSystemTestCase
     fill_in "E-Mail", with: "aunt@old.ie"
     fill_in "Passwort", with: "auntpassword"
     find('.actions .button').click
-    assert_selector '.notification', text: "Erfolgreich angemeldet."
+    assert_selector '.notification', text: "Sie sind nun angemeldet."
   end
 end
