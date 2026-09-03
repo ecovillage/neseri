@@ -1,4 +1,4 @@
-{{ ansible_managed | comment }}
+{{ ansible_managed | comment('plain', decoration='-- ') }}
 --
 -- Data-only load: the target tables already exist (created by `rails
 -- db:prepare`), so pgloader is told not to touch DDL - just TRUNCATE each
@@ -16,4 +16,17 @@ WITH data only, truncate, reset sequences
 SET PostgreSQL PARAMETERS
     maintenance_work_mem to '128MB',
     work_mem to '12MB'
+
+-- The sqlite3 export predates Active Storage's multi-service support, so
+-- its active_storage_blobs table has no service_name column at all - every
+-- row maps to NULL, which the NOT NULL constraint on the Postgres side
+-- rejects, failing the whole table's COPY batch. Production has only ever
+-- used the `local` disk service (config.active_storage.service = :local),
+-- so relax the constraint for the load and backfill it before restoring it.
+BEFORE LOAD DO
+    $$ ALTER TABLE active_storage_blobs ALTER COLUMN service_name DROP NOT NULL; $$
+
+AFTER LOAD DO
+    $$ UPDATE active_storage_blobs SET service_name = 'local' WHERE service_name IS NULL; $$,
+    $$ ALTER TABLE active_storage_blobs ALTER COLUMN service_name SET NOT NULL; $$
 ;
