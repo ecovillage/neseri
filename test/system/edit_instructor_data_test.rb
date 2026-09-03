@@ -15,6 +15,9 @@ class EditInstructorDataTest < ApplicationSystemTestCase
     fill_in "Vorname", with: "Alex"
     find('.edit_user .button').click
 
+    # Wait for the redirect to actually land before checking DB state.
+    assert_selector '.notification', text: 'Profil aktualisiert.'
+
     assert User.find_by(email: 'aunt@old.ie').firstname
   end
 end

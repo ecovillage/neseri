@@ -24,6 +24,9 @@ class InvitedHasToAcceptTosTest < ApplicationSystemTestCase
     fill_in 'Telefonnummer', with: '0123456789'
     click_link_or_button 'Seminarvorschlag speichern'
 
+    # Wait for the redirect to actually land before checking DB state.
+    assert_selector '.notification', text: 'Seminarvorschlag gespeichert'
+
     # A new user was created.
     assert (user_count + 1) == User.count
     jones = User.find_by(email: 'jones@neseri.de')

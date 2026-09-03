@@ -23,6 +23,11 @@ class TosTest < ApplicationSystemTestCase
 
     find('.button_to .button').click
 
+    # Wait for the post-accept redirect to actually land (a raw
+    # ActiveRecord check right after .click races the real request/redirect
+    # cycle without this) before asserting on DB state.
+    assert_selector 'h1', text: 'Veranstaltungsvorschläge für das Ökodorf Sieben Linden'
+
     assert User.find_by(email: 'jane@jane.jane').tos_accepted_at
   end
 

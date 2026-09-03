@@ -63,6 +63,9 @@ group :test do
   gem 'selenium-webdriver'
   # minitest 6 split Minitest::Mock out into its own gem; test/services/booking_export_test.rb needs it.
   gem 'minitest-mock'
+  # Test coverage report, see test/test_helper.rb for setup, and the "Test
+  # coverage" section of README.md for how to view the report it produces.
+  gem 'simplecov', require: false
 end
 
 gem 'tzinfo-data', platforms: [:windows, :jruby]

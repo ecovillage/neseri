@@ -60,6 +60,22 @@ You can use mail_catcher; start it; visit http://localhost:1080 in browser, mail
 The smallish test-suite is written using MiniTest, make a test run with `rails t`.
 System-tests have to be run manually with `rails t test/system` (they are not run by default) and use the selenium chrom(ium)-driver.
 
+#### Test coverage
+
+Every test run measures coverage via [SimpleCov](https://github.com/simplecov-ruby/simplecov) and writes an HTML
+report to `coverage/index.html` (gitignored, regenerated on each run). Open it in a browser, e.g.:
+
+```
+xdg-open coverage/index.html   # Linux
+open coverage/index.html       # macOS
+```
+
+It breaks coverage down by group (Models, Controllers, Helpers, ...) and, per file, highlights exactly which lines
+were and weren't hit. Since unit/integration tests (`rails t`) and system tests (`rails t test/system`) are separate
+runs, run both before checking the report - SimpleCov merges consecutive runs (within 10 minutes of each other)
+into one combined result instead of overwriting it, so the report reflects the whole suite. Set `COVERAGE=0` to skip
+instrumentation (slightly faster, e.g. for a quick single-test iteration): `COVERAGE=0 rails t test/models/seminar_test.rb`.
+
 ## Deployment
 
 Production runs behind Hostsharing Caddy / pfsense on a Proxmox container,

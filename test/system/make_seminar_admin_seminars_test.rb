@@ -11,6 +11,10 @@ class MakeSeminarAdminSeminarsTest < ApplicationSystemTestCase
     num_seminars = Seminar.count
 
     click_on "Admin-Kopie erstellen"
+
+    # Wait for the redirect to actually land before checking DB state.
+    assert_selector 'h1', text: 'Admin-Kopie bearbeiten'
+
     assert seminars(:one).is_user_seminar?
     assert seminars(:one).admin_seminar.is_admin_seminar?
 

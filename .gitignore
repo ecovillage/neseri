@@ -29,6 +29,9 @@
 /public/assets
 .byebug_history
 
+# Test coverage report (see test/test_helper.rb / README.md)
+/coverage
+
 # Ignore master and prod keys for decrypting credentials and more.
 *.key
 
