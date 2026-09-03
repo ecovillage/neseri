@@ -141,7 +141,6 @@ As the data was messy, such is the code.
 In a gist:
   * `rails neseri:create_legacy_json > data.json` creates a JSON file, that
   * `rails neseri:import_legacy_json` will consume (and create respective users, seminars, etc.)
-  * `rails "neseri:import_sqlite[/path/to/file.sqlite3]"` replaces the local sqlite3 database's content with that of another sqlite3 file (a backup is taken first); the Postgres-production equivalent is `ansible/playbooks/import-sqlite.yml`, which uses pgloader
 
 #### Publishing into the legacy system
 
