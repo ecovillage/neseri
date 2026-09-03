@@ -3,48 +3,41 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '>= 3.2'
 
+# Framework
 gem 'rails', '~> 8.0'
 gem 'puma', '~> 6.4'
-gem 'sass-rails', '~> 6.0'
-gem 'sprockets-rails'
-
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.11'
-
 gem 'pg'
+gem 'bootsnap', require: false
 
-gem 'image_processing', '~> 1.12'
-
-gem 'rails-i18n', '~> 8.0'
-
-gem 'devise'
-gem 'devise-i18n'
-
-gem 'devise_invitable', '~> 2.0'
-
-gem 'pretender'
-
-gem 'haml'
-gem 'haml-rails'
-
+# Assets / views
 gem 'bulma-rails', '~> 0.9.4'
 gem 'bulma_form_builder', git: 'https://github.com/meismann/bulma_form_builder.git'
-
-gem 'font-awesome-sass', '~> 6.5'
-
-gem 'jquery-rails'
 gem 'cocoon'
+gem 'font-awesome-sass', '~> 6.5'
+gem 'haml'
+gem 'haml-rails'
+gem 'jbuilder', '~> 2.11'
+gem 'jquery-rails'
+gem 'sass-rails', '~> 6.0'
+gem 'sprockets-rails'
+gem 'turbolinks', '~> 5'
 
-gem 'pagy', '~> 8.0'
+# I18n
+gem 'rails-i18n', '~> 8.0'
 
+# Auth
+gem 'devise'
+gem 'devise-i18n'
+gem 'devise_invitable', '~> 2.0'
+gem 'pretender'
+
+# Misc
 gem 'action_policy'
-
 gem 'actionnav'
-
-gem 'clowne'
-
 gem 'ahoy_email'
-
+gem 'clowne'
+gem 'image_processing', '~> 1.12'
+gem 'pagy', '~> 8.0'
 gem 'rest-client'
 
 # Used to check that an email address' domain has a real, IANA-registered
@@ -52,19 +45,17 @@ gem 'rest-client'
 # required, the suffix list ships with the gem.
 gem 'public_suffix'
 
-gem 'bootsnap', require: false
-
 group :development, :test do
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'byebug', platforms: [:mri, :windows]
   gem 'sqlite3', '~> 2.0'
 end
 
 group :development do
-  gem 'web-console'
-  gem 'listen'
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem 'listen'
+  gem 'web-console'
 end
 
 group :test do
@@ -72,4 +63,4 @@ group :test do
   gem 'selenium-webdriver'
 end
 
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: [:windows, :jruby]
