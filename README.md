@@ -1,10 +1,8 @@
 # neseri - workshop proposal system
 
-[![Build Status](https://travis-ci.org/ecovillage/neseri.svg?branch=master)](https://travis-ci.org/ecovillage/neseri)
-
 A workshop proposal system for the [ecovillage Sieben Linden](https://siebenlinden.org) (but probably broad enough to be used somewhere else).
 
-Full i18n support, but currently only a proper German locale is available.
+Full i18n support; German and English locales are maintained (German is the default).
 
 The name comes from `new seminar registration system`.
 
@@ -13,16 +11,16 @@ The code is published under the [AGPLv3+](LICENSE.txt) and Copyright 2019-2023 F
 ## Incomplete list of features (work flows)
 
   * users can self-register (with email-confirmation)
-  * users can create and edit seminar (workshop, event) proposols
-  * users can add other referees to seminars (via email-address, automatically sends an invitation mail)
-  * referees then become users and can create seminars (they are normal users) and edit seminars where they are registered as referees
+  * users can create and edit seminar (workshop, event) proposals
+  * users can add other instructors to seminars (via email-address, automatically sends an invitation mail)
+  * instructors then become users and can create seminars (they are normal users) and edit seminars where they are registered as instructors
   * administrators can create rooms and seminar-types (which then are displayed as select boxes in the seminar form)
   * administrators can create admin-copies and lock the seminars created by users to separately work on a copy while seeing the original values the user(s) entered
-  * (TODO) with the proper legacy system in the backend, referees and and seminars can be "published" into the legacy system
+  * administrators can map instructors to their legacy-system counterpart and then "publish" an admin-copy of a seminar into the legacy system (a CouchDB-backed system, pushed to via `Legacy::Export`/`Legacy::PersonExport`, see `app/lib/legacy/`)
 
 ## Configuration
 
-See `Deployment` section for ENV variables to get mails kicking.
+See the `Deployment` section below for the ENV variables needed to get mail and the legacy-system integration working.
 
 ### Database Setup
 
@@ -35,41 +33,7 @@ Optionally,
 ```bash
 rails db:seed
 ```
-which populates the db with some dummy users.
-
-## Deployment instructions
-
-You need a JavaScript runtime, otherwise rails will bail out (`ExecJS::RuntimeUnavailable: Could not find a JavaScript runtime. See https://github.com/rails/execjs for a list of available runtimes.`).
-Check the link and install one of the runtimes.
-If the error persists, mention a gem in the Gemfile (I go with [therubyracer](https://github.com/cowboyd/therubyracer), thus add `gem 'therubyracer'` in `Gemfile` and re-run `bundle`).
-
-### Poor mans setup
-
-  * have a host with installed ruby (>= 2.6.1)
-  * clone the git repository (`git clone https://github.com/ecovillage/neseri`)
-  * `cd neseri` into the directory
-  * run `bundle`
-  * then `RAILS_ENV=production rails db:schema:load` (or `rails db:migrate` to update)
-  * `RAILS_ENV=production rails credentials:edit` (delete config/master.key and similar if already present)
-  * export `SERVE_STATIC_FILES=true` environment variable
-  * set mailhost and other ENVs (see below)
-  * `rails assets:precompile`
-  * fire up `rails s -p 4000 -b 0.0.0.0` to run the application on **port 4000** on all (even public) IPs of the machine.
-
-In production, make sure to have these environment variables set (with proper values of course):
-
-    HOST=yourhost.comm
-    MAILER_HOST=yourhost.commm # to generate absolute URLs in mails
-    DATABASEURL=postgres://aksdjl:aslkalksd@djief:342/aksdu
-    SENDER_EMAIL="Neseri\ Your\ Community\ <registration@yourhost.commm>"
-    SMTP_SERVER=yourhost.commm
-    SMTP_DOMAIN=yourhost.commm
-    SMTP_PORT=587
-    SMTP_PWD=9098asdjlker!
-    SMTP_USER=iaowur32oalks
-
-Works fine with dokku.
-
+which populates the db with a `user@neseri.tu`/`admin@neseri.tu` pair of dummy users and some seminar kinds.
 
 ## Development
 
@@ -94,7 +58,48 @@ You can use mail_catcher; start it; visit http://localhost:1080 in browser, mail
 ### Tests
 
 The smallish test-suite is written using MiniTest, make a test run with `rails t`.
-System-tests have to be run manually with `rails t test/system` (they are not run by default) and use the selenium chrom(ium)-driver. 
+System-tests have to be run manually with `rails t test/system` (they are not run by default) and use the selenium chrom(ium)-driver.
+
+## Deployment
+
+Production runs behind Hostsharing Caddy / pfsense on a Proxmox container,
+deployed and managed entirely via Ansible - see [`ansible/README.md`](ansible/README.md)
+for the full architecture, one-time setup and rollback story. In short:
+
+```bash
+cd ansible
+ansible-galaxy collection install -r requirements.yml
+ansible-playbook playbooks/deploy-app.yml    # 1st: deploys the app
+ansible-playbook playbooks/caddy-edge.yml    # 2nd: wires up the public edge
+```
+
+The app itself is deployed Capistrano-style (one checkout per release under
+`releases/`, shared `bundle`/`storage`/config, `current` symlink flipped
+only once `mise install` / `bundle install` / `assets:precompile` /
+`rails db:prepare` all succeeded), running under `systemd` (`neseri-puma`)
+on Puma, with Postgres (native, localhost-only) as the production database.
+Ruby is installed by `mise`, reading the same `mise.toml` used locally, so
+there is a single place to bump the Ruby version.
+
+The app is configured entirely via environment variables, rendered into
+`shared/app.env` by Ansible from `inventory/group_vars/proxmox_container/{vars,vault}.yml`:
+
+    RAILS_ENV=production
+    RAILS_SERVE_STATIC_FILES=true
+    RAILS_MAX_THREADS=5
+    WEB_CONCURRENCY=2
+    DATABASE_URL=postgresql://user:password@127.0.0.1:5432/neseri_production
+    HOST=yourhost.example              # to generate absolute URLs in routes
+    MAILER_HOST=yourhost.example       # to generate absolute URLs in mails
+    SENDER_EMAIL="Neseri Your Community <registration@yourhost.example>"
+    SMTP_SERVER=yourhost.example
+    SMTP_DOMAIN=yourhost.example
+    SMTP_PORT=587
+    SMTP_PWD=your-smtp-password
+    SMTP_USER=your-smtp-user
+
+The Rails master key (`config/master.key`) is deployed separately and does
+not go through the environment.
 
 ## Contributing
 
@@ -113,13 +118,13 @@ For new controllers, inherit from `NeseriController` to include verification and
   - multiple flashs via [a flash helper](app/helpers/flash_helper.rb).
   - visit [/flashs](/flashs) to see how the rendered flashs look like
   - [https://ddnexus.github.io/pagy/](pagy) for pagination, despite the loud self-praise
-  - authentication via [devise](https://github.com/plataformatec/devise)
+  - authentication via [devise](https://github.com/plataformatec/devise) (invitations via [devise_invitable](https://github.com/scambra/devise_invitable))
   - authorization via [action_policy](https://actionpolicy.evilmartians.io/)
   - some navigation via the yet underdeveloped but cool [actionnav](https://github.com/adamcooke/actionnav)
   - nested forms magic with [cocoon](https://github.com/nathanvda/cocoon)
   - mail archive via [ahoy_mail](https://github.com/ankane/ahoy_email) - but no tracking
-  - model/resource cloning with [clowne](https://github.com/palkan/clowne)
-  - [bulma](http://bulma.io/) as a decent css framework with a ill-conceived but handy [Form Builder](https://github.com/fwolfst/bulma_form_builder) for some visual consistency.
+  - model/resource cloning with [clowne](https://github.com/palkan/clowne) (see `app/cloners/`)
+  - [bulma](http://bulma.io/) as a decent css framework with a ill-conceived but handy [Form Builder](https://github.com/meismann/bulma_form_builder) for some visual consistency.
   - [FontAwesome Icons](http://fontawesome.com/)
 
 And of course all the awesomeness by the rest of the ecosystem. Obviously, see the [Gemfile](Gemfile) for some direct dependencies.
@@ -136,11 +141,8 @@ As the data was messy, such is the code.
 In a gist:
   * `rails neseri:create_legacy_json > data.json` creates a JSON file, that
   * `rails neseri:import_legacy_json` will consume (and create respective users, seminars, etc.)
+  * `rails "neseri:import_sqlite[/path/to/file.sqlite3]"` replaces the local sqlite3 database's content with that of another sqlite3 file (a backup is taken first); the Postgres-production equivalent is `ansible/playbooks/import-sqlite.yml`, which uses pgloader
 
-#### Exporting data
+#### Publishing into the legacy system
 
-TBD
-
-#### Exporting directly into legacy database
-
-Data can be "exported" into Sieben Lindens legacy system.  This is done via simple JSON pushes (the legacy system involves a CouchDB).
+Once instructors are mapped to their legacy-system counterpart (`Publication::UserMapping`, done from an admin-copy's publication screen), an admin-copy of a seminar can be "published": this pushes JSON documents for the seminar and its instructors into the legacy system via simple HTTP PUTs (the legacy system is backed by a CouchDB). See `app/lib/legacy/export.rb` and `app/lib/legacy/person_export.rb`. The legacy system's URL and web-URL are configured at runtime under `/admin/settings`, stored as `Setting` records (`legacy_db_uri`, `legacy_web_url`).
