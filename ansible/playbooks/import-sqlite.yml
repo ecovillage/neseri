@@ -69,9 +69,11 @@
       run_once: true
 
   tasks:
-    - name: Install pgloader
+    - name: Install pgloader and acl (the latter for setfacl, used below to let postgres write backups)
       ansible.builtin.apt:
-        name: pgloader
+        name:
+          - pgloader
+          - acl
         state: present
         update_cache: true
       become: true
@@ -88,6 +90,27 @@
         state: directory
         owner: "{{ neseri_deploy_user }}"
         mode: "0700"
+      become: true
+
+    - name: Let postgres traverse into the backup directory (pg_dump runs as postgres via peer auth)
+      ansible.posix.acl:
+        path: "{{ item }}"
+        entity: postgres
+        etype: user
+        permissions: x
+        state: present
+      loop:
+        - "{{ neseri_app_dir }}"
+        - "{{ neseri_app_dir }}/shared"
+      become: true
+
+    - name: Let postgres write into the backup directory itself
+      ansible.posix.acl:
+        path: "{{ neseri_import_backup_dir }}"
+        entity: postgres
+        etype: user
+        permissions: rwx
+        state: present
       become: true
 
     - name: Pick a backup filename

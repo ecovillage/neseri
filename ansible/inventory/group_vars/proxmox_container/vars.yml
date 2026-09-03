@@ -44,6 +44,12 @@ neseri_github_ssh_host_key: "github.com ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMq
 # the same as it is for local dev. One less thing to keep in sync.
 neseri_mise_bin: /usr/bin/mise
 
+# `bundle install`'s parallelism. Deliberately not tied to the container's
+# vcpu count: sassc compiles libsass (C++) from source on every install, and
+# each parallel job is a full cc1plus process - on a small container, one
+# job per core has been enough to OOM. Bump this only alongside more RAM.
+neseri_bundle_jobs: 2
+
 postgres_db_name: neseri_production
 postgres_db_user: neseri
 # Conservative-but-not-starved defaults now that the container has 1GB+ RAM;

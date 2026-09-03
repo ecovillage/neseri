@@ -13,6 +13,9 @@
 /db/*.sqlite3-wal
 /db/*.sqlite3-journal
 
+# Ignore backups taken by lib/tasks/import_sqlite.rake
+/db/backups/
+
 # Ignore all logfiles and tempfiles.
 /log/*
 /tmp/*

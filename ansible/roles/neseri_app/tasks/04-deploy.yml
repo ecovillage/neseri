@@ -105,6 +105,14 @@
     path: "{{ neseri_app_dir }}/releases/{{ neseri_release }}/storage"
     state: absent
 
+- name: Create tmp/pids (not in git; Puma needs it to write its pidfile on boot)
+  ansible.builtin.file:
+    path: "{{ neseri_app_dir }}/releases/{{ neseri_release }}/tmp/pids"
+    state: directory
+    owner: "{{ neseri_deploy_user }}"
+    group: "{{ neseri_deploy_user }}"
+    mode: "0750"
+
 - name: Symlink shared config/storage into the new release
   ansible.builtin.file:
     src: "{{ neseri_app_dir }}/shared/{{ item }}"
@@ -137,7 +145,7 @@
         bundle config set --local deployment true &&
         bundle config set --local without "development test" &&
         bundle config set --local path {{ neseri_app_dir }}/shared/bundle &&
-        bundle install --jobs {{ ansible_processor_vcpus | default(2) }} --retry 3
+        bundle install --jobs {{ neseri_bundle_jobs }} --retry 3
       '
     chdir: "{{ neseri_app_dir }}/releases/{{ neseri_release }}"
   environment:
