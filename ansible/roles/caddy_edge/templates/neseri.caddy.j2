@@ -11,6 +11,13 @@
 	encode gzip
 
 	reverse_proxy {{ neseri_backend_host }}:{{ neseri_backend_port }} {
+		# Without this, Caddy sends the raw dial address ("{{ neseri_backend_host }}:{{ neseri_backend_port }}")
+		# as the Host header instead of the domain the client actually asked
+		# for. The backend's own Caddy routes purely on Host/SNI - it never
+		# matches its {{ neseri_domain }} site block, so it falls through to
+		# Caddy's default "no route" response: 200, empty body. Forward the
+		# original Host explicitly so the backend can route the request.
+		header_up Host {host}
 		transport http {
 			tls
 			tls_server_name {{ neseri_backend_tls_server_name }}
