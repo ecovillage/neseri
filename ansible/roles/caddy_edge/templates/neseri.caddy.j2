@@ -1,6 +1,13 @@
 {{ neseri_domain }} {
 	tls {{ letsencrypt_email }}
 
+	# Constant background noise from vulnerability-scanner bots (wp-config.php,
+	# .env, .git/HEAD, backup.sql, ...) - answer these here instead of paying
+	# for a round trip through pfsense to the backend for each one. None of
+	# these paths are real app routes.
+	@scanner_bait path /.env* /.git/* /.svn/* /.ssh/* /.vscode/* /.aws/* /.npmrc /.bash_history /wp-admin/* /wp-login.php /wp-config.php /xmlrpc.php /actuator/* /phpinfo.php /phpmyadmin/* /config.php /config.xml *.sql /backup.* /dump.sql /database.sql /database_backup.sql /server.key /secrets.json /user_secrets.yml /docker-compose.yml /_vti_pvt/* /storage/logs/*
+	respond @scanner_bait 403
+
 	encode gzip
 
 	reverse_proxy {{ neseri_backend_host }}:{{ neseri_backend_port }} {
