@@ -76,7 +76,7 @@ class Seminar < ApplicationRecord
   scope :active, -> { where(active: true) }
   scope :future, -> { where("start_date >= ?", DateTime.now) }
   scope :past,   -> { where("start_date <= ?", DateTime.now) }
-  scope :admin_copies, -> { where("user_seminar_id NOT NULL") }
+  scope :admin_copies, -> { where.not(user_seminar_id: nil) }
   scope :user_versions, -> { where("user_seminar_id IS NULL") }
   scope :with_user, ->(user) { where(creator: user).or(self.where(seminar_instructors: user.seminar_instructors)) }
 
