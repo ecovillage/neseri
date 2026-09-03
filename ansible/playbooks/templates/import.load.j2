@@ -1,4 +1,4 @@
-{{ ansible_managed | comment }}
+{{ ansible_managed | comment('sql') }}
 --
 -- Data-only load: the target tables already exist (created by `rails
 -- db:prepare`), so pgloader is told not to touch DDL - just TRUNCATE each
