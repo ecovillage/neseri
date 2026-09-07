@@ -112,6 +112,6 @@
                       = link_to file.filename, url_for(file), target: '_new'
                       - if file.blob.content_type.start_with? 'image'
                         = link_to url_for(file), target: '_new' do
-                          = image_tag file.variant(resize: "180x100").processed
+                          = attachment_thumbnail(file)
 
   = f.submit

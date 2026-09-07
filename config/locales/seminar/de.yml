@@ -72,6 +72,7 @@ de:
     new: Neuen Seminarvorschlag anlegen
     edit: Vorschlag bearbeiten
     files: Anhänge
+    file_missing: Datei derzeit nicht verfügbar
     of_original: des Originals
     is-locked: Dieser Veranstaltungsvorschlag wird derzeit durch das Bildungsreferat bearbeitet.
     pull_back: Seminarvorschlag zurückziehen
