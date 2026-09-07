@@ -1,32 +1,29 @@
-#default: &default
-#  adapter: sqlite3
-#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#  timeout: 5000
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: <%= ENV.fetch("PGHOST", "127.0.0.1") %>
+  port: <%= ENV.fetch("PGPORT", 5432) %>
+  username: <%= ENV.fetch("PGUSER", "neseri") %>
+  password: <%= ENV.fetch("PGPASSWORD", "neseri") %>
 
 development:
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  database: db/development.sqlite3
+  <<: *default
+  database: neseri_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
-  adapter: sqlite3
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  database: db/test.sqlite3
+  <<: *default
+  database: neseri_test
 
+# Overridden entirely by DATABASE_URL in production (see
+# ansible/roles/neseri_app/templates/database.yml.j2, which is what's
+# actually deployed) - this block only matters if you run RAILS_ENV=production
+# locally.
 production:
-  adapter: sqlite3
+  adapter: postgresql
+  encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
-  database: db/production.sqlite3
-  #adapter: postgresql
-  #encoding: unicode
-  #timeout: 5000
-  #url: <%= ENV['DATABASE_URL'] %>
-  #database: neseri
-  #username: neseri
-  #password: <%= ENV['NESERITU_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>

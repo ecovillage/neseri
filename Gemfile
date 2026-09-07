@@ -47,7 +47,6 @@ gem 'public_suffix'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :windows]
-  gem 'sqlite3', '~> 2.0'
 end
 
 group :development do

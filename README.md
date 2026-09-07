@@ -46,12 +46,14 @@ out of the git checkout, so there's a single place to bump the version.
 curl https://mise.run | sh   # if you don't have mise yet
 mise install                 # installs the Ruby version pinned in mise.toml
 bundle install
+docker compose up -d         # local Postgres, see docker-compose.yml
 bin/rails db:setup
 bin/rails s
 ```
 
-No Docker needed locally - `development`/`test` use sqlite3
-(`config/database.yml`), so there's nothing else to run alongside it.
+`development`/`test` use Postgres (`config/database.yml`, defaulting to the
+`docker-compose.yml` container at `127.0.0.1:5432`) - the same database
+engine as production, just running locally instead of on the deploy target.
 
 You can use mail_catcher; start it; visit http://localhost:1080 in browser, mailer settings in `config/environments/development.rb` are already properly set up.
 

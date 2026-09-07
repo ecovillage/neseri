@@ -361,14 +361,6 @@ GEM
       actionpack (>= 6.1)
       activesupport (>= 6.1)
       sprockets (>= 3.0.0)
-    sqlite3 (2.9.4-aarch64-linux-gnu)
-    sqlite3 (2.9.4-aarch64-linux-musl)
-    sqlite3 (2.9.4-arm-linux-gnu)
-    sqlite3 (2.9.4-arm-linux-musl)
-    sqlite3 (2.9.4-arm64-darwin)
-    sqlite3 (2.9.4-x86_64-darwin)
-    sqlite3 (2.9.4-x86_64-linux-gnu)
-    sqlite3 (2.9.4-x86_64-linux-musl)
     temple (0.10.4)
     thor (1.5.0)
     tilt (2.7.0)
@@ -444,7 +436,6 @@ DEPENDENCIES
   selenium-webdriver
   simplecov
   sprockets-rails
-  sqlite3 (~> 2.0)
   turbolinks (~> 5)
   tzinfo-data
   web-console
@@ -589,14 +580,6 @@ CHECKSUMS
   simplecov (1.1.1) sha256=25825ef13f0b2e74694d769817dad6ab8e90131dabdaa666e522fea105521e78
   sprockets (4.2.2) sha256=761e5a49f1c288704763f73139763564c845a8f856d52fba013458f8af1b59b1
   sprockets-rails (3.5.2) sha256=a9e88e6ce9f8c912d349aa5401509165ec42326baf9e942a85de4b76dbc4119e
-  sqlite3 (2.9.4-aarch64-linux-gnu) sha256=ecabed721e6eaad54601d2685f09029d90025efc8d931040dc89cb3f8a2080ec
-  sqlite3 (2.9.4-aarch64-linux-musl) sha256=ffb4255947fb54c8c3eeca97460c9702b40de91ce390455ef7367ca6a3929a31
-  sqlite3 (2.9.4-arm-linux-gnu) sha256=9ee2008b9fbec984c3c165b0d7eedd2bd2a415100b761bfa3a4c6fbec9208bf6
-  sqlite3 (2.9.4-arm-linux-musl) sha256=8dc1fe4da6977992cd62decf4a93ccf6cc2e124a5e6a340160d52092f70e837a
-  sqlite3 (2.9.4-arm64-darwin) sha256=1d5aad413a815d236e96d43f05a1acc600b6cd086800770342a3f9c2877499ff
-  sqlite3 (2.9.4-x86_64-darwin) sha256=f280c476e360b73e86165a5e59b72801385b4a6c3a47f8af5ecefb9d90bec17f
-  sqlite3 (2.9.4-x86_64-linux-gnu) sha256=537a3eda71b1df1336d0055cbebe55a7317c34870c192c7b6b9d8d0be6871847
-  sqlite3 (2.9.4-x86_64-linux-musl) sha256=3fc5e865b4be9a85d998203ef8d0c0fdcb92f20acf34a254346ff8a19088efec
   temple (0.10.4) sha256=b7a1e94b6f09038ab0b6e4fe0126996055da2c38bec53a8a336f075748fff72c
   thor (1.5.0) sha256=e3a9e55fe857e44859ce104a84675ab6e8cd59c650a49106a05f55f136425e73
   tilt (2.7.0) sha256=0d5b9ba69f6a36490c64b0eee9f6e9aad517e20dcc848800a06eb116f08c6ab3

@@ -11,6 +11,9 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "pg_catalog.plpgsql"
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.integer "blob_id", null: false
     t.datetime "created_at", precision: nil, null: false
@@ -75,7 +78,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
     t.index ["kind"], name: "index_rooms_on_kind"
   end
 
-  create_table "seminar_instructors", id: :integer, default: nil, force: :cascade do |t|
+  create_table "seminar_instructors", id: :serial, force: :cascade do |t|
     t.string "accommodation"
     t.string "address"
     t.string "comment"
@@ -154,7 +157,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
     t.index ["key"], name: "index_settings_on_key", unique: true
   end
 
-  create_table "users", id: :integer, default: nil, force: :cascade do |t|
+  create_table "users", id: :serial, force: :cascade do |t|
     t.string "address"
     t.boolean "admin", default: false
     t.datetime "confirmation_sent_at", precision: nil
