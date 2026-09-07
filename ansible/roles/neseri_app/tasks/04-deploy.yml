@@ -26,6 +26,7 @@
       SMTP_PORT: "{{ vault_smtp_port }}"
       SMTP_PWD: "{{ vault_smtp_pwd }}"
       SMTP_USER: "{{ vault_smtp_user }}"
+      SMTP_TLS: "{{ vault_smtp_tls }}"
   no_log: true
 
 - name: Write the Rails master key (shared across releases)
