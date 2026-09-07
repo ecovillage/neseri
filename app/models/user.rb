@@ -73,4 +73,15 @@ class User < ApplicationRecord
   def profile_missing?
     firstname.to_s == '' || lastname.to_s == '' || address.to_s == ''
   end
+
+  # Deliver Devise notifications (confirmation, password reset, ...) via
+  # ActiveJob instead of inline. A synchronous #deliver_now here means an
+  # SMTP hiccup (wrong credentials, timeout, provider downtime) raises
+  # inside the web request and turns an otherwise-successful signup/reset
+  # into a 500, even though the record was already committed. deliver_later
+  # decouples that: the request succeeds regardless, and mail delivery
+  # failures are retried/logged as a background job failure instead.
+  def send_devise_notification(notification, *args)
+    devise_mailer.send(notification, self, *args).deliver_later
+  end
 end

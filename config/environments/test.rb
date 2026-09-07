@@ -34,6 +34,12 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  # Run ActiveJob jobs (e.g. Devise's deliver_later notifications) inline
+  # instead of on the default :async adapter's background thread pool - the
+  # existing tests assert on ActionMailer::Base.deliveries right after
+  # triggering the action and would otherwise race the job's execution.
+  config.active_job.queue_adapter = :inline
+
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
   # ActionMailer::Base.deliveries array.
