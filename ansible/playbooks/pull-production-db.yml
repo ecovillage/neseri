@@ -1,0 +1,167 @@
+---
+# One-off data import, the other direction from import-sqlite.yml: pull the
+# production Postgres database down into the local Postgres started by
+# `docker compose up -d` (see the repo root docker-compose.yml), so local
+# development can work against real(-ish) data instead of fixtures/seeds.
+#
+# This downloads production's actual user data - names, email addresses,
+# postal addresses, phone numbers - onto whatever machine runs this
+# playbook. Treat the resulting local database with the same care you'd
+# give the production one; don't commit it, screenshot it into a public
+# issue, etc.
+#
+# This REPLACES the local database: {{ local_db_name }} (default
+# neseri_development) is dropped and recreated from the production dump.
+# Nothing on the production side is modified - pg_dump only reads.
+#
+# Usage:
+#   cd ansible
+#   ansible-playbook playbooks/pull-production-db.yml
+#   # or, to fill a different local database (e.g. so you can diff it
+#   # against your current neseri_development):
+#   ansible-playbook playbooks/pull-production-db.yml -e local_db_name=neseri_from_prod
+
+- name: Dump the production database
+  hosts: proxmox_container
+
+  vars:
+    neseri_pull_remote_dir: /tmp/neseri-pull
+    neseri_pull_remote_dump: "{{ neseri_pull_remote_dir }}/production.dump"
+    neseri_pull_local_dump: "{{ local_dump_path | default('/tmp/neseri-production.dump') }}"
+
+  vars_prompt:
+    - name: neseri_pull_confirm
+      prompt: >-
+        This downloads production's actual data - names, email addresses,
+        postal addresses, phone numbers - onto this machine, and REPLACES
+        the local '{{ local_db_name | default('neseri_development') }}'
+        database with it. Nothing on production is changed. Type 'yes' to
+        continue
+      private: false
+
+  pre_tasks:
+    - name: Abort unless the pull was confirmed
+      ansible.builtin.assert:
+        that: neseri_pull_confirm == 'yes'
+        fail_msg: "Aborted - confirmation not given."
+        success_msg: "Confirmed - proceeding with the pull."
+      run_once: true
+
+  tasks:
+    - name: Create the remote dump directory
+      ansible.builtin.file:
+        path: "{{ neseri_pull_remote_dir }}"
+        state: directory
+        owner: postgres
+        mode: "0700"
+      become: true
+
+    - name: Dump the production database (custom format, for pg_restore)
+      ansible.builtin.command:
+        cmd: >-
+          pg_dump --format=custom --file={{ neseri_pull_remote_dump }}
+          {{ postgres_db_name }}
+      become: true
+      become_user: postgres
+      changed_when: true
+
+    - name: Fetch the dump to the local machine
+      ansible.builtin.fetch:
+        src: "{{ neseri_pull_remote_dump }}"
+        dest: "{{ neseri_pull_local_dump }}"
+        flat: true
+      become: true
+
+    - name: Remove the remote dump (it's just PII in transit, not a backup - import-sqlite.yml's pg_dump under shared/backups/ is the real one)
+      ansible.builtin.file:
+        path: "{{ neseri_pull_remote_dir }}"
+        state: absent
+      become: true
+
+- name: Restore the dump into the local Postgres (docker compose)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  vars:
+    neseri_repo_root: "{{ playbook_dir }}/../.."
+    neseri_compose_file: "{{ neseri_repo_root }}/docker-compose.yml"
+    neseri_pull_local_dump: "{{ local_dump_path | default('/tmp/neseri-production.dump') }}"
+    neseri_pull_local_db: "{{ local_db_name | default('neseri_development') }}"
+    # Matches docker-compose.yml's POSTGRES_USER/PASSWORD.
+    neseri_local_pg_user: neseri
+
+  tasks:
+    - name: Start the local Postgres (no-op if already up)
+      ansible.builtin.command:
+        cmd: docker compose -f {{ neseri_compose_file }} up -d postgres
+      changed_when: false
+
+    - name: Wait for it to accept connections
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} exec -T postgres
+          pg_isready -U {{ neseri_local_pg_user }}
+      register: neseri_pg_ready
+      until: neseri_pg_ready.rc == 0
+      retries: 15
+      delay: 2
+      changed_when: false
+
+    - name: Terminate other connections to the target database (DROP DATABASE fails otherwise, e.g. if `bin/rails s` is running)
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} exec -T postgres
+          psql -U {{ neseri_local_pg_user }} -d postgres -c
+          "SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE datname = '{{ neseri_pull_local_db }}' AND pid <> pg_backend_pid();"
+      changed_when: true
+
+    - name: Drop the local database
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} exec -T postgres
+          dropdb -U {{ neseri_local_pg_user }} --if-exists {{ neseri_pull_local_db }}
+      changed_when: true
+
+    - name: Recreate it
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} exec -T postgres
+          createdb -U {{ neseri_local_pg_user }} -O {{ neseri_local_pg_user }} {{ neseri_pull_local_db }}
+      changed_when: true
+
+    - name: Copy the dump into the container (pg_restore needs a path inside it, not on the host)
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} cp
+          {{ neseri_pull_local_dump }} postgres:/tmp/production.dump
+      changed_when: true
+
+    - name: Restore it
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} exec -T postgres
+          pg_restore --no-owner --no-privileges -U {{ neseri_local_pg_user }}
+          -d {{ neseri_pull_local_db }} /tmp/production.dump
+      register: neseri_restore_result
+      changed_when: true
+      # pg_restore exits 1 on warnings (e.g. "role neseri_production does
+      # not exist" from ownership it can't map, even with --no-owner) as
+      # well as on real failures - a human skims the output either way.
+      failed_when: false
+
+    - name: Show pg_restore's output
+      ansible.builtin.debug:
+        msg: "{{ neseri_restore_result.stderr_lines }}"
+
+    - name: Remove the dump from inside the container
+      ansible.builtin.command:
+        cmd: >-
+          docker compose -f {{ neseri_compose_file }} exec -T postgres
+          rm -f /tmp/production.dump
+      changed_when: true
+
+    - name: Remove the local copy of the dump
+      ansible.builtin.file:
+        path: "{{ neseri_pull_local_dump }}"
+        state: absent

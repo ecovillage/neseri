@@ -10,15 +10,23 @@
 # by default (overridable via PGHOST/PGPORT/PGUSER/PGPASSWORD).
 services:
   postgres:
-    image: postgres:16-alpine
+    # Pinned to match production's actual Postgres version (see
+    # ansible/roles/neseri_app/tasks/01-packages.yml - installed from Ubuntu
+    # 26.04's apt repo, currently 18.x) so a `pull-production-db.yml` dump
+    # restores here without a cross-version pg_restore surprise.
+    image: postgres:18-alpine
     environment:
       POSTGRES_USER: neseri
       POSTGRES_PASSWORD: neseri
       POSTGRES_DB: neseri_development
     ports:
       - "127.0.0.1:5432:5432"
+    # 18+'s image wants the mount one level up (it manages a
+    # version-specific subdirectory itself, for pg_ctlcluster-style
+    # upgrades) - a direct mount at .../postgresql/data is the pre-18 layout
+    # and gets refused.
     volumes:
-      - neseri_postgres_data:/var/lib/postgresql/data
+      - neseri_postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U neseri"]
       interval: 2s

@@ -175,6 +175,29 @@ This is additive only (a plain rsync push, nothing on the target is
 deleted), so unlike `import-sqlite.yml` it doesn't stop the app or ask for
 confirmation.
 
+## Pulling the production database down locally
+
+`playbooks/pull-production-db.yml` goes the other direction from
+`import-sqlite.yml`: it `pg_dump`s the production database and restores it
+into the local Postgres from the repo root's `docker-compose.yml`, so local
+development can run against real(-ish) data instead of fixtures/seeds.
+
+```bash
+cd ansible
+ansible-playbook playbooks/pull-production-db.yml
+# or, to land it in a differently-named local database instead of
+# overwriting neseri_development:
+ansible-playbook playbooks/pull-production-db.yml -e local_db_name=neseri_from_prod
+```
+
+This downloads production's actual user data (names, email addresses,
+postal addresses, phone numbers) onto whatever machine runs it - the
+playbook asks for an explicit `yes` before doing anything, and the transfer
+copy of the dump is deleted (both on the container and locally) once the
+restore finishes. Nothing on the production side is modified - `pg_dump`
+only reads. Doesn't touch attachments; pair it with a local rsync from
+`shared/storage/` by hand if you need those too.
+
 ## Resource note
 
 The container has 1GB+ RAM / 8GB disk. Postgres is tuned down
