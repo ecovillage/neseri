@@ -116,9 +116,6 @@ key yet:
 3. Rerun `ansible-playbook playbooks/deploy-app.yml` - the clone succeeds
    now.
 
-This replaces the old `vault_ghcr_username`/`vault_ghcr_token` - GHCR isn't
-used anymore, so those two can be deleted from the vault.
-
 To rotate the key: delete `{{ neseri_app_dir }}/.ssh/id_ed25519*` on the
 container, remove the old deploy key from GitHub, and rerun (repeats the
 bootstrap above with a fresh keypair).
