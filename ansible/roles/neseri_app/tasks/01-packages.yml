@@ -27,6 +27,10 @@
       - libgdbm-compat-dev
       - libpq-dev       # for the `pg` gem
       - libvips         # for image processing
+      - imagemagick     # ditto - image_processing/ActiveStorage variants
+                         # default to the mini_magick backend (shells out to
+                         # `convert`) unless config.active_storage.variant_processor
+                         # is set to :vips, and the app doesn't set it
       - python3-psycopg2 # for the community.postgresql ansible modules
     state: present
     update_cache: true
