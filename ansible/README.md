@@ -157,6 +157,24 @@ line. The app is stopped for the duration and restarted afterwards, and a
 before anything is truncated. The playbook asks for an explicit `yes`
 before doing any of this.
 
+pgloader only moves the sqlite3 file's rows, though - it has no idea that
+some of those (`active_storage_blobs`/`active_storage_attachments`) are
+metadata pointing at actual files, which Active Storage's Disk service
+keeps separately under a local `storage/` directory. If the sqlite3 file
+you're importing has attachments, also run `playbooks/import-storage.yml`
+(order relative to `import-sqlite.yml` doesn't matter) to sync that
+directory into `shared/storage/` on the container - otherwise production
+ends up with attachment records for files it was never given, which 500s
+(`ActiveStorage::FileNotFoundError`) the moment a view tries to render one:
+
+```bash
+ansible-playbook playbooks/import-storage.yml -e storage_dir_path=/path/to/storage
+```
+
+This is additive only (a plain rsync push, nothing on the target is
+deleted), so unlike `import-sqlite.yml` it doesn't stop the app or ask for
+confirmation.
+
 ## Resource note
 
 The container has 1GB+ RAM / 8GB disk. Postgres is tuned down
@@ -183,6 +201,8 @@ inventory/group_vars/caddy_edge/        non-secret vars for the edge
 inventory/group_vars/proxmox_container/ vars.yml (non-secret) + vault.yml (secrets)
 playbooks/deploy-app.yml                run 1st
 playbooks/caddy-edge.yml                run 2nd
+playbooks/import-sqlite.yml             one-off: import a sqlite3 file's data
+playbooks/import-storage.yml            one-off: sync its Active Storage files
 roles/neseri_app/                       installs Ruby/Postgres/Caddy, deploys and runs the app on the container
 roles/caddy_edge/                       adds the neseri site block to the Hostsharing Caddyfile
 ```

@@ -1,0 +1,66 @@
+---
+# One-off data import: sync a local Active Storage `storage/` directory into
+# production's shared/storage/, without touching the database.
+#
+# Pairs with import-sqlite.yml: pgloader only moves the sqlite3 file's
+# *rows* - it has no idea that some of those rows
+# (active_storage_blobs/active_storage_attachments) are metadata pointing at
+# actual files the Disk service keeps separately, under a local `storage/`
+# directory. Importing the database alone leaves production with attachment
+# records for files it was never given, which 500s
+# (ActiveStorage::FileNotFoundError) the moment a view tries to render one.
+# Run this playbook alongside import-sqlite.yml (order doesn't matter)
+# whenever the sqlite3 file being imported has attachments.
+#
+# This only adds files - rsync copies in, nothing on the target is ever
+# deleted, and Active Storage keys are random per blob, so a same-named file
+# already on the target is - barring a hash collision - the exact same file,
+# not something this would clobber with different content. The app is left
+# running throughout; there's nothing here for it to race.
+#
+# Usage:
+#   ansible-playbook playbooks/import-storage.yml -e storage_dir_path=/path/to/storage
+
+- name: Sync local Active Storage files into production
+  hosts: proxmox_container
+
+  pre_tasks:
+    - name: Require storage_dir_path
+      ansible.builtin.assert:
+        that:
+          - storage_dir_path is defined
+          - storage_dir_path | length > 0
+        fail_msg: >-
+          Pass the local storage directory to sync: ansible-playbook
+          playbooks/import-storage.yml -e storage_dir_path=/path/to/storage
+      run_once: true
+
+    - name: Check the storage directory exists locally
+      ansible.builtin.stat:
+        path: "{{ storage_dir_path }}"
+      register: neseri_storage_stat
+      delegate_to: localhost
+      become: false
+      run_once: true
+
+    - name: Fail if it doesn't (or isn't a directory)
+      ansible.builtin.assert:
+        that: neseri_storage_stat.stat.exists and neseri_storage_stat.stat.isdir
+        fail_msg: "No such directory: {{ storage_dir_path }}"
+      run_once: true
+
+  tasks:
+    - name: Sync Active Storage files into shared/storage
+      ansible.posix.synchronize:
+        src: "{{ storage_dir_path }}/"
+        dest: "{{ neseri_app_dir }}/shared/storage/"
+        recursive: true
+      become: true
+
+    - name: Fix ownership of the synced storage files
+      ansible.builtin.file:
+        path: "{{ neseri_app_dir }}/shared/storage"
+        owner: "{{ neseri_deploy_user }}"
+        group: "{{ neseri_deploy_user }}"
+        recurse: true
+      become: true
