@@ -76,10 +76,13 @@ Rails.application.configure do
     user_name:       ENV['SMTP_USER'],
     password:        ENV['SMTP_PWD'],
     authentication:  'plain',
-    # Force STARTTLS (as opposed to enable_starttls_auto, which silently
-    # falls back to a plaintext connection if the server doesn't advertise
-    # STARTTLS): mails must always go out over TLS.
-    enable_starttls: ENV.fetch('SMTP_TLS', 'true') == 'true' }
+    # SMTP_PORT 465 is implicit TLS/SMTPS: the server expects the TLS
+    # handshake immediately on connect, not a plaintext EHLO followed by a
+    # STARTTLS upgrade. `enable_starttls` sends that plaintext EHLO first,
+    # which the server never answers on this port, hanging until
+    # Net::ReadTimeout. `tls: true` wraps the socket in TLS from the start,
+    # matching what port 465 actually expects.
+    tls: ENV.fetch('SMTP_TLS', 'true') == 'true' }
   
   config.action_mailer.default_url_options = { :host => ENV['MAILER_HOST'] }
 
