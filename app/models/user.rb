@@ -51,6 +51,12 @@ class User < ApplicationRecord
 
   validates_acceptance_of :tos_agreement, :allow_nil => false, on: :create
 
+  # Only enforced on sign-up (on: :create); invited users are created via
+  # User.invite!(validate: false) and fill in these fields later on the
+  # instructor page, so this must not block invitation acceptance or later
+  # profile updates for users who haven't completed them yet.
+  validates_presence_of :firstname, :lastname, :phone, on: :create
+
   def downcase_strip_email
     self.email = self.email.downcase.strip
   end

@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   impersonates :user
 
   def configure_permitted_devise_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :tos_agreement])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:email, :tos_agreement,
+      :firstname, :lastname, :address, :phone, :mobile, :homepage])
     devise_parameter_sanitizer.permit(:accept_invitation, keys: [:tos_agreement])
   end
 
