@@ -1,26 +1,18 @@
-= render 'devise/shared/auth_hero' do
-  %h2.title= t('devise.registrations.new.sign_up')
+%h1.title= t('devise.registrations.new.sign_up')
+
+= form_for(resource, as: resource_name, url: registration_path(resource_name), builder: SignUpFormBuilder) do |f|
+  = f.errors
+
   .box
-    = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-      = render "devise/shared/error_messages", resource: resource
-      .field
-        = f.label :email
-        %br/
-        = f.email_field :email, autofocus: true, autocomplete: "email"
-      .field
-        = f.label :password
-        - if @minimum_password_length
-          %em= t('devise.shared.minimum_password_length', count: @minimum_password_length)
-        %br/
-        = f.password_field :password, autocomplete: "new-password"
-      .field
-        = f.label :password_confirmation
-        %br/
-        = f.password_field :password_confirmation, autocomplete: "new-password"
-      %br
-      .field
-        = f.check_box :tos_agreement
-        = f.label :tos_agreement, t(:read_and_accepted_tos_html, privacy_path: privacy_path)
-      .actions
-        = f.submit t('devise.registrations.new.sign_up'), class: 'button'
-  = render "devise/shared/links"
+    %p.help= t(:required_fields_hint)
+    = f.labeled_email_field :email
+    = f.labeled_password_field :password, help_text: (t('devise.shared.minimum_password_length', count: @minimum_password_length) if @minimum_password_length)
+    = f.labeled_password_field :password_confirmation
+
+    .field
+      = f.check_box :tos_agreement
+      = f.label :tos_agreement, t(:read_and_accepted_tos_html, privacy_path: privacy_path)
+
+  = f.submit t('devise.registrations.new.sign_up')
+
+= render "devise/shared/links"

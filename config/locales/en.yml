@@ -59,6 +59,7 @@ en:
   publication:
     connection_refused: Could not connect to the legacy system!
   read_and_accepted_tos_html: <a href="%{privacy_path}">Terms and privacy policy</a> read and accepted
+  required_fields_hint: Fields marked with * are required.
   resend_confirmation_instructions: Resend instructions
   room:
     create: Create new room

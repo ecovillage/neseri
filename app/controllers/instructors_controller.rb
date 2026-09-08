@@ -25,7 +25,8 @@ class InstructorsController < NeseriController
   private
 
   def instructor_params
-    params.require(:user).permit(:firstname,
+    params.require(:user).permit(:email,
+      :firstname,
       :lastname,
       :address,
       :phone,

@@ -59,6 +59,7 @@ de:
   publication:
     connection_refused: Konnte nicht mit Alt-System verbinden!
   read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a> gelesen und akzeptiert
+  required_fields_hint: Mit * markierte Felder sind Pflichtfelder.
   resend_confirmation_instructions: Anleitung erneut schicken
   room:
     create: Neuen Raum anlegen

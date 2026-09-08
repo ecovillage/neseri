@@ -1,10 +1,12 @@
 %h1.title #{t(:edit_your_instructor_data)}
 
-= form_for @instructor, url: instructor_path, builder: BulmaFormBuilder::HorizontalBulmaFormBuilder, local: true, remote: false do |f|
+= form_for @instructor, url: instructor_path, builder: SignUpFormBuilder, local: true, remote: false do |f|
   = f.errors
 
   .box
-    = f.labeled_text_field :firstname, placeholder: t('instructor.placeholder.lastname')
+    %p.help= t(:required_fields_hint)
+    = f.labeled_email_field :email
+    = f.labeled_text_field :firstname, placeholder: t('instructor.placeholder.firstname')
     = f.labeled_text_field :lastname, placeholder: t('instructor.placeholder.lastname')
     = f.labeled_text_area "address", help_text: t('instructor.helptext.address')
     = f.labeled_text_field "phone", icon: 'fa-phone'
