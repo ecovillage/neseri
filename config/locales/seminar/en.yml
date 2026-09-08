@@ -63,6 +63,7 @@ en:
     edit: Edit proposal
     files: Attachments
     file_missing: File currently unavailable
+    file_pending_upload: will be uploaded once saved
     of_original: of the original
     is-locked: This event proposal is currently being processed by the education office.
     pull_back: Withdraw seminar proposal

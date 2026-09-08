@@ -73,6 +73,7 @@ de:
     edit: Vorschlag bearbeiten
     files: Anhänge
     file_missing: Datei derzeit nicht verfügbar
+    file_pending_upload: wird erst nach dem Speichern hochgeladen
     of_original: des Originals
     is-locked: Dieser Veranstaltungsvorschlag wird derzeit durch das Bildungsreferat bearbeitet.
     pull_back: Seminarvorschlag zurückziehen

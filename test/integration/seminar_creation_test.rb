@@ -42,6 +42,25 @@ class SeminarCreationTest < ActionDispatch::IntegrationTest
 
     assert_equal num_seminars, Seminar.count
 
+    # Regression test: a validation failure while a file is attached used to
+    # blow up with `ArgumentError: Cannot get a signed_id for a new record`
+    # when the form tried to re-render a link to the not-yet-persisted file
+    # (see app/views/seminars/_form.html.haml).
+    post "/seminars", params: {
+      seminar: {
+        title: '',
+        cost_participant: '100',
+        files: [fixture_file_upload('test_image.png', 'image/png')]
+      }
+    }
+    assert_response :success
+
+    assert_select '.notification.is-danger' do
+      assert_select 'h2', 'Konnte Seminar nicht speichern: ein Fehler.'
+    end
+
+    assert_equal num_seminars, Seminar.count
+
     post "/seminars", params: {
       seminar: {
         title: 'Minimum title',

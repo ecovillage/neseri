@@ -231,9 +231,13 @@
     %p
       %br
       %ul
-        %li
-          - @seminar.files.each do |file|
-            = link_to file.filename, url_for(file)
+        - @seminar.files.each do |file|
+          %li
+            - if file.blob&.persisted?
+              = link_to file.filename, url_for(file)
+            - else
+              = file.filename
+              %em= " (#{t('seminar.file_pending_upload')})"
 
       %br
       = f.file_field :files, multiple: true
