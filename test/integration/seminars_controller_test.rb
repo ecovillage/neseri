@@ -33,6 +33,21 @@ class SeminarsControllerTest < ActionDispatch::IntegrationTest
     assert_equal 'A new, valid title', seminar.reload.title
   end
 
+  # Pagy raises Pagy::OverflowError for a page beyond the last one (e.g. a
+  # stale bookmarked pagination link, or someone editing the page number
+  # by hand) - left unrescued that's an unhandled exception and 500s the
+  # page. NeseriController rescues it and redirects to the last valid page.
+  test "an out-of-range page number redirects to the last valid page instead of 500ing" do
+    sign_in users(:jane)
+
+    get seminars_path(current_page: 999, past_page: 1)
+
+    assert_redirected_to seminars_path(current_page: 1, past_page: 1)
+    follow_redirect!
+    assert_response :success
+    assert_select '.notification', text: 'Diese Seite gibt es nicht (mehr) - hier ist die letzte Seite.'
+  end
+
   test "the creator can pull a seminar back (soft-delete)" do
     sign_in users(:jane)
     seminar = seminars(:bob_and_janes_seminar)

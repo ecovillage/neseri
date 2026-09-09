@@ -48,6 +48,7 @@ de:
     nojs: Du musst JavaScript aktiviert haben um Änderungen mit dieser Anwendung durchführen zu können
   nr: Nr
   mail_all_instructors: E-Mail an alle verfassen
+  page_out_of_range: Diese Seite gibt es nicht (mehr) - hier ist die letzte Seite.
   pages:
     about: Über
     contact: Kontakt

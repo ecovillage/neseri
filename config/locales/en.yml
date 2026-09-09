@@ -48,6 +48,7 @@ en:
     nojs: You need to have JavaScript enabled to make changes in this application
   nr: "No."
   mail_all_instructors: Write email to all instructors
+  page_out_of_range: This page doesn't exist (anymore) - here's the last page.
   pages:
     about: About
     contact: Contact
