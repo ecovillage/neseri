@@ -40,6 +40,15 @@ class InstructorUserLinkTest < ActiveSupport::TestCase
     assert last_updated_at == bob_and_janes_seminar.updated_at
   end
 
+  test "does nothing if the instructor is already correctly linked" do
+    jane_instructor = seminar_instructors(:bob_and_jane_jane)
+    last_updated_at = jane_instructor.updated_at
+
+    assert_nil InstructorUserLink.create_and_invite!(jane_instructor)
+    assert_equal users(:jane), jane_instructor.user
+    assert_equal last_updated_at, jane_instructor.updated_at
+  end
+
   test "creates, invites and sets the user if not present" do
     bob_and_janes_seminar = seminars(:bob_and_janes_seminar)
 

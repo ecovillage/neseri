@@ -90,6 +90,15 @@ class SeminarTest < ActiveSupport::TestCase
     assert_includes seminar.errors.details[:attendees_maximum].map { |e| e[:error] }, :must_be_greater_than_minimum
   end
 
+  test "attached files over 10MB are purged and rejected" do
+    seminar = Seminar.new(title: 'Big file', creator: users(:jane), cost_participant: 100,
+      start_date: DateTime.now, end_date: DateTime.now + 1)
+    seminar.files.attach(io: StringIO.new("a" * 10_000_001), filename: 'big.txt', content_type: 'text/plain')
+
+    refute seminar.valid?
+    assert_includes seminar.errors.details[:base].map { |e| e[:error] }, :file_too_big
+  end
+
   test ".admin_copies and .user_versions only return the matching kind" do
     admin_copy = seminars(:admin_copy_bob_and_janes_seminar)
     user_version = seminars(:bob_and_janes_seminar)

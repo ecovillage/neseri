@@ -7,13 +7,13 @@ class RegistrationTest < ApplicationSystemTestCase
     visit root_path
     click_link_or_button 'neu registrieren'
 
-    assert_selector 'h2', text: 'Neu registrieren'
+    assert_selector 'h1', text: 'Neu registrieren'
 
     fill_in 'E-Mail', with: 'newperson@neseri.de'
-    fill_in 'Passwort', with: 'newpersonpassword'
-    fill_in 'Passwortbestätigung', with: 'newpersonpassword'
+    fill_in 'user_password', with: 'newpersonpassword'
+    fill_in 'user_password_confirmation', with: 'newpersonpassword'
     check 'AGB und Datenschutzerklärung gelesen und akzeptiert', allow_label_click: true
-    find('.actions .button').click
+    find('.new_user .button').click
 
     assert_selector '.notification', text: 'Bestätigungs-E-Mail'
 

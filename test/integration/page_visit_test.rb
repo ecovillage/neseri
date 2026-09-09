@@ -32,4 +32,18 @@ class PageVisitTest < ActionDispatch::IntegrationTest
     assert_select '.title', text: 'Impressum'
   end
 
+  test "anonymous visiting the contact page is asked to sign in" do
+    get contact_path
+    assert_response :redirect
+    follow_redirect!
+    assert_select '.notification-alert'
+  end
+
+  test "the flashs page renders one of every kind of flash message, for design review" do
+    get flashs_path
+    assert_response :success
+
+    assert_select '.notification', text: 'Careful, alert'
+  end
+
 end

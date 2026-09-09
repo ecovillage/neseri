@@ -30,14 +30,20 @@ class Admin::AdminSeminarsController < NeseriController
 
   def edit
     @seminar = Seminar.find(params[:id])
+    # Authorizing before the is_user_seminar? check (matching #update)
+    # keeps `verify_authorized` satisfied on every path, including the
+    # early return right below.
+    authorize! @seminar
 
     if @seminar.is_user_seminar?
       # TODO could be nice and redirect or find the admin copy ...
       helpers.add_flash notice: t('not_an_admin_copy')
-      redirect_to admin_admin_seminars_path
+      # Without this `and return`, execution fell through to the
+      # redirect below and double-rendered (500) whenever this was reached
+      # for a user seminar's id (nothing in the UI links here with one,
+      # but the route doesn't stop it).
+      redirect_to admin_admin_seminars_path and return
     end
-
-    authorize! @seminar
 
     if @seminar.uuid
       redirect_to admin_admin_seminar_path(@seminar) and return
@@ -50,7 +56,11 @@ class Admin::AdminSeminarsController < NeseriController
 
     if @seminar.is_user_seminar?
       helpers.add_flash notice: t('not_an_admin_copy')
-      redirect_to admin_admin_seminars_path
+      # Without this `and return`, execution fell through to
+      # @seminar.update below and double-rendered (500) whenever this was
+      # reached for a user seminar's id (e.g. its own creator, who's
+      # authorized above the same way as for the actual seminars#update).
+      redirect_to admin_admin_seminars_path and return
     end
 
     if @seminar.update(seminar_params)

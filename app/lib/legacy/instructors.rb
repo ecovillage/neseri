@@ -13,7 +13,10 @@ module Legacy
         []
       else
         view_uri = ''
-        person_ids_from_view URI.escape("#{db_uri}/_design/sl_seminar/_view/person_by_name?key=\"#{name}\"")
+        # URI.escape was removed in Ruby 3.0; URI::DEFAULT_PARSER.escape is
+        # its documented drop-in replacement (that's what URI.escape used to
+        # delegate to).
+        person_ids_from_view URI::DEFAULT_PARSER.escape("#{db_uri}/_design/sl_seminar/_view/person_by_name?key=\"#{name}\"")
       end
     end
 
@@ -21,7 +24,7 @@ module Legacy
       if email.nil? || email.empty?
         []
       else
-        person_ids_from_view URI.escape("#{db_uri}/_design/sl_seminar/_view/person_by_email?key=\"#{email}\"")
+        person_ids_from_view URI::DEFAULT_PARSER.escape("#{db_uri}/_design/sl_seminar/_view/person_by_email?key=\"#{email}\"")
       end
     end
 

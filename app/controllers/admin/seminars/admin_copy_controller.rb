@@ -6,10 +6,10 @@ class Admin::Seminars::AdminCopyController < NeseriController
     authorize! @user_seminar, with: AdminSeminarPolicy
 
     if @user_seminar.admin_seminar
-      helpers.add_flash t("admin.seminar.admin_copy.has_already")
+      helpers.add_flash notice: t("admin.seminar.admin_copy.has_already")
       @admin_seminar = @user_seminar.admin_seminar
     elsif @user_seminar.is_admin_seminar?
-      helpers.add_flash t("admin.seminar.admin_copy.is_already")
+      helpers.add_flash notice: t("admin.seminar.admin_copy.is_already")
       @admin_seminar = @user_seminar
     else
       operation = AdminSeminarCloner.call(@user_seminar)
