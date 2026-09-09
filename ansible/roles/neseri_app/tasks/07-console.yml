@@ -1,0 +1,19 @@
+---
+# An admin-facing wrapper around the su/mise/env-loading dance needed to get
+# a production Rails console - see templates/console.sh.j2 for the why.
+
+- name: "Create a root-owned bin/ for admin tooling (not under {{ neseri_deploy_user }}'s writable tree)"
+  ansible.builtin.file:
+    path: "{{ neseri_app_dir }}/bin"
+    state: directory
+    owner: root
+    group: root
+    mode: "0700"
+
+- name: Install the production console wrapper
+  ansible.builtin.template:
+    src: console.sh.j2
+    dest: "{{ neseri_app_dir }}/bin/console"
+    owner: root
+    group: root
+    mode: "0700"

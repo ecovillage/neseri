@@ -25,3 +25,6 @@
 
 - name: Configure the host firewall
   ansible.builtin.import_tasks: 06-firewall.yml
+
+- name: Install the admin console wrapper
+  ansible.builtin.import_tasks: 07-console.yml

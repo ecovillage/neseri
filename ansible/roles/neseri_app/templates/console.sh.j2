@@ -1,0 +1,62 @@
+#!/bin/bash
+{{ ansible_managed | comment }}
+#
+# Drops into the production Rails console the same way systemd runs Puma:
+# as the {{ neseri_deploy_user }} service account, with HOME set to its
+# mise-managed home (so the Ruby version pinned in mise.toml is found) and
+# the production environment (DATABASE_URL, RAILS_ENV, ...) loaded from
+# shared/app.env.
+#
+# Why this exists: {{ neseri_deploy_user }} has a nologin shell (see
+# 02-user.yml) - it's a service account, not a login for admins - and Ruby
+# is only installed into its mise-managed HOME (04-deploy.yml), never
+# system-wide. So a bare `bin/rails c` run as root fails with
+# "ruby: command not found", and `su {{ neseri_deploy_user }}` on its own
+# just hits the nologin shell.
+#
+# This script lives root-owned (0700) outside {{ neseri_deploy_user }}'s
+# writable tree - deliberately, so that a compromised app process running
+# as {{ neseri_deploy_user }} cannot tamper with what root executes here
+# before dropping into that same account.
+#
+# Usage:
+#   {{ neseri_app_dir }}/bin/console                  # rails console
+#   {{ neseri_app_dir }}/bin/console dbconsole        # bin/rails dbconsole
+#   {{ neseri_app_dir }}/bin/console runner script.rb # bin/rails runner ...
+#   {{ neseri_app_dir }}/bin/console bundle exec rake some:task
+#
+# Must be run as root.
+
+set -euo pipefail
+
+app_dir={{ neseri_app_dir }}
+deploy_user={{ neseri_deploy_user }}
+mise_bin={{ neseri_mise_bin }}
+
+if [ "$(id -u)" -ne 0 ]; then
+  echo "Run this as root - it su's into $deploy_user itself." >&2
+  exit 1
+fi
+
+if [ ! -e "$app_dir/current" ]; then
+  echo "$app_dir/current does not exist - has the app been deployed yet?" >&2
+  exit 1
+fi
+
+# Default to an interactive console if no command was given.
+if [ "$#" -eq 0 ]; then
+  set -- bin/rails console
+fi
+
+# Re-quote the arguments for the su -c shell so spaces/quotes in e.g. a
+# runner script's own arguments survive the extra layer.
+printf -v quoted_cmd '%q ' "$@"
+
+exec su -s /bin/bash "$deploy_user" -c "
+  set -a
+  source '$app_dir/shared/app.env'
+  set +a
+  export MISE_TRUSTED_CONFIG_PATHS='$app_dir'
+  cd '$app_dir/current'
+  exec '$mise_bin' exec -- $quoted_cmd
+"
