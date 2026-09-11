@@ -8,8 +8,6 @@ class SeminarClonerTest < ActiveSupport::TestCase
 
     refute seminar_one.locked?
     refute copy.locked?
-    assert seminar_one.uuid
-    refute copy.uuid
   end
 end
 

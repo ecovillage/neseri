@@ -21,11 +21,7 @@ class Admin::AdminSeminarsController < NeseriController
 
     authorize! @seminar
 
-    if @seminar.uuid
-      redirect_to admin_admin_seminar_publication_path(@seminar)
-    else
-      redirect_to edit_admin_admin_seminar_path(@seminar)
-    end
+    redirect_to edit_admin_admin_seminar_path(@seminar)
   end
 
   def edit
@@ -43,10 +39,6 @@ class Admin::AdminSeminarsController < NeseriController
       # for a user seminar's id (nothing in the UI links here with one,
       # but the route doesn't stop it).
       redirect_to admin_admin_seminars_path and return
-    end
-
-    if @seminar.uuid
-      redirect_to admin_admin_seminar_path(@seminar) and return
     end
   end
 

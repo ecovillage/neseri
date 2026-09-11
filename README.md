@@ -16,11 +16,10 @@ The code is published under the [AGPLv3+](LICENSE.txt) and Copyright 2019-2023 F
   * instructors then become users and can create seminars (they are normal users) and edit seminars where they are registered as instructors
   * administrators can create rooms and seminar-types (which then are displayed as select boxes in the seminar form)
   * administrators can create admin-copies and lock the seminars created by users to separately work on a copy while seeing the original values the user(s) entered
-  * administrators can map instructors to their legacy-system counterpart and then "publish" an admin-copy of a seminar into the legacy system (a CouchDB-backed system, pushed to via `Legacy::Export`/`Legacy::PersonExport`, see `app/lib/legacy/`)
 
 ## Configuration
 
-See the `Deployment` section below for the ENV variables needed to get mail and the legacy-system integration working.
+See the `Deployment` section below for the ENV variables needed to get mail working.
 
 ### Database Setup
 
@@ -150,16 +149,3 @@ And of course all the awesomeness by the rest of the ecosystem. Obviously, see t
 ### I18n
 
 A config for [i18n-tasks](https://github.com/glebm/i18n-tasks) is prepared under `config/i18n-tasks.yml`
-
-### Dealing with legacy data
-
-Some rake-tasks are provided to deal with specific legacy data of a prior application.
-As the data was messy, such is the code.
-
-In a gist:
-  * `rails neseri:create_legacy_json > data.json` creates a JSON file, that
-  * `rails neseri:import_legacy_json` will consume (and create respective users, seminars, etc.)
-
-#### Publishing into the legacy system
-
-Once instructors are mapped to their legacy-system counterpart (`Publication::UserMapping`, done from an admin-copy's publication screen), an admin-copy of a seminar can be "published": this pushes JSON documents for the seminar and its instructors into the legacy system via simple HTTP PUTs (the legacy system is backed by a CouchDB). See `app/lib/legacy/export.rb` and `app/lib/legacy/person_export.rb`. The legacy system's URL and web-URL are configured at runtime under `/admin/settings`, stored as `Setting` records (`legacy_db_uri`, `legacy_web_url`).

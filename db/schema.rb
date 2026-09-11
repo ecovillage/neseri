@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
+ActiveRecord::Schema[8.1].define(version: 2026_09_11_100635) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -51,14 +51,6 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
     t.integer "user_id"
     t.string "user_type"
     t.index ["user_type", "user_id"], name: "index_ahoy_messages_on_user_type_and_user_id"
-  end
-
-  create_table "publication_user_mappings", force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.datetime "updated_at", precision: nil, null: false
-    t.integer "user_id"
-    t.string "uuid"
-    t.index ["user_id"], name: "index_publication_user_mappings_on_user_id"
   end
 
   create_table "publications", force: :cascade do |t|
@@ -142,19 +134,10 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
     t.string "title"
     t.datetime "updated_at", precision: nil, null: false
     t.integer "user_seminar_id"
-    t.string "uuid"
     t.index ["creator_id"], name: "index_seminars_on_creator_id"
     t.index ["room_wish_id"], name: "index_seminars_on_room_wish_id"
     t.index ["seminar_kind_id"], name: "index_seminars_on_seminar_kind_id"
     t.index ["user_seminar_id"], name: "index_seminars_on_user_seminar_id"
-  end
-
-  create_table "settings", force: :cascade do |t|
-    t.datetime "created_at", precision: nil, null: false
-    t.string "key"
-    t.datetime "updated_at", precision: nil, null: false
-    t.string "value"
-    t.index ["key"], name: "index_settings_on_key", unique: true
   end
 
   create_table "users", id: :serial, force: :cascade do |t|
@@ -197,6 +180,5 @@ ActiveRecord::Schema[8.1].define(version: 2026_09_07_161513) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "publication_user_mappings", "users"
   add_foreign_key "publications", "seminars"
 end

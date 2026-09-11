@@ -18,11 +18,9 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :settings, only: [:index, :update]
     resources :users, only: [:index, :show] do
       post :impersonate, on: :member
       post :stop_impersonating, on: :collection
-      resource :user_mapping, controller: 'admin_seminars/publication/user_mappings', only: :create
     end
     resources :emails, only: [:index, :show]
 
@@ -34,13 +32,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :admin_seminars, only: [:index, :edit, :destroy, :update, :show] do
-      # :update creates a single instructor's legacy person record (see
-      # PublicationController#update) - the "create legacy person" button
-      # on the publish-review page PUTs to this route, so without :update
-      # here that button 404'd on click.
-      resource :publication, controller: 'admin_seminars/publication', only: [:new, :create, :show, :update]
-    end
+    resources :admin_seminars, only: [:index, :edit, :destroy, :update, :show]
 
     resources :seminar_kinds, only: [:index, :new, :create, :destroy, :update]
     resources :rooms, only: [:index, :new, :create, :destroy, :update]

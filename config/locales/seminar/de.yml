@@ -11,24 +11,11 @@ de:
         update: Seminarvorschlag speichern
   seminar:
     view_user_version: Original ansehen
-    publish: Übernehmen
-    publication:
-      select_referees_and_publish: Referent*n wählen und übernehmen
-      view_in_legacy_system: In Altsystem ansehen
-      referee:
-        from_neseri: In neseri
-        from_legacy: In Altsystem
-        view_in_legacy_system: In Altsystem ansehen
-        choose: Auswählen
-        change: Auswählen
-        create: Neu anlegen
-        recreate: Neu
     tags:
       locked: gesperrt
       is-admin: (Admin-Kopie)
       has_admin_seminar: hat Admin-Kopie
       is-pulled-back: zurückgezogen
-      is-published: veröffentlicht
     files_text_html: "<b>Fotos</b>: bitte hochladen oder an <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Bitte ein digitales Portrait-Foto von dir für die Hompage, minimale Abmessungen 200 px in Breite oder Höhe. Dieses wird auf der Homepage kreisförmig dargestellt. Wenn vorhanden, auch gern zum Seminar passende andere Fotos (hier aber keine Garantie, dass sie auf die Homepage kommen). Es ist hilfreich, wenn die Bilder bereits in dem korrekten Seitenverhältnis vorliegen (720px x 340px), ansonsten versuchen wir daraus einen Ausschnitt zu wählen. Größer ist hier immer besser als kleiner. Dateigröße sollte mindestens 1 MB sein. <a href=\"https://siebenlinden.org/wp-content/uploads/2021/06/Vorgaben_Bilder_Webseite.pdf\">Weitere Hinweise und illustrierte Beispiele</a>. Stelle unbedingt sicher, dass die Bildrechte erlauben, die Bilder zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit zu verwenden.</br>Es können auch andere für die Veranstaltung wichtige Dateien (z.B. Mitbringlisten, Info-Texte für mails, ...) angehängt werden."
     user_actions: Aktionen
     conditions: Konditionen

@@ -3,8 +3,6 @@ class SeminarCloner < Clowne::Cloner
   include_association :seminar_instructors
   #include_attached :files
 
-  nullify :uuid
-
   finalize do |source, record, params|
     # What to do if its an admin-seminar? raise?
 
