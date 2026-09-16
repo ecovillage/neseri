@@ -21,46 +21,25 @@ class Admin::AdminSeminarsControllerTest < ActionDispatch::IntegrationTest
   test "showing a user seminar with an admin copy shows/redirects for that admin copy instead" do
     sign_in users(:admin)
     admin_copy = seminars(:admin_copy_bob_and_janes_seminar)
-    admin_copy.update!(uuid: nil)
 
     get admin_admin_seminar_path(seminars(:bob_and_janes_seminar))
     assert_redirected_to edit_admin_admin_seminar_path(admin_copy)
   end
 
-  test "showing a published admin seminar redirects to its publication page" do
+  test "showing an admin seminar redirects to editing it" do
     sign_in users(:admin)
     admin_copy = seminars(:admin_copy_bob_and_janes_seminar)
-    admin_copy.update!(uuid: 'legacy-uuid')
-
-    get admin_admin_seminar_path(admin_copy)
-    assert_redirected_to admin_admin_seminar_publication_path(admin_copy)
-  end
-
-  test "showing an unpublished admin seminar redirects to editing it" do
-    sign_in users(:admin)
-    admin_copy = seminars(:admin_copy_bob_and_janes_seminar)
-    admin_copy.update!(uuid: nil)
 
     get admin_admin_seminar_path(admin_copy)
     assert_redirected_to edit_admin_admin_seminar_path(admin_copy)
   end
 
-  test "editing an unpublished admin seminar renders the edit form" do
+  test "editing an admin seminar renders the edit form" do
     sign_in users(:admin)
     admin_copy = seminars(:admin_copy_bob_and_janes_seminar)
-    admin_copy.update!(uuid: nil)
 
     get edit_admin_admin_seminar_path(admin_copy)
     assert_response :success
-  end
-
-  test "editing a published admin seminar redirects to showing it instead" do
-    sign_in users(:admin)
-    admin_copy = seminars(:admin_copy_bob_and_janes_seminar)
-    admin_copy.update!(uuid: 'legacy-uuid')
-
-    get edit_admin_admin_seminar_path(admin_copy)
-    assert_redirected_to admin_admin_seminar_path(admin_copy)
   end
 
   test "an admin editing a user seminar's id is simply unauthorized (edit? is admin_and_admin_copy? only)" do

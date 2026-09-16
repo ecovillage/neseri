@@ -19,7 +19,6 @@
 #  royalty_participant_reduced :decimal(, )
 #  material_cost               :decimal(, )
 #  kind                        :string           default("user")
-#  uuid                        :string
 #  locked                      :boolean          default(FALSE)
 #  created_at                  :datetime         not null
 #  updated_at                  :datetime         not null
@@ -56,7 +55,6 @@ one:
   cost_participant_reduced: 225
   material_cost: 10
   kind: MyString
-  uuid: MyString
   locked: false
   wished_room: big_room
 
@@ -79,7 +77,6 @@ two:
   cost_participant_reduced: 9.99
   material_cost: 9.99
   kind: MyString
-  uuid: MyString
   locked: false
 
 bob_and_janes_seminar:

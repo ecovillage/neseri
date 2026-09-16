@@ -11,24 +11,11 @@ en:
         update: Save seminar proposal
   seminar:
     view_user_version: View original
-    publish: Publish
-    publication:
-      select_referees_and_publish: Select instructors and publish
-      view_in_legacy_system: View in legacy system
-      referee:
-        from_neseri: In neseri
-        from_legacy: In legacy system
-        view_in_legacy_system: View in legacy system
-        choose: Select
-        change: Select
-        create: Create new
-        recreate: New
     tags:
       locked: locked
       is-admin: (admin copy)
       has_admin_seminar: has admin copy
       is-pulled-back: withdrawn
-      is-published: published
     files_text_html: "<b>Photos</b>: please upload them or send them to <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Please include a digital portrait photo of yourself for the website, at least 200 px in width or height. It will be shown cropped to a circle on the website. If available, feel free to add other photos that fit the seminar too (though there's no guarantee they'll be used on the website). It helps if the images are already in the right aspect ratio (720px x 340px), otherwise we'll try to crop them. Bigger is always better than smaller here. File size should be at least 1 MB. <a href=\"https://siebenlinden.org/wp-content/uploads/2021/06/Vorgaben_Bilder_Webseite.pdf\">Further notes and illustrated examples</a>. Please make sure the image rights allow the photos to be used for event promotion and public relations.</br>Other files relevant to the event (e.g. packing lists, info texts for emails, ...) can also be attached."
     user_actions: Actions
     conditions: Conditions

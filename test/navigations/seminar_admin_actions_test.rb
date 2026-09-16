@@ -15,7 +15,6 @@ class SeminarAdminActionsTest < ActiveSupport::TestCase
     assert_includes titles, I18n.t(:lock)
     refute_includes titles, I18n.t(:edit)
     refute_includes titles, I18n.t("seminar.view_user_version")
-    refute_includes titles, I18n.t("seminar.publish")
   end
 
   test "a user seminar that already has an admin copy offers to view it, and to unlock it once locked" do
@@ -31,14 +30,13 @@ class SeminarAdminActionsTest < ActiveSupport::TestCase
     assert_includes items.map(&:title), I18n.t(:unlock)
   end
 
-  test "an unpublished admin copy offers to edit it, view its user version, and publish it" do
+  test "an admin copy offers to edit it and view its user version" do
     seminar = seminars(:admin_copy_bob_and_janes_seminar)
     items = SeminarAdminActions.new(seminar, users(:admin)).items
 
     titles = items.map(&:title)
     assert_includes titles, I18n.t(:edit)
     assert_includes titles, I18n.t("seminar.view_user_version")
-    assert_includes titles, I18n.t("seminar.publish")
   end
 
   test "an inactive user seminar is not offered locking" do

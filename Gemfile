@@ -38,7 +38,6 @@ gem 'ahoy_email'
 gem 'clowne'
 gem 'image_processing', '~> 1.12'
 gem 'pagy', '~> 8.0'
-gem 'rest-client'
 
 # Used to check that an email address' domain has a real, IANA-registered
 # top-level domain (includes internationalized/IDN TLDs). No network access
