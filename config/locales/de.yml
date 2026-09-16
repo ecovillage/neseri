@@ -11,13 +11,13 @@ de:
     deleted: Anhang gelöscht
   back_to_mails: Zurück zu den E-Mails
   back_to_admin: Zurück als Admin
-  change_password: Password ändern
+  change_password: Passwort ändern
   clone: Kopie anlegen
   contact:
     contact: Eine E-Mail schicken
   copy: Kopieren
   copy_created: Kopie erstellt
-  could_not_save_instructor: Könnte Referent*in nicht anlegen
+  could_not_save_instructor: Konnte Referent*in nicht anlegen
   create_admin_copy: Admin-Kopie erstellen
   created_seminars: Erstellte Seminare
   date:
@@ -34,7 +34,7 @@ de:
     registrations:
       new:
         sign_up: Neu registrieren
-  documentation: Documentation
+  documentation: Dokumentation
   edit: Bearbeiten
   instructor_updated: Profil aktualisiert.
   impersonate: Anmelden als
@@ -56,7 +56,7 @@ de:
     impressum: Impressum
     privacy: Datenschutz
   please_fill_out_profile_html: Du bist als Referent*in angegeben, aber uns fehlen Kontakt-Daten. Bitte <a href="%{profile_path}">fülle Dein Profil aus</a>.
-  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige deine Zurkenntnisnahme ganz unten auf der Seite.
+  please_read_and_accept_below: Bitte lies den Text sorgfältig durch und bestätige deine Kenntnisnahme ganz unten auf der Seite.
   read_and_accepted_tos_html: <a href="%{privacy_path}">AGB und Datenschutzerklärung</a> gelesen und akzeptiert
   required_fields_hint: Mit * markierte Felder sind Pflichtfelder.
   resend_confirmation_instructions: Anleitung erneut schicken
@@ -65,7 +65,7 @@ de:
     deactivate: Verstecken
     deactivated: "(versteckt)"
     reactivate: Reaktivieren
-  save: speichern
+  save: Speichern
   seminar_instructors:
     add: Referent*in hinzufügen
     remove: Referent*in entfernen
@@ -80,7 +80,7 @@ de:
   seminar_unlocked: Seminar entsperrt
   send_mail: Mail schicken
   send_me_reset_password_instructions: Anleitung schicken
-  reset_password_instructions: Anleitung für ein neues Password schicken
+  reset_password_instructions: Anleitung für ein neues Passwort schicken
   sessions:
     destroy:
       sign_out: Abmelden

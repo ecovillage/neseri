@@ -16,13 +16,13 @@ de:
       is-admin: (Admin-Kopie)
       has_admin_seminar: hat Admin-Kopie
       is-pulled-back: zurückgezogen
-    files_text_html: "<b>Fotos</b>: bitte hochladen oder an <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Bitte ein digitales Portrait-Foto von dir für die Hompage, minimale Abmessungen 200 px in Breite oder Höhe. Dieses wird auf der Homepage kreisförmig dargestellt. Wenn vorhanden, auch gern zum Seminar passende andere Fotos (hier aber keine Garantie, dass sie auf die Homepage kommen). Es ist hilfreich, wenn die Bilder bereits in dem korrekten Seitenverhältnis vorliegen (720px x 340px), ansonsten versuchen wir daraus einen Ausschnitt zu wählen. Größer ist hier immer besser als kleiner. Dateigröße sollte mindestens 1 MB sein. <a href=\"https://siebenlinden.org/wp-content/uploads/2021/06/Vorgaben_Bilder_Webseite.pdf\">Weitere Hinweise und illustrierte Beispiele</a>. Stelle unbedingt sicher, dass die Bildrechte erlauben, die Bilder zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit zu verwenden.</br>Es können auch andere für die Veranstaltung wichtige Dateien (z.B. Mitbringlisten, Info-Texte für mails, ...) angehängt werden."
+    files_text_html: "<b>Fotos</b>: bitte hochladen oder an <a href=\"mailto:bildungsreferat@siebenlinden.org\">bildungsreferat@siebenlinden.org</a>. Bitte ein digitales Portrait-Foto von dir für die Homepage, minimale Abmessungen 200 px in Breite oder Höhe. Dieses wird auf der Homepage kreisförmig dargestellt. Wenn vorhanden, auch gern zum Seminar passende andere Fotos (hier aber keine Garantie, dass sie auf die Homepage kommen). Es ist hilfreich, wenn die Bilder bereits in dem korrekten Seitenverhältnis vorliegen (720px x 340px), ansonsten versuchen wir daraus einen Ausschnitt zu wählen. Größer ist hier immer besser als kleiner. Dateigröße sollte mindestens 1 MB sein. <a href=\"https://siebenlinden.org/wp-content/uploads/2021/06/Vorgaben_Bilder_Webseite.pdf\">Weitere Hinweise und illustrierte Beispiele</a>. Stelle unbedingt sicher, dass die Bildrechte erlauben, die Bilder zur Veranstaltungsbewerbung und Öffentlichkeitsarbeit zu verwenden.</br>Es können auch andere für die Veranstaltung wichtige Dateien (z.B. Mitbringlisten, Info-Texte für Mails, ...) angehängt werden."
     user_actions: Aktionen
     conditions: Konditionen
     conditions_text_html: |
       Die Referent*in/nen erklären sich damit einverstanden, <b>einen Seminarplatz (Regionalplatz)</b> für Menschen mit Wohnsitz in Sieben Linden <b>kostenlos</b> zur Verfügung zu stellen. Diese Person unterstützt die Referent*in/nen und ggf. Teilnehmer*innen in praktischen Fragen und informiert Teilnehmende auf Anfrage über Sieben Linden.</p> 
-      <p>Wird das Seminar seitens der Referent*in/nen ohne vorliegen höherer Gewalt (z.B. schwere Krankheit) vor Ablauf der vereinbarten Absagefrist abgesagt, zahlt die Referent:in/nen eine <b>Ausfallpauschale</b> in Höhe von 200 €. Die Ausfallgebühr ist auch zu zahlen, wenn eine Ersatzveranstaltung für den Termin gefunden wurde bzw. der Seminartermin verlegt wurde. </p>
-      <p>Bei Nicht-Zustandekommen aufgrund zu geringer Anzahl Anmeldungen beträgt die von der/den Referent:in/nen zu zahlende Ausfallpauschale bei Veranstaltungen bis zu 5 Tagen 50 €, ab 6 Tagen 100 €. Die Referent*in/nen reichen spätestens innerhalb 14 Tagen nach Seminardurchführung einen Ablaufplan/Konzept des Seminars beim Bildungsreferat ein. </p>
+      <p>Wird das Seminar seitens der Referent*in/nen ohne Vorliegen höherer Gewalt (z.B. schwere Krankheit) vor Ablauf der vereinbarten Absagefrist abgesagt, zahlt die Referent:in/nen eine <b>Ausfallpauschale</b> in Höhe von 200 €. Die Ausfallgebühr ist auch zu zahlen, wenn eine Ersatzveranstaltung für den Termin gefunden wurde bzw. der Seminartermin verlegt wurde. </p>
+      <p>Bei Nicht-Zustandekommen aufgrund zu geringer Anzahl Anmeldungen beträgt die von der/den Referent:in/nen zu zahlende Ausfallpauschale bei Veranstaltungen bis zu 5 Tagen 50 €, ab 6 Tagen 100 €. Die Referent*in/nen reichen spätestens innerhalb von 14 Tagen nach Seminardurchführung einen Ablaufplan/Konzept des Seminars beim Bildungsreferat ein. </p>
       <p>Die Referent:innentätigkeit im Rahmen des eingereichten Seminarangebots stellt eine <b>selbstständige Tätigkeit auf Honorarbasis</b> dar. </p>
       <h4>Datenschutz</h4>
       <p> Mit der Übernahme meiner/unserer Referent*innenrolle beim Freundeskreis Ökodorf e.V. akzeptiere(n) ich(wir) folgende Bedingungen: </p>
@@ -81,8 +81,8 @@ de:
       royalty_participant_reduced: 'für Teilnehmer*innen, die auch vom FK Sozialermäßigung erhalten. Höchstens 75% der normalen Seminarkosten.'
       accommodation: "In der Regel: Gästezimmer"
       alternative_dates: So weit gefasst wie möglich, z.B. Quartal, Monat
-      material_cost: … pro Teilnehmer*in, die ggf. gesondert gezahlt sollen, z.B. Holz zum Schnitzen
-      media_coverage_links: Falls es eine aktuelle Doku, einen Podcast oder Online-Artikel/Blogeintrag über dich und deine Arbeit gibt, die in direktem Zusammenhang mit dem Seminarthema steht, füge den Link bitte hier ein.
+      material_cost: … pro Teilnehmer*in, die ggf. gesondert gezahlt werden sollen, z.B. Holz zum Schnitzen
+      media_coverage_links: Falls es eine aktuelle Doku, einen Podcast oder Online-Artikel/Blogeintrag über dich und deine Arbeit gibt, der in direktem Zusammenhang mit dem Seminarthema steht, füge den Link bitte hier ein.
     form:
       section:
         publication: Veröffentlichung im Seminarprogramm
