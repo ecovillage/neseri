@@ -3,8 +3,9 @@
 #
 # No Docker here: the app is deployed the old-fashioned way - git pull,
 # bundle install, migrate, restart. Ruby comes from mise, same as for local
-# development (see the repo root mise.toml) - Postgres and the internal
-# Caddy are native apt packages/systemd services.
+# development (see the repo root mise.toml) - Postgres is a native apt
+# package/systemd service. The container's internal Caddy is configured
+# separately, from the infrastructure repo's container-caddy role.
 
 neseri_domain: neseri.siebenlinden.org
 

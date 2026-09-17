@@ -1,16 +1,21 @@
 # neseri deployment
 
-Deploys neseri to production behind pfsense, with a Hostsharing Caddy as the
-public edge. The app is git-cloned onto the Proxmox container,
-`bundle install`ed, migrated and run under systemd, next to native Postgres
-and Caddy installs.
+Deploys neseri to production behind pfsense. The app is git-cloned onto the
+Proxmox container, `bundle install`ed, migrated and run under systemd, next
+to a native Postgres install.
+
+Inbound routing (the public Hostsharing edge, the pfsense/reverse-proxy hop,
+and the container's own internal Caddy) is **not** configured from this repo
+anymore - see [Architecture](#architecture) below and the
+[infrastructure repo](../../infrastructure)'s `playbooks/neseri/inbound-routing.yml`.
 
 ## Architecture
 
 ```
-Browser --TLS--> Hostsharing Caddy --TLS--> pfsense (212.91.243.26:443)
-(vm4007.hostsharing.net,                      |  NAT
- DNS: neseri.siebenlinden.org)                v
+Browser --TLS--> Hostsharing edge-caddy --TLS--> pfsense --NAT-->
+(vm4007.hostsharing.net,                          reverse-proxy (SNI, 192.168.1.209)
+ DNS: neseri.siebenlinden.org)                       |
+                                                      v
                                     Proxmox container (192.168.1.135)
                                       caddy:443 --TLS--> 127.0.0.1:3000 (Puma, systemd)
                                                           postgres (systemd, localhost:5432)
@@ -24,8 +29,9 @@ would risk the mailcow/mailman sites sharing that same container). Instead:
 - The Hostsharing Caddy holds the **real, publicly-trusted Let's Encrypt
   certificate** for `neseri.siebenlinden.org` - it's the only place that can
   get one, since that's what DNS actually points at.
-- It then opens a **second TLS connection** to pfsense's public IP, which
-  NATs it through to the container's own Caddy.
+- It then opens a **second TLS connection** through pfsense (NATed to the
+  shared reverse-proxy container, which SNI-routes it on to this container)
+  to the container's own Caddy.
 - The container's Caddy can't get a public certificate for that name either
   (DNS doesn't point at pfsense), so it mints its own certificate from
   Caddy's built-in local CA (`tls internal`).
@@ -33,9 +39,13 @@ would risk the mailcow/mailman sites sharing that same container). Instead:
   the backend leg against it (`tls_trust_pool`), so nothing is silently
   unverified (no `insecure_skip_verify` anywhere).
 
-This is why **`playbooks/deploy-app.yml` has to run before
-`playbooks/caddy-edge.yml`**: the CA root certificate the edge needs to trust
-is only produced once the app has been deployed.
+All of the above (both Caddy instances, the reverse-proxy's SNI map) is now
+owned by the infrastructure repo's `roles/edge-caddy`, `roles/container-caddy`
+and `roles/reverse-proxy`, run via `playbooks/neseri/inbound-routing.yml`.
+That playbook is self-contained for Caddy purposes (container-caddy installs
+and starts its own Caddy, independent of this repo's `deploy-app.yml`) - but
+for visitors to actually reach the app, `deploy-app.yml` still needs to have
+put something on `127.0.0.1:3000` for the container's Caddy to proxy to.
 
 ## On the container
 
@@ -52,8 +62,6 @@ is only produced once the app has been deployed.
   deploy that actually bumps `mise.toml`.
 - **Postgres**, tuned down a bit (see `postgres_shared_buffers` etc. in
   `vars.yml`) and listening on `127.0.0.1` only.
-- **Caddy**, from the official apt repo, same internal-CA TLS setup as
-  before.
 - **The app itself**, deployed Capistrano-style:
   ```
   /opt/neseri/
@@ -124,15 +132,22 @@ bootstrap above with a fresh keypair).
 
 ```bash
 cd ansible
-ansible-playbook playbooks/deploy-app.yml    # 1st: deploys the app
-ansible-playbook playbooks/caddy-edge.yml    # 2nd: wires up the public edge
+ansible-playbook playbooks/deploy-app.yml    # deploys the app
 ```
 
-Re-running either playbook is safe (idempotent); re-running `deploy-app.yml`
-deploys whatever is currently on `neseri_deploy_ref` on GitHub as a new
-release and restarts the app - Ruby/Postgres/Caddy installs and old releases
-beyond `neseri_keep_releases` are left alone (build/prune) or updated in
-place (config).
+Wiring up (or changing) the public edge - both Caddy instances and the
+shared reverse-proxy's SNI map - happens from the infrastructure repo now:
+
+```bash
+cd ../../infrastructure   # adjust to wherever that repo is checked out
+ansible-playbook -i inventory/prod/hosts.yml playbooks/neseri/inbound-routing.yml
+```
+
+Re-running `deploy-app.yml` is safe (idempotent); it deploys whatever is
+currently on `neseri_deploy_ref` on GitHub as a new release and restarts the
+app - the Ruby/Postgres installs and old releases beyond
+`neseri_keep_releases` are left alone (build/prune) or updated in place
+(config).
 
 ## Importing a sqlite3 file into production
 
@@ -210,22 +225,30 @@ already built/installed), not something that happens on every deploy.
 
 ## pfsense
 
-pfsense needs one NAT rule: WAN TCP/443 -> 192.168.1.135:443. See the chat
-for the exact steps; consider restricting the source of that rule to
-Hostsharing's IP (`83.223.91.233`), since nothing else needs to reach that
-port directly.
+**Migration note (todo, not done by Ansible):** this used to be a direct NAT
+rule `WAN TCP/443 -> 192.168.1.135:443`. Since neseri.siebenlinden.org was
+added to the infrastructure repo's shared reverse-proxy (SNI-routed via
+`192.168.1.209`), that NAT rule needs to point there instead - otherwise the
+reverse-proxy's SNI map for `neseri.siebenlinden.org` never sees any traffic.
+**Verify/update this on pfsense** before relying on the new routing path.
+Also check the Proxmox firewall rule allowing the reverse-proxy container to
+reach `192.168.1.135` on 80/443 (see the infrastructure repo's
+`roles/reverse-proxy/Readme.md` for the exact failure mode if that's
+missing). Consider restricting the NAT rule's source to Hostsharing's IP
+(`83.223.91.233`), since nothing else needs to reach that port directly.
 
 ## Layout
 
 ```
 ansible.cfg
-inventory/hosts.yml                     caddy_edge (Hostsharing) / proxmox_container
-inventory/group_vars/caddy_edge/        non-secret vars for the edge
+inventory/hosts.yml                     proxmox_container
 inventory/group_vars/proxmox_container/ vars.yml (non-secret) + vault.yml (secrets)
-playbooks/deploy-app.yml                run 1st
-playbooks/caddy-edge.yml                run 2nd
+playbooks/deploy-app.yml                deploys the app (Ruby/Postgres/Puma)
 playbooks/import-sqlite.yml             one-off: import a sqlite3 file's data
 playbooks/import-storage.yml            one-off: sync its Active Storage files
-roles/neseri_app/                       installs Ruby/Postgres/Caddy, deploys and runs the app on the container
-roles/caddy_edge/                       adds the neseri site block to the Hostsharing Caddyfile
+roles/neseri_app/                       installs Ruby/Postgres, deploys and runs the app on the container
 ```
+
+The public edge (Hostsharing Caddy, the container's internal Caddy, and the
+shared reverse-proxy) is configured from the infrastructure repo's
+`playbooks/neseri/inbound-routing.yml`, not from here.
